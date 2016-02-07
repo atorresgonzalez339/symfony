@@ -1,0 +1,9 @@
+<ul>
+	{% for template in templates %}
+	<li>
+		<a href="{{path('flyer_new', {'id_template':loop.index, 'id_property':id_property})}}">
+			Templaste - {{loop.index}}
+		</a>
+	</li>
+	{% endfor %}
+</ul>

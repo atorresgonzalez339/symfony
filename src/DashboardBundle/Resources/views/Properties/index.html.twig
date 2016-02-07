@@ -1,0 +1,12 @@
+<ul>
+	{% for data in properties %}
+		<li>
+			<img height="150" src="{{data.photos.0}}" >
+			<br />
+			<a href="{{path('template_index')}}?id_property={{data.mlsId}}">
+				Property - {{loop.index}}
+			</a>
+			<hr />
+		</li>
+	{% endfor %}
+</ul>
