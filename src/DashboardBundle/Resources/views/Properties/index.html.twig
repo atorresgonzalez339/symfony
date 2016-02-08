@@ -1,12 +1,22 @@
-<ul>
-	{% for data in properties %}
-		<li>
-			<img height="150" src="{{data.photos.0}}" >
-			<br />
-			<a href="{{path('template_index')}}?id_property={{data.mlsId}}">
-				Property - {{loop.index}}
-			</a>
-			<hr />
-		</li>
-	{% endfor %}
-</ul>
+{% extends 'DashboardBundle:Common:backend.html.twig' %}
+
+{% block breadcrumb %}
+	<li><a href="#">Properties</a></li>
+{% endblock breadcrumb%}
+
+{% block content %}
+	<ul>
+		{% for data in properties %}
+			<li>
+				<img height="150" src="{{data.photos.0}}" >
+				<br />
+				<a href="{{path('template_index')}}?id_property={{data.mlsId}}">
+					Property - {{loop.index}}
+				</a>
+				<hr />
+			</li>
+		{% endfor %}
+	</ul>
+{% endblock content%}
+
+

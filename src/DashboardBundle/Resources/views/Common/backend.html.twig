@@ -6,61 +6,73 @@
     {{parent()}}
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:400,300,500,700&amp;subset=latin,latin-ext">
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Montserrat:400,700">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link  href="{{ asset('bundles/dashboard/material/css/material-design-icons.min.css') }}" rel="stylesheet" type="text/css" />
     <link  href="{{ asset('bundles/dashboard/assets/libraries/Font-Awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
     <link  href="{{ asset('bundles/dashboard/assets/libraries/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet" type="text/css" />
     <link  href="{{ asset('bundles/dashboard/assets/libraries/bootstrap-fileinput/css/fileinput.min.css') }}" rel="stylesheet" type="text/css" />
     <link  href="{{ asset('bundles/dashboard/assets/libraries/nvd3/nv.d3.min.css') }}" rel="stylesheet" type="text/css" />
     <link  href="{{ asset('bundles/dashboard/assets/librariesOwlCarousel/owl-carousel/owl.carousel.css') }}" rel="stylesheet" type="text/css" />
     <link  href="{{ asset('bundles/dashboard/assets/css/realsite-admin.css') }}" rel="stylesheet" type="text/css" />
+    <link  href="{{ asset('bundles/dashboard/assets/css/realsite.css') }}" rel="stylesheet" type="text/css" />
 {% endblock stylesheets %}
 
 {% block bodyCass %}open{% endblock bodyCass %}
 
 {% block body %}
+
+    {% block viewport %}
     <div class="admin-wrapper">
 
         {% block east  %}
             {% include 'DashboardBundle:Common:Partials/_admin-navegation.html.twig' %}
         {% endblock east %}
+            <div class="admin-content">
+                <div class="admin-content-inner">
 
-        <div class="admin-content">
-            <div class="admin-content-inner">
-
-                {% block north %}
-                    {% include 'DashboardBundle:Common:Partials/_admin-content-header.html.twig' %}
-                {% endblock north%}
-
-                <div class="admin-content-main">
-                    <div class="admin-content-main-inner">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div id="chart">
-                                        <svg></svg>
-                                    </div><!-- /#chart -->
+                    {% block north %}
+                        <div class="admin-content-header">
+                            <div class="admin-content-header-inner">
+                            {% include 'DashboardBundle:Common:Partials/_admin-content-header.html.twig' %}
+                                <div class="page-title">
+                                    <div class="row">
+                                        <ul>
+                                            <li><a href="#"><i class="fa fa-home"></i> Home</a> / </li>
+                                            {#<i class="mdi-hardware-keyboard-arrow-right"></i>#}
+                                            {% block breadcrumb %}
+                                                <li><a href="#">Dashboard</a></li>
+                                            {% endblock breadcrumb%}
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div><!-- /.row -->
+                            </div>
+                        </div>
+                    {% endblock north%}
 
+                    {% block center %}
+                        <div class="admin-content-main">
+                            <div class="admin-content-main-inner">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            {% block content %} {% endblock content%}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endblock center%}
 
-                        </div><!-- /.container-fluid -->
-                    </div><!-- /.admin-content-main-inner -->
-                </div><!-- /.container-fluid -->
+                    {% block south %}
+                        {% include 'DashboardBundle:Common:Partials/_admin-footer.html.twig' %}
+                    {% endblock south%}
 
-                {% block south %}
-                    {% include 'DashboardBundle:Common:Partials/_admin-footer.html.twig' %}
-                {% endblock south%}
-
-            </div><!-- /.admin-content-main-inner -->
-        </div><!-- /.admin-content -->
-    </div><!-- /.admin-landing-wrapper -->
-    {% block viewport %}
-
-
-
-        {% block center %}{% endblock center%}
+                </div>
+            </div>
 
         {% block west  %}{% endblock west%}
-    
+
+    </div>
     {% endblock viewport %}
 
 {% endblock body%}

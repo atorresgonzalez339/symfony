@@ -18,10 +18,12 @@
     ul, menu, dir {
         -webkit-padding-start: 0px;
     }
+    .content, .sidebar {
+         margin-bottom: 0px;
+         margin-top: 0px;
+    }
 </style>
 
-<div class="admin-content-header">
-    <div class="admin-content-header-inner">
             <div class="row">
                 <div class="container-fluid">
                     <div class="admin-content-header-logo">
@@ -31,7 +33,9 @@
                     </div><!-- /admin-content-header-logo -->
                     <div class="admin-content-header-menu">
                         <ul class="admin-content-header-menu-inner collapse">
-                            <li><a href="admin-login.html">Logout</a></li>
+                            <li><a href="admin-dashboard.html#">FAQ</a></li>
+                            <li><a href="admin-dashboard.html#">Support</a></li>
+                            <li><a href="admin-login.html"><i class="fa fa-sign-out"></i> Logout</a></li>
                         </ul>
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".admin-content-header-menu-inner">
                             <span class="sr-only">Toggle navigation</span>
@@ -43,14 +47,4 @@
 
                 </div>
             </div>
-            <div class="page-title">
-                <div class="row">
-                    <ul>
-                        <li><a href="#"><i class="fa fa-home"></i> Home</a> /</li>
-                        <li><a href="#">Category</a> /</li>
-                        <li><a href="ui-buttons.html">Buttons</a></li>
-                    </ul>
-                </div>
-            </div>
-    </div><!-- /.admin-content-header-inner -->
-</div><!-- /.admin-content-header -->
+
