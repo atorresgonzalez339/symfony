@@ -14,6 +14,7 @@ class FlyerController extends Controller
      */
     public function newAction(Request $request){
       $mls_id = $request->get('id_property');
+      $template = $request->get('id_template');
       $property = $this->getProperty($mls_id);
 
       $photos = [];
