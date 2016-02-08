@@ -1,0 +1,382 @@
+{% extends 'DashboardBundle:Common:layout.html.twig' %}
+
+{% block title %}{% endblock title %}
+
+{% block stylesheets %}
+    {{parent()}}
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:400,300,500,700&amp;subset=latin,latin-ext">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Montserrat:400,700">
+    <link  href="{{ asset('bundles/dashboard/assets/libraries/Font-Awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
+    <link  href="{{ asset('bundles/dashboard/assets/libraries/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet" type="text/css" />
+    <link  href="{{ asset('bundles/dashboard/assets/libraries/bootstrap-fileinput/css/fileinput.min.css') }}" rel="stylesheet" type="text/css" />
+    <link  href="{{ asset('bundles/dashboard/assets/libraries/nvd3/nv.d3.min.css') }}" rel="stylesheet" type="text/css" />
+    <link  href="{{ asset('bundles/dashboard/assets/librariesOwlCarousel/owl-carousel/owl.carousel.css') }}" rel="stylesheet" type="text/css" />
+    <link  href="{{ asset('bundles/dashboard/assets/css/realsite-admin.css') }}" rel="stylesheet" type="text/css" />
+{% endblock stylesheets %}
+
+{% block bodyCass %}open{% endblock bodyCass %}
+
+{% block body %}
+    <div class="admin-wrapper">
+        <div class="admin-navigation">
+            <div class="admin-navigation-inner">
+                <nav>
+                    <ul class="menu">
+                        <li class="avatar">
+                            <a href="admin-dashboard.html#">
+                                <img src="{{ asset('bundles/dashboard/people/01.jpg') }}" alt="Avatar">
+
+                        <span class="avatar-content">
+                            <span class="avatar-title">Lisa Peterson</span>
+                            <span class="avatar-subtitle">Project Manager</span>
+                        </span><!-- /.avatar-content -->
+                            </a>
+                        </li>
+
+                        <li class=" active ">
+                            <a href="admin-dashboard.html"><strong><i class="fa fa-dashboard"></i></strong> <span>Dashboard</span></a>
+                        </li>
+
+                        <li class="">
+                            <a href="admin-properties.html"><strong><i class="fa fa-building"></i></strong> <span>Properties</span></a>
+                        </li>
+
+                        <li class="">
+                            <a href="admin-property-browser.html"><strong><i class="fa fa-th-list"></i></strong> <span>Property Browser</span></a>
+                        </li>
+
+                        <li class="">
+                            <a href="admin-agencies.html"><strong><i class="fa fa-briefcase"></i></strong> <span>Agencies</span></a>
+                        </li>
+
+                        <li class="">
+                            <a href="admin-gallery.html"><strong><i class="fa fa-file"></i></strong> <span>Media Files</span></a>
+                        </li>
+
+                        <li class="">
+                            <a href="admin-map.html"><strong><i class="fa fa-globe"></i></strong> <span>Google Map</span></a>
+                        </li>
+
+                        <li class="">
+                            <a href="admin-people.html"><strong><i class="fa fa-users"></i></strong> <span>People</span></a>
+                        </li>
+
+                        <li class="">
+                            <a href="admin-property-add.html"><strong><i class="fa fa-pencil"></i></strong> <span>Add Property</span></a>
+                        </li>
+
+                        <li>
+                            <a href="admin-login.html"><strong><i class="fa fa-sign-out"></i></strong> <span>Logout</span></a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <div class="projects">
+                    <h2>Projects</h2>
+
+                    <ul>
+                        <li class="orange"><a href="admin-dashboard.html#">Web Analytics</a></li>
+                        <li class="green"><a href="admin-dashboard.html#">Custom Development</a></li>
+                        <li class="lime"><a href="admin-dashboard.html#">Property Filtering</a></li>
+                        <li class="deep-orange"><a href="admin-dashboard.html#">Social Marketing</a></li>
+                        <li class="yellow"><a href="admin-dashboard.html#">Agents Management</a></li>
+                    </ul>
+                </div><!-- /.projects -->
+                <div class="layer"></div>
+            </div><!-- /.admin-navigation-inner -->
+        </div><!-- /.admin-navigation -->
+
+        <div class="admin-content">
+            <div class="admin-content-inner">
+                <div class="admin-content-header">
+                    <div class="admin-content-header-inner">
+                        <div class="container-fluid">
+                            <div class="admin-content-header-logo">
+                                <a href="index.html">
+                                    Realsite
+                                </a>
+                            </div><!-- /admin-content-header-logo -->
+
+                            <div class="admin-content-header-menu">
+                                <ul class="admin-content-header-menu-inner collapse">
+                                    <li><a href="admin-dashboard.html#">Documentation</a></li>
+                                    <li><a href="admin-dashboard.html#">FAQ</a></li>
+                                    <li><a href="admin-dashboard.html#">Support</a></li>
+                                    <li><a href="admin-login.html">Logout</a></li>
+                                </ul>
+
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".admin-content-header-menu-inner">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                            </div><!-- /.admin-content-header-menu  -->
+                        </div><!-- /.container-fluid -->
+                    </div><!-- /.admin-content-header-inner -->
+                </div><!-- /.admin-content-header -->
+
+                <div class="admin-content-main">
+                    <div class="admin-content-main-inner">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div id="chart">
+                                        <svg></svg>
+                                    </div><!-- /#chart -->
+                                </div>
+                            </div><!-- /.row -->
+
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6">
+                                    <h3 class="page-header">Recent Properties</h3>
+
+                                    <div class="row">
+                                        <div class="col-sm-4 col-md-6 col-lg-4">
+                                            <div class="property-preview">
+                                                <div class="property-preview-image">
+                                                    <a href="admin-dashboard.html#" class="property-preview-action">
+                                                        <i class="fa fa-times"></i>
+                                                    </a><!-- /.property-preview-action -->
+
+                                                    <a href="admin-dashboard.html#">
+                                                        <img src="assets/img/tmp/medium/1.jpg" alt="">
+                                                    </a>
+                                                </div><!-- /.property-preview-image -->
+
+                                                <div class="property-preview-content">
+                                                    <h2><a href="admin-dashboard.html#">Apartment</a></h2>
+                                                    <a href="admin-dashboard.html#" class="property-preview-action-secondary">Edit</a>
+                                                </div><!-- /.property-preview-content -->
+                                            </div><!-- /.property-preview -->
+                                        </div><!-- /.col-* -->
+
+                                        <div class="col-sm-4 col-md-6 col-lg-4">
+                                            <div class="property-preview">
+                                                <div class="property-preview-image">
+                                                    <a href="admin-dashboard.html#" class="property-preview-action">
+                                                        <i class="fa fa-times"></i>
+                                                    </a><!-- /.property-preview-action -->
+
+                                                    <a href="admin-dashboard.html#">
+                                                        <img src="assets/img/tmp/medium/2.jpg" alt="">
+                                                    </a>
+                                                </div><!-- /.property-preview-image -->
+
+                                                <div class="property-preview-content">
+                                                    <h2><a href="admin-dashboard.html#">Apartment</a></h2>
+                                                    <a href="admin-dashboard.html#" class="property-preview-action-secondary">Edit</a>
+                                                </div><!-- /.property-preview-content -->
+                                            </div><!-- /.property-preview -->
+                                        </div><!-- /.col-* -->
+
+                                        <div class="col-sm-4 col-md-6 col-lg-4">
+                                            <div class="property-preview">
+                                                <div class="property-preview-image">
+                                                    <a href="admin-dashboard.html#" class="property-preview-action">
+                                                        <i class="fa fa-times"></i>
+                                                    </a><!-- /.property-preview-action -->
+
+                                                    <a href="admin-dashboard.html#">
+                                                        <img src="assets/img/tmp/medium/3.jpg" alt="">
+                                                    </a>
+                                                </div><!-- /.property-preview-image -->
+
+                                                <div class="property-preview-content">
+                                                    <h2><a href="admin-dashboard.html#">Apartment</a></h2>
+                                                    <a href="admin-dashboard.html#" class="property-preview-action-secondary">Edit</a>
+                                                </div><!-- /.property-preview-content -->
+                                            </div><!-- /.property-preview -->
+                                        </div><!-- /.col-* -->
+
+                                        <div class="col-sm-4 col-md-6 col-lg-4">
+                                            <div class="property-preview">
+                                                <div class="property-preview-image">
+                                                    <a href="admin-dashboard.html#" class="property-preview-action">
+                                                        <i class="fa fa-times"></i>
+                                                    </a><!-- /.property-preview-action -->
+
+                                                    <a href="admin-dashboard.html#">
+                                                        <img src="assets/img/tmp/medium/4.jpg" alt="">
+                                                    </a>
+                                                </div><!-- /.property-preview-image -->
+
+                                                <div class="property-preview-content">
+                                                    <h2><a href="admin-dashboard.html#">Aparatment</a></h2>
+                                                    <a href="admin-dashboard.html#" class="property-preview-action-secondary">Edit</a>
+                                                </div><!-- /.property-preview-content -->
+                                            </div><!-- /.property-preview -->
+                                        </div><!-- /.col-* -->
+
+                                        <div class="col-sm-4 col-md-6 col-lg-4">
+                                            <div class="property-preview">
+                                                <div class="property-preview-image">
+                                                    <a href="admin-dashboard.html#" class="property-preview-action">
+                                                        <i class="fa fa-times"></i>
+                                                    </a><!-- /.property-preview-action -->
+
+                                                    <a href="admin-dashboard.html#">
+                                                        <img src="assets/img/tmp/medium/5.jpg" alt="">
+                                                    </a>
+                                                </div><!-- /.property-preview-image -->
+
+                                                <div class="property-preview-content">
+                                                    <h2><a href="admin-dashboard.html#">Apartment</a></h2>
+                                                    <a href="admin-dashboard.html#" class="property-preview-action-secondary">Edit</a>
+                                                </div><!-- /.property-preview-content -->
+                                            </div><!-- /.property-preview -->
+                                        </div><!-- /.col-* -->
+
+                                        <div class="col-sm-4 col-md-6 col-lg-4">
+                                            <div class="property-preview">
+                                                <div class="property-preview-image">
+                                                    <a href="admin-dashboard.html#" class="property-preview-action">
+                                                        <i class="fa fa-times"></i>
+                                                    </a><!-- /.property-preview-action -->
+
+                                                    <a href="admin-dashboard.html#">
+                                                        <img src="assets/img/tmp/medium/6.jpg" alt="">
+                                                    </a>
+                                                </div><!-- /.property-preview-image -->
+
+                                                <div class="property-preview-content">
+                                                    <h2><a href="admin-dashboard.html#">Apartment</a></h2>
+                                                    <a href="admin-dashboard.html#" class="property-preview-action-secondary">Edit</a>
+                                                </div><!-- /.property-preview-content -->
+                                            </div><!-- /.property-preview -->
+                                        </div><!-- /.col-* -->
+                                    </div><!-- /.row -->
+                                </div><!-- /.col-* -->
+
+                                <div class="col-sm-12 col-md-6">
+                                    <h3 class="page-header">Recent activity</h3>
+
+                                    <div class="activity">
+                                        <ul>
+                                            <li>
+                                                <div class="icon red">
+                                                    <i class="fa fa-times"></i>
+                                                </div><!-- /.icon -->
+
+                                                <div class="content">
+                                                    Property <a href="admin-dashboard.html#">#5432</a> has been published by <a href="admin-dashboard.html#">admin</a>.
+                                                </div><!-- /.content -->
+                                            </li>
+
+                                            <li>
+                                                <div class="icon cyan">
+                                                    <i class="fa fa-pencil"></i>
+                                                </div><!-- /.icon -->
+
+                                                <div class="content">
+                                                    Admin edited property with ID <a href="admin-dashboard.html#">#12345</a>.
+                                                </div><!-- /.content -->
+                                            </li>
+
+                                            <li>
+                                                <div class="icon teal">
+                                                    <i class="fa fa-bug"></i>
+                                                </div><!-- /.icon -->
+
+                                                <div class="content">
+                                                    System has reported 3 new bugs.
+                                                </div><!-- /.content -->
+                                            </li>
+
+                                            <li>
+                                                <div class="icon orange">
+                                                    <i class="fa fa-cc-mastercard"></i>
+                                                </div><!-- /.icon -->
+
+                                                <div class="content">
+                                                    Your debit card will expire in two weeks.
+                                                </div><!-- /.content -->
+                                            </li>
+
+                                            <li>
+                                                <div class="icon brown">
+                                                    <i class="fa fa-users"></i>
+                                                </div><!-- /.icon -->
+
+                                                <div class="content">
+                                                    8 users are avaiting registration confimations.
+                                                </div><!-- /.content -->
+                                            </li>
+
+                                            <li>
+                                                <div class="icon green">
+                                                    <i class="fa fa-paypal"></i>
+                                                </div><!-- /.icon -->
+
+                                                <div class="content">
+                                                    PayPal transaction has been completed. <a href="admin-dashboard.html#">View more</a>
+                                                </div><!-- /.content -->
+                                            </li>
+
+                                            <li>
+                                                <div class="icon red">
+                                                    <i class="fa fa-times"></i>
+                                                </div><!-- /.icon -->
+
+                                                <div class="content">
+                                                    Property <a href="admin-dashboard.html#">#5432</a> has been published by <a href="admin-dashboard.html#">admin</a>.
+                                                </div><!-- /.content -->
+                                            </li>
+                                        </ul>
+                                    </div><!-- /.activity -->
+                                </div><!-- /.col-* -->
+                            </div><!-- /.row -->
+                        </div><!-- /.container-fluid -->
+                    </div><!-- /.admin-content-main-inner -->
+                </div><!-- /.container-fluid -->
+
+                <div class="admin-content-footer">
+                    <div class="admin-content-footer-inner">
+                        <div class="container-fluid">
+                            <div class="admin-content-footer-left">
+                                &copy; 2015 Realsite - Material Real Estate Template. All rights reserved.
+                            </div><!-- /.admin-content-footer-left -->
+
+                            <div class="admin-content-footer-right">
+                                Created by <a href="http://byaviators.com">Aviators</a>
+                            </div><!-- /.admin-content-footer-right -->
+                        </div><!-- /.container-fluid -->
+                    </div><!-- /.admin-content-footer-inner -->
+                </div><!-- /.admin-content-footer -->
+
+            </div><!-- /.admin-content-main-inner -->
+        </div><!-- /.admin-content -->
+    </div><!-- /.admin-landing-wrapper -->
+    {% block viewport %}
+
+        {% block north %}{% endblock north%}
+
+        {% block east  %}{% endblock east %}
+
+        {% block south %}{% endblock south%}
+
+        {% block center %}{% endblock center%}
+
+        {% block west  %}{% endblock west%}
+    
+    {% endblock viewport %}
+
+{% endblock body%}
+
+{% block javascripts %}
+    {{parent()}}
+    
+{% endblock javascripts%}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

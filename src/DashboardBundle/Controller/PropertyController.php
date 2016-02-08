@@ -26,7 +26,7 @@ class PropertyController extends Controller
 			//$output = $this->get('api_caller')->call(new HttpGetJson($remote_url , $parameters));
 
 			$ch = curl_init($remote_url);
-    	
+
     	curl_setopt($ch, CURLOPT_HTTPHEADER, array(
         "Authorization: Basic " . base64_encode("$username:$password"),
     	));
