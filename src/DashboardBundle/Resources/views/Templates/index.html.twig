@@ -1,9 +1,154 @@
-<ul>
-	{% for template in templates %}
-	<li>
-		<a href="{{path('flyer_new', {'id_template':loop.index, 'id_property':id_property})}}">
-			Templaste - {{loop.index}}
-		</a>
-	</li>
-	{% endfor %}
-</ul>
+{% extends 'DashboardBundle:Common:backend.html.twig' %}
+
+{% block breadcrumb %}
+	<li><a href="#">Templates</a></li>
+{% endblock breadcrumb%}
+
+{% block content %}
+
+<div class="row">
+  <div class="content col-sm-12 col-md-12">
+  <h1 class="page-header">Templates</h1>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="property-large">
+          <a class="property-large-image" href="{{path('flyer_new', {'id_template':'1', 'id_property':id_property})}}">
+              <img src="{{asset('bundles/dashboard/images/templates/casual.jpg')}}" alt="">
+          </a><!-- /.property-large-image -->
+
+          <div class="property-large-content">
+              <h2 class="property-large-title">
+              	<a href="{{path('flyer_new', {'id_template':'1', 'id_property':id_property})}}">Orange Fox Gate</a>
+              </h2>
+          </div><!-- /.property-large-content -->
+      </div><!-- /.property-large -->
+    </div>
+
+    <div class="col-sm-3">
+      <div class="property-large">
+          <a class="property-large-image" href="{{path('flyer_new', {'id_template':'1', 'id_property':id_property})}}">
+              <img src="{{asset('bundles/dashboard/images/templates/centre.jpg')}}" alt="">
+          </a><!-- /.property-large-image -->
+
+          <div class="property-large-content">
+              <h2 class="property-large-title">
+              	<a href="{{path('flyer_new', {'id_template':'1', 'id_property':id_property})}}">
+              		Cotton Rock
+              	</a>
+              </h2>
+          </div><!-- /.property-large-content -->
+      </div><!-- /.property-large -->
+    </div>
+
+    <div class="col-sm-3">
+      <div class="property-large">
+        <a class="property-large-image" href="{{path('flyer_new', {'id_template':'1', 'id_property':id_property})}}">
+            <img src="{{asset('bundles/dashboard/images/templates/classic.jpg')}}" alt="">
+        </a><!-- /.property-large-image -->
+
+        <div class="property-large-content">
+            <h2 class="property-large-title">
+            	<a href="{{path('flyer_new', {'id_template':'1', 'id_property':id_property})}}">
+            		Orange Fox Gate
+            	</a>
+            </h2>
+        </div><!-- /.property-large-content -->
+      </div><!-- /.property-large -->
+    </div>
+
+    <div class="col-sm-3">
+      <div class="property-large">
+    		<a class="property-large-image" href="{{path('flyer_new', {'id_template':'1', 'id_property':id_property})}}">
+            <img src="{{asset('bundles/dashboard/images/templates/clean.jpg')}}" alt="">
+        </a><!-- /.property-large-image -->
+
+        <div class="property-large-content">
+            <h2 class="property-large-title">
+            	<a href="{{path('flyer_new', {'id_template':'1', 'id_property':id_property})}}">
+            		Orange Fox Gate
+            	</a>
+            </h2>
+        </div><!-- /.property-large-content -->
+      </div><!-- /.property-large -->
+    </div>
+
+    <div class="col-sm-3">
+      <div class="property-large">
+          <a class="property-large-image" href="{{path('flyer_new', {'id_template':'1', 'id_property':id_property})}}">
+              <img src="{{asset('bundles/dashboard/images/templates/casual.jpg')}}" alt="">
+          </a><!-- /.property-large-image -->
+
+          <div class="property-large-content">
+              <h2 class="property-large-title">
+              	<a href="{{path('flyer_new', {'id_template':'1', 'id_property':id_property})}}">Orange Fox Gate</a>
+              </h2>
+          </div><!-- /.property-large-content -->
+      </div><!-- /.property-large -->
+    </div>
+
+    <div class="col-sm-3">
+      <div class="property-large">
+          <a class="property-large-image" href="{{path('flyer_new', {'id_template':'1', 'id_property':id_property})}}">
+              <img src="{{asset('bundles/dashboard/images/templates/centre.jpg')}}" alt="">
+          </a><!-- /.property-large-image -->
+
+          <div class="property-large-content">
+              <h2 class="property-large-title">
+              	<a href="{{path('flyer_new', {'id_template':'1', 'id_property':id_property})}}">
+              		Cotton Rock
+              	</a>
+              </h2>
+          </div><!-- /.property-large-content -->
+      </div><!-- /.property-large -->
+    </div>
+
+    <div class="col-sm-3">
+      <div class="property-large">
+        <a class="property-large-image" href="{{path('flyer_new', {'id_template':'1', 'id_property':id_property})}}">
+            <img src="{{asset('bundles/dashboard/images/templates/classic.jpg')}}" alt="">
+        </a><!-- /.property-large-image -->
+
+        <div class="property-large-content">
+            <h2 class="property-large-title">
+            	<a href="{{path('flyer_new', {'id_template':'1', 'id_property':id_property})}}">
+            		Orange Fox Gate
+            	</a>
+            </h2>
+        </div><!-- /.property-large-content -->
+      </div><!-- /.property-large -->
+    </div>
+
+    <div class="col-sm-3">
+      <div class="property-large">
+    		<a class="property-large-image" href="{{path('flyer_new', {'id_template':'1', 'id_property':id_property})}}">
+            <img src="{{asset('bundles/dashboard/images/templates/clean.jpg')}}" alt="">
+        </a><!-- /.property-large-image -->
+
+        <div class="property-large-content">
+            <h2 class="property-large-title">
+            	<a href="{{path('flyer_new', {'id_template':'1', 'id_property':id_property})}}">
+            		Orange Fox Gate
+            	</a>
+            </h2>
+        </div><!-- /.property-large-content -->
+      </div><!-- /.property-large -->
+    </div>
+
+	</div><!-- /.row -->
+
+	<div class="center">
+	  <ul class="pagination">
+	      <li><a href="properties-large.html#"><span aria-hidden="true">«</span><span class="sr-only">Previous</span></a></li>
+	      <li><a href="properties-large.html#">1</a></li>
+	      <li><a href="properties-large.html#">2</a></li>
+	      <li class="active"><a href="properties-large.html#">3</a></li>
+	      <li><a href="properties-large.html#">4</a></li>
+	      <li><a href="properties-large.html#">5</a></li>
+	      <li><a href="properties-large.html#"><span aria-hidden="true">»</span><span class="sr-only">Next</span></a></li>
+	  </ul>
+	</div><!-- /.center -->
+</div><!-- /.content -->
+
+</div>
+{% endblock content %}

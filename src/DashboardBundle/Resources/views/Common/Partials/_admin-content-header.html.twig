@@ -24,38 +24,38 @@
     }
 </style>
 
+<div class="row">
+    <div class="container-fluid">
+        <div class="page-title" style="position: absolute;">
             <div class="row">
-                <div class="container-fluid">
-                    <div class="page-title" style="position: absolute;">
-                        <div class="row">
-                            <ul>
-                                <li><a href="#"><i class="fa fa-home"></i> Home</a> / </li>
-                                {#<i class="mdi-hardware-keyboard-arrow-right"></i>#}
-                                {% block breadcrumb %}
-                                    <li><a href="#">Dashboard</a></li>
-                                {% endblock breadcrumb%}
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="admin-content-header-menu">
-                        <ul class="admin-content-header-menu-inner collapse">
-                            <li><a href="admin-dashboard.html#">FAQ</a></li>
-                            <li><a href="admin-dashboard.html#">Support</a></li>
-                            <li>
-                              <a href="{{path('fos_user_security_logout')}}">
-                                <i class="fa fa-sign-out"></i> 
-                                Logout
-                              </a>
-                            </li>
-                        </ul>
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".admin-content-header-menu-inner">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                    </div><!-- /.admin-content-header-menu  -->
-
-                </div>
+                <ul>
+                    <li><a href="#"><i class="fa fa-home"></i> Home</a> / </li>
+                    {#<i class="mdi-hardware-keyboard-arrow-right"></i>#}
+                    {% block breadcrumb %}
+                        <li><a href="#">Dashboard</a></li>
+                    {% endblock breadcrumb%}
+                </ul>
             </div>
+        </div>
+        <div class="admin-content-header-menu">
+            <ul class="admin-content-header-menu-inner collapse">
+                <li><a href="admin-dashboard.html#">FAQ</a></li>
+                <li><a href="admin-dashboard.html#">Support</a></li>
+                <li>
+                  <a href="{{path('fos_user_security_logout')}}">
+                    <i class="fa fa-sign-out"></i> 
+                    Logout
+                  </a>
+                </li>
+            </ul>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".admin-content-header-menu-inner">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div><!-- /.admin-content-header-menu  -->
+
+    </div>
+</div>
 
