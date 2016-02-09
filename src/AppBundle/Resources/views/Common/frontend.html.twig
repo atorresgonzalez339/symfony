@@ -21,7 +21,26 @@
         <div class="page-wrapper">
 
             {% block north  %}
-                {% include 'AppBundle:Common:Partials/_public-header.html.twig' %}
+            <div class="header header-standard header-call-to-action-wrapper">
+                <div class="relative">
+                    <div class="blur header-background overflow-hidden"></div>
+
+                    <div class="header-background-inner">
+
+                        <div class="container">
+                            <div class="header-inner">
+                            {% block header  %}
+                                {% include 'AppBundle:Common:Partials/_public-header.html.twig' %}
+                            {% endblock header  %}
+
+                            {% block banner  %}
+                                {% include 'AppBundle:Common:Partials/_public-header-banner.html.twig' %}
+                            {% endblock banner  %}
+                            </div><!-- /.header-inner -->
+                        </div><!-- /.container -->
+                    </div><!-- /.header-background-inner-->
+                </div><!-- /.relative -->
+            </div>
             {% endblock north %}
 
             {% block center %}
