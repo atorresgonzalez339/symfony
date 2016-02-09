@@ -27,48 +27,49 @@
         {% block east  %}
             {% include 'DashboardBundle:Common:Partials/_admin-navegation.html.twig' %}
         {% endblock east %}
-            <div class="admin-content">
-                <div class="admin-content-inner">
 
-                    {% block north %}
-                        <div class="admin-content-header">
-                            <div class="admin-content-header-inner">
-                            {% include 'DashboardBundle:Common:Partials/_admin-content-header.html.twig' %}
-                                <div class="page-title">
-                                    <div class="row">
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-home"></i> Home</a> / </li>
-                                            {#<i class="mdi-hardware-keyboard-arrow-right"></i>#}
-                                            {% block breadcrumb %}
-                                                <li><a href="#">Dashboard</a></li>
-                                            {% endblock breadcrumb%}
-                                        </ul>
+        <div class="admin-content">
+            <div class="admin-content-inner">
+
+                {% block north %}
+                    <div class="admin-content-header">
+                        <div class="admin-content-header-inner">
+                        {% include 'DashboardBundle:Common:Partials/_admin-content-header.html.twig' %}
+                            <div class="page-title">
+                                <div class="row">
+                                    <ul>
+                                        <li><a href="#"><i class="fa fa-home"></i> Home</a> / </li>
+                                        {#<i class="mdi-hardware-keyboard-arrow-right"></i>#}
+                                        {% block breadcrumb %}
+                                            <li><a href="#">Dashboard</a></li>
+                                        {% endblock breadcrumb%}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endblock north%}
+
+                {% block center %}
+                    <div class="admin-content-main">
+                        <div class="admin-content-main-inner">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        {% block content %} {% endblock content%}
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    {% endblock north%}
+                    </div>
+                {% endblock center%}
 
-                    {% block center %}
-                        <div class="admin-content-main">
-                            <div class="admin-content-main-inner">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            {% block content %} {% endblock content%}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    {% endblock center%}
+                {% block south %}
+                    {% include 'DashboardBundle:Common:Partials/_admin-footer.html.twig' %}
+                {% endblock south%}
 
-                    {% block south %}
-                        {% include 'DashboardBundle:Common:Partials/_admin-footer.html.twig' %}
-                    {% endblock south%}
-
-                </div>
             </div>
+        </div>
 
         {% block west  %}{% endblock west%}
 
