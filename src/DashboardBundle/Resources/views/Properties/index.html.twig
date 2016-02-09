@@ -5,19 +5,6 @@
 {% endblock breadcrumb%}
 
 {% block content %}
-	{#<ul>#}
-		{#{% for data in properties %}#}
-			{#<li>#}
-				{#<img height="150" src="{{data.photos.0}}" >#}
-				{#<br />#}
-				{#<a href="{{path('template_index')}}?id_property={{data.mlsId}}">#}
-					{#Property - {{loop.index}}#}
-				{#</a>#}
-				{#<hr />#}
-			{#</li>#}
-		{#{% endfor %}#}
-	{#</ul>#}
-
 	<div class="row">
 		<div class="content col-sm-8 col-md-12">
 			<h1 class="page-header">Row Properties</h1>
@@ -64,20 +51,20 @@
 				</form>
 			</div><!-- /.properties-sort -->
 
+			{% for data in properties %}
 			<div class="property-row">
-				<a href="properties-row.html#" class="property-row-image">
+				<a href="{{path('template_index')}}?id_property={{data.mlsId}}" class="property-row-image">
 					<span class="property-badge">Featured</span>
-					<img src="{{ asset('bundles/dashboard/properties/1.jpg') }}" alt="">
+					<img src="{{data.photos.0}}" alt="">
 				</a><!-- /.property-row-image -->
 
 				<div class="property-row-content">
 					<h2 class="property-row-title">
-						<a href="properties-row.html#">Orange Fox Gate</a>
+						<a href="properties-row.html#">{{data.property.subdivision}}</a>
 					</h2>
 
 					<ul class="property-row-location">
-						<li><a href="properties-row.html#">New York</a>,</li>
-						<li><a href="properties-row.html#">Brooklyn</a></li>
+						<li>{{data.address.full}}, {{data.address.city}}, {{data.address.state}}</li>
 					</ul>
 
 					<div class="property-row-body">
@@ -110,241 +97,7 @@
 
 				</div><!-- /.property-row-content -->
 			</div><!-- /.property-row -->
-
-			<div class="property-row">
-				<a href="properties-row.html#" class="property-row-image">
-					<span class="property-badge">Featured</span>
-					<img src="{{ asset('bundles/dashboard/properties/2.jpg') }}" alt="">
-				</a><!-- /.property-row-image -->
-
-				<div class="property-row-content">
-					<h2 class="property-row-title">
-						<a href="properties-row.html#">Orange Fox Gate</a>
-					</h2>
-
-					<ul class="property-row-location">
-						<li><a href="properties-row.html#">New York</a>,</li>
-						<li><a href="properties-row.html#">Brooklyn</a></li>
-					</ul>
-
-					<div class="property-row-body">
-						<p>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean consectetur diam dui, vitae tincidunt neque feugiat bibendum.
-						</p>
-					</div><!-- /.property-row-body -->
-
-					<div class="property-row-meta">
-						<div class="property-row-meta-item">
-							<span><i class="fa fa-dollar"></i></span>
-							<strong>12,500</strong>
-						</div><!-- /.property-box-meta-item -->
-
-						<div class="property-row-meta-item">
-							<span><i class="fa fa-arrows"></i></span>
-							<strong>98 sqft</strong>
-						</div><!-- /.property-box-meta-item -->
-
-						<div class="property-row-meta-item">
-							<span><i class="fa fa-car"></i></span>
-							<strong>1</strong>
-						</div><!-- /.property-box-meta-item -->
-
-						<div class="property-row-meta-item">
-							<span><i class="fa fa-file"></i></span>
-							<strong>Rent</strong>
-						</div><!-- /.property-box-meta-item -->
-					</div><!-- /.property-row-meta -->
-
-				</div><!-- /.property-row-content -->
-			</div><!-- /.property-row -->
-
-			<div class="property-row">
-				<a href="properties-row.html#" class="property-row-image">
-					<span class="property-badge">Featured</span>
-					<img src="{{ asset('bundles/dashboard/properties/3.jpg') }}" alt="">
-				</a><!-- /.property-row-image -->
-
-				<div class="property-row-content">
-					<h2 class="property-row-title">
-						<a href="properties-row.html#">Orange Fox Gate</a>
-					</h2>
-
-					<ul class="property-row-location">
-						<li><a href="properties-row.html#">New York</a>,</li>
-						<li><a href="properties-row.html#">Brooklyn</a></li>
-					</ul>
-
-					<div class="property-row-body">
-						<p>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean consectetur diam dui, vitae tincidunt neque feugiat bibendum.
-						</p>
-					</div><!-- /.property-row-body -->
-
-					<div class="property-row-meta">
-						<div class="property-row-meta-item">
-							<span><i class="fa fa-dollar"></i></span>
-							<strong>12,500</strong>
-						</div><!-- /.property-box-meta-item -->
-
-						<div class="property-row-meta-item">
-							<span><i class="fa fa-arrows"></i></span>
-							<strong>98 sqft</strong>
-						</div><!-- /.property-box-meta-item -->
-
-						<div class="property-row-meta-item">
-							<span><i class="fa fa-car"></i></span>
-							<strong>1</strong>
-						</div><!-- /.property-box-meta-item -->
-
-						<div class="property-row-meta-item">
-							<span><i class="fa fa-file"></i></span>
-							<strong>Rent</strong>
-						</div><!-- /.property-box-meta-item -->
-					</div><!-- /.property-row-meta -->
-
-				</div><!-- /.property-row-content -->
-			</div><!-- /.property-row -->
-
-			<div class="property-row">
-				<a href="properties-row.html#" class="property-row-image">
-					<span class="property-badge">Featured</span>
-					<img src="{{ asset('bundles/dashboard/properties/4.jpg') }}" alt="">
-				</a><!-- /.property-row-image -->
-
-				<div class="property-row-content">
-					<h2 class="property-row-title">
-						<a href="properties-row.html#">Orange Fox Gate</a>
-					</h2>
-
-					<ul class="property-row-location">
-						<li><a href="properties-row.html#">New York</a>,</li>
-						<li><a href="properties-row.html#">Brooklyn</a></li>
-					</ul>
-
-					<div class="property-row-body">
-						<p>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean consectetur diam dui, vitae tincidunt neque feugiat bibendum.
-						</p>
-					</div><!-- /.property-row-body -->
-
-					<div class="property-row-meta">
-						<div class="property-row-meta-item">
-							<span><i class="fa fa-dollar"></i></span>
-							<strong>12,500</strong>
-						</div><!-- /.property-box-meta-item -->
-
-						<div class="property-row-meta-item">
-							<span><i class="fa fa-arrows"></i></span>
-							<strong>98 sqft</strong>
-						</div><!-- /.property-box-meta-item -->
-
-						<div class="property-row-meta-item">
-							<span><i class="fa fa-car"></i></span>
-							<strong>1</strong>
-						</div><!-- /.property-box-meta-item -->
-
-						<div class="property-row-meta-item">
-							<span><i class="fa fa-file"></i></span>
-							<strong>Rent</strong>
-						</div><!-- /.property-box-meta-item -->
-					</div><!-- /.property-row-meta -->
-
-				</div><!-- /.property-row-content -->
-			</div><!-- /.property-row -->
-
-			<div class="property-row">
-				<a href="properties-row.html#" class="property-row-image">
-					<span class="property-badge">Featured</span>
-					<img src="{{ asset('bundles/dashboard/properties/5.jpg') }}" alt="">
-				</a><!-- /.property-row-image -->
-
-				<div class="property-row-content">
-					<h2 class="property-row-title">
-						<a href="properties-row.html#">Orange Fox Gate</a>
-					</h2>
-
-					<ul class="property-row-location">
-						<li><a href="properties-row.html#">New York</a>,</li>
-						<li><a href="properties-row.html#">Brooklyn</a></li>
-					</ul>
-
-					<div class="property-row-body">
-						<p>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean consectetur diam dui, vitae tincidunt neque feugiat bibendum.
-						</p>
-					</div><!-- /.property-row-body -->
-
-					<div class="property-row-meta">
-						<div class="property-row-meta-item">
-							<span><i class="fa fa-dollar"></i></span>
-							<strong>12,500</strong>
-						</div><!-- /.property-box-meta-item -->
-
-						<div class="property-row-meta-item">
-							<span><i class="fa fa-arrows"></i></span>
-							<strong>98 sqft</strong>
-						</div><!-- /.property-box-meta-item -->
-
-						<div class="property-row-meta-item">
-							<span><i class="fa fa-car"></i></span>
-							<strong>1</strong>
-						</div><!-- /.property-box-meta-item -->
-
-						<div class="property-row-meta-item">
-							<span><i class="fa fa-file"></i></span>
-							<strong>Rent</strong>
-						</div><!-- /.property-box-meta-item -->
-					</div><!-- /.property-row-meta -->
-
-				</div><!-- /.property-row-content -->
-			</div><!-- /.property-row -->
-
-			<div class="property-row">
-				<a href="properties-row.html#" class="property-row-image">
-					<span class="property-badge">Featured</span>
-					<img src="{{ asset('bundles/dashboard/properties/6.jpg') }}" alt="">
-				</a><!-- /.property-row-image -->
-
-				<div class="property-row-content">
-					<h2 class="property-row-title">
-						<a href="properties-row.html#">Orange Fox Gate</a>
-					</h2>
-
-					<ul class="property-row-location">
-						<li><a href="properties-row.html#">New York</a>,</li>
-						<li><a href="properties-row.html#">Brooklyn</a></li>
-					</ul>
-
-					<div class="property-row-body">
-						<p>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean consectetur diam dui, vitae tincidunt neque feugiat bibendum.
-						</p>
-					</div><!-- /.property-row-body -->
-
-					<div class="property-row-meta">
-						<div class="property-row-meta-item">
-							<span><i class="fa fa-dollar"></i></span>
-							<strong>12,500</strong>
-						</div><!-- /.property-box-meta-item -->
-
-						<div class="property-row-meta-item">
-							<span><i class="fa fa-arrows"></i></span>
-							<strong>98 sqft</strong>
-						</div><!-- /.property-box-meta-item -->
-
-						<div class="property-row-meta-item">
-							<span><i class="fa fa-car"></i></span>
-							<strong>1</strong>
-						</div><!-- /.property-box-meta-item -->
-
-						<div class="property-row-meta-item">
-							<span><i class="fa fa-file"></i></span>
-							<strong>Rent</strong>
-						</div><!-- /.property-box-meta-item -->
-					</div><!-- /.property-row-meta -->
-
-				</div><!-- /.property-row-content -->
-			</div><!-- /.property-row -->
+			{% endfor %}
 
 			<div class="center">
 				<ul class="pagination">
