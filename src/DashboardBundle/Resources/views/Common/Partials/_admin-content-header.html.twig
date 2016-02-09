@@ -35,7 +35,12 @@
                         <ul class="admin-content-header-menu-inner collapse">
                             <li><a href="admin-dashboard.html#">FAQ</a></li>
                             <li><a href="admin-dashboard.html#">Support</a></li>
-                            <li><a href="admin-login.html"><i class="fa fa-sign-out"></i> Logout</a></li>
+                            <li>
+                              <a href="{{path('fos_user_security_logout')}}">
+                                <i class="fa fa-sign-out"></i> 
+                                Logout
+                              </a>
+                            </li>
                         </ul>
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".admin-content-header-menu-inner">
                             <span class="sr-only">Toggle navigation</span>
