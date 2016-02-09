@@ -10,3 +10,7 @@
 /vendor/
 /bin/
 /composer.phar
+
+composer.lock
+
+app/cache/.gitkeep
