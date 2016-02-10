@@ -5,114 +5,302 @@
 {% endblock breadcrumb%}
 
 {% block content %}
-	<div class="row">
-		<div class="content col-sm-8 col-md-12">
-			<h1 class="page-header">Row Properties</h1>
 
-			<div class="properties-sort">
-				<form method="get" action="http://html.realsite.byaviators.com/properties-row.html?">
-					<h3 class="page-header">Display Options</h3>
+<style>
+	.property-row {
+		background-color: #fff;
+		box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
+		margin-bottom: 30px; }
 
-					<div class="row">
-						<div class="col-sm-3">
-							<select style="display: none;">
-								<option>Rating</option>
-								<option>Most Viewed</option>
-								<option>Best Rated</option>
-							</select><div class="btn-group bootstrap-select"><button type="button" class="btn dropdown-toggle form-control selectpicker btn-default" data-toggle="dropdown" title="Rating" aria-expanded="false"><span class="filter-option pull-left">Rating</span>&nbsp;<span class="caret"></span></button><div class="dropdown-menu open" style="height: 0px; width: 0px;"><ul class="dropdown-menu inner selectpicker" role="menu"><li data-original-index="0" class="selected"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>Rating</span>" data-tokens="null"><span class="text">Rating</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="1"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>Most Viewed</span>" data-tokens="null"><span class="text">Most Viewed</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="2"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>Best Rated</span>" data-tokens="null"><span class="text">Best Rated</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li></ul></div></div>
-						</div><!-- /.col-* -->
+	.property-row-image {
+		display: block;
+		position: relative;
+		background-color: rgba(0, 0, 0, 0.15);
+		display: block;
+		float: left;
+		height: 195px;
+		width: 262px; }
+	.property-row-image:after {
+		background-color: black;
+		background-image: url("../img/magnifier.png");
+		background-position: center center;
+		background-repeat: no-repeat;
+		background-size: 32px 32px;
+		content: '';
+		display: table-cell;
+		height: 100%;
+		left: 0px;
+		opacity: 0;
+		position: absolute;
+		text-align: center;
+		top: 0px;
+		transition: opacity .15s linear;
+		vertical-align: middle;
+		width: 100%;
+		z-index: 3; }
+	.property-row-image:hover:after {
+		opacity: .5; }
+	.property-row-image:before {
+		color: rgba(0, 0, 0, 0.2);
+		content: "";
+		display: block;
+		font-family: 'FontAwesome';
+		font-size: 40px;
+		left: 50%;
+		position: absolute;
+		top: 50%;
+		transform: translateX(-50%) translateY(-50%);
+		-webkit-transform: translateX(-50%) translateY(-50%);
+		z-index: 0; }
+	.footer .property-row-image:before {
+		color: #42A5F5; }
+	.property-row-image img {
+		display: block;
+		position: relative;
+		width: 100%;
+		z-index: 2; }
+	@media (min-width: 768px) and (max-width: 991px) {
+		.property-row-image {
+			float: none;
+			height: auto;
+			width: 100%; } }
+	@media (max-width: 767px) {
+		.property-row-image {
+			float: none;
+			height: auto;
+			width: 100%; } }
 
-						<div class="col-sm-3">
-							<select style="display: none;">
-								<option>Sort by</option>
-								<option>Price</option>
-								<option>Name</option>
-								<option>Date</option>
-							</select><div class="btn-group bootstrap-select"><button type="button" class="btn dropdown-toggle form-control selectpicker btn-default" data-toggle="dropdown" title="Sort by" aria-expanded="false"><span class="filter-option pull-left">Sort by</span>&nbsp;<span class="caret"></span></button><div class="dropdown-menu open" style="height: 0px; width: 0px;"><ul class="dropdown-menu inner selectpicker" role="menu"><li data-original-index="0" class="selected"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>Sort by</span>" data-tokens="null"><span class="text">Sort by</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="1"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>Price</span>" data-tokens="null"><span class="text">Price</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="2"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>Name</span>" data-tokens="null"><span class="text">Name</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="3"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>Date</span>" data-tokens="null"><span class="text">Date</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li></ul></div></div>
-						</div><!-- /.col-* -->
+	.property-row-body {
+		color: #616161; }
 
-						<div class="col-sm-3">
-							<select style="display: none;">
-								<option>Order</option>
-								<option>ASC</option>
-								<option>DESC</option>
-							</select><div class="btn-group bootstrap-select"><button type="button" class="btn dropdown-toggle form-control selectpicker btn-default" data-toggle="dropdown" title="Order"><span class="filter-option pull-left">Order</span>&nbsp;<span class="caret"></span></button><div class="dropdown-menu open"><ul class="dropdown-menu inner selectpicker" role="menu"><li data-original-index="0" class="selected"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>Order</span>" data-tokens="null"><span class="text">Order</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="1"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>ASC</span>" data-tokens="null"><span class="text">ASC</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="2"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>DESC</span>" data-tokens="null"><span class="text">DESC</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li></ul></div></div>
-						</div><!-- /.col-* -->
+	.property-row-content {
+		float: left;
+		margin-left: 30px;
+		min-height: 195px;
+		position: relative;
+		width: 525px; }
+	@media (min-width: 992px) and (max-width: 1199px) {
+		.property-row-content {
+			width: 375px; } }
+	@media (min-width: 768px) and (max-width: 991px) {
+		.property-row-content {
+			float: none;
+			margin-left: 0px;
+			padding: 0px 15px;
+			width: 100%; } }
+	@media (max-width: 767px) {
+		.property-row-content {
+			float: none;
+			margin-left: 0px;
+			padding: 0px 15px;
+			width: 100%; } }
 
-						<div class="col-sm-3">
-							<select style="display: none;">
-								<option>Display as</option>
-								<option>Rows</option>
-								<option>Grid</option>
-								<option>Table</option>
-							</select><div class="btn-group bootstrap-select"><button type="button" class="btn dropdown-toggle form-control selectpicker btn-default" data-toggle="dropdown" title="Display as"><span class="filter-option pull-left">Display as</span>&nbsp;<span class="caret"></span></button><div class="dropdown-menu open"><ul class="dropdown-menu inner selectpicker" role="menu"><li data-original-index="0" class="selected"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>Display as</span>" data-tokens="null"><span class="text">Display as</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="1"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>Rows</span>" data-tokens="null"><span class="text">Rows</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="2"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>Grid</span>" data-tokens="null"><span class="text">Grid</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="3"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>Table</span>" data-tokens="null"><span class="text">Table</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li></ul></div></div>
-						</div><!-- /.col-* -->
-					</div><!-- /.row -->
-				</form>
-			</div><!-- /.properties-sort -->
+	.property-row-title {
+		color: #424242;
+		margin-bottom: 0px;
+		font-size: 20px;}
+	.property-row-title a {
+		color: #424242; }
 
-			{% for data in properties %}
-			<div class="property-row">
-				<a href="{{path('template_index')}}?id_property={{data.mlsId}}" class="property-row-image">
-					<span class="property-badge">Featured</span>
-					<img src="{{data.photos.0}}" alt="">
-				</a><!-- /.property-row-image -->
+	.property-row-meta {
+		background-color: #F5F5F5;
+		border-top: 1px solid #E0E0E0;
+		bottom: 0px;
+		left: -30px;
+		position: absolute;
+		right: -30px;
+	}
+	.property-row-meta-item {
+		border-right: 1px solid #E0E0E0;
+		float: left;
+		font-size: 12px;
+		padding: 6px 20px;
+	}
 
-				<div class="property-row-content">
-					<h2 class="property-row-title">
-						<a href="properties-row.html#">{{data.property.subdivision}}</a>
-					</h2>
+	.property-row-location {
+		border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+		display: block;
+		list-style: none;
+		margin: 10px 0px 10px 0px;
+		padding: 0px 0px 10px 0px; }
+	.property-row-location li {
+		display: inline; }
+	.property-row-location li a {
+		color: #9E9E9E;
+		font-size: 11px;
+		font-weight: 500;
+		text-transform: uppercase; }
 
-					<ul class="property-row-location">
-						<li>{{data.address.full}}, {{data.address.city}}, {{data.address.state}}</li>
-					</ul>
+	.property-row-meta {
+		background-color: #F5F5F5;
+		border-top: 1px solid #E0E0E0;
+		bottom: 0px;
+		left: -30px;
+		position: absolute;
+		right: -30px; }
+</style>
 
-					<div class="property-row-body">
-						<p>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean consectetur diam dui, vitae tincidunt neque feugiat bibendum.
-						</p>
-					</div><!-- /.property-row-body -->
+	<div class="card">
+		<div class="title">
+			<h5> Properties </h5>
+		</div>
+		<div class="content">
 
-					<div class="property-row-meta">
-						<div class="property-row-meta-item">
-							<span><i class="fa fa-dollar"></i></span>
-							<strong>12,500</strong>
-						</div><!-- /.property-box-meta-item -->
+				<div class="row">
+					<div class="col m3">
+						<a href="properties-row.html#" class="property-row-image">
+							<img src="{{ asset('bundles/dashboard/properties/1.jpg') }}" alt="">
+						</a>
+					</div>
+					<div class="col m9">
+						<div class="property-row-content">
+							<h2 class="property-row-title">
+								<a href="properties-row.html#">Orange Fox Gate</a>
+							</h2>
+							<ul class="property-row-location">
+								<li><a href="properties-row.html#">New York</a>,</li>
+								<li><a href="properties-row.html#">Brooklyn</a></li>
+							</ul>
+							<div class="property-row-body">
+								<p>
+									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean consectetur diam dui, vitae tincidunt neque feugiat bibendum.
+								</p>
+							</div><!-- /.property-row-body -->
 
-						<div class="property-row-meta-item">
-							<span><i class="fa fa-arrows"></i></span>
-							<strong>98 sqft</strong>
-						</div><!-- /.property-box-meta-item -->
+							<div class="property-row-meta">
+								<div class="property-row-meta-item">
+									<span><i class="fa fa-dollar"></i></span>
+									<strong>12,500</strong>
+								</div><!-- /.property-box-meta-item -->
 
-						<div class="property-row-meta-item">
-							<span><i class="fa fa-car"></i></span>
-							<strong>1</strong>
-						</div><!-- /.property-box-meta-item -->
+								<div class="property-row-meta-item">
+									<span><i class="fa fa-arrows"></i></span>
+									<strong>98 sqft</strong>
+								</div><!-- /.property-box-meta-item -->
 
-						<div class="property-row-meta-item">
-							<span><i class="fa fa-file"></i></span>
-							<strong>Rent</strong>
-						</div><!-- /.property-box-meta-item -->
-					</div><!-- /.property-row-meta -->
+								<div class="property-row-meta-item">
+									<span><i class="fa fa-car"></i></span>
+									<strong>1</strong>
+								</div><!-- /.property-box-meta-item -->
 
-				</div><!-- /.property-row-content -->
-			</div><!-- /.property-row -->
-			{% endfor %}
+								<div class="property-row-meta-item">
+									<span><i class="fa fa-file"></i></span>
+									<strong>Rent</strong>
+								</div><!-- /.property-box-meta-item -->
+							</div><!-- /.property-row-meta -->
+						</div><!-- /.property-row-content -->
+					</div>
+			</div>
 
-			<div class="center">
-				<ul class="pagination">
-					<li><a href="properties-row.html#"><span aria-hidden="true">«</span><span class="sr-only">Previous</span></a></li>
-					<li><a href="properties-row.html#">1</a></li>
-					<li><a href="properties-row.html#">2</a></li>
-					<li class="active"><a href="properties-row.html#">3</a></li>
-					<li><a href="properties-row.html#">4</a></li>
-					<li><a href="properties-row.html#">5</a></li>
-					<li><a href="properties-row.html#"><span aria-hidden="true">»</span><span class="sr-only">Next</span></a></li>
-				</ul>
-			</div><!-- /.center -->
-		</div><!-- /.content -->
+			<div class="row">
+				<div class="col m3">
+					<a href="properties-row.html#" class="property-row-image">
+						<img src="{{ asset('bundles/dashboard/properties/1.jpg') }}" alt="">
+					</a>
+				</div>
+				<div class="col m9">
+					<div class="property-row-content">
+						<h2 class="property-row-title">
+							<a href="properties-row.html#">Orange Fox Gate</a>
+						</h2>
+						<ul class="property-row-location">
+							<li><a href="properties-row.html#">New York</a>,</li>
+							<li><a href="properties-row.html#">Brooklyn</a></li>
+						</ul>
+						<div class="property-row-body">
+							<p>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean consectetur diam dui, vitae tincidunt neque feugiat bibendum.
+							</p>
+						</div><!-- /.property-row-body -->
 
+						<div class="property-row-meta">
+							<div class="property-row-meta-item">
+								<span><i class="fa fa-dollar"></i></span>
+								<strong>12,500</strong>
+							</div><!-- /.property-box-meta-item -->
+
+							<div class="property-row-meta-item">
+								<span><i class="fa fa-arrows"></i></span>
+								<strong>98 sqft</strong>
+							</div><!-- /.property-box-meta-item -->
+
+							<div class="property-row-meta-item">
+								<span><i class="fa fa-car"></i></span>
+								<strong>1</strong>
+							</div><!-- /.property-box-meta-item -->
+
+							<div class="property-row-meta-item">
+								<span><i class="fa fa-file"></i></span>
+								<strong>Rent</strong>
+							</div><!-- /.property-box-meta-item -->
+						</div><!-- /.property-row-meta -->
+					</div><!-- /.property-row-content -->
+				</div>
+			</div>
+		</div>
 	</div>
+			{#{% for data in properties %}#}
+			{#<div class="property-row">#}
+				{#<a href="{{path('template_index')}}?id_property={{data.mlsId}}" class="property-row-image">#}
+					{#<span class="property-badge">Featured</span>#}
+					{#<img src="{{data.photos.0}}" alt="">#}
+				{#</a><!-- /.property-row-image -->#}
+
+				{#<div class="property-row-content">#}
+					{#<h2 class="property-row-title">#}
+						{#<a href="properties-row.html#">{{data.property.subdivision}}</a>#}
+					{#</h2>#}
+
+					{#<ul class="property-row-location">#}
+						{#<li>{{data.address.full}}, {{data.address.city}}, {{data.address.state}}</li>#}
+					{#</ul>#}
+
+					{#<div class="property-row-body">#}
+						{#<p>#}
+							{#Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean consectetur diam dui, vitae tincidunt neque feugiat bibendum.#}
+						{#</p>#}
+					{#</div><!-- /.property-row-body -->#}
+
+					{#<div class="property-row-meta">#}
+						{#<div class="property-row-meta-item">#}
+							{#<span><i class="fa fa-dollar"></i></span>#}
+							{#<strong>12,500</strong>#}
+						{#</div><!-- /.property-box-meta-item -->#}
+
+						{#<div class="property-row-meta-item">#}
+							{#<span><i class="fa fa-arrows"></i></span>#}
+							{#<strong>98 sqft</strong>#}
+						{#</div><!-- /.property-box-meta-item -->#}
+
+						{#<div class="property-row-meta-item">#}
+							{#<span><i class="fa fa-car"></i></span>#}
+							{#<strong>1</strong>#}
+						{#</div><!-- /.property-box-meta-item -->#}
+
+						{#<div class="property-row-meta-item">#}
+							{#<span><i class="fa fa-file"></i></span>#}
+							{#<strong>Rent</strong>#}
+						{#</div><!-- /.property-box-meta-item -->#}
+					{#</div><!-- /.property-row-meta -->#}
+
+				{#</div><!-- /.property-row-content -->#}
+			{#</div><!-- /.property-row -->#}
+			{#{% endfor %}#}
+
+			{#<div class="center">#}
+				{#<ul class="pagination">#}
+					{#<li><a href="properties-row.html#"><span aria-hidden="true">«</span><span class="sr-only">Previous</span></a></li>#}
+					{#<li><a href="properties-row.html#">1</a></li>#}
+					{#<li><a href="properties-row.html#">2</a></li>#}
+					{#<li class="active"><a href="properties-row.html#">3</a></li>#}
+					{#<li><a href="properties-row.html#">4</a></li>#}
+					{#<li><a href="properties-row.html#">5</a></li>#}
+					{#<li><a href="properties-row.html#"><span aria-hidden="true">»</span><span class="sr-only">Next</span></a></li>#}
+				{#</ul>#}
+			{#</div><!-- /.center -->#}
+		{#</div><!-- /.content -->#}
+
+	{#</div>#}
 
 {% endblock content%}
 
