@@ -1,4 +1,16 @@
 services:
-   dashboard.utils.business:
-       class: DashboardBundle\UtilBusiness
-       arguments: ["@service_container"]
+  dashboard.utils.business:
+    class: DashboardBundle\UtilBusiness
+    arguments: ["@service_container"]
+
+  dashboard.property.business:
+    class: DashboardBundle\PropertyBusiness
+    arguments: ["@service_container"]
+
+  dashboard.flyer.business:
+    class: DashboardBundle\FlyerBusiness
+    arguments: ["@service_container"]
+
+  dashboard.template.business:
+    class: DashboardBundle\TemplateBusiness
+    arguments: ["@service_container"]

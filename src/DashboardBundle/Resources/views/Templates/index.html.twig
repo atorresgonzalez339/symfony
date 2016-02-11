@@ -5,115 +5,37 @@
 {% endblock breadcrumb%}
 
 {% block content %}
-    <style>
-        .card .card-action.card-action-templeate{
-            border-top: 1px solid rgba(160, 160, 160, .2);
-            padding: 10px 0px 10px 10px;
-        }
-        .card.small .card-image.card-image-templeate {
-            height: 100%;
-        }
-    </style>
+<style>
+    .card .card-action.card-action-templeate{
+        border-top: 1px solid rgba(160, 160, 160, .2);
+        padding: 10px 0px 10px 10px;
+    }
+    .card.small .card-image.card-image-templeate {
+        height: 100%;
+    }
+</style>
 <div class="card">
-    <div class="title">
-        <h5> <i class="mdi mdi-av-web"></i> Templeates </h5>
-    </div>
-    <div class="content">
+  <div class="title">
+      <h5> <i class="mdi mdi-av-web"></i> Templeates </h5>
+  </div>
+  <div class="content">
 
-    <div class="row">
-        <div class="col m3">
-            <div class="card small">
-                <div class="card-image card-image-templeate"><img src="{{asset('bundles/dashboard/images/templates/casual.jpg')}}">
-                    <div class="card-action card-action-templeate">
-                        <a href="#!" class="azure-text">Title</a>
-                        <a href="#" class="azure-text right"><i class="fa fa-heart"></i></a>
-                        <a href="#" class="azure-text right"><i class="fa fa-share-alt"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col m3">
-            <div class="card small">
-                <div class="card-image card-image-templeate"><img src="{{asset('bundles/dashboard/images/templates/centre.jpg')}}">
-                    <div class="card-action card-action-templeate">
-                        <a href="#!" class="azure-text">Title</a>
-                        <a href="#" class="azure-text right"><i class="fa fa-heart"></i></a>
-                        <a href="#" class="azure-text right"><i class="fa fa-share-alt"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col m3">
-            <div class="card small">
-                <div class="card-image card-image-templeate"><img src="{{asset('bundles/dashboard/images/templates/classic.jpg')}}">
-                    <div class="card-action card-action-templeate">
-                        <a href="#!" class="azure-text">Title</a>
-                        <a href="#" class="azure-text right"><i class="fa fa-heart"></i></a>
-                        <a href="#" class="azure-text right"><i class="fa fa-share-alt"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col m3">
-            <div class="card small">
-                <div class="card-image card-image-templeate"><img src="{{asset('bundles/dashboard/images/templates/clean.jpg')}}">
-                    <div class="card-action card-action-templeate">
-                        <a href="#!" class="azure-text">Title</a>
-                        <a href="#" class="azure-text right"><i class="fa fa-heart"></i></a>
-                        <a href="#" class="azure-text right"><i class="fa fa-share-alt"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="row">
+    {% for template in templates %}
+    <div class="col m3">
+      <div class="card small">
+        <div class="card-image card-image-templeate"><img src="{{asset('bundles/dashboard/images/templates/' ~ template.image)}}">
+          <div class="card-action card-action-templeate">
+            <a href="#!" class="azure-text">{{template.name}}</a>
+            <a href="#" class="azure-text right"><i class="fa fa-heart"></i></a>
+            <a href="#" class="azure-text right"><i class="fa fa-share-alt"></i></a>
+          </div>
+        </div>  
+      </div>  
     </div>
-
-    <div class="row">
-        <div class="col m3">
-            <div class="card small">
-                <div class="card-image card-image-templeate"><img src="{{asset('bundles/dashboard/images/templates/casual.jpg')}}">
-                    <div class="card-action card-action-templeate">
-                        <a href="#!" class="azure-text">Title</a>
-                        <a href="#" class="azure-text right"><i class="fa fa-heart"></i></a>
-                        <a href="#" class="azure-text right"><i class="fa fa-share-alt"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col m3">
-            <div class="card small">
-                <div class="card-image card-image-templeate"><img src="{{asset('bundles/dashboard/images/templates/centre.jpg')}}">
-                    <div class="card-action card-action-templeate">
-                        <a href="#!" class="azure-text">Title</a>
-                        <a href="#" class="azure-text right"><i class="fa fa-heart"></i></a>
-                        <a href="#" class="azure-text right"><i class="fa fa-share-alt"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col m3">
-            <div class="card small">
-                <div class="card-image card-image-templeate"><img src="{{asset('bundles/dashboard/images/templates/classic.jpg')}}">
-                    <div class="card-action card-action-templeate">
-                        <a href="#!" class="azure-text">Title</a>
-                        <a href="#" class="azure-text right"><i class="fa fa-heart"></i></a>
-                        <a href="#" class="azure-text right"><i class="fa fa-share-alt"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col m3">
-            <div class="card small">
-                <div class="card-image card-image-templeate"><img src="{{asset('bundles/dashboard/images/templates/clean.jpg')}}">
-                    <div class="card-action card-action-templeate">
-                        <a href="#!" class="azure-text">Title</a>
-                        <a href="#" class="azure-text right"><i class="fa fa-heart"></i></a>
-                        <a href="#" class="azure-text right"><i class="fa fa-share-alt"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+  {% endfor %}
+  </div>
+  <div class="row">
     <ul class="pagination center">
         <li class="disabled"><a href="#!"><i class="mdi-navigation-chevron-left"></i></a></li>
         <li class="active"><a href="#!">1</a></li>
@@ -123,150 +45,6 @@
         <li class="waves-effect"><a href="#!">5</a></li>
         <li class="waves-effect"><a href="#!"><i class="mdi-navigation-chevron-right"></i></a></li>
     </ul>
-
-{#<div class="row">#}
-  {#<div class="content col-sm-12 col-md-12">#}
-  {#<h1 class="page-header">Templates</h1>#}
-
-  {#<div class="row">#}
-    {#<div class="col-sm-3">#}
-      {#<div class="property-large">#}
-          {#<a class="property-large-image" href="{{path('flyer_new', {'id_template':'1', 'id_property':id_property})}}">#}
-              {#<img src="{{asset('bundles/dashboard/images/templates/casual.jpg')}}" alt="">#}
-          {#</a><!-- /.property-large-image -->#}
-
-          {#<div class="property-large-content">#}
-              {#<h2 class="property-large-title">#}
-              	{#<a href="{{path('flyer_new', {'id_template':'1', 'id_property':id_property})}}">Orange Fox Gate</a>#}
-              {#</h2>#}
-          {#</div><!-- /.property-large-content -->#}
-      {#</div><!-- /.property-large -->#}
-    {#</div>#}
-
-    {#<div class="col-sm-3">#}
-      {#<div class="property-large">#}
-          {#<a class="property-large-image" href="{{path('flyer_new', {'id_template':'1', 'id_property':id_property})}}">#}
-              {#<img src="{{asset('bundles/dashboard/images/templates/centre.jpg')}}" alt="">#}
-          {#</a><!-- /.property-large-image -->#}
-
-          {#<div class="property-large-content">#}
-              {#<h2 class="property-large-title">#}
-              	{#<a href="{{path('flyer_new', {'id_template':'1', 'id_property':id_property})}}">#}
-              		{#Cotton Rock#}
-              	{#</a>#}
-              {#</h2>#}
-          {#</div><!-- /.property-large-content -->#}
-      {#</div><!-- /.property-large -->#}
-    {#</div>#}
-
-    {#<div class="col-sm-3">#}
-      {#<div class="property-large">#}
-        {#<a class="property-large-image" href="{{path('flyer_new', {'id_template':'1', 'id_property':id_property})}}">#}
-            {#<img src="{{asset('bundles/dashboard/images/templates/classic.jpg')}}" alt="">#}
-        {#</a><!-- /.property-large-image -->#}
-
-        {#<div class="property-large-content">#}
-            {#<h2 class="property-large-title">#}
-            	{#<a href="{{path('flyer_new', {'id_template':'1', 'id_property':id_property})}}">#}
-            		{#Orange Fox Gate#}
-            	{#</a>#}
-            {#</h2>#}
-        {#</div><!-- /.property-large-content -->#}
-      {#</div><!-- /.property-large -->#}
-    {#</div>#}
-
-    {#<div class="col-sm-3">#}
-      {#<div class="property-large">#}
-    		{#<a class="property-large-image" href="{{path('flyer_new', {'id_template':'1', 'id_property':id_property})}}">#}
-            {#<img src="{{asset('bundles/dashboard/images/templates/clean.jpg')}}" alt="">#}
-        {#</a><!-- /.property-large-image -->#}
-
-        {#<div class="property-large-content">#}
-            {#<h2 class="property-large-title">#}
-            	{#<a href="{{path('flyer_new', {'id_template':'1', 'id_property':id_property})}}">#}
-            		{#Orange Fox Gate#}
-            	{#</a>#}
-            {#</h2>#}
-        {#</div><!-- /.property-large-content -->#}
-      {#</div><!-- /.property-large -->#}
-    {#</div>#}
-
-    {#<div class="col-sm-3">#}
-      {#<div class="property-large">#}
-          {#<a class="property-large-image" href="{{path('flyer_new', {'id_template':'1', 'id_property':id_property})}}">#}
-              {#<img src="{{asset('bundles/dashboard/images/templates/casual.jpg')}}" alt="">#}
-          {#</a><!-- /.property-large-image -->#}
-
-          {#<div class="property-large-content">#}
-              {#<h2 class="property-large-title">#}
-              	{#<a href="{{path('flyer_new', {'id_template':'1', 'id_property':id_property})}}">Orange Fox Gate</a>#}
-              {#</h2>#}
-          {#</div><!-- /.property-large-content -->#}
-      {#</div><!-- /.property-large -->#}
-    {#</div>#}
-
-    {#<div class="col-sm-3">#}
-      {#<div class="property-large">#}
-          {#<a class="property-large-image" href="{{path('flyer_new', {'id_template':'1', 'id_property':id_property})}}">#}
-              {#<img src="{{asset('bundles/dashboard/images/templates/centre.jpg')}}" alt="">#}
-          {#</a><!-- /.property-large-image -->#}
-
-          {#<div class="property-large-content">#}
-              {#<h2 class="property-large-title">#}
-              	{#<a href="{{path('flyer_new', {'id_template':'1', 'id_property':id_property})}}">#}
-              		{#Cotton Rock#}
-              	{#</a>#}
-              {#</h2>#}
-          {#</div><!-- /.property-large-content -->#}
-      {#</div><!-- /.property-large -->#}
-    {#</div>#}
-
-    {#<div class="col-sm-3">#}
-      {#<div class="property-large">#}
-        {#<a class="property-large-image" href="{{path('flyer_new', {'id_template':'1', 'id_property':id_property})}}">#}
-            {#<img src="{{asset('bundles/dashboard/images/templates/classic.jpg')}}" alt="">#}
-        {#</a><!-- /.property-large-image -->#}
-
-        {#<div class="property-large-content">#}
-            {#<h2 class="property-large-title">#}
-            	{#<a href="{{path('flyer_new', {'id_template':'1', 'id_property':id_property})}}">#}
-            		{#Orange Fox Gate#}
-            	{#</a>#}
-            {#</h2>#}
-        {#</div><!-- /.property-large-content -->#}
-      {#</div><!-- /.property-large -->#}
-    {#</div>#}
-
-    {#<div class="col-sm-3">#}
-      {#<div class="property-large">#}
-    		{#<a class="property-large-image" href="{{path('flyer_new', {'id_template':'1', 'id_property':id_property})}}">#}
-            {#<img src="{{asset('bundles/dashboard/images/templates/clean.jpg')}}" alt="">#}
-        {#</a><!-- /.property-large-image -->#}
-
-        {#<div class="property-large-content">#}
-            {#<h2 class="property-large-title">#}
-            	{#<a href="{{path('flyer_new', {'id_template':'1', 'id_property':id_property})}}">#}
-            		{#Orange Fox Gate#}
-            	{#</a>#}
-            {#</h2>#}
-        {#</div><!-- /.property-large-content -->#}
-      {#</div><!-- /.property-large -->#}
-    {#</div>#}
-
-	{#</div><!-- /.row -->#}
-
-	{#<div class="center">#}
-	  {#<ul class="pagination">#}
-	      {#<li><a href="properties-large.html#"><span aria-hidden="true">«</span><span class="sr-only">Previous</span></a></li>#}
-	      {#<li><a href="properties-large.html#">1</a></li>#}
-	      {#<li><a href="properties-large.html#">2</a></li>#}
-	      {#<li class="active"><a href="properties-large.html#">3</a></li>#}
-	      {#<li><a href="properties-large.html#">4</a></li>#}
-	      {#<li><a href="properties-large.html#">5</a></li>#}
-	      {#<li><a href="properties-large.html#"><span aria-hidden="true">»</span><span class="sr-only">Next</span></a></li>#}
-	  {#</ul>#}
-	{#</div><!-- /.center -->#}
-{#</div><!-- /.content -->#}
-
-{#</div>#}
+  </div>
+</div>
 {% endblock content %}

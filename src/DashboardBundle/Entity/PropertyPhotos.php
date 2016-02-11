@@ -27,4 +27,60 @@ class PropertyPhotos
      * @ORM\Column(type="string", nullable=true)
      */
     private $url;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set url
+     *
+     * @param string $url
+     * @return PropertyPhotos
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    /**
+     * Get url
+     *
+     * @return string 
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * Set property
+     *
+     * @param \DashboardBundle\Entity\Property $property
+     * @return PropertyPhotos
+     */
+    public function setProperty(\DashboardBundle\Entity\Property $property = null)
+    {
+        $this->property = $property;
+
+        return $this;
+    }
+
+    /**
+     * Get property
+     *
+     * @return \DashboardBundle\Entity\Property 
+     */
+    public function getProperty()
+    {
+        return $this->property;
+    }
 }

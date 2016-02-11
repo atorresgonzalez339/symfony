@@ -12,129 +12,42 @@
 	</div>
 	<div class="content">
 
+		{% for data in properties %}
 		<div class="row">
 			<div class="col m3" style="padding-right: 0px">
 				<div class="card-image image-properties">
-					<img src="{{ asset('bundles/dashboard/properties/2.jpg') }}">
+					<img src="{{data.photos.0}}">
 				</div>
 			</div>
 			<div class="col m9">
 					<div class="card body-properties">
 						<div class="card-content dark-clare-text">
-							<span class="card-title dark-text">Card Title</span>
+								<a href="{{path('template_index')}}?id_property={{data.mlsId}}" class="property-row-image">
+									<span class="card-title dark-text">{{data.property.subdivision}}</span>
+								</a>
 							<ul class="property-row-location">
-								<li><a href="#">New York</a>,</li>
-								<li><a href="#">Brooklyn</a></li>
+								<li>{{data.address.full}}, {{data.address.city}}, {{data.address.state}}</li>
 							</ul>
-							<p>I am a very simple card. I am good at containing small bits of information.
-								I am convenient because I require little markup to use effectively.</p>
+							<p>
+								I am a very simple card. I am good at containing small bits of information.
+								I am convenient because I require little markup to use effectively.
+							</p>
 						</div>
 						<div class="card-action card-action-properties" style="padding: 13px;">
-							<a href="#" class="azure-text"><i class="fa fa-dollar"></i> 12,500</a>
-							<a href="#" class="azure-text"><i class="fa fa-arrows"></i> 98 sqft</a>
-							<a href="#" class="azure-text"><i class="fa fa-car"></i> 1</a>
-							<a href="#" class="azure-text"><i class="fa fa-file"></i> Rent</a>
+							<a href="#" class="azure-text">Price: {{data.listPrice|number_format(2, '.', ',')}}</a>
+							<a href="#" class="azure-text">Bed: {{data.property.bedrooms}}</a>
+							<a href="#" class="azure-text">Bath: {{data.property.bathsFull + data.property.bathsHalf}}</a>
+							<a href="#" class="azure-text">Size: {{data.property.lotSize}}</a>
+							<a href="#" class="azure-text">FOR RENT</a>
 							<a href="#" class="azure-text right"><i class="fa fa-share-alt"></i></a>
 							<a href="#" class="azure-text right"><i class="fa fa-heart"></i></a>
 						</div>
 					</div>
 			</div>
 		</div>
-
-		<div class="row">
-			<div class="col m3" style="padding-right: 0px">
-				<div class="card-image image-properties">
-					<img src="{{ asset('bundles/dashboard/properties/2.jpg') }}">
-				</div>
-			</div>
-			<div class="col m9">
-				<div class="card body-properties">
-					<div class="card-content dark-clare-text">
-						<span class="card-title dark-text">Card Title</span>
-						<ul class="property-row-location">
-							<li><a href="#">New York</a>,</li>
-							<li><a href="#">Brooklyn</a></li>
-						</ul>
-						<p>I am a very simple card. I am good at containing small bits of information.
-							I am convenient because I require little markup to use effectively.</p>
-					</div>
-					<div class="card-action card-action-properties" style="padding: 13px;">
-						<a href="#" class="azure-text"><i class="fa fa-dollar"></i> 12,500</a>
-						<a href="#" class="azure-text"><i class="fa fa-arrows"></i> 98 sqft</a>
-						<a href="#" class="azure-text"><i class="fa fa-car"></i> 1</a>
-						<a href="#" class="azure-text"><i class="fa fa-file"></i> Rent</a>
-						<a href="#" class="azure-text right"><i class="fa fa-share-alt"></i></a>
-						<a href="#" class="azure-text right"><i class="fa fa-heart-o"></i></a>
-					</div>
-				</div>
-			</div>
-		</div>
-
+		{% endfor %}
 	</div>
 </div>
-			{#{% for data in properties %}#}
-			{#<div class="property-row">#}
-				{#<a href="{{path('template_index')}}?id_property={{data.mlsId}}" class="property-row-image">#}
-					{#<span class="property-badge">Featured</span>#}
-					{#<img src="{{data.photos.0}}" alt="">#}
-				{#</a><!-- /.property-row-image -->#}
-
-				{#<div class="property-row-content">#}
-					{#<h2 class="property-row-title">#}
-						{#<a href="properties-row.html#">{{data.property.subdivision}}</a>#}
-					{#</h2>#}
-
-					{#<ul class="property-row-location">#}
-						{#<li>{{data.address.full}}, {{data.address.city}}, {{data.address.state}}</li>#}
-					{#</ul>#}
-
-					{#<div class="property-row-body">#}
-						{#<p>#}
-							{#Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean consectetur diam dui, vitae tincidunt neque feugiat bibendum.#}
-						{#</p>#}
-					{#</div><!-- /.property-row-body -->#}
-
-					{#<div class="property-row-meta">#}
-						{#<div class="property-row-meta-item">#}
-							{#<span><i class="fa fa-dollar"></i></span>#}
-							{#<strong>12,500</strong>#}
-						{#</div><!-- /.property-box-meta-item -->#}
-
-						{#<div class="property-row-meta-item">#}
-							{#<span><i class="fa fa-arrows"></i></span>#}
-							{#<strong>98 sqft</strong>#}
-						{#</div><!-- /.property-box-meta-item -->#}
-
-						{#<div class="property-row-meta-item">#}
-							{#<span><i class="fa fa-car"></i></span>#}
-							{#<strong>1</strong>#}
-						{#</div><!-- /.property-box-meta-item -->#}
-
-						{#<div class="property-row-meta-item">#}
-							{#<span><i class="fa fa-file"></i></span>#}
-							{#<strong>Rent</strong>#}
-						{#</div><!-- /.property-box-meta-item -->#}
-					{#</div><!-- /.property-row-meta -->#}
-
-				{#</div><!-- /.property-row-content -->#}
-			{#</div><!-- /.property-row -->#}
-			{#{% endfor %}#}
-
-			{#<div class="center">#}
-				{#<ul class="pagination">#}
-					{#<li><a href="properties-row.html#"><span aria-hidden="true">«</span><span class="sr-only">Previous</span></a></li>#}
-					{#<li><a href="properties-row.html#">1</a></li>#}
-					{#<li><a href="properties-row.html#">2</a></li>#}
-					{#<li class="active"><a href="properties-row.html#">3</a></li>#}
-					{#<li><a href="properties-row.html#">4</a></li>#}
-					{#<li><a href="properties-row.html#">5</a></li>#}
-					{#<li><a href="properties-row.html#"><span aria-hidden="true">»</span><span class="sr-only">Next</span></a></li>#}
-				{#</ul>#}
-			{#</div><!-- /.center -->#}
-		{#</div><!-- /.content -->#}
-
-	{#</div>#}
-
 {% endblock content%}
 
 

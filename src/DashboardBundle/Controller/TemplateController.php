@@ -13,7 +13,10 @@ class TemplateController extends Controller{
  	 */
   public function indexAction(Request $request){
 
-  	$templates = array(0, 1, 2);
+  	$templates = $this->getDoctrine()
+        			->getRepository('DashboardBundle:Template')
+        			->findAll();
+
   	$id_property = $request->get('id_property');
 
 		return $this->render('DashboardBundle:Templates:index.html.twig', array(

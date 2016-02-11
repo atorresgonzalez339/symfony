@@ -26,4 +26,88 @@ class Template
      * @ORM\Column(type="string", nullable=false)
      */
     private $view;
+
+    /**
+     * @ORM\Column(type="string", nullable=false)
+     */
+    private $image;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Template
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set view
+     *
+     * @param string $view
+     * @return Template
+     */
+    public function setView($view)
+    {
+        $this->view = $view;
+
+        return $this;
+    }
+
+    /**
+     * Get view
+     *
+     * @return string 
+     */
+    public function getView()
+    {
+        return $this->view;
+    }
+
+    /**
+     * Set image
+     *
+     * @param string $image
+     * @return Template
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string 
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
 }
