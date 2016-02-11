@@ -6,239 +6,96 @@
 
 {% block content %}
 
+
 <style>
-	.property-row {
-		background-color: #fff;
-		box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
-		margin-bottom: 30px; }
-
-	.property-row-image {
-		display: block;
-		position: relative;
-		background-color: rgba(0, 0, 0, 0.15);
-		display: block;
-		float: left;
-		height: 195px;
-		width: 262px; }
-	.property-row-image:after {
-		background-color: black;
-		background-image: url("../img/magnifier.png");
-		background-position: center center;
-		background-repeat: no-repeat;
-		background-size: 32px 32px;
-		content: '';
-		display: table-cell;
-		height: 100%;
-		left: 0px;
-		opacity: 0;
-		position: absolute;
-		text-align: center;
-		top: 0px;
-		transition: opacity .15s linear;
-		vertical-align: middle;
-		width: 100%;
-		z-index: 3; }
-	.property-row-image:hover:after {
-		opacity: .5; }
-	.property-row-image:before {
-		color: rgba(0, 0, 0, 0.2);
-		content: "";
-		display: block;
-		font-family: 'FontAwesome';
-		font-size: 40px;
-		left: 50%;
-		position: absolute;
-		top: 50%;
-		transform: translateX(-50%) translateY(-50%);
-		-webkit-transform: translateX(-50%) translateY(-50%);
-		z-index: 0; }
-	.footer .property-row-image:before {
-		color: #42A5F5; }
-	.property-row-image img {
-		display: block;
-		position: relative;
-		width: 100%;
-		z-index: 2; }
-	@media (min-width: 768px) and (max-width: 991px) {
-		.property-row-image {
-			float: none;
-			height: auto;
-			width: 100%; } }
-	@media (max-width: 767px) {
-		.property-row-image {
-			float: none;
-			height: auto;
-			width: 100%; } }
-
-	.property-row-body {
-		color: #616161; }
-
-	.property-row-content {
-		float: left;
-		margin-left: 30px;
-		min-height: 195px;
-		position: relative;
-		width: 525px; }
-	@media (min-width: 992px) and (max-width: 1199px) {
-		.property-row-content {
-			width: 375px; } }
-	@media (min-width: 768px) and (max-width: 991px) {
-		.property-row-content {
-			float: none;
-			margin-left: 0px;
-			padding: 0px 15px;
-			width: 100%; } }
-	@media (max-width: 767px) {
-		.property-row-content {
-			float: none;
-			margin-left: 0px;
-			padding: 0px 15px;
-			width: 100%; } }
-
-	.property-row-title {
-		color: #424242;
-		margin-bottom: 0px;
-		font-size: 20px;}
-	.property-row-title a {
-		color: #424242; }
-
-	.property-row-meta {
-		background-color: #F5F5F5;
-		border-top: 1px solid #E0E0E0;
-		bottom: 0px;
-		left: -30px;
-		position: absolute;
-		right: -30px;
+	.card .card-image.image-properties img {
+		border-radius: 0px 0px 0 0;
+		box-shadow: 0 1px 2px rgba(0,0,0,.26)!important;
+		min-height: 192px;
+		max-height: 192px;
 	}
-	.property-row-meta-item {
-		border-right: 1px solid #E0E0E0;
-		float: left;
-		font-size: 12px;
-		padding: 6px 20px;
+	.card.body-properties {
+		border-radius: 0px 2px 2px 0px;
+		min-height: 192px;
+		max-height: 192px;
 	}
-
+	.dark-clare-text {
+		color: #616161!important;
+	}
+	.dark-text {
+		color: #424242!important;
+	}
+	.azure-text {
+		color: #42A5F5!important;
+	}
 	.property-row-location {
 		border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 		display: block;
 		list-style: none;
-		margin: 10px 0px 10px 0px;
-		padding: 0px 0px 10px 0px; }
+		margin: 0px 0px 10px 0px;
+		padding: 0px 0px 10px 0px;
+	}
 	.property-row-location li {
-		display: inline; }
+		display: inline;
+	}
 	.property-row-location li a {
 		color: #9E9E9E;
 		font-size: 11px;
 		font-weight: 500;
-		text-transform: uppercase; }
-
-	.property-row-meta {
-		background-color: #F5F5F5;
-		border-top: 1px solid #E0E0E0;
-		bottom: 0px;
-		left: -30px;
-		position: absolute;
-		right: -30px; }
+		text-transform: uppercase;
+	}
+	.card.body-properties .card-content {
+		padding: 5px 15px 15px 15px;
+	}
+	.card-action a > i {
+		margin-top: -2px;
+		font-size: 14px;
+	}
+	.card-action a.right > i {
+		font-size: 20px;
+	}
+	.card-action-properties{
+		padding: 13px;
+	}
+	.site .card .card-action-properties > a{
+		text-transform: none;
+	}
 </style>
-
-	<div class="card">
-		<div class="title">
-			<h5> Properties </h5>
-		</div>
-		<div class="content">
-
-				<div class="row">
-					<div class="col m3">
-						<a href="properties-row.html#" class="property-row-image">
-							<img src="{{ asset('bundles/dashboard/properties/1.jpg') }}" alt="">
-						</a>
-					</div>
-					<div class="col m9">
-						<div class="property-row-content">
-							<h2 class="property-row-title">
-								<a href="properties-row.html#">Orange Fox Gate</a>
-							</h2>
-							<ul class="property-row-location">
-								<li><a href="properties-row.html#">New York</a>,</li>
-								<li><a href="properties-row.html#">Brooklyn</a></li>
-							</ul>
-							<div class="property-row-body">
-								<p>
-									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean consectetur diam dui, vitae tincidunt neque feugiat bibendum.
-								</p>
-							</div><!-- /.property-row-body -->
-
-							<div class="property-row-meta">
-								<div class="property-row-meta-item">
-									<span><i class="fa fa-dollar"></i></span>
-									<strong>12,500</strong>
-								</div><!-- /.property-box-meta-item -->
-
-								<div class="property-row-meta-item">
-									<span><i class="fa fa-arrows"></i></span>
-									<strong>98 sqft</strong>
-								</div><!-- /.property-box-meta-item -->
-
-								<div class="property-row-meta-item">
-									<span><i class="fa fa-car"></i></span>
-									<strong>1</strong>
-								</div><!-- /.property-box-meta-item -->
-
-								<div class="property-row-meta-item">
-									<span><i class="fa fa-file"></i></span>
-									<strong>Rent</strong>
-								</div><!-- /.property-box-meta-item -->
-							</div><!-- /.property-row-meta -->
-						</div><!-- /.property-row-content -->
-					</div>
+<div class="card">
+	<div class="title">
+		<h5> Properties </h5>
+	</div>
+	<div class="content">
+		<div class="row">
+			<div class="col m3" style="padding-right: 0px">
+				<div class="card-image image-properties">
+					<img src="{{ asset('bundles/dashboard/properties/2.jpg') }}">
+				</div>
 			</div>
-
-			<div class="row">
-				<div class="col m3">
-					<a href="properties-row.html#" class="property-row-image">
-						<img src="{{ asset('bundles/dashboard/properties/1.jpg') }}" alt="">
-					</a>
-				</div>
-				<div class="col m9">
-					<div class="property-row-content">
-						<h2 class="property-row-title">
-							<a href="properties-row.html#">Orange Fox Gate</a>
-						</h2>
-						<ul class="property-row-location">
-							<li><a href="properties-row.html#">New York</a>,</li>
-							<li><a href="properties-row.html#">Brooklyn</a></li>
-						</ul>
-						<div class="property-row-body">
-							<p>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean consectetur diam dui, vitae tincidunt neque feugiat bibendum.
-							</p>
-						</div><!-- /.property-row-body -->
-
-						<div class="property-row-meta">
-							<div class="property-row-meta-item">
-								<span><i class="fa fa-dollar"></i></span>
-								<strong>12,500</strong>
-							</div><!-- /.property-box-meta-item -->
-
-							<div class="property-row-meta-item">
-								<span><i class="fa fa-arrows"></i></span>
-								<strong>98 sqft</strong>
-							</div><!-- /.property-box-meta-item -->
-
-							<div class="property-row-meta-item">
-								<span><i class="fa fa-car"></i></span>
-								<strong>1</strong>
-							</div><!-- /.property-box-meta-item -->
-
-							<div class="property-row-meta-item">
-								<span><i class="fa fa-file"></i></span>
-								<strong>Rent</strong>
-							</div><!-- /.property-box-meta-item -->
-						</div><!-- /.property-row-meta -->
-					</div><!-- /.property-row-content -->
-				</div>
+			<div class="col m9">
+					<div class="card body-properties">
+						<div class="card-content dark-clare-text">
+							<span class="card-title dark-text">Card Title</span>
+							<ul class="property-row-location">
+								<li><a href="#">New York</a>,</li>
+								<li><a href="#">Brooklyn</a></li>
+							</ul>
+							<p>I am a very simple card. I am good at containing small bits of information.
+								I am convenient because I require little markup to use effectively.</p>
+						</div>
+						<div class="card-action card-action-properties" style="padding: 13px;">
+							<a href="#" class="azure-text"><i class="fa fa-dollar"></i> 12,500</a>
+							<a href="#" class="azure-text"><i class="fa fa-arrows"></i> 98 sqft</a>
+							<a href="#" class="azure-text"><i class="fa fa-car"></i> 1</a>
+							<a href="#" class="azure-text"><i class="fa fa-file"></i> Rent</a>
+							<a href="#" class="azure-text right"><i class="fa fa-share-alt"></i></a>
+							<a href="#" class="azure-text right"><i class="fa fa-heart"></i></a>
+						</div>
+					</div>
 			</div>
 		</div>
 	</div>
+</div>
 			{#{% for data in properties %}#}
 			{#<div class="property-row">#}
 				{#<a href="{{path('template_index')}}?id_property={{data.mlsId}}" class="property-row-image">#}
