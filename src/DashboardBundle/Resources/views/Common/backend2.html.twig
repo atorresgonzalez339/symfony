@@ -15,73 +15,12 @@
 
 {% block body %}
 
-    <nav class="navbar-top">
-        <div class="nav-wrapper">
-            <a href="http://html.nkdev.info/_con/ui-buttons.html#" class="yay-toggle">
-                <div class="burg1"></div>
-                <div class="burg2"></div>
-                <div class="burg3"></div>
-            </a>
-            <a href="http://html.nkdev.info/_con/index.html" class="brand-logo">
-                <div style="margin-top: -17px"> LOGO</div>
-                <!--<img src="" alt="LOGO">-->
-            </a>
-            <ul>
-                <li>
-                    <a class="dropdown-button" data-activates="test-dropdown" href="http://html.nkdev.info/_con/ui-buttons.html#!">
-                        <i class="mdi-communication-email"></i> <span class="badge new">2</span></a>
-                    <div id="test-dropdown" class="dropdown-content dropdown-media" style="width: 51px; position: absolute; top: 0px; left: -299px; opacity: 1; display: none;">
-                        <div class="card-panel">
-                            <div class="media-heading">Messages
-                                <a href="http://html.nkdev.info/_con/mail-compose.html">
-                                    <i class="mdi-content-add-circle-outline"></i>
-                                </a>
-                            </div>
-                            <div class="media-footer">
-                                <a href="http://html.nkdev.info/_con/mail-inbox.html">
-                                    <i class="mdi-hardware-keyboard-control"></i>
-                                </a>
-                            </div>
-                            <div class="row mt-0">
-                                <div class="col s2">
-                                    <img src="{{ asset('bundles/dashboard/people/02.jpg') }}" alt="" class="circle responsive-img"></div>
-                                <div class="col s10">
-                                    <span class="media-date">9:02 AM</span>
-                                    <a href="http://html.nkdev.info/_con/ui-buttons.html#" class="media-title">Dianne Chambers</a>
-                                    <span>Ut feugiat tempus felis, sit amet mattis dolor accumsan quis...</span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col s2">
-                                    <img src="{{ asset('bundles/dashboard/people/04.jpg') }}" alt="" class="circle responsive-img">
-                                </div>
-                                <div class="col s10">
-                                    <span class="media-date">Dec 19</span>
-                                    <a href="http://html.nkdev.info/_con/ui-buttons.html#" class="media-title">Joanne Stephens</a>
-                                    <span>Proin suscipit lobortis porta. Interdum et malesuada fames ac ante ipsum primis in faucibus...</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="user">
-                    <a class="dropdown-button" data-activates="user-dropdown" href="http://html.nkdev.info/_con/ui-buttons.html#!">
-                        <img src="{{ asset('bundles/dashboard/people/01.jpg') }}" alt="Livan Frometa" class="circle"> Livan Frometa <i class="mdi-navigation-expand-more right"></i>
-                    </a>
-                    <ul id="user-dropdown" class="dropdown-content">
-                        <li><a href="http://html.nkdev.info/_con/page-profile.html"><i class="fa fa-user"></i> Profile</a>
-                        </li>
-                        <li><a href="http://html.nkdev.info/_con/mail-inbox.html"><i class="fa fa-envelope"></i> Messages
-                                <span class="badge new">2 new</span></a></li>
-                        <li><a href="http://html.nkdev.info/_con/ui-buttons.html#!"><i class="fa fa-cogs"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="http://html.nkdev.info/_con/page-sign-in.html"><i class="fa fa-sign-out"></i>
-                                Logout</a></li>
-                    </ul>
-                </li>
-            </ul><!-- /Menu --></div>
-    </nav>
+  {% block viewport %}
+
+    {% block north %}
+      {% include 'DashboardBundle:Common:Partials/_backend-navbar-top.html.twig' %}
+    {% endblock north%}
+
     <aside class="yaybar yay-shrink yay-hide-to-small yay-gestures">
         <div class="top">
             <div><!-- Sidebar toggle --><a href="http://html.nkdev.info/_con/ui-buttons.html#" class="yay-toggle">
@@ -366,10 +305,6 @@
                 href="http://themeforest.net/item/con-material-admin-dashboard-template/10621512?ref=_nK">Purchase</a>
     </footer>
 
-
-    {% block viewport %}
-
-        {% block north %}{% endblock north%}
 
         {% block east  %}{% endblock east %}
 
