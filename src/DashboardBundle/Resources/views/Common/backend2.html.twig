@@ -21,298 +21,32 @@
       {% include 'DashboardBundle:Common:Partials/_backend-navbar-top.html.twig' %}
     {% endblock north%}
 
-    <aside class="yaybar yay-shrink yay-hide-to-small yay-gestures">
-        <div class="top">
-            <div><!-- Sidebar toggle --><a href="http://html.nkdev.info/_con/ui-buttons.html#" class="yay-toggle">
-                    <div class="burg1"></div>
-                    <div class="burg2"></div>
-                    <div class="burg3"></div>
-                </a>
-                <a href="http://html.nkdev.info/_con/ui-buttons.html#!" class="brand-logo">
-                    <img src="" alt="LOGO">
-                </a>
-            </div>
-        </div>
-        <div class="nano has-scrollbar">
-            <div class="nano-content" tabindex="0" style="right: -17px;">
-                <ul>
-                    <li class="yay-user-info">
-                        <a href="http://html.nkdev.info/_con/page-profile.html"><img src="{{ asset('bundles/dashboard/people/01.jpg') }}" alt="Livan Frometa" class="circle">
-                            <h3 class="yay-user-info-name">Livan Frometa</h3>
-                            <div class="yay-user-location"><i class="fa fa-map-marker"></i> Las Vegas, NV</div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{path('dashboard_index')}}" class="waves-effect waves-blue">
-                            <i class="ion ion-social-angular"></i> Dashboard
-                        </a>
-                    </li>
-                    <li class="">
-                        <a href="#" class="yay-sub-toggle waves-effect waves-blue"><i
-                                    class="fa fa-dashboard"></i> Properties <span
-                                    class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
-                        <ul style="display: none; height: 80px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">
-                            <li><a href="{{path('properties_index')}}" class="waves-effect waves-blue">My Properties</a></li>
-                            <li><a href="{{path('properties_index')}}" class="waves-effect waves-blue">MLS Properties</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#" class="waves-effect waves-blue"><i
-                                    class="fa fa-magic"></i> Flayer
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{path('template_index')}}" class="waves-effect waves-blue">
-                            <i class="mdi mdi-av-web"></i> Template
-                            <span class="badge new">new</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="waves-effect waves-blue"><i
-                                    class="fa fa-magic"></i> Contact
-                        </a>
-                    </li>
+    {% block west %}
+      {% include 'DashboardBundle:Common:Partials/_backend-sidebar.html.twig' %}
+    {% endblock west%}
 
-                    <li class="label">Stats</li>
-                    <li class="content"><span><i class="fa fa-spinner"></i> Server Load</span>
-                        <div class="progress small light-green lighten-4">
-                            <div class="light-green accent-5" style="width: 37%"></div>
-                        </div>
-                        <span><i class="fa fa-thumbs-o-up"></i> User Satisfaction</span>
-                        <div class="progress small">
-                            <div style="width: 91%"></div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="nano-pane">
-                <div class="nano-slider" style="height: 302px; transform: translate(0px, 0px);"></div>
-            </div>
-        </div>
-    </aside><!-- /Yay Sidebar -->
-    <div class="fixed-action-btn" style="bottom: 45px; right: 24px"><a class="btn-floating btn-large red"><i
-                    class="large mdi-editor-mode-edit"></i></a>
-        <ul>
-            <li><a class="btn-floating red"
-                   style="transform: scaleY(0.4) scaleX(0.4) translateY(40px) translateX(0px); opacity: 0;"><i
-                            class="large mdi-editor-insert-chart"></i></a></li>
-            <li><a class="btn-floating yellow darken-1"
-                   style="transform: scaleY(0.4) scaleX(0.4) translateY(40px) translateX(0px); opacity: 0;"><i
-                            class="large mdi-editor-format-quote"></i></a></li>
-            <li><a class="btn-floating green"
-                   style="transform: scaleY(0.4) scaleX(0.4) translateY(40px) translateX(0px); opacity: 0;"><i
-                            class="large mdi-editor-publish"></i></a></li>
-            <li><a class="btn-floating blue"
-                   style="transform: scaleY(0.4) scaleX(0.4) translateY(40px) translateX(0px); opacity: 0;"><i
-                            class="large mdi-editor-attach-file"></i></a></li>
-        </ul>
-    </div><!-- Main Content -->
-    <section class="content-wrap"><!-- Breadcrumb -->
-        <div class="page-title">
-            <div class="row">
-                <div class="col s12 m9 l10">
-                    <ul>
-                        <li>
-                            <a href="http://html.nkdev.info/_con/ui-buttons.html#"><i class="fa fa-home"></i> Home</a>
-                            <i class="mdi-navigation-chevron-right"></i>
-                        </li>
-                        <li><a href="http://html.nkdev.info/_con/ui-buttons.html#">Category</a>
-                            <i class="mdi-navigation-chevron-right"></i></li>
-                        <li><a href="http://html.nkdev.info/_con/ui-buttons.html">Buttons</a></li>
-                    </ul>
-                </div>
-                <div class="col s12 m3 l2 right-align">
-                    <a href="http://html.nkdev.info/_con/ui-buttons.html#!" class="btn grey lighten-3 grey-text z-depth-0 chat-toggle">
-                        <i class="fa fa-comments"></i>
-                    </a>
-                </div>
-            </div>
-        </div><!-- /Breadcrumb -->
 
-        {% block content %} {% endblock content%}
+    {% block center %}
+    <section class="content-wrap">
 
+      {% block breadcrumb_body %}
+        {% include 'DashboardBundle:Common:Partials/_backend-breadcrumb-body-top.html.twig' %}
+              {% block breadcrumb %} {% endblock breadcrumb%}
+        {% include 'DashboardBundle:Common:Partials/_backend-breadcrumb-body-down.html.twig' %}
+      {% endblock breadcrumb_body%}
+
+      {% block content %} {% endblock content%}
     </section>
-    <!-- /Main Content --><!-- Search Bar -->
-    <div class="search-bar">
-        <div class="layer-overlay"
-             style="position: absolute; width: 100%; height: 100%; z-index: 0; transform: scale(1); background: none;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-                <g>
-                    <circle cx="0" cy="0" r="0" fill="rgb(255, 255, 255)"></circle>
-                </g>
-            </svg>
-        </div>
-        <div class="layer-content" style="z-index: 2; background: none;">
-            <form action="http://html.nkdev.info/_con/ui-buttons.html#!"><!-- Header --><a
-                        class="search-bar-toggle grey-text text-darken-2"
-                        href="http://html.nkdev.info/_con/ui-buttons.html#!"><i class="mdi-navigation-close"></i></a>
-                <!-- Search Input -->
-                <div class="input-field"><i class="mdi-action-search prefix active"></i> <input type="text"
-                                                                                                name="con-search"
-                                                                                                placeholder="Search...">
-                </div>
-            </form>
-        </div>
-    </div><!-- /Search Bar --><!--
-  Chat
-    .chat-light - light color scheme
--->
-    <div class="chat">
-        <div class="layer-overlay"
-             style="position: absolute; width: 100%; height: 100%; z-index: 0; transform: scale(1); background: none;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-                <g>
-                    <circle cx="0" cy="0" r="0" fill="rgb(53, 56, 76)"></circle>
-                </g>
-            </svg>
-        </div>
-        <div class="layer-content" style="z-index: 2; background: none;"><!-- Contacts -->
-            <div class="contacts"><!-- Top Bar -->
-                <div class="topbar"><a href="http://html.nkdev.info/_con/ui-buttons.html#!" class="text">Chat</a> <a
-                            href="http://html.nkdev.info/_con/ui-buttons.html#!" class="chat-toggle"><i
-                                class="mdi-navigation-close"></i></a></div><!-- /Top Bar -->
-                <div class="nano has-scrollbar">
-                    <div class="nano-content" tabindex="0" style="right: -17px;"><span class="label">Online</span>
-                        <div class="user"><img src="{{ asset('bundles/dashboard/people/02.jpg') }}"
-                                               alt="Felecia Castro" class="circle photo">
-                            <div class="name">Felecia Castro</div>
-                            <div class="status">Lorem status</div>
-                            <div class="online"><i class="green-text fa fa-circle"></i></div>
-                        </div>
-                        <div class="user"><img src="{{ asset('bundles/dashboard/people/04.jpg') }}"
-                                               alt="Max Brooks" class="circle photo">
-                            <div class="name">Max Brooks</div>
-                            <div class="status">Lorem status</div>
-                            <div class="online"><i class="green-text fa fa-circle"></i></div>
-                        </div>
-                        <div class="user"><img src="{{ asset('bundles/dashboard/people/03.jpg') }}"
-                                               alt="Patsy Griffin" class="circle photo">
-                            <div class="name">Patsy Griffin</div>
-                            <div class="status">Lorem status</div>
-                            <div class="online"><i class="green-text fa fa-circle"></i></div>
-                        </div>
-                        <div class="user"><img src="{{ asset('bundles/dashboard/people/10.jpg') }}"
-                                               alt="Chloe Morgan" class="circle photo">
-                            <div class="name">Chloe Morgan</div>
-                            <div class="status">Lorem status</div>
-                            <div class="online"><i class="green-text fa fa-circle"></i></div>
-                        </div>
-                        <div class="user"><img src="{{ asset('bundles/dashboard/people/13.jpg') }}"
-                                               alt="Vernon Garrett" class="circle photo">
-                            <div class="name">Vernon Garrett</div>
-                            <div class="status">Lorem status</div>
-                            <div class="online"><i class="yellow-text fa fa-circle"></i></div>
-                        </div>
-                        <div class="user"><img src="{{ asset('bundles/dashboard/people/16.jpg') }}"
-                                               alt="Greg Mcdonalid" class="circle photo">
-                            <div class="name">Greg Mcdonalid</div>
-                            <div class="status">Lorem status</div>
-                            <div class="online"><i class="yellow-text fa fa-circle"></i></div>
-                        </div>
-                        <div class="user"><img src="{{ asset('bundles/dashboard/people/17.png') }}"
-                                               alt="Christian Jackson" class="circle photo">
-                            <div class="name">Christian Jackson</div>
-                            <div class="status">Lorem status</div>
-                            <div class="online"><i class="yellow-text fa fa-circle"></i></div>
-                        </div>
-                        <span class="label">Offline</span>
-                        <div class="user"><img src="{{ asset('bundles/dashboard/people/18.jpg') }}"
-                                               alt="Willie Kelly" class="circle photo">
-                            <div class="name">Willie Kelly</div>
-                            <div class="status">Lorem status</div>
-                        </div>
-                        <div class="user"><img src="{{ asset('bundles/dashboard/people/19.jpg') }}"
-                                               alt="Jenny Phillips" class="circle photo">
-                            <div class="name">Jenny Phillips</div>
-                            <div class="status">Lorem status</div>
-                        </div>
-                        <div class="user"><img src="{{ asset('bundles/dashboard/people/08.jpg') }}"
-                                               alt="Darren Cunningham" class="circle photo">
-                            <div class="name">Darren Cunningham</div>
-                            <div class="status">Lorem status</div>
-                        </div>
-                        <div class="user"><img src="{{ asset('bundles/dashboard/people/06.jpg') }}"
-                                               alt="Sandra Cole" class="circle photo">
-                            <div class="name">Sandra Cole</div>
-                            <div class="status">Lorem status</div>
-                        </div>
-                    </div>
-                    <div class="nano-pane" style="display: none;">
-                        <div class="nano-slider" style="height: 20px; transform: translate(0px, 0px);"></div>
-                    </div>
-                </div>
-            </div><!-- /Contacts --><!-- Messages -->
-            <div class="messages"><!-- Top Bar with back link -->
-                <div class="topbar"><a href="http://html.nkdev.info/_con/ui-buttons.html#!" class="chat-toggle"><i
-                                class="mdi-navigation-close"></i></a> <a href="http://html.nkdev.info/_con/ui-buttons.html#!"
-                                                                         class="chat-back"><i
-                                class="mdi-hardware-keyboard-arrow-left"></i> Back</a></div><!-- /Top Bar with back link -->
-                <!-- All messages list -->
-                <div class="list">
-                    <div class="nano scroll-bottom has-scrollbar">
-                        <div class="nano-content" tabindex="0" style="right: -17px;">
-                            <div class="date">Monday, Feb 23, 8:23 pm</div>
-                            <div class="from-me">Hi, Felicia.<br>How are you?</div>
-                            <div class="clear"></div>
-                            <div class="from-them"><img src="{{ asset('bundles/dashboard/people/02.jpg') }}"
-                                                        alt="Livan Frometa" class="circle photo"> Hi! I am good!
-                            </div>
-                            <div class="clear"></div>
-                            <div class="from-me">Glad to see you :)<br>This long text is intended to show how the chat will
-                                display it.
-                            </div>
-                            <div class="clear"></div>
-                            <div class="from-them"><img src="{{ asset('bundles/dashboard/people/02.jpg') }}"
-                                                        alt="Livan Frometa" class="circle photo"> Also, we will send the longest
-                                word to show how it will fit in the chat window: <strong>Pneumonoultramicroscopicsilicovolcanoconiosis</strong>
-                            </div>
-                            <div class="date">Friday, Mar 10, 5:07 pm</div>
-                            <div class="from-me">Hi again!</div>
-                            <div class="clear"></div>
-                            <div class="from-them"><img src="{{ asset('bundles/dashboard/people/02.jpg') }}"
-                                                        alt="Livan Frometa" class="circle photo"> Hi! Glad to see you.
-                            </div>
-                            <div class="clear"></div>
-                            <div class="from-me">I want to add you in my Facebook.</div>
-                            <div class="clear"></div>
-                            <div class="from-me">Can you give me your page?</div>
-                            <div class="clear"></div>
-                            <div class="from-them"><img src="{{ asset('bundles/dashboard/people/02.jpg') }}"
-                                                        alt="Livan Frometa" class="circle photo"> I do not use Facebook. But you
-                                can follow me in Twitter.
-                            </div>
-                            <div class="clear"></div>
-                            <div class="from-me">It's good idea!</div>
-                            <div class="clear"></div>
-                            <div class="from-them"><img src="{{ asset('bundles/dashboard/people/02.jpg') }}"
-                                                        alt="Livan Frometa" class="circle photo"> You can find me here - <a
-                                        href="https://twitter.com/nkdevv">https://twitter.com/nkdevv</a></div>
-                        </div>
-                        <div class="nano-pane" style="display: none;">
-                            <div class="nano-slider" style="height: 20px; transform: translate(0px, 0px);"></div>
-                        </div>
-                    </div>
-                </div><!-- /All messages list --><!-- Send message -->
-                <div class="send">
-                    <form action="http://html.nkdev.info/_con/ui-buttons.html#!">
-                        <div class="input-field"><input id="chat-message" type="text" name="chat-message"></div>
-                        <button class="btn waves-effect z-depth-0"><i class="mdi-content-send"></i></button>
-                    </form>
-                </div><!-- /Send message --></div><!-- /Messages --></div>
-    </div><!-- /Chat -->
+    {% endblock center%}
 
-    <footer>© 2015 <strong>nK</strong>. All rights reserved. <a
-                href="http://themeforest.net/item/con-material-admin-dashboard-template/10621512?ref=_nK">Purchase</a>
-    </footer>
+    {% block east  %}
+      {% include 'DashboardBundle:Common:Partials/_backend-floting-botton.html.twig' %}
+      {% include 'DashboardBundle:Common:Partials/_backend-chat.html.twig' %}
+    {% endblock east %}
 
-
-        {% block east  %}{% endblock east %}
-
-        {% block south %}{% endblock south%}
-
-        {% block center %}{% endblock center%}
-
-        {% block west  %}{% endblock west%}
+    {% block south %}
+      {% include 'DashboardBundle:Common:Partials/_backend-footer.html.twig' %}
+    {% endblock south%}
 
     {% endblock viewport %}
 
