@@ -5,408 +5,104 @@
 {% endblock breadcrumb%}
 
 {% block content %}
-	<div class="row">
-		<div class="content col-sm-8 col-md-9">
-			<h1 class="page-header">Profile</h1>
-			<div class="module">
-				<div class="module-content">
-					<div class="agent-card">
-						<div class="row">
-							<div class="col-sm-12 col-md-4 mb30">
-								<a href="agents-detail.html#" class="agent-card-image">
-									<img src="{{ asset('bundles/dashboard/people/01.jpg') }}" alt="Avatar">
-								</a><!-- /.agent-card-image -->
-							</div>
 
-							<div class="col-sm-12 col-md-3">
-								<h2>Information</h2>
+	<style>
 
-								<div class="agent-card-info">
-									<ul>
-										<li>Effectivity Real Estate</li>
-										<li>Wardrobe Street 90210</li>
-										<li>London, United Kingdom</li>
-									</ul>
+		.card.small .card-image.card-image-profile {
+			height: 100%;
+		}
+		.pmop-edit:hover {
+			background: rgba(0, 0, 0, 0.8);
+			opacity: 1;
+		}
+		.pmop-edit {
+			position: absolute;
+			top: 0;
+			left: 0;
+			color: #fff;
+			background: rgba(0, 0, 0, 0.38);
+			text-align: center;
+			padding: 10px 10px 11px;
+			-webkit-transition: opacity;
+			-o-transition: opacity;
+			transition: opacity;
+			-webkit-transition-duration: 250ms;
+			transition-duration: 250ms;
+			z-index: 20;
+			width: 100%;
+			opacity: 0.8;
+		}
+		.pmo-block {
+			padding: 0px;
+		}
+		.pmo-block > h2 {
+			font-size: 16px;
+			margin: 0 0 15px;
+		}
+		.pmo-contact ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+		.pmo-contact ul li {
+			position: relative;
+			padding: 8px 0 8px 35px;
+		}
+		.pmo-contact ul li i {
+			font-size: 18px;
+			vertical-align: top;
+			line-height: 100%;
+			position: absolute;
+			left: 0;
+			width: 18px;
+			text-align: center;
+		}
+	</style>
+<div class="card">
+	<div class="title">
+		<h5> <i class="fa fa-user"></i> Profile </h5>
+	</div>
+	<div class="content">
+		<div class="row">
+			<div class="col m3">
+				<div class="card small" style="background-color: #F8F8F8;color: #5E5E5E">
 
-									<br>
+					<a href="" class="pmop-edit">
+						<i class="mdi mdi-image-photo-camera"></i> <span class="hidden-xs">Update Profile Picture</span>
+					</a>
+					<div class="card-image card-image-profile">
+						<img src="{{ asset('bundles/dashboard/people/01.jpg') }}">
+					</div>
+					<div class="card-action">
+						<div class="pmo-block pmo-contact hidden-xs">
+							<h2>Contact</h2>
 
-									<ul>
-										<li><i class="fa fa-phone"></i> 0123 123 123</li>
-										<li><i class="fa fa-at"></i> <a href="agents-detail.html#">E-mail address</a>
-										</li>
-										<li><i class="fa fa-globe"></i> <a href="http://example.com">example.com</a>
-										</li>
-									</ul>
-								</div><!-- /.agent-card-info -->
-							</div>
-
-							<div class="col-sm-12 col-md-5 mb30">
-								<h2>Contact Form</h2>
-
-								<div class="agent-card-form">
-									{#<form method="post"#}
-										  {#action="http://html.realsite.byaviators.com/agents-detail.html?">#}
-										{#<div class="form-group">#}
-											{#<input type="text" class="form-control" placeholder="Subject">#}
-										{#</div><!-- /.form-group -->#}
-
-										{#<div class="form-group">#}
-											{#<input type="email" class="form-control" placeholder="E-mail">#}
-										{#</div><!-- /.form-group -->#}
-
-										{#<div class="form-group">#}
-											{#<textarea class="form-control" placeholder="Message"#}
-													  {#style="overflow: hidden; word-wrap: break-word; height: 68px;"></textarea>#}
-										{#</div><!-- /.form-group -->#}
-									{#</form>#}
-								</div><!-- /.agent-card-form -->
-							</div>
+							<ul>
+								<li><i class="mdi mdi-communication-phone"></i> 00971 12345678 9</li>
+								<li><i class="mdi mdi-communication-email"></i> malinda-h@gmail.com</li>
+								<li><i class="fa fa-facebook-official"></i> malinda.hollaway</li>
+								<li><i class="fa fa-twitter"></i> @malinda (twitter.com/malinda)</li>
+								<li>
+									<i class="mdi mdi-communication-location-on"></i>
+									<address class="m-b-0 ng-binding">
+										44-46 Morningside Road,<br>
+										Edinburgh,<br>
+										Scotland
+									</address>
+								</li>
+							</ul>
 						</div>
-					</div><!-- /.agent-card-->
-				</div><!-- /.module-content -->
-			</div><!-- /.module -->
-
-			<div class="module">
-				<div class="module-content">
-					<div class="agent-card">
-						<div class="row">
-
-							<div class="col-sm-12 col-md-5 mb30">
-								<h2>Contact Form</h2>
-
-								<div class="agent-card-form">
-									<form method="post" action="http://html.realsite.byaviators.com/agents-detail.html?">
-									<div class="form-group">
-									<input type="text" class="form-control" placeholder="Subject">
-									</div><!-- /.form-group -->
-
-									<div class="form-group">
-									<input type="email" class="form-control" placeholder="E-mail">
-									</div><!-- /.form-group -->
-
-									<div class="form-group">
-									<textarea class="form-control" placeholder="Message"
-									style="overflow: hidden; word-wrap: break-word; height: 68px;"></textarea>
-									</div><!-- /.form-group -->
-									</form>
-								</div><!-- /.agent-card-form -->
-							</div>
-
-							<div class="col-sm-12 col-md-5 mb30">
-								<h2>Contact Form</h2>
-
-								<div class="agent-card-form">
-									{#<form method="post"#}
-									{#action="http://html.realsite.byaviators.com/agents-detail.html?">#}
-									{#<div class="form-group">#}
-									{#<input type="text" class="form-control" placeholder="Subject">#}
-									{#</div><!-- /.form-group -->#}
-
-									{#<div class="form-group">#}
-									{#<input type="email" class="form-control" placeholder="E-mail">#}
-									{#</div><!-- /.form-group -->#}
-
-									{#<div class="form-group">#}
-									{#<textarea class="form-control" placeholder="Message"#}
-									{#style="overflow: hidden; word-wrap: break-word; height: 68px;"></textarea>#}
-									{#</div><!-- /.form-group -->#}
-									{#</form>#}
-								</div><!-- /.agent-card-form -->
-							</div>
-						</div>
-					</div><!-- /.agent-card-->
-				</div><!-- /.module-content -->
-			</div><!-- /.module -->
-
-			<h2 class="page-header">Recent properties</h2>
-
-			<div class="row">
-				<div class="col-sm-6 col-md-4">
-					<div class="property-box">
-						<div class="property-box-image">
-							<a href="agents-detail.html#">
-								<img src="{{ asset('bundles/dashboard/properties/1.jpg') }}" alt="">
-
-			<span class="property-box-excerpt">
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et ipsum nibh. Vivamus vehicula consequat justo, id molestie nisl feugiat dignissim. Nam a blandit leo, a porta nisl.
-			</span>
-							</a>
-						</div><!-- /.property-image -->
-
-						<div class="property-box-content">
-							<div class="property-box-meta">
-								<div class="property-box-meta-item">
-									<span>Baths</span>
-									<strong>2</strong>
-								</div><!-- /.property-box-meta-item -->
-
-								<div class="property-box-meta-item">
-									<span>Beds</span>
-									<strong>4</strong>
-								</div><!-- /.property-box-meta-item -->
-
-								<div class="property-box-meta-item">
-									<span>Garages</span>
-									<strong>1</strong>
-								</div><!-- /.property-box-meta-item -->
-							</div><!-- /.property-box-meta -->
-						</div><!-- /.property-box-content -->
-
-						<div class="property-box-bottom">
-							<div class="property-box-price">
-								$ 17,000
-							</div><!-- /.property-box-price -->
-
-							<a href="agents-detail.html#" class="property-box-view">
-								View Detail
-							</a><!-- /.property-box-view -->
-						</div><!-- /.property-box-bottom -->
-					</div><!-- /.property-box -->
+					</div>
 				</div>
 
-				<div class="col-sm-6 col-md-4">
-					<div class="property-box">
-						<div class="property-box-image">
-							<a href="agents-detail.html#">
-								<img src="{{ asset('bundles/dashboard/properties/2.jpg') }}" alt="">
+			</div>
+			<div class="col m9">
 
-			<span class="property-box-excerpt">
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et ipsum nibh. Vivamus vehicula consequat justo, id molestie nisl feugiat dignissim. Nam a blandit leo, a porta nisl.
-			</span>
-							</a>
-						</div><!-- /.property-image -->
+			</div>
+		</div>
+	</div>
+</div>
 
-						<div class="property-box-content">
-							<div class="property-box-meta">
-								<div class="property-box-meta-item">
-									<span>Baths</span>
-									<strong>2</strong>
-								</div><!-- /.property-box-meta-item -->
-
-								<div class="property-box-meta-item">
-									<span>Beds</span>
-									<strong>4</strong>
-								</div><!-- /.property-box-meta-item -->
-
-								<div class="property-box-meta-item">
-									<span>Garages</span>
-									<strong>1</strong>
-								</div><!-- /.property-box-meta-item -->
-							</div><!-- /.property-box-meta -->
-						</div><!-- /.property-box-content -->
-
-						<div class="property-box-bottom">
-							<div class="property-box-price">
-								$ 17,000
-							</div><!-- /.property-box-price -->
-
-							<a href="agents-detail.html#" class="property-box-view">
-								View Detail
-							</a><!-- /.property-box-view -->
-						</div><!-- /.property-box-bottom -->
-					</div><!-- /.property-box -->
-				</div>
-
-				<div class="col-sm-6 col-md-4">
-					<div class="property-box">
-						<div class="property-box-image">
-							<a href="agents-detail.html#">
-								<img src="{{ asset('bundles/dashboard/properties/3.jpg') }}" alt="">
-
-			<span class="property-box-excerpt">
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et ipsum nibh. Vivamus vehicula consequat justo, id molestie nisl feugiat dignissim. Nam a blandit leo, a porta nisl.
-			</span>
-							</a>
-						</div><!-- /.property-image -->
-
-						<div class="property-box-content">
-							<div class="property-box-meta">
-								<div class="property-box-meta-item">
-									<span>Baths</span>
-									<strong>2</strong>
-								</div><!-- /.property-box-meta-item -->
-
-								<div class="property-box-meta-item">
-									<span>Beds</span>
-									<strong>4</strong>
-								</div><!-- /.property-box-meta-item -->
-
-								<div class="property-box-meta-item">
-									<span>Garages</span>
-									<strong>1</strong>
-								</div><!-- /.property-box-meta-item -->
-							</div><!-- /.property-box-meta -->
-						</div><!-- /.property-box-content -->
-
-						<div class="property-box-bottom">
-							<div class="property-box-price">
-								$ 17,000
-							</div><!-- /.property-box-price -->
-
-							<a href="agents-detail.html#" class="property-box-view">
-								View Detail
-							</a><!-- /.property-box-view -->
-						</div><!-- /.property-box-bottom -->
-					</div><!-- /.property-box -->
-				</div>
-			</div><!-- /.row -->
-		</div><!-- /.content -->
-
-		<div class="sidebar col-sm-4 col-md-3">
-			<div class="widget">
-				<div class="widget-title">
-					<h2>My Contacts</h2>
-				</div><!--/.widget-title -->
-
-				<div class="widget-content">
-					<div class="agent-small">
-						<div class="agent-small-inner">
-							<div class="agent-small-image">
-								<a href="agents-detail.html#" class="agent-small-image-inner">
-									<img src="{{ asset('bundles/dashboard/people/02.jpg') }}" alt="">
-								</a><!-- /.agent-small-image-inner -->
-							</div><!-- /.agent-small-image -->
-
-							<div class="agent-small-content">
-								<h3 class="agent-small-title">
-									<a href="agents-detail.html#">Caelan Sinclair</a>
-								</h3>
-
-								<div class="agent-small-email">
-									<i class="fa fa-at"></i> <a href="agents-detail.html#">E-mail Address</a>
-								</div><!-- /.agent-small-email -->
-
-								<div class="agent-small-phone">
-									<i class="fa fa-phone"></i> 1401-123-456
-								</div><!-- /.agent-small-phone -->
-							</div><!-- /.agent-small-content -->
-						</div><!-- /.agent-small-inner -->
-					</div><!-- /.agent-small -->
-
-					<div class="agent-small">
-						<div class="agent-small-inner">
-							<div class="agent-small-image">
-								<a href="agents-detail.html#" class="agent-small-image-inner">
-									<img src="{{ asset('bundles/dashboard/people/03.jpg') }}" alt="">
-								</a><!-- /.agent-small-image-inner -->
-							</div><!-- /.agent-small-image -->
-
-							<div class="agent-small-content">
-								<h3 class="agent-small-title">
-									<a href="agents-detail.html#">Lee Izzy</a>
-								</h3>
-
-								<div class="agent-small-email">
-									<i class="fa fa-at"></i> <a href="agents-detail.html#">E-mail Address</a>
-								</div><!-- /.agent-small-email -->
-
-								<div class="agent-small-phone">
-									<i class="fa fa-phone"></i> 1401-456-789
-								</div><!-- /.agent-small-phone -->
-							</div><!-- /.agent-small-content -->
-						</div><!-- /.agent-small-inner -->
-					</div><!-- /.agent-small -->
-
-					<div class="agent-small">
-						<div class="agent-small-inner">
-							<div class="agent-small-image">
-								<a href="agents-detail.html#" class="agent-small-image-inner">
-									<img src="{{ asset('bundles/dashboard/people/04.jpg') }}" alt="">
-								</a><!-- /.agent-small-image-inner -->
-							</div><!-- /.agent-small-image -->
-
-							<div class="agent-small-content">
-								<h3 class="agent-small-title">
-									<a href="agents-detail.html#">Derick Brice</a>
-								</h3>
-
-								<div class="agent-small-email">
-									<i class="fa fa-at"></i> <a href="agents-detail.html#">E-mail Address</a>
-								</div><!-- /.agent-small-email -->
-
-								<div class="agent-small-phone">
-									<i class="fa fa-phone"></i> 1401-789-123
-								</div><!-- /.agent-small-phone -->
-							</div><!-- /.agent-small-content -->
-						</div><!-- /.agent-small-inner -->
-					</div><!-- /.agent-small -->
-
-					<div class="agent-small">
-						<div class="agent-small-inner">
-							<div class="agent-small-image">
-								<a href="agents-detail.html#" class="agent-small-image-inner">
-									<img src="{{ asset('bundles/dashboard/people/10.jpg') }}" alt="">
-								</a><!-- /.agent-small-image-inner -->
-							</div><!-- /.agent-small-image -->
-
-							<div class="agent-small-content">
-								<h3 class="agent-small-title">
-									<a href="agents-detail.html#">Derick Brice</a>
-								</h3>
-
-								<div class="agent-small-email">
-									<i class="fa fa-at"></i> <a href="agents-detail.html#">E-mail Address</a>
-								</div><!-- /.agent-small-email -->
-
-								<div class="agent-small-phone">
-									<i class="fa fa-phone"></i> 1401-789-123
-								</div><!-- /.agent-small-phone -->
-							</div><!-- /.agent-small-content -->
-						</div><!-- /.agent-small-inner -->
-					</div><!-- /.agent-small -->
-
-					<div class="agent-small">
-						<div class="agent-small-inner">
-							<div class="agent-small-image">
-								<a href="agents-detail.html#" class="agent-small-image-inner">
-									<img src="{{ asset('bundles/dashboard/people/12.jpg') }}" alt="">
-								</a><!-- /.agent-small-image-inner -->
-							</div><!-- /.agent-small-image -->
-
-							<div class="agent-small-content">
-								<h3 class="agent-small-title">
-									<a href="agents-detail.html#">Derick Brice</a>
-								</h3>
-
-								<div class="agent-small-email">
-									<i class="fa fa-at"></i> <a href="agents-detail.html#">E-mail Address</a>
-								</div><!-- /.agent-small-email -->
-
-								<div class="agent-small-phone">
-									<i class="fa fa-phone"></i> 1401-789-123
-								</div><!-- /.agent-small-phone -->
-							</div><!-- /.agent-small-content -->
-						</div><!-- /.agent-small-inner -->
-					</div><!-- /.agent-small -->
-
-					<div class="agent-small">
-						<div class="agent-small-inner">
-							<div class="agent-small-image">
-								<a href="agents-detail.html#" class="agent-small-image-inner">
-									<img src="{{ asset('bundles/dashboard/people/13.jpg') }}" alt="">
-								</a><!-- /.agent-small-image-inner -->
-							</div><!-- /.agent-small-image -->
-
-							<div class="agent-small-content">
-								<h3 class="agent-small-title">
-									<a href="agents-detail.html#">Derick Brice</a>
-								</h3>
-
-								<div class="agent-small-email">
-									<i class="fa fa-at"></i> <a href="agents-detail.html#">E-mail Address</a>
-								</div><!-- /.agent-small-email -->
-
-								<div class="agent-small-phone">
-									<i class="fa fa-phone"></i> 1401-789-123
-								</div><!-- /.agent-small-phone -->
-							</div><!-- /.agent-small-content -->
-						</div><!-- /.agent-small-inner -->
-					</div><!-- /.agent-small -->
-				</div><!-- /.widget-content -->
-			</div><!-- /.widget -->
-
-		</div><!-- /.sidebar -->
-	</div><!-- /.row -->
 {% endblock content%}
 
 
