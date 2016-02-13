@@ -35,9 +35,13 @@
 		.pmo-block {
 			padding: 0px;
 		}
+		.pmo-block-tab {
+			padding: 25px;
+		}
 		.pmo-block > h2 {
 			font-size: 16px;
-			margin: 0 0 15px;
+			margin: 0 0 0px;
+			color: #424242;argin: 0 0 15px;
 		}
 		.pmo-contact ul {
 			list-style: none;
@@ -57,15 +61,19 @@
 			width: 18px;
 			text-align: center;
 		}
+		.tab-nav {
+			 list-style: none;
+			 padding: 0;
+			 white-space: nowrap;
+			 margin: 0;
+			 overflow: hidden;
+			 box-shadow: inset 0 -2px 0 0 #eeeeee;
+			 width: 100%;
+		 }
 	</style>
-<div class="card">
-	<div class="title">
-		<h5> <i class="fa fa-user"></i> Profile </h5>
-	</div>
-	<div class="content">
 		<div class="row">
-			<div class="col m3">
-				<div class="card small" style="background-color: #F8F8F8;color: #5E5E5E">
+			<div class="col m3" style="padding-right: 20px;">
+				<div class="card small" style="background-color: #F8F8F8;color: #5E5E5E;">
 
 					<a href="" class="pmop-edit">
 						<i class="mdi mdi-image-photo-camera"></i> <span class="hidden-xs">Update Profile Picture</span>
@@ -94,15 +102,23 @@
 						</div>
 					</div>
 				</div>
-
 			</div>
-			<div class="col m9">
-
+			<div class="col m9" style="border-left: 1px solid #eee;background-color: #FFFFFF;min-height: 570px;border-bottom: 1px solid #eee;">
+				<div class="row" style="margin-top: 0px">
+					<div class="col s12">
+						<ul class="tabs tab-nav">
+							<li class="tab col s1 waves-effect"><a href="#test1" class="active">ABOUT</a></li>
+							<li class="tab col s1 waves-effect"><a href="#test2">CONTACTS</a></li>
+							<li class="tab col s1 waves-effect"><a href="#test3">Test 3</a></li>
+						</ul>
+					</div>
+					<div id="test1" class="col s12">Test 1</div>
+					<div id="test2" class="col s12">Test 2</div>
+					<div id="test3" class="col s12">Test 3</div>
+				</div>
 			</div>
 		</div>
-	</div>
-</div>
-
+	<br>
 {% endblock content%}
 
 
