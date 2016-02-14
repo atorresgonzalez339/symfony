@@ -78,6 +78,29 @@
 			height: 45px;
 			line-height: 45px;
 		}
+
+		input[type=date], input[type=datetime-local], input[type=email],
+		input[type=number], input[type=password], input[type=search],
+		input[type=tel], input[type=text], input[type=time], input[type=url] {
+			height: 45px !important;
+			margin: 0 0 1px !important;
+
+			height: 35px !important;
+			text-indent: 5px;
+
+			border-left: 1px solid #ccc !important;
+			border-right: 1px solid #ccc !important;
+			border-top: 1px solid #ccc !important;
+			box-shadow: inset 0 1px 2px #eee;
+
+		}
+		.input-field {
+			margin-top: 1.5rem !important;
+		}
+		.input-field label.active {
+			transform: translateY(-170%);
+			left: 0px;
+		}
 	</style>
 		<div class="row">
 			<div class="col m3" style="padding-right: 20px;">
@@ -135,6 +158,86 @@
 							</div>
 						</nav>
 
+						<div class="row" style="padding-left: 20px;padding-right: 20px;margin-top: 0rem;">
+							<form action="">
+
+								<div class="row" style="margin-top: 0rem;">
+									<div class="col m6" style="padding-bottom: 0px;">
+										<div class="input-field align-left">
+											<input id="input_text_name" type="text" class="validate">
+											<label for="input_text_name">Name</label>
+										</div>
+									</div>
+									<div class="col m6" style="padding-bottom: 0px;">
+										<div class="input-field align-left">
+											<input id="input_text_dir" type="text" class="validate">
+											<label for="input_text_dir">Direction</label>
+										</div>
+									</div>
+								</div>
+
+								<div class="row" style="margin-top: 0rem;">
+									<div class="col m6" style="padding-bottom: 0px;">
+										<div class="input-field align-left">
+											<input id="input_text_lastname" type="text" class="validate">
+											<label for="input_text_lastname">Last Name</label>
+										</div>
+									</div>
+									<div class="col m6" style="padding-bottom: 0px;">
+										<div class="input-field align-left">
+											<input id="input_text_city" type="text" class="validate">
+											<label for="input_text_city">City</label>
+										</div>
+									</div>
+								</div>
+
+								<div class="row" style="margin-top: 0rem;">
+									<div class="col m6" style="padding-bottom: 0px;">
+										<div class="input-field">
+											<input id="input_email" type="email" class="validate">
+											<label for="input_email">Email</label>
+										</div>
+									</div>
+									<div class="col m6" style="padding-bottom: 0px;">
+										<div class="input-field align-left">
+											<input id="input_text_state" type="text" class="validate">
+											<label for="input_text_state">State</label>
+										</div>
+									</div>
+								</div>
+
+								<div class="row" style="margin-top: 0rem;">
+									<div class="col m6" style="padding-bottom: 0px;">
+										<div class="input-field">
+											<input id="masked-phone" type="text" data-inputmask="'mask': '(999) 999-9999'">
+											<label for="masked-phone" style="transform: translateY(-170%);left: 0px;">Phone</label>
+										</div>
+									</div>
+									<div class="col m6" style="padding-bottom: 0px;">
+										<div class="input-field align-left">
+											<input id="input_text_ra1" type="text" class="validate">
+											<label for="input_text_ra1">????</label>
+										</div>
+									</div>
+								</div>
+
+								<div class="row" style="margin-top: 0rem;">
+									<div class="col m6" style="padding-bottom: 0px;">
+										<div class="input-field">
+											<input id="masked-phone-alt" type="text" data-inputmask="'mask': '(999) 999-9999'">
+											<label for="masked-phone-alt" style="transform: translateY(-170%);left: 0px;">Alternative Phone</label>
+										</div>
+									</div>
+									<div class="col m6" style="padding-bottom: 0px;">
+										<div class="input-field align-left">
+											<input id="input_text_ra1" type="text" class="validate">
+											<label for="input_text_ra1">Pa&iacute;s</label>
+										</div>
+									</div>
+								</div>
+
+							</form>
+						</div>
 					</div>
 					<div id="test2" class="col s12">Test 2</div>
 					<div id="test3" class="col s12">Test 3</div>
@@ -144,4 +247,8 @@
 	<br>
 {% endblock content%}
 
+{% block javascripts %}
+	{{parent()}}
+	<script src="{{ asset('bundles/dashboard/material/js/jquery.inputmask.bundle.min.js') }}"></script>
+{% endblock javascripts%}
 
