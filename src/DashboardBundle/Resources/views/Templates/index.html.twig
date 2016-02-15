@@ -26,7 +26,7 @@
       <div class="card small ">
         <div class="card-image card-image-templeate hoverable"><img src="{{asset('bundles/dashboard/images/templates/' ~ template.image)}}">
           <div class="card-action card-action-templeate">
-            <a href="#!" class="azure-text">{{template.name}}</a>
+            <a href="{{path('flyer_new', {'id_property':id_property, 'id_template':template.id})}}" class="azure-text">{{template.name}}</a>
             <a href="#" class="azure-text right"><i class="fa fa-heart"></i></a>
             <a href="#" class="azure-text right"><i class="fa fa-share-alt"></i></a>
           </div>
