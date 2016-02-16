@@ -3,6 +3,7 @@
 namespace DashboardBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use APY\DataGridBundle\Grid\Mapping as GRID;
 
 /**
  * @ORM\Entity
@@ -45,6 +46,7 @@ class Flyer
 
     /**
      * @ORM\Column(type="string", nullable=false)
+     * @GRID\Column(field="name", type="textext" , filterable=true, title="ADMIN.NME",size=25,class="bold")
      */
     private $name;
 

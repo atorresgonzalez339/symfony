@@ -6,6 +6,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
+use APY\DataGridBundle\Grid\Source\Entity;
+use APY\DataGridBundle\Grid\Action\DeleteMassAction;
 
 class FlyerController extends Controller
 {
@@ -13,16 +17,27 @@ class FlyerController extends Controller
      * @Route("/flyer", name="flyer_index")
      */
     public function indexAction(Request $request){
+        $source = new Entity('DashboardBundle:Flyer');
+        $grid   = $this->get('grid');
+        $grid->setSource($source);
+//        $grid->hideColumns(array('description'));
+        $grid->addMassAction(new DeleteMassAction());
+        $grid->setLimits($this->container->getParameter('admin.paginator.limits.config'));
 
-      $user = $this->getUser();
+        if ($request->isXmlHttpRequest()) {return $grid->getGridResponse('AdministrationBundle:languageAdmin:indexAjax.html.twig');}
+        if ($grid->isReadyForRedirect() ) {return new RedirectResponse($grid->getRouteUrl());}
 
-      $flyers = $this->getDoctrine()
-              ->getRepository('DashboardBundle:Flyer')
-              ->findBy(array('user_id' => $user->getId()));
+        return $grid->getGridResponse('DashboardBundle:Flyer:index.html.twig');
 
-      return $this->render('DashboardBundle:Flyer:index.html.twig', array(
-                            'flyers' => $flyers
-                           ));
+//      $user = $this->getUser();
+//
+//      $flyers = $this->getDoctrine()
+//              ->getRepository('DashboardBundle:Flyer')
+//              ->findBy(array('user_id' => $user->getId()));
+//
+//      return $this->render('DashboardBundle:Flyer:index.html.twig', array(
+//                            'flyers' => $flyers
+//                           ));
     }
 
     /**
