@@ -10,6 +10,22 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class FlyerController extends Controller
 {
     /**
+     * @Route("/flyer", name="flyer_index")
+     */
+    public function indexAction(Request $request){
+
+      $user = $this->getUser();
+
+      $flyers = $this->getDoctrine()
+              ->getRepository('DashboardBundle:Flyer')
+              ->findBy(array('user_id' => $user->getId()));
+
+      return $this->render('DashboardBundle:Flyer:index.html.twig', array(
+                            'flyers' => $flyers
+                           ));
+    }
+
+    /**
      * @Route("/flyer/new", name="flyer_new")
      */
     public function newAction(Request $request){
