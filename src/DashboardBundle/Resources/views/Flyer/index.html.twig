@@ -5,5 +5,12 @@
 {% endblock breadcrumb%}
 
 {% block content %}
-	{{ grid(grid, 'DashboardBundle:Grid:gridTemplateAjax.html.twig') }}
+	<div class="card card-data-grid">
+		<div class="title">
+			<h5> Properties </h5>
+		</div>
+		<div class="content">
+			{{ grid(grid, 'DashboardBundle:Grid:gridTemplateAjax.html.twig') }}
+		</div>
+	</div>
 {% endblock content %}

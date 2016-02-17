@@ -20,7 +20,7 @@ class FlyerController extends Controller
         $source = new Entity('DashboardBundle:Flyer');
         $grid   = $this->get('grid');
         $grid->setSource($source);
-//        $grid->hideColumns(array('description'));
+        $grid->hideColumns(array('id'));
         $grid->addMassAction(new DeleteMassAction());
         $grid->setLimits($this->container->getParameter('admin.paginator.limits.config'));
 

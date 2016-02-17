@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="76692f47-e827-48f4-a6d5-bcd16fcdfc52" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DashboardBundle/Resources/public/material/js/jquery-1.11.2.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/DashboardBundle/Resources/views/Flyer/indexAjax.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DashboardBundle/Controller/FlyerController.php" afterPath="$PROJECT_DIR$/src/DashboardBundle/Controller/FlyerController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DashboardBundle/Resources/config/services.yml" afterPath="$PROJECT_DIR$/src/DashboardBundle/Resources/config/services.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DashboardBundle/Resources/views/Common/backend2.html.twig" afterPath="$PROJECT_DIR$/src/DashboardBundle/Resources/views/Common/backend2.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DashboardBundle/Entity/Flyer.php" afterPath="$PROJECT_DIR$/src/DashboardBundle/Entity/Flyer.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DashboardBundle/Resources/public/main/css/main.css" afterPath="$PROJECT_DIR$/src/DashboardBundle/Resources/public/main/css/main.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DashboardBundle/Resources/views/Flyer/index.html.twig" afterPath="$PROJECT_DIR$/src/DashboardBundle/Resources/views/Flyer/index.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DashboardBundle/Resources/views/Grid/gridTemplate.html.twig" afterPath="$PROJECT_DIR$/src/DashboardBundle/Resources/views/Grid/gridTemplate.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DashboardBundle/Resources/views/Grid/gridTemplateAjax.html.twig" afterPath="$PROJECT_DIR$/src/DashboardBundle/Resources/views/Grid/gridTemplateAjax.html.twig" />
     </list>
     <ignored path="symfony.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,21 +36,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="backend2.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/DashboardBundle/Resources/views/Common/backend2.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.807693">
-              <caret line="16" column="16" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="FlyerController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/DashboardBundle/Controller/FlyerController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.6923075">
-              <caret line="26" column="89" selection-start-line="26" selection-start-column="89" selection-end-line="26" selection-end-column="89" />
+            <state vertical-scroll-proportion="-6.3846154">
+              <caret line="24" column="64" selection-start-line="24" selection-start-column="64" selection-end-line="24" selection-end-column="64" />
               <folding>
                 <element signature="e#46#105#0#PHP" expanded="true" />
               </folding>
@@ -60,21 +48,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="indexAjax.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/DashboardBundle/Resources/views/Flyer/indexAjax.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
-              <caret line="0" column="35" selection-start-line="0" selection-start-column="35" selection-end-line="0" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Flyer.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/DashboardBundle/Entity/Flyer.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.3076923">
-              <caret line="2" column="25" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="25" />
+            <state vertical-scroll-proportion="-3.2545455">
+              <caret line="85" column="83" selection-start-line="85" selection-start-column="83" selection-end-line="85" selection-end-column="83" />
               <folding>
                 <element signature="e#42#74#0#PHP" expanded="true" />
               </folding>
@@ -82,44 +60,49 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gridTemplate.html.twig" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/DashboardBundle/Resources/views/Flyer/index.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.2075472">
+              <caret line="10" column="10" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/DashboardBundle/Resources/public/main/css/main.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-13.961538">
+              <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gridTemplate.html.twig" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/DashboardBundle/Resources/views/Grid/gridTemplate.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.7454545">
-              <caret line="40" column="75" selection-start-line="40" selection-start-column="75" selection-end-line="40" selection-end-column="75" />
+            <state vertical-scroll-proportion="0.4275093">
+              <caret line="237" column="35" selection-start-line="237" selection-start-column="35" selection-end-line="237" selection-end-column="35" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#1;n#form#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#th#1;n#tr#0;n#thead#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#i#0;n#th#1;n#tr#0;n#thead#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#i#1;n#th#1;n#tr#0;n#thead#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Functions.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/DashboardBundle/Twig/Extension/Functions.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.5">
-              <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="services.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/DashboardBundle/Resources/config/services.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="1" column="40" selection-start-line="1" selection-start-column="40" selection-end-line="1" selection-end-column="40" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="gridTemplateAjax.html.twig" pinned="false" current-in-tab="true">
+      <file leaf-file-name="gridTemplateAjax.html.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/DashboardBundle/Resources/views/Grid/gridTemplateAjax.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.25749558">
+            <state vertical-scroll-proportion="-5.6153846">
               <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-              <folding />
+              <folding>
+                <marker date="1455678885748" expanded="true" signature="175:745" placeholder="{% block grid_scripts_goto ...%}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -138,7 +121,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/config/routing.yml" />
         <option value="$PROJECT_DIR$/src/DashboardBundle/Controller/PropertyController.php" />
         <option value="$PROJECT_DIR$/src/DashboardBundle/Resources/views/Common/frontend.html.twig" />
         <option value="$PROJECT_DIR$/src/DashboardBundle/Resources/views/Common/layout.html.twig" />
@@ -179,16 +161,17 @@
         <option value="$PROJECT_DIR$/vendor/apy/datagrid-bundle/DependencyInjection/APYDataGridExtension.php" />
         <option value="$PROJECT_DIR$/app/AppKernel.php" />
         <option value="$PROJECT_DIR$/vendor/apy/datagrid-bundle/Grid/Mapping/Column.php" />
-        <option value="$PROJECT_DIR$/src/DashboardBundle/Entity/Flyer.php" />
         <option value="$PROJECT_DIR$/src/DashboardBundle/Twig/Extension/Functions.php" />
         <option value="$PROJECT_DIR$/src/DashboardBundle/Resources/views/Grid/blocks_js.jquery.html.twig" />
         <option value="$PROJECT_DIR$/src/DashboardBundle/Resources/config/services.yml" />
-        <option value="$PROJECT_DIR$/src/DashboardBundle/Resources/views/Flyer/index.html.twig" />
         <option value="$PROJECT_DIR$/src/DashboardBundle/Resources/views/Common/backend2.html.twig" />
         <option value="$PROJECT_DIR$/src/DashboardBundle/Resources/views/Flyer/indexAjax.html.twig" />
-        <option value="$PROJECT_DIR$/src/DashboardBundle/Controller/FlyerController.php" />
-        <option value="$PROJECT_DIR$/src/DashboardBundle/Resources/views/Grid/gridTemplate.html.twig" />
         <option value="$PROJECT_DIR$/src/DashboardBundle/Resources/views/Grid/gridTemplateAjax.html.twig" />
+        <option value="$PROJECT_DIR$/src/DashboardBundle/Controller/FlyerController.php" />
+        <option value="$PROJECT_DIR$/src/DashboardBundle/Entity/Flyer.php" />
+        <option value="$PROJECT_DIR$/src/DashboardBundle/Resources/public/main/css/main.css" />
+        <option value="$PROJECT_DIR$/src/DashboardBundle/Resources/views/Flyer/index.html.twig" />
+        <option value="$PROJECT_DIR$/src/DashboardBundle/Resources/views/Grid/gridTemplate.html.twig" />
       </list>
     </option>
   </component>
@@ -426,6 +409,36 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="Properties" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="symfony" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="symfony" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DashboardBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Profile" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -572,41 +585,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="material" />
+              <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="symfony" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="symfony" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DashboardBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="material" />
+              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -818,13 +801,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.26984128">
           <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/DashboardBundle/Resources/views/Properties/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.774074">
-          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1064,16 +1040,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DashboardBundle/Entity/Flyer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.3076923">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="25" />
-          <folding>
-            <element signature="e#42#74#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/apy/datagrid-bundle/Resources/config/services.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="2.935933">
@@ -1090,26 +1056,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DashboardBundle/Resources/views/Profile/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9858906">
-          <caret line="336" column="72" selection-start-line="336" selection-start-column="72" selection-end-line="336" selection-end-column="72" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/DashboardBundle/Resources/public/material/js/jquery-1.11.2.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/DashboardBundle/Resources/views/Flyer/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35843372">
-          <caret line="7" column="52" selection-start-line="7" selection-start-column="52" selection-end-line="7" selection-end-column="52" />
           <folding />
         </state>
       </provider>
@@ -1130,39 +1080,86 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/DashboardBundle/Resources/views/Grid/gridTemplateAjax.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.6153846">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <marker date="1455678885748" expanded="true" signature="175:745" placeholder="{% block grid_scripts_goto ...%}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DashboardBundle/Entity/Flyer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.2545455">
+          <caret line="85" column="83" selection-start-line="85" selection-start-column="83" selection-end-line="85" selection-end-column="83" />
+          <folding>
+            <element signature="e#42#74#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DashboardBundle/Resources/public/main/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.961538">
+          <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DashboardBundle/Resources/views/Properties/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.30511463">
+          <caret line="12" column="8" selection-start-line="10" selection-start-column="2" selection-end-line="12" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DashboardBundle/Resources/views/Common/backend2.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.40388006">
+          <caret line="16" column="16" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DashboardBundle/Resources/views/Profile/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.50617284">
+          <caret line="320" column="54" selection-start-line="320" selection-start-column="44" selection-end-line="320" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/DashboardBundle/Controller/FlyerController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.6923075">
-          <caret line="26" column="89" selection-start-line="26" selection-start-column="89" selection-end-line="26" selection-end-column="89" />
+        <state vertical-scroll-proportion="-6.3846154">
+          <caret line="24" column="64" selection-start-line="24" selection-start-column="64" selection-end-line="24" selection-end-column="64" />
           <folding>
             <element signature="e#46#105#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DashboardBundle/Resources/views/Common/backend2.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/DashboardBundle/Resources/views/Flyer/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.807693">
-          <caret line="16" column="16" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
+        <state vertical-scroll-proportion="-3.2075472">
+          <caret line="10" column="10" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/DashboardBundle/Resources/views/Grid/gridTemplate.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.7454545">
-          <caret line="40" column="75" selection-start-line="40" selection-start-column="75" selection-end-line="40" selection-end-column="75" />
+        <state vertical-scroll-proportion="0.4275093">
+          <caret line="237" column="35" selection-start-line="237" selection-start-column="35" selection-end-line="237" selection-end-column="35" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#1;n#form#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#1;n#tr#0;n#thead#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#0;n#th#1;n#tr#0;n#thead#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#1;n#th#1;n#tr#0;n#thead#0;n#!!top" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/DashboardBundle/Resources/views/Grid/gridTemplateAjax.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25749558">
-          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>

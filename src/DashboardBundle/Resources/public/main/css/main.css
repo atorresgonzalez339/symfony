@@ -66,3 +66,13 @@
 .site .card .card-action-properties > a{
     text-transform: none;
 }
+
+.card-data-grid {
+    margin-top: 0px !important;
+}
+
+.card-data-grid div.content {
+    padding-top: 1px !important;
+    padding-left: 10px;
+    padding-right: 10px;
+}
