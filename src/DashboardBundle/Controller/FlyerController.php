@@ -24,7 +24,7 @@ class FlyerController extends Controller
         $grid->addMassAction(new DeleteMassAction());
         $grid->setLimits($this->container->getParameter('admin.paginator.limits.config'));
 
-        if ($request->isXmlHttpRequest()) {return $grid->getGridResponse('AdministrationBundle:languageAdmin:indexAjax.html.twig');}
+        if ($request->isXmlHttpRequest()) {return $grid->getGridResponse('DashboardBundle:Flyer:indexAjax.html.twig');}
         if ($grid->isReadyForRedirect() ) {return new RedirectResponse($grid->getRouteUrl());}
 
         return $grid->getGridResponse('DashboardBundle:Flyer:index.html.twig');

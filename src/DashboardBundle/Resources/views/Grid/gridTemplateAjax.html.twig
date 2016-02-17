@@ -14,7 +14,6 @@ function {{ grid.hash }}_goto(url, data, type)
     type = type || 'GET';
     data = data || [];
 
-    alert('asasasas');
     $('#genericContainerTable').html('');
     $('.grid-loading').css('display','block');
     
@@ -25,6 +24,7 @@ function {{ grid.hash }}_goto(url, data, type)
     }).done(function( msg ) {
     
         $('#{{ grid.hash }}').parent().replaceWith(msg);
+        $('.grid-loading').css('display','none');
         $(".collapsible").collapsible();
         $(".select2").select2();
     });
