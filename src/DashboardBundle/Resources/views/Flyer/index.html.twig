@@ -8,6 +8,11 @@
 	<div class="card card-data-grid">
 		<div class="title">
 			<h5> Properties </h5>
+			<div class="btn-group right">
+				<a class="btn btn-small waves-dark waves-effect"><i class="mdi mdi-content-add left"></i>Add</a>
+				<a class="btn btn-small waves-dark waves-effect"><i class="mdi mdi-content-create left"></i>Edit</a>
+				<a class="btn btn-small waves-dark waves-effect red"><i class="mdi mdi-content-clear left"></i>Delete</a>
+			</div>
 		</div>
 		<div class="content">
 			{{ grid(grid, 'DashboardBundle:Grid:gridTemplateAjax.html.twig') }}
