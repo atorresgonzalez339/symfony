@@ -17,3 +17,9 @@ services:
   dashboard.template.business:
     class: DashboardBundle\TemplateBusiness
     arguments: ["@service_container"]
+
+  ralf.common.twig.extension.functions:
+    class: DashboardBundle\Twig\Extension\Functions
+    arguments: ["@twig","@security.context","@service_container"]
+    tags:
+      - { name: twig.extension }

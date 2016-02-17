@@ -8,6 +8,7 @@ use APY\DataGridBundle\Grid\Mapping as GRID;
 /**
  * @ORM\Entity
  * @ORM\Table(name="flyers")
+ * @GRID\Source(columns="id,name")
  */
 class Flyer
 {
@@ -46,7 +47,7 @@ class Flyer
 
     /**
      * @ORM\Column(type="string", nullable=false)
-     * @GRID\Column(field="name", type="textext" , filterable=true, title="ADMIN.NME",size=25,class="bold")
+     * @GRID\Column(field="name", type="text" , filterable=true, title="Abbreviation",size=25)
      */
     private $name;
 
