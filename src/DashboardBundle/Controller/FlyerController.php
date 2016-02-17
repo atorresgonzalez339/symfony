@@ -17,6 +17,7 @@ class FlyerController extends Controller
      * @Route("/flyer", name="flyer_index")
      */
     public function indexAction(Request $request){
+<<<<<<< Updated upstream
         $source = new Entity('DashboardBundle:Flyer');
         $grid   = $this->get('grid');
         $grid->setSource($source);
@@ -38,6 +39,18 @@ class FlyerController extends Controller
 //      return $this->render('DashboardBundle:Flyer:index.html.twig', array(
 //                            'flyers' => $flyers
 //                           ));
+=======
+
+      $user = $this->getUser();
+
+      $flyers = $this->getDoctrine()
+              ->getRepository('DashboardBundle:Flyer')
+              ->findByUser($user->getId());
+
+      return $this->render('DashboardBundle:Flyer:index.html.twig', array(
+                            'flyers' => $flyers
+                           ));
+>>>>>>> Stashed changes
     }
 
     /**

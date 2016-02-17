@@ -31,7 +31,7 @@ class Flyer
      * @ORM\ManyToOne(targetEntity="\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    private $user_id;
+    private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="Template")
