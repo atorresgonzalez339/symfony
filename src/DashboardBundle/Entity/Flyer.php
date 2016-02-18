@@ -101,7 +101,7 @@ class Flyer
 
     /**
      * @ORM\Column(type="string", nullable=false)
-     * @GRID\Column(field="sender_name", type="textext" , filterable=true, title="Locale",size=25,class="grey-text")
+     * @GRID\Column(field="sender_name", type="textext" , filterable=true, title="Locale", size=25, class="grey-text")
      */
     private $sender_name;
 
