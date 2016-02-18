@@ -23,7 +23,7 @@
 			<div class="col m9">
 				<div class="card body-properties">
 					<div class="card-content dark-clare-text">
-							<a href="{{path('template_index')}}?id_property={{data.mlsId}}" class="property-row-image">
+							<a href="{{path('template_index', {'property_id':data.mlsId, 'property_type':property_type})}}" class="property-row-image">
 								<span class="card-title dark-text">{{data.property.subdivision}}</span>
 							</a>
 						<ul class="property-row-location">

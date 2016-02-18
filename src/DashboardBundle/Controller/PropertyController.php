@@ -13,8 +13,10 @@ class PropertyController extends Controller
      */
     public function indexAction(Request $request){
 			$properties = $this->getProperties();
+      $property_type = 'mls';
 			return $this->render('DashboardBundle:Properties:index.html.twig', array(
-        'properties' => $properties
+        'properties' => $properties,
+        'property_type' => $property_type
       ));
     }
 
