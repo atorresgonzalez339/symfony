@@ -11,35 +11,25 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use APY\DataGridBundle\Grid\Source\Entity;
 use APY\DataGridBundle\Grid\Action\DeleteMassAction;
 
+use DashboardBundle\Entity\Flyer;
+
 class FlyerController extends Controller
 {
     /**
      * @Route("/flyer", name="flyer_index")
      */
     public function indexAction(Request $request){
-        $source = new Entity('DashboardBundle:Flyer');
-        $grid   = $this->get('grid');
-        $grid->setSource($source);
-        $grid->hideColumns(array('id'));
-        $grid->addMassAction(new DeleteMassAction());
-        $grid->setLimits($this->container->getParameter('admin.paginator.limits.config'));
+      $source = new Entity('DashboardBundle:Flyer');
+      $grid   = $this->get('grid');
+      $grid->setSource($source);
+      $grid->hideColumns(array('id'));
+      $grid->addMassAction(new DeleteMassAction());
+      $grid->setLimits($this->container->getParameter('admin.paginator.limits.config'));
 
-        if ($request->isXmlHttpRequest()) {return $grid->getGridResponse('DashboardBundle:Flyer:indexAjax.html.twig');}
-        if ($grid->isReadyForRedirect() ) {return new RedirectResponse($grid->getRouteUrl());}
+      if ($request->isXmlHttpRequest()) {return $grid->getGridResponse('DashboardBundle:Flyer:indexAjax.html.twig');}
+      if ($grid->isReadyForRedirect() ) {return new RedirectResponse($grid->getRouteUrl());}
 
-        return $grid->getGridResponse('DashboardBundle:Flyer:index.html.twig');
-
-//      $user = $this->getUser();
-//
-//      $flyers = $this->getDoctrine()
-//              ->getRepository('DashboardBundle:Flyer')
-//              ->findBy(array('user_id' => $user->getId()));
-//
-//      return $this->render('DashboardBundle:Flyer:index.html.twig', array(
-//                            'flyers' => $flyers
-//                           ));
-
-      $user = $this->getUser();
+      return $grid->getGridResponse('DashboardBundle:Flyer:index.html.twig');
 
       $flyers = $this->getDoctrine()
               ->getRepository('DashboardBundle:Flyer')
@@ -51,27 +41,49 @@ class FlyerController extends Controller
     }
 
     /**
-     * @Route("/flyer/new", name="flyer_new")
+     * @Route("/flyer/create", name="flyer_create")
      */
-    public function newAction(Request $request){
-      $mls_id = $request->get('id_property');
-      $template = $request->get('id_template');
-      $property = $this->getProperty($mls_id);
+    public function createAction(Request $request){
+      $property_id = $request->get('property_id');
+      $property_type = $request->get('property_type');
+      $template_id = $request->get('id_template');
+      $flyer_id = $request->get('flyer_id');
+      $user = $this->getUser();
 
       $photos = [];
 
-      foreach($property['photos'] as $photo){
-        $thumb = \PhpThumb_Factory::create($photo);
-        $img =  'data:image/png;base64,' . base64_encode($thumb->getImageAsString());
-        $photos[] = $img;
+      if($property_type == 'mls'){
+        $property = $this->getProperty($property_id);
+        foreach($property['photos'] as $photo){
+          $thumb = \PhpThumb_Factory::create($photo);
+          $img =  'data:image/png;base64,' . base64_encode($thumb->getImageAsString());
+          $photos[] = $img;
+        }
+      }
+      else {
+        $property = $this->getDoctrine()
+              ->getRepository('DashboardBundle:Property')
+              ->find($property_id);
+      }
+      
+      if($flyer_id){
+        $flyer = $this->getDoctrine()
+              ->getRepository('DashboardBundle:Flyer')
+              ->find($flyer_id);
+      }
+      else{
+        $flyer = new Flyer($user);
       }
 
-      // echo "<pre>";
-      // print_r($property);
+      $template = $this->getDoctrine()
+              ->getRepository('DashboardBundle:Template')
+              ->find($template_id);
 
-      return $this->render('DashboardBundle:Flyer:edit.html.twig', array(
-        'property' => $property,
-        'photos' =>  $photos
+      $fliyer_view = $this->renderView('DashboardBundle:Themes:default.html.twig');
+
+      return $this->render('DashboardBundle:Flyer:create.html.twig', array(
+        'fliyer_view' => $fliyer_view,
+        'photos' =>  $photos ? $photos : []
       ));
     }
 
