@@ -43,12 +43,12 @@
         {% set info    = app.session.flashbag.get('info')    %}
         {% set success = app.session.flashbag.get('success') %}
 
-        {% if error | length > 0%}
-          <div class="alert alert-danger flashmessage">
-            <a data-dismiss="alert" class="close">×</a>
-            <strong>{{ "ADMIN.GENERIC.ERROR.MESSAGE.TITLE" | trans }}</strong> {{ error[0]}}
+        {% for msg in error %}
+          <div class="alert alert-dismissible red  lighten-4 red-text text-darken-2 alert-border-left">
+            <strong>Success!</strong> {{ msg }}
+            <button class="close">&times;</button>
           </div>
-        {% endif %}
+        {% endfor %}
 
         {% for msg in info %}
           <div class="alert alert-dismissible blue  lighten-4 blue-text text-darken-2 alert-border-left">
