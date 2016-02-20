@@ -10,15 +10,20 @@
 	<div class="card">
 		<div class="title">
 			<h5> My Properties </h5>
+			<ul id='dropdown2' class='dropdown-content'>
+				<li><a href="#!">New</a></li>
+				<li><a href="#!">From Mls</a></li>
+			</ul>
 			<div class="btn-group right">
-				<a class="btn btn-small waves-dark waves-effect" href="{{ path('properties_design') }}">
-					<i class="mdi mdi-content-add left"></i>Add
-				</a>
 				<a id="edit_action" class="btn btn-small waves-dark waves-effect">
 					<i class="mdi mdi-content-create left"></i>
 					Edit
 				</a>
 				<a class="btn btn-small waves-dark waves-effect red"><i class="mdi mdi-content-clear left"></i>Delete</a>
+			</div>
+			<div class="div btn-group right">
+				<a href="#!" class="waves-effect waves-dark btn btn-small"><i class="mdi mdi-content-add left"></i>Add</a>
+				<a href="#!" class="waves-effect waves-dark btn btn-small dropdown-button" data-activates='dropdown2'><span class="mdi-navigation-expand-more"></span></a>
 			</div>
 		</div>
 		<div class="content">
