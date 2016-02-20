@@ -21,8 +21,7 @@ class PropertyController extends BaseController
 		/**
 		 * @Route("/properties", name="properties_index")
 		 */
-		public function indexAction(Request $request){
-			$source = new Entity('DashboardBundle:Property');
+		public function indexAction(Request $request){$source = new Entity('DashboardBundle:Property');
 			$grid = $this->get('grid');
 			$grid->setSource($source);
 			$grid->hideColumns(array('id'));
@@ -43,6 +42,8 @@ class PropertyController extends BaseController
 		 * @Route("/properties/design", name="properties_design")
 		 */
 		public function designAction(Request $request){
+			$this->addFlash('success','Primero debe guardar la propiedad para poder continuar con la creacion!!!');
+			$this->addFlash('info','Test flash message');
 
 			$mls_id = $request->get('mls_id');
 			$property_id = $request->get('property_id');

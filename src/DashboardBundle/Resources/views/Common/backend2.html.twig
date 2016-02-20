@@ -37,7 +37,36 @@
         {% include 'DashboardBundle:Common:Partials/_backend-breadcrumb-body-down.html.twig' %}
       {% endblock breadcrumb_body%}
 
-      {% block content %} {% endblock content%}
+
+      {% block flash_message %}
+        {% set error   = app.session.flashbag.get('error')   %}
+        {% set info    = app.session.flashbag.get('info')    %}
+        {% set success = app.session.flashbag.get('success') %}
+
+        {% if error | length > 0%}
+          <div class="alert alert-danger flashmessage">
+            <a data-dismiss="alert" class="close">×</a>
+            <strong>{{ "ADMIN.GENERIC.ERROR.MESSAGE.TITLE" | trans }}</strong> {{ error[0]}}
+          </div>
+        {% endif %}
+
+        {% for msg in info %}
+          <div class="alert alert-dismissible blue  lighten-4 blue-text text-darken-2 alert-border-left">
+            <strong>Success!</strong> {{ msg }}
+            <button class="close">&times;</button>
+          </div>
+        {% endfor %}
+
+        {% for msg in success %}
+          <div class="alert alert-dismissible green  lighten-4 green-text text-darken-2 alert-border-left">
+            <strong>Success!</strong> {{ msg }}
+            <button class="close">&times;</button>
+          </div>
+        {% endfor %}
+
+      {% endblock flash_message %}
+
+        {% block content %} {% endblock content%}
     </section>
     {% endblock center%}
 
