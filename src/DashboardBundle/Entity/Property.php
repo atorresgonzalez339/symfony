@@ -33,7 +33,7 @@ class Property
     private $user;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string", nullable=false)
      * @GRID\Column(field="name", type="text" , filterable=true, title="Name", size=50)
      */
     protected $name;
@@ -42,6 +42,16 @@ class Property
      * @ORM\Column(type="text", nullable=true)
      */
     protected $description;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    protected $amenities;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    protected $features;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -56,29 +66,24 @@ class Property
     protected $for_rent;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $leaseTerm;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="smallint", nullable=true)
      */
     protected $bedrooms;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="smallint", nullable=true)
      */
     protected $bathsFull;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="smallint", nullable=true)
      */
     protected $bathsHalf;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    protected $laundry;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
@@ -96,52 +101,47 @@ class Property
     protected $yearBuilt;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    protected $accessibility;
-
-    /**
      * @ORM\Column(type="integer", nullable=true)
      */
     protected $mlsId;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $address;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $unit;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $city;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $state;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $country;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="smallint", nullable=true)
      */
     protected $postalCode;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      */
     protected $lat;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      */
     protected $lng;
 

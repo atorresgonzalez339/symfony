@@ -1,7 +1,7 @@
 {% extends 'DashboardBundle:Common:backend2.html.twig' %}
 
 {% block breadcrumb %}
-	<li><a href="#">Properties</a></li>
+	<li><a href="#">My Properties</a></li>
 {% endblock breadcrumb%}
 
 {% set idFormGrid  = grid.hash %}
@@ -9,8 +9,7 @@
 {% block content %}
 	<div class="card">
 		<div class="title">
-			<h5> Properties </h5>
-
+			<h5> My Properties </h5>
 			<ul id='dropdown2' class='dropdown-content'>
 				<li><a href="{{ path('properties_design') }}">New</a></li>
 				<li><a href="#!">From Mls</a></li>

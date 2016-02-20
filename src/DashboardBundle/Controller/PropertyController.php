@@ -49,7 +49,9 @@ class PropertyController extends BaseController
 			$user = $this->getUser();
 
 			if($mls_id){
-				$property = new Property($user);
+				$mls_property = $this->getBusiness()->getMlsProperty($mls_id);
+				$new_property = new Property($user);
+				$property = $this->getBusiness()->parseToEntity($mls_property, $new_property);
 			}
 			else if($property_id){
 				$property = $this->getDoctrine()
