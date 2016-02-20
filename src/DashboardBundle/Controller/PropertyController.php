@@ -45,6 +45,7 @@ class PropertyController extends BaseController
 			$this->addFlash('success','Primero debe guardar la propiedad para poder continuar con la creacion!!!');
 			$this->addFlash('info','Test flash message');
 			$this->addFlash('error','Test flash message');
+			$this->addFlash('warning','Test flash message');
 
 			$mls_id = $request->get('mls_id');
 			$property_id = $request->get('property_id');
