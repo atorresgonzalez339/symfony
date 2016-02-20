@@ -3,6 +3,21 @@
 {% block stylesheets_priority %}
   {{parent()}}
   <link  href="{{ asset('bundles/dashboard/material/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
+  <style>
+    #map-canvas {
+      height: 200px;
+      margin-bottom: 30px;
+    }
+    #pac-input {
+      background-color: #fff;
+      padding: 0 11px 0 13px;
+      width: 400px;
+      font-family: Roboto;
+      font-size: 15px;
+      font-weight: 300;
+      text-overflow: ellipsis;
+    }
+  </style>
 {% endblock stylesheets_priority %}
 
 {% block breadcrumb %}
@@ -73,6 +88,30 @@
         <h5> Location </h5>
       </div>
       <div class="content">
+
+        <div class="row">
+          <div class="col m12">
+            <input id="pac-input" class="controls" type="text" placeholder="Enter a location">
+            <div id="map-canvas"></div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col m6">
+            <div class="input-field">
+              <i class="mdi-maps-place prefix"></i>
+              <input id="input-latitude" type="text" name="subject">
+              <label for="input-latitude" class="">Latitude</label>
+            </div>
+          </div>
+          <div class="col m6">
+            <div class="input-field">
+              <i class="mdi-maps-place prefix"></i>
+              <input id="input-longitude" type="text" name="subject">
+              <label for="input-longitude" class="">Lontgitude</label>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </form>
@@ -81,4 +120,11 @@
 {% block javascripts %}
   {{parent()}}
   <script src="{{ asset('bundles/dashboard/material/js/select2.full.min.js') }}"></script>
+
+  <script src="http://maps.googleapis.com/maps/api/js?libraries=weather,geometry,visualization,places,drawing&amp;sensor=false" type="text/javascript"></script>
+  <script src="{{ asset('bundles/dashboard/assets/libraries/jquery-google-map/infobox.js') }}"></script>
+  <script src="{{ asset('bundles/dashboard/assets/libraries/jquery-google-map/markerclusterer.js') }}"></script>
+  <script src="{{ asset('bundles/dashboard/assets/libraries/jquery-google-map/jquery-google-map.js') }}"></script>
+  <script src="{{ asset('bundles/dashboard/assets/js/map.js') }}"></script>
+
 {% endblock javascripts%}
