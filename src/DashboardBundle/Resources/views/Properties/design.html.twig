@@ -1,9 +1,84 @@
 {% extends 'DashboardBundle:Common:backend2.html.twig' %}
 
+{% block stylesheets_priority %}
+  {{parent()}}
+  <link  href="{{ asset('bundles/dashboard/material/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
+{% endblock stylesheets_priority %}
+
 {% block breadcrumb %}
-    <li><a href="#">Properties</a></li>
-{% endblock breadcrumb%}
+  <li><a href="#">Properties</a></li>
+{% endblock breadcrumb %}
 
 {% block content %}
+  <form action="#!">
+    <div class="card-panel">
+      <div class="input-field">
+        <input id="input_name" type="text" name="name" length="100">
+        <label for="input_name" class="">Name</label>
+      </div>
+      <div class="input-field">
+        <textarea id="textarea-message" class="materialize-textarea" name="message" length="250"></textarea>
+        <label for="textarea-message">Message</label>
+      </div>
+    </div>
+    <div class="card">
+      <div class="title">
+        <h5> Attributes </h5>
+      </div>
+      <div class="content">
+        <div class="row">
+          <div class="col m6">
+            <div class="input-field">
+              <i class="mdi-editor-attach-money prefix"></i>
+              <input id="input_price" type="text" name="subject">
+              <label for="input_price" class="">Price</label>
+            </div>
+            <div class="input-field">
+              <i class="mdi-action-open-with prefix"></i>
+              <input id="input_size" type="text" name="subject">
+              <label for="input_size" class="">Size</label>
+            </div>
+            <div class="input-field">
+              <i class="mdi-action-invert-colors prefix"></i>
+              <input id="input_baths" type="text" name="subject">
+              <label for="input_baths" class="">Baths</label>
+            </div>
+            <div class="input-field">
+              <i class="mdi-maps-hotel prefix"></i>
+              <input id="input_rooms" type="text" name="subject">
+              <label for="input_rooms" class="">Rooms</label>
+            </div>
+            <div class="input-field">
+              <i class="mdi-maps-directions-car prefix"></i>
+              <input id="input_garages" type="text" name="subject">
+              <label for="input_garages" class="">Garages</label>
+            </div>
+          </div>
+          <div class="col m6">
+            <div class="input-field">
+              <select class="select2">
+                <option value="AK">Apartament</option>
+                <option value="HI">Condo</option>
+                <option value="HI">House</option>
+                <option value="HI">Villa</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <div class="card">
+      <div class="title">
+        <h5> Location </h5>
+      </div>
+      <div class="content">
+      </div>
+    </div>
+  </form>
 {% endblock %}
+
+{% block javascripts %}
+  {{parent()}}
+  <script src="{{ asset('bundles/dashboard/material/js/select2.full.min.js') }}"></script>
+{% endblock javascripts%}

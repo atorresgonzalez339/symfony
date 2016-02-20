@@ -4,6 +4,8 @@
 
 {% block stylesheets %}
     {{parent()}}
+
+    {% block stylesheets_priority %} {% endblock stylesheets_priority %}
     <link  href="{{ asset('bundles/dashboard/material/css/nanoscroller.css') }}" rel="stylesheet" type="text/css" />
     <link  href="{{ asset('bundles/dashboard/material/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
     <link  href="{{ asset('bundles/dashboard/material/css/material-design-icons.min.css') }}" rel="stylesheet" type="text/css" />
