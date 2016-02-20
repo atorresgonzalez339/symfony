@@ -237,21 +237,32 @@
         <li {% if grid.isFiltered %} class="active" {% endif %}>
             <div class="align-left collapsible-header {% if grid.isFiltered %} active {% endif %}"><i class="mdi-content-filter-list"></i>{{'Filters'|trans}}</div>
             <div class="collapsible-body" style="background-color: #FFFFFF">
-                <table>
-                    <tr class="grid-row-filters row">
-                        {% for column in grid.columns %}
-                           {% if loop.index0!=0 %}
-                             {% if column.visible(grid.isReadyForExport) and column.filterable%}
-                                <th {% if loop.last %} class="last-column"{%else%}class="col l3 column-{{ column.title }}"{% endif %}{% if(column.size > -1) %} style="width:" {% endif %}>
-                                    {% if column.filterable%}
-                                        {{ grid_filter(column, grid)|raw }}
-                                    {% endif %}
-                                </th>
-                             {% endif %}
-                           {% endif %}
-                        {% endfor %}
-                    </tr>
-                </table>
+
+                {% for column in grid.columns %}
+                <div class="row">
+                    {% for i in 0..3 %}
+                    <div class="col s3">
+                        dsds- {{ loop.index0 }}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+
+                {#<table>#}
+                    {#<tr class="grid-row-filters row">#}
+                        {#{% for column in grid.columns %}#}
+                           {#{% if loop.index0!=0 %}#}
+                             {#{% if column.visible(grid.isReadyForExport) and column.filterable%}#}
+                                {#<th {% if loop.last %} class="last-column"{%else%}class="col l3 column-{{ column.title }}"{% endif %}{% if(column.size > -1) %} style="width:" {% endif %}>#}
+                                    {#{% if column.filterable%}#}
+                                        {#{{ grid_filter(column, grid)|raw }}#}
+                                    {#{% endif %}#}
+                                {#</th>#}
+                             {#{% endif %}#}
+                           {#{% endif %}#}
+                        {#{% endfor %}#}
+                    {#</tr>#}
+                {#</table>#}
             </div>
         </li>
     </ul>
