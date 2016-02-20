@@ -5,19 +5,19 @@ parameters:
 
 services:
   dashboard.utils.business:
-    class: DashboardBundle\UtilBusiness
+    class: DashboardBundle\Business\UtilBusiness
     arguments: ["@service_container"]
 
   dashboard.property.business:
-    class: DashboardBundle\PropertyBusiness
+    class: DashboardBundle\Business\PropertyBusiness
     arguments: ["@service_container"]
 
   dashboard.flyer.business:
-    class: DashboardBundle\FlyerBusiness
+    class: DashboardBundle\Business\FlyerBusiness
     arguments: ["@service_container"]
 
   dashboard.template.business:
-    class: DashboardBundle\TemplateBusiness
+    class: DashboardBundle\Business\TemplateBusiness
     arguments: ["@service_container"]
 
   ralf.common.twig.extension.functions:

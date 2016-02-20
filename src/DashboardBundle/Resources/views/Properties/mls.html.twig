@@ -1,0 +1,54 @@
+{% extends 'DashboardBundle:Common:backend2.html.twig' %}
+
+{% block breadcrumb %}
+    <li><a href="#">Properties</a></li>
+{% endblock breadcrumb%}
+
+{% block content %}
+
+    <div class="card">
+
+        <div class="title">
+            <h5> Properties </h5>
+        </div>
+
+        <div class="content">
+            {% for data in properties %}
+                <div class="row">
+                    <div class="col m3" style="padding-right: 0px">
+                        <div class="card-image image-properties">
+                            <img src="{{data.photos.0}}">
+                        </div>
+                    </div>
+                    <div class="col m9">
+                        <div class="card body-properties">
+                            <div class="card-content dark-clare-text">
+                                <a href="{{path('template_index', {'property_id':data.mlsId, 'property_type':property_type})}}" class="property-row-image">
+                                    <span class="card-title dark-text">{{data.property.subdivision}}</span>
+                                </a>
+                                <ul class="property-row-location">
+                                    <li>{{data.address.full}}, {{data.address.city}}, {{data.address.state}}</li>
+                                </ul>
+                                <p>
+                                    I am a very simple card. I am good at containing small bits of information.
+                                    I am convenient because I require little markup to use effectively.
+                                </p>
+                            </div>
+                            <div class="card-action card-action-properties" style="padding: 13px;">
+                                <a href="#" class="azure-text">Price: {{data.listPrice|number_format(2, '.', ',')}}</a>
+                                <a href="#" class="azure-text">Bed: {{data.property.bedrooms}}</a>
+                                <a href="#" class="azure-text">Bath: {{data.property.bathsFull + data.property.bathsHalf}}</a>
+                                <a href="#" class="azure-text">Size: {{data.property.lotSize}}</a>
+                                <a href="#" class="azure-text">FOR RENT</a>
+                                <a href="#" class="azure-text right"><i class="fa fa-share-alt"></i></a>
+                                <a href="#" class="azure-text right"><i class="fa fa-heart"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content%}
+
+

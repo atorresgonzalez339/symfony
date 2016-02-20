@@ -3,11 +3,14 @@
 namespace DashboardBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use APY\DataGridBundle\Grid\Mapping as GRID;
 use UserBundle\Entity\User;
+
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="properties")
+ * @GRID\Source(columns="id,name")
  */
 class Property
 {
@@ -31,6 +34,7 @@ class Property
 
     /**
      * @ORM\Column(type="string", nullable=true)
+     * @GRID\Column(field="name", type="text" , filterable=true, title="Name", size=50)
      */
     protected $name;
 
@@ -46,8 +50,10 @@ class Property
 
     /**
      * @ORM\Column(type="boolean", nullable=false)
+     * @GRID\Column(field="for_rent", type="boolean", filterable=false, title="For Rent?", sortable=true)
+
      */
-    protected $forRent;
+    protected $for_rent;
 
     /**
      * @ORM\Column(type="string")

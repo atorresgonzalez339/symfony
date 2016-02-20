@@ -36,6 +36,12 @@ class Flyer
     private $user;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Property")
+     * @ORM\JoinColumn(name="property_id", referencedColumnName="id")
+     */
+    private $property;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Template")
      * @ORM\JoinColumn(name="template_id", referencedColumnName="id")
      */

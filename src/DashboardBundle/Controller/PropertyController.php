@@ -2,45 +2,76 @@
 
 namespace DashboardBundle\Controller;
 
+use DashboardBundle\Entity\Property;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use APY\DataGridBundle\Grid\Source\Entity;
+use APY\DataGridBundle\Grid\Action\DeleteMassAction;
 
-class PropertyController extends Controller
+class PropertyController extends BaseController
 {
-    /**
-     * @Route("/properties", name="properties_index")
-     */
-    public function indexAction(Request $request){
-			$properties = $this->getProperties();
-      $property_type = 'mls';
-			return $this->render('DashboardBundle:Properties:index.html.twig', array(
-        'properties' => $properties,
-        'property_type' => $property_type
-      ));
-    }
 
-    public function getProperties(){
-			$username = "simplyrets";
-			$password = "simplyrets";
-			$remote_url = 'https://api.simplyrets.com/properties';
+		private $serviceName = 'dashboard.property.business';
 
-			//$output = $this->get('api_caller')->call(new HttpGetJson($remote_url , $parameters));
-
-			$ch = curl_init($remote_url);
-
-    	curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-        "Authorization: Basic " . base64_encode("$username:$password"),
-    	));
-    	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    	$output = curl_exec($ch);
-    	$result = json_decode($output, true);
-    	curl_close($ch);
-
-			// $lat = '25.7824618';
-			// $lng = '-80.3011208';
-
-			//$remote_url .= "?points=$lat,$lng";
-			return $result;
+		public function getBusiness() {
+			return parent::findBusiness($this->serviceName);
 		}
+
+		/**
+		 * @Route("/properties", name="properties_index")
+		 */
+		public function indexAction(Request $request){
+			$source = new Entity('DashboardBundle:Property');
+			$grid = $this->get('grid');
+			$grid->setSource($source);
+			$grid->hideColumns(array('id'));
+			$grid->addMassAction(new DeleteMassAction());
+			$grid->setLimits($this->container->getParameter('admin.paginator.limits.config'));
+
+			if ($request->isXmlHttpRequest()) {
+				return $grid->getGridResponse('DashboardBundle:Propery:indexAjax.html.twig');
+			}
+			if ($grid->isReadyForRedirect() ) {
+				return new RedirectResponse($grid->getRouteUrl());
+			}
+
+			return $grid->getGridResponse('DashboardBundle:Properties:index.html.twig');
+		}
+
+		/**
+		 * @Route("/properties/design", name="properties_design")
+		 */
+		public function designAction(Request $request){
+
+			$mls_id = $request->get('mls_id');
+			$property_id = $request->get('property_id');
+			$user = $this->getUser();
+
+			if($mls_id){
+				$property = new Property($user);
+			}
+			else if($property_id){
+				$property = $this->getDoctrine()
+					 							 ->getRepository('DashboardBundle:Property')
+											   ->find($property_id);
+			}
+			else{
+				$property = new Property($user);
+			}
+
+			return $this->render('DashboardBundle:Properties:design.html.twig', array(
+				'property' => $property
+			));
+		}
+
+    /**
+     * @Route("/properties/mls", name="properties_mls")
+     */
+    public function mlsAction(Request $request){
+			$properties = $this->getBusiness()->getMlsProperties();
+			return $this->render('DashboardBundle:Properties:mls.html.twig', array(
+				'properties' => $properties
+			));
+    }
 }

@@ -20,7 +20,7 @@ class BaseController extends Controller {
      * @example $this->getBusiness("ralf.core.business.ralfbusiness");
      */
     public function findBusiness($service) {
-        if (!$this->container->has($service)) {
+        if (!$this->has($service)) {
             throw new \LogicException('The service ' . $service . ' is not configurated');
         }
         return $this->get($service);

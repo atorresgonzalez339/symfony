@@ -37,21 +37,26 @@ class FlyerController extends BaseController
     }
 
     /**
-     * @Route("/flyer/create", name="flyer_create")
+     * @Route("/flyer/design", name="flyer_design")
      */
-    public function createAction(Request $request){
-      
-      $ids = $this->getFiertSelectetGridItem();
-
-      print_r($ids);
-
-      die('here');
+    public function designAction(Request $request){
 
       $property_id = $request->get('property_id');
       $property_type = $request->get('property_type');
       $template_id = $request->get('id_template');
       $flyer_id = $request->get('flyer_id');
       $user = $this->getUser();
+
+      if($request->isMethod('POST')){
+        $flyer_id = $this->getFiertSelectetGridItem();
+        $flyer = $this->getDoctrine()
+                      ->getRepository('DashboardBundle:Flyer')
+                      ->find($flyer_id);
+
+        $property = $flyer->getProperty();
+        $template = $flyer->getTemplate();
+
+      }
 
       $photos = [];
 
@@ -70,9 +75,7 @@ class FlyerController extends BaseController
       }
       
       if($flyer_id){
-        $flyer = $this->getDoctrine()
-              ->getRepository('DashboardBundle:Flyer')
-              ->find($flyer_id);
+
       }
       else{
         $flyer = new Flyer($user);
@@ -89,6 +92,14 @@ class FlyerController extends BaseController
         'fliyer_view' => $fliyer_view,
         'photos' =>  $photos ? $photos : []
       ));
+    }
+
+    /**
+     * @Route("/flyer/create", name="flyer_create")
+     */
+    public function createAction()
+    {
+
     }
 
     /**
