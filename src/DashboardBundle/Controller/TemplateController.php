@@ -14,7 +14,6 @@ class TemplateController extends Controller{
   public function indexAction(Request $request){
 
     $property_id = $request->get('property_id');
-    $property_type = $request->get('property_type');
 
   	$templates = $this->getDoctrine()
         			->getRepository('DashboardBundle:Template')
@@ -23,7 +22,6 @@ class TemplateController extends Controller{
 		return $this->render('DashboardBundle:Templates:index.html.twig', array(
        'templates' => $templates,
        'property_id' => $property_id,
-       'property_type' => $property_type
    	));
   }
 

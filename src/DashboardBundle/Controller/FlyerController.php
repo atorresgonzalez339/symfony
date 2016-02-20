@@ -42,7 +42,6 @@ class FlyerController extends BaseController
     public function designAction(Request $request){
 
       $property_id = $request->get('property_id');
-      $property_type = $request->get('property_type');
       $template_id = $request->get('id_template');
       $flyer_id = $request->get('flyer_id');
       $user = $this->getUser();
@@ -60,30 +59,22 @@ class FlyerController extends BaseController
 
       $photos = [];
 
-      if($property_type == 'mls'){
-        $property = $this->getProperty($property_id);
-        foreach($property['photos'] as $photo){
-          $thumb = \PhpThumb_Factory::create($photo);
-          $img =  'data:image/png;base64,' . base64_encode($thumb->getImageAsString());
-          $photos[] = $img;
-        }
-      }
-      else {
-        $property = $this->getDoctrine()
-              ->getRepository('DashboardBundle:Property')
-              ->find($property_id);
-      }
-      
-      if($flyer_id){
-
-      }
-      else{
-        $flyer = new Flyer($user);
-      }
+      $property = $this->getDoctrine()
+            ->getRepository('DashboardBundle:Property')
+            ->find($property_id);
 
       $template = $this->getDoctrine()
         ->getRepository('DashboardBundle:Template')
         ->find($template_id);
+
+      if($flyer_id){
+        $flyer = $this->getDoctrine()
+                     ->getRepository('DashboardBundle:Flyer')
+                     ->find($flyer_id);
+      }
+      else{
+        $flyer = new Flyer($user);
+      }
 
       $fliyer_view = $this->renderView('DashboardBundle:Themes:default.html.twig');
 
