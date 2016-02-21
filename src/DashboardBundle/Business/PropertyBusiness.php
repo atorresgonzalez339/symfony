@@ -2,6 +2,8 @@
 
 namespace DashboardBundle\Business;
 
+use DashboardBundle\Entity\Property;
+
 class PropertyBusiness {
 	
 		private $container;
@@ -55,7 +57,35 @@ class PropertyBusiness {
       return $result;
     }
 
-    public function parseToEntity($property_data, $property){
+    public function propertyApiMapper($data, Property $property){
+      $property->setName($data['property']['subdivision']);
+      $property->setDescription($data['property']['lotDescription']);
+      $property->setFeatures(
+        'Style: ' . $data['property']['style'] . ' - ' .
+        'View: ' . $data['property']['view'] . ' - ' .
+        'Construction: ' . $data['property']['construction'] . ' - ' .
+        'Accessibility: ' . $data['property']['accessibility'] . ' - ' .
+        'Heating: ' . $data['property']['heating'] . ' - ' .
+        'Laundry Features: ' . $data['property']['laundryFeatures'] . ' - ' .
+        'Interior Features: ' .  $data['property']['interiorFeatures'] . ' - ' .
+        'Exterior Features: ' . $data['property']['exteriorFeatures'] . ' - ');
+      $property->setType($data['property']['type']);
+      $property->setLeaseTerm($data['leaseTerm']);
+      $property->setBedrooms($data['property']['bedrooms']);
+      $property->setBathsFull($data['property']['bathsFull']);
+      $property->setBathsHalf($data['property']['bathsHalf']);
+      $property->setLotSize($data['property']['lotSize']);
+      $property->setYearBuilt($data['property']['yearBuilt']);
+      $property->setMlsId($data['mlsId']);
+      $property->setAddress($data['address']['full']);
+      $property->setUnit($data['address']['unit']);
+      $property->setCity($data['address']['city']);
+      $property->setState($data['address']['state']);
+      $property->setCountry($data['address']['country']);
+      $property->setPostalCode($data['address']['postalCode']);
+      $property->setLat($data['geo']['lat']);
+      $property->setLng($data['geo']['lng']);
+
       return $property;
     }
 

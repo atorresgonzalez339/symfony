@@ -42,10 +42,10 @@ class PropertyController extends BaseController
 		 * @Route("/properties/design", name="properties_design")
 		 */
 		public function designAction(Request $request){
-			$this->addFlash('success','Primero debe guardar la propiedad para poder continuar con la creacion!!!');
-			$this->addFlash('info','Test flash message');
-			$this->addFlash('error','Test flash message');
-			$this->addFlash('warning','Test flash message');
+//			$this->addFlash('success','Primero debe guardar la propiedad para poder continuar con la creacion!!!');
+//			$this->addFlash('info','Test flash message');
+//			$this->addFlash('error','Test flash message');
+//			$this->addFlash('warning','Test flash message');
 
 			$mls_id = $request->get('mls_id');
 			$property_id = $request->get('property_id');
@@ -54,7 +54,7 @@ class PropertyController extends BaseController
 			if($mls_id){
 				$mls_property = $this->getBusiness()->getMlsProperty($mls_id);
 				$new_property = new Property($user);
-				$property = $this->getBusiness()->parseToEntity($mls_property, $new_property);
+				$property = $this->getBusiness()->propertyApiMapper($mls_property, $new_property);
 			}
 			else if($property_id){
 				$property = $this->getDoctrine()
