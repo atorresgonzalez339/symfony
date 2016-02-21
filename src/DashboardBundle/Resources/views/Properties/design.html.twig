@@ -29,11 +29,9 @@
 {% block content %}
   <div class="row">
     <div class="col m12">
-      <ul class="tabs z-depth-1" style="width: 100%;">
-        <li class="tab col s3"><a class="active" href="#main-info">Main Information</a></li>
-        <li class="tab col s3"><a href="#image-gallery" class="">Image Gallery</a></li>
-        <li class="tab col s3"><a href="#extra-text" class="">Extra Text</a></li>
-        <li class="tab col s3"><a href="#files" class="">Files</a></li>
+      <ul class="tabs z-depth-1" style="width: 100%;overflow-x: hidden;">
+        <li class="tab col s3"><a class="active" href="#main-info"> Information</a></li>
+        <li class="tab col s3"><a href="#image-gallery" class=""> Gallery</a></li>
       </ul>
     </div>
   </div>
@@ -73,14 +71,6 @@
     </div>
   </div>
 
-  <div class="row" id="extra-text">
-    Extra Text
-  </div>
-
-  <div class="row" id="files">
-    Files
-  </div>
-
   <div class="row" id="main-info">
     <div class="col m12">
       <form action="#!">
@@ -88,18 +78,22 @@
           <div class="title">
             <h5> Basic Information </h5>
             <div class="btn-group right">
-              <a href="#!" class="waves-effect waves-dark btn btn-small"><i
-                    class="mdi mdi-content-save left"></i>Save</a>
+              <a href="#!" class="waves-effect waves-dark btn btn-small">
+                <i class="mdi mdi-navigation-chevron-left left"></i> Back
+              </a>
+              <a href="#!" class="waves-effect waves-dark btn btn-small">
+                <i class="mdi mdi-content-save left"></i> Save
+              </a>
             </div>
           </div>
-          <div class="content">
+          <div class="content" style="padding-top: 5px;padding-bottom: 5px;">
             <div class="input-field">
               <input id="input_name" type="text" name="name" length="100">
               <label for="input_name" class="">Name</label>
             </div>
             <div class="input-field">
               <textarea id="textarea-message" class="materialize-textarea" name="message" length="250"></textarea>
-              <label for="textarea-message">Message</label>
+              <label for="textarea-message">Description</label>
             </div>
           </div>
         </div>
@@ -107,8 +101,8 @@
           <div class="title">
             <h5> Attributes </h5>
           </div>
-          <div class="content">
-            <div class="row">
+          <div class="content" style="padding-top: 5px;padding-bottom: 5px;">
+            <div class="row" style="margin-top: 5px;">
               <div class="col m6">
                 <div class="input-field">
                   <i class="mdi-editor-attach-money prefix"></i>
@@ -154,16 +148,14 @@
           <div class="title">
             <h5> Location </h5>
           </div>
-          <div class="content">
-
-            <div class="row">
-              <div class="col m12">
+          <div class="content" style="padding-top: 5px;padding-bottom: 5px;">
+            <div class="row" style="margin-top: 5px">
+              <div class="col m12" style="padding-bottom: 5px;">
                 <input id="pac-input" class="controls" type="text" placeholder="Enter a location">
                 <div id="map-canvas"></div>
               </div>
             </div>
-
-            <div class="row">
+            <div class="row" style="margin-top: 5px">
               <div class="col m6">
                 <div class="input-field">
                   <i class="mdi-maps-place prefix"></i>
