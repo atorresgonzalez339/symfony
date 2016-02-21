@@ -4,6 +4,7 @@
   {{ parent() }}
   <link href="{{ asset('bundles/dashboard/material/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
   <link href="{{ asset('bundles/dashboard/material/css/default-skin.css') }}" rel="stylesheet" type="text/css"/>
+  <link href="{{ asset('bundles/dashboard/material/css/photoswipe.css') }}" rel="stylesheet" type="text/css"/>
   <style>
     #map-canvas {
       height: 200px;
@@ -40,6 +41,7 @@
 {% block javascripts %}
   {{ parent() }}
   <script src="{{ asset('bundles/dashboard/material/js/select2.full.min.js') }}"></script>
+  <script src="{{ asset('bundles/dashboard/material/js/photoswipe.min.js') }}"></script>
   <script src="{{ asset('bundles/dashboard/material/js/photoswipe-ui-default.min.js') }}"></script>
 
   <script src="http://maps.googleapis.com/maps/api/js?libraries=weather,geometry,visualization,places,drawing&amp;sensor=false" type="text/javascript"></script>
