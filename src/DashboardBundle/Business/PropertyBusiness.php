@@ -72,8 +72,7 @@ class PropertyBusiness {
       $property->setType($data['property']['type']);
       $property->setLeaseTerm($data['leaseTerm']);
       $property->setBedrooms($data['property']['bedrooms']);
-      $property->setBathsFull($data['property']['bathsFull']);
-      $property->setBathsHalf($data['property']['bathsHalf']);
+      $property->setBathrooms($data['property']['bathsFull'] + $data['property']['bathsHalf']);
       $property->setLotSize($data['property']['lotSize']);
       $property->setYearBuilt($data['property']['yearBuilt']);
       $property->setMlsId($data['mlsId']);
