@@ -81,7 +81,7 @@ class Property
     protected $bathrooms;
 
     /**
-     * @ORM\Column(type="smallint", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $parking_spaces;
 

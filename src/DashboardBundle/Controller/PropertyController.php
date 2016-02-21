@@ -70,7 +70,7 @@ class PropertyController extends BaseController
 
 			return $this->render('DashboardBundle:Properties:design.html.twig', array(
 				'property' => $property,
-				'property_form' => $property_form
+				'property_form' => $property_form->createView()
 			));
 		}
 

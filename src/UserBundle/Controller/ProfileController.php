@@ -28,8 +28,8 @@ class ProfileController extends Controller
       $profile_form = $this->createForm(ProfileType::class, $profile);
 
       return $this->render('UserBundle:Profile:index.html.twig', array(
-                           	'profile_form' => $profile_form
-                           ));
+        'profile_form' => $profile_form->createView()
+      ));
     }
 
     /**

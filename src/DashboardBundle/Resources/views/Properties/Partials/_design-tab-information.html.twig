@@ -15,12 +15,12 @@
         </div>
         <div class="content" style="padding-top: 5px;padding-bottom: 5px;">
           <div class="input-field">
-            <input id="input_name" type="text" name="name" length="100">
-            <label for="input_name" class="">Name</label>
+            {{ form_widget(property_form.name, {'attr': {'id': 'name'}}) }}
+            <label for="name" class="">Name</label>
           </div>
           <div class="input-field">
-            <textarea id="textarea-message" class="materialize-textarea" name="message" length="250"></textarea>
-            <label for="textarea-message">Description</label>
+            {{ form_widget(property_form.description, {'attr': {'id': 'description', 'class':'materialize-textarea'}}) }}
+            <label for="description">Description</label>
           </div>
         </div>
       </div>
@@ -31,31 +31,45 @@
         <div class="content" style="padding-top: 5px;padding-bottom: 5px;">
           <div class="row" style="margin-top: 5px;">
             <div class="col m6">
-              <div class="input-field" style="margin-top: 3px;">
-                <i class="mdi-editor-attach-money prefix"></i>
-                <input id="input_price" type="text" name="subject">
-                <label for="input_price" class="">Price</label>
-              </div>
               <div class="input-field" style="margin-top: 0px;">
-                <i class="mdi-action-open-with prefix"></i>
-                <input id="input_size" type="text" name="subject">
-                <label for="input_size" class="">Size</label>
+                <i class="mdi-maps-hotel prefix"></i>
+                {{ form_widget(property_form.bedrooms, {'attr': {'id': 'bedrooms'}}) }}
+                <label for="bedrooms" class="">Rooms</label>
               </div>
               <div class="input-field" style="margin-top: 0px;">
                 <i class="mdi-action-invert-colors prefix"></i>
-                <input id="input_baths" type="text" name="subject">
+                {{ form_widget(property_form.bathrooms, {'attr': {'id': 'bathrooms'}}) }}
                 <label for="input_baths" class="">Baths</label>
               </div>
               <div class="input-field" style="margin-top: 0px;">
-                <i class="mdi-maps-hotel prefix"></i>
-                <input id="input_rooms" type="text" name="subject">
-                <label for="input_rooms" class="">Rooms</label>
+                <i class="mdi-maps-directions-car prefix"></i>
+                {{ form_widget(property_form.parking_spaces, {'attr': {'id': 'parking_spaces'}}) }}
+                <label for="parking_spaces" class="">Parking</label>
+              </div>
+              <div class="input-field" style="margin-top: 3px;">
+                <i class="mdi-editor-attach-money prefix"></i>
+                {{ form_widget(property_form.list_price, {'attr': {'id': 'list_price'}}) }}
+                <label for="list_price" class="">Price</label>
               </div>
               <div class="input-field" style="margin-top: 0px;">
-                <i class="mdi-maps-directions-car prefix"></i>
-                <input id="input_garages" type="text" name="subject">
-                <label for="input_garages" class="">Garages</label>
+                <i class="mdi-action-open-with prefix"></i>
+                {{ form_widget(property_form.lotSize, {'attr': {'id': 'lotSize'}}) }}
+                <label for="lotSize" class="">Size</label>
               </div>
+              <div class="input-field" style="margin-top: 0px;">
+                <i class="mdi-action-open-with prefix"></i>
+                {{ form_widget(property_form.yearBuilt, {'attr': {'id': 'yearBuilt'}}) }}
+                <label for="yearBuilt" class="">Year Built</label>
+              </div>
+              <div class="input-field" style="margin-top: 0px;">
+                <i class="mdi-action-open-with prefix"></i>
+                {{ form_widget(property_form.leaseTerm, {'attr': {'id': 'leaseTerm'}}) }}
+                <label for="leaseTerm" class="">Lease Term</label>
+              </div>
+              <p style="margin-top: 35px;">
+                <input type="checkbox" id="checkbox4" class="filled-in" checked="checked" />
+                <label for="checkbox4">For rent</label>
+              </p>
             </div>
             <div class="col m6">
               <div class="input-field" style="margin-top: 3px;">
@@ -65,11 +79,33 @@
                   <option value="HI">House</option>
                   <option value="HI">Villa</option>
                 </select>
+              </div>
+              <br />
+              <div class="input-field" style="margin-top: 0px;">
+                {{ form_widget(property_form.address, {'attr': {'id': 'address'}}) }}
+                <label for="address" class="">Address</label>
+              </div>
+              <div class="input-field" style="margin-top: 0px;">
+                {{ form_widget(property_form.unit, {'attr': {'id': 'unit'}}) }}
+                <label for="unit" class="">Unit</label>
+              </div>
+              <div class="input-field" style="margin-top: 0px;">
+                {{ form_widget(property_form.city, {'attr': {'id': 'city'}}) }}
+                <label for="city" class="">City</label>
+              </div>
+              <div class="input-field" style="margin-top: 0px;">
+                {{ form_widget(property_form.state, {'attr': {'id': 'state'}}) }}
+                <label for="state" class="">State</label>
+              </div>
+              <div class="input-field" style="margin-top: 0px;">
+                {{ form_widget(property_form.country, {'attr': {'id': 'country'}}) }}
+                <label for="country" class="">Country</label>
+              </div>
+              <div class="input-field" style="margin-top: 0px;">
+                {{ form_widget(property_form.postalCode, {'attr': {'id': 'postalCode'}}) }}
+                <label for="postalCode" class="">Postal Code</label>
+              </div>
             </div>
-            <p style="margin-top: 35px;">
-              <input type="checkbox" id="checkbox4" class="filled-in" checked="checked" />
-              <label for="checkbox4">For rent</label>
-            </p>
           </div>
         </div>
       </div>
@@ -89,15 +125,15 @@
             <div class="col m6">
               <div class="input-field">
                 <i class="mdi-maps-place prefix"></i>
-                <input id="input-latitude" type="text" name="subject">
-                <label for="input-latitude" class="">Latitude</label>
+                {{ form_widget(property_form.lat, {'attr': {'id': 'lat'}}) }}
+                <label for="lat" class="">Latitude</label>
               </div>
             </div>
             <div class="col m6">
               <div class="input-field">
                 <i class="mdi-maps-place prefix"></i>
-                <input id="input-longitude" type="text" name="subject">
-                <label for="input-longitude" class="">Lontgitude</label>
+                {{ form_widget(property_form.lng, {'attr': {'id': 'lng'}}) }}
+                <label for="lng" class="">Lontgitude</label>
               </div>
             </div>
           </div>
