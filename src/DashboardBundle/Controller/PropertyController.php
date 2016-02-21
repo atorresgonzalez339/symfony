@@ -2,6 +2,7 @@
 
 namespace DashboardBundle\Controller;
 
+use DashboardBundle\Form\PropertyType;
 use DashboardBundle\Entity\Property;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -65,8 +66,11 @@ class PropertyController extends BaseController
 				$property = new Property($user);
 			}
 
+			$property_form = $this->createForm(PropertyType::class, $property);
+
 			return $this->render('DashboardBundle:Properties:design.html.twig', array(
-				'property' => $property
+				'property' => $property,
+				'property_form' => $property_form
 			));
 		}
 

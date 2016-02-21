@@ -78,13 +78,12 @@ class Property
     /**
      * @ORM\Column(type="smallint", nullable=true)
      */
-    protected $bathsFull;
+    protected $bathrooms;
 
     /**
      * @ORM\Column(type="smallint", nullable=true)
      */
-    protected $bathsHalf;
-
+    protected $parking_spaces;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
@@ -341,50 +340,38 @@ class Property
     }
 
     /**
-     * Set bathsFull
-     *
-     * @param integer $bathsFull
-     * @return Property
+     * @return mixed
      */
-    public function setBathsFull($bathsFull)
+    public function getBathrooms()
     {
-        $this->bathsFull = $bathsFull;
-
-        return $this;
+        return $this->bathrooms;
     }
 
     /**
-     * Get bathsFull
-     *
-     * @return integer 
+     * @param mixed $bathrooms
      */
-    public function getBathsFull()
+    public function setBathrooms($bathrooms)
     {
-        return $this->bathsFull;
+        $this->bathrooms = $bathrooms;
     }
 
     /**
-     * Set bathsHalf
-     *
-     * @param integer $bathsHalf
-     * @return Property
+     * @return mixed
      */
-    public function setBathsHalf($bathsHalf)
+    public function getParkingSpaces()
     {
-        $this->bathsHalf = $bathsHalf;
-
-        return $this;
+        return $this->parking_spaces;
     }
 
     /**
-     * Get bathsHalf
-     *
-     * @return integer 
+     * @param mixed $parking_spaces
      */
-    public function getBathsHalf()
+    public function setParkingSpaces($parking_spaces)
     {
-        return $this->bathsHalf;
+        $this->parking_spaces = $parking_spaces;
     }
+
+
 
     /**
      * Set lotSize
