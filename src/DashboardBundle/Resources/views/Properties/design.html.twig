@@ -3,6 +3,7 @@
 {% block stylesheets_priority %}
   {{ parent() }}
   <link href="{{ asset('bundles/dashboard/material/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
+  <link href="{{ asset('bundles/dashboard/material/css/default-skin.css') }}" rel="stylesheet" type="text/css"/>
   <style>
     #map-canvas {
       height: 200px;
@@ -26,129 +27,161 @@
 {% endblock breadcrumb %}
 
 {% block content %}
-<div class="row">
-  <div class="col m12">
-    <ul class="tabs z-depth-1" style="width: 100%;">
-      <li class="tab col s3"><a class="active" href="#main-info">Main Information</a></li>
-      <li class="tab col s3"><a href="#image-gallery" class="">Image Gallery</a></li>
-      <li class="tab col s3"><a href="#extra-text" class="">Extra Text</a></li>
-      <li class="tab col s3"><a href="#files" class="">Files</a></li>
-    </ul>
+  <div class="row">
+    <div class="col m12">
+      <ul class="tabs z-depth-1" style="width: 100%;">
+        <li class="tab col s3"><a class="active" href="#main-info">Main Information</a></li>
+        <li class="tab col s3"><a href="#image-gallery" class="">Image Gallery</a></li>
+        <li class="tab col s3"><a href="#extra-text" class="">Extra Text</a></li>
+        <li class="tab col s3"><a href="#files" class="">Files</a></li>
+      </ul>
+    </div>
   </div>
-</div>
 
-<div class="row" id="image-gallery">
-  Image Gallery
-</div>
-
-<div class="row" id="extra-text">
-  Extra Text
-</div>
-
-<div class="row" id="files">
-  Files
-</div>
-
-<div class="row" id="main-info">
-  <div class="col m12">
-  <form action="#!">
-    <div class="card">
-      <div class="title">
-        <h5> Basic Information </h5>
-        <div class="btn-group right">
-          <a href="#!" class="waves-effect waves-dark btn btn-small"><i class="mdi mdi-content-save left"></i>Save</a>
+  <div class="row" id="image-gallery">
+    <div class="card-panel of-h">
+      <div class="row photoswipe-gallery isotope mt-0" data-pswp-uid="1" style="position: relative; height: 516px;">
+        <a class="col s12 m6 l3 item" href="{{ asset('bundles/dashboard/properties/1.jpg') }}" data-size="2880x1800"
+            data-med="{{ asset('bundles/dashboard/properties/3.jpg') }}" data-med-size="1440x900" data-author="John Doe"
+            style="position: absolute; left: 0px; top: 0px;">
+          <img src="{{ asset('bundles/dashboard/properties/1.jpg') }}" alt="">
+          <figure>Magna tollit mei te</figure>
+        </a>
+        <a class="col s12 m6 l3 item" href="{{ asset('bundles/dashboard/properties/2.jpg') }}" data-size="2880x1800"
+                data-med="{{ asset('bundles/dashboard/properties/3.jpg') }}" data-med-size="1440x900" data-author="Felicia Castro"
+                style="position: absolute; left: 257px; top: 0px;">
+          <img src="{{ asset('bundles/dashboard/properties/2.jpg') }}"  alt="">
+          <figure>Ex graeco deserunt posidonium pri, mei oblique bonorum recusabo te. Id mea diceret constituto, numquam
+            persequeris per te. Eam no veri verear quaerendum, eam graecis adolescens dissentiunt eu, summo quaeque
+            corpora ex eam. Libris molestiae an vix.
+          </figure>
+        </a>
+        <a class="col s12 m6 l3 item" href="{{ asset('bundles/dashboard/properties/1.jpg') }}" data-size="2880x1800"
+                data-med="{{ asset('bundles/dashboard/properties/3.jpg') }}" data-med-size="1440x900" data-author="Max Brooks"
+                style="position: absolute; left: 515px; top: 0px;">
+          <img src="{{ asset('bundles/dashboard/properties/3.jpg') }}" alt="">
+          <figure>Pri quem blandit intellegebat</figure>
+        </a> 
+        <a class="col s12 m6 l3 item" href="{{ asset('bundles/dashboard/properties/4.jpg') }}" data-size="2880x1800"
+                data-med="{{ asset('bundles/dashboard/properties/3.jpg') }}" data-med-size="1440x900" data-author="Patsy Griffin"
+                style="position: absolute; left: 773px; top: 0px;">
+          <img src="{{ asset('bundles/dashboard/properties/4.jpg') }}"
+                                                                        alt="">
+          <figure>Vim ut eirmod minimum placerat</figure>
+        </a> 
         </div>
-      </div>
-      <div class="content">
-        <div class="input-field">
-          <input id="input_name" type="text" name="name" length="100">
-          <label for="input_name" class="">Name</label>
-        </div>
-        <div class="input-field">
-          <textarea id="textarea-message" class="materialize-textarea" name="message" length="250"></textarea>
-          <label for="textarea-message">Message</label>
-        </div>
-      </div>
     </div>
-    <div class="card">
-      <div class="title">
-        <h5> Attributes </h5>
-      </div>
-      <div class="content">
-        <div class="row">
-          <div class="col m6">
-            <div class="input-field">
-              <i class="mdi-editor-attach-money prefix"></i>
-              <input id="input_price" type="text" name="subject">
-              <label for="input_price" class="">Price</label>
-            </div>
-            <div class="input-field">
-              <i class="mdi-action-open-with prefix"></i>
-              <input id="input_size" type="text" name="subject">
-              <label for="input_size" class="">Size</label>
-            </div>
-            <div class="input-field">
-              <i class="mdi-action-invert-colors prefix"></i>
-              <input id="input_baths" type="text" name="subject">
-              <label for="input_baths" class="">Baths</label>
-            </div>
-            <div class="input-field">
-              <i class="mdi-maps-hotel prefix"></i>
-              <input id="input_rooms" type="text" name="subject">
-              <label for="input_rooms" class="">Rooms</label>
-            </div>
-            <div class="input-field">
-              <i class="mdi-maps-directions-car prefix"></i>
-              <input id="input_garages" type="text" name="subject">
-              <label for="input_garages" class="">Garages</label>
+  </div>
+
+  <div class="row" id="extra-text">
+    Extra Text
+  </div>
+
+  <div class="row" id="files">
+    Files
+  </div>
+
+  <div class="row" id="main-info">
+    <div class="col m12">
+      <form action="#!">
+        <div class="card">
+          <div class="title">
+            <h5> Basic Information </h5>
+            <div class="btn-group right">
+              <a href="#!" class="waves-effect waves-dark btn btn-small"><i
+                    class="mdi mdi-content-save left"></i>Save</a>
             </div>
           </div>
-          <div class="col m6">
+          <div class="content">
             <div class="input-field">
-              <select class="select2">
-                <option value="AK">Apartament</option>
-                <option value="HI">Condo</option>
-                <option value="HI">House</option>
-                <option value="HI">Villa</option>
-              </select>
+              <input id="input_name" type="text" name="name" length="100">
+              <label for="input_name" class="">Name</label>
+            </div>
+            <div class="input-field">
+              <textarea id="textarea-message" class="materialize-textarea" name="message" length="250"></textarea>
+              <label for="textarea-message">Message</label>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="title">
-        <h5> Location </h5>
-      </div>
-      <div class="content">
-
-        <div class="row">
-          <div class="col m12">
-            <input id="pac-input" class="controls" type="text" placeholder="Enter a location">
-            <div id="map-canvas"></div>
+        <div class="card">
+          <div class="title">
+            <h5> Attributes </h5>
+          </div>
+          <div class="content">
+            <div class="row">
+              <div class="col m6">
+                <div class="input-field">
+                  <i class="mdi-editor-attach-money prefix"></i>
+                  <input id="input_price" type="text" name="subject">
+                  <label for="input_price" class="">Price</label>
+                </div>
+                <div class="input-field">
+                  <i class="mdi-action-open-with prefix"></i>
+                  <input id="input_size" type="text" name="subject">
+                  <label for="input_size" class="">Size</label>
+                </div>
+                <div class="input-field">
+                  <i class="mdi-action-invert-colors prefix"></i>
+                  <input id="input_baths" type="text" name="subject">
+                  <label for="input_baths" class="">Baths</label>
+                </div>
+                <div class="input-field">
+                  <i class="mdi-maps-hotel prefix"></i>
+                  <input id="input_rooms" type="text" name="subject">
+                  <label for="input_rooms" class="">Rooms</label>
+                </div>
+                <div class="input-field">
+                  <i class="mdi-maps-directions-car prefix"></i>
+                  <input id="input_garages" type="text" name="subject">
+                  <label for="input_garages" class="">Garages</label>
+                </div>
+              </div>
+              <div class="col m6">
+                <div class="input-field">
+                  <select class="select2">
+                    <option value="AK">Apartament</option>
+                    <option value="HI">Condo</option>
+                    <option value="HI">House</option>
+                    <option value="HI">Villa</option>
+                  </select>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="row">
-          <div class="col m6">
-            <div class="input-field">
-              <i class="mdi-maps-place prefix"></i>
-              <input id="input-latitude" type="text" name="subject">
-              <label for="input-latitude" class="">Latitude</label>
-            </div>
+        <div class="card">
+          <div class="title">
+            <h5> Location </h5>
           </div>
-          <div class="col m6">
-            <div class="input-field">
-              <i class="mdi-maps-place prefix"></i>
-              <input id="input-longitude" type="text" name="subject">
-              <label for="input-longitude" class="">Lontgitude</label>
+          <div class="content">
+
+            <div class="row">
+              <div class="col m12">
+                <input id="pac-input" class="controls" type="text" placeholder="Enter a location">
+                <div id="map-canvas"></div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col m6">
+                <div class="input-field">
+                  <i class="mdi-maps-place prefix"></i>
+                  <input id="input-latitude" type="text" name="subject">
+                  <label for="input-latitude" class="">Latitude</label>
+                </div>
+              </div>
+              <div class="col m6">
+                <div class="input-field">
+                  <i class="mdi-maps-place prefix"></i>
+                  <input id="input-longitude" type="text" name="subject">
+                  <label for="input-longitude" class="">Lontgitude</label>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </form>
+      </form>
     </div>
   </div>
 {% endblock %}
@@ -156,10 +189,9 @@
 {% block javascripts %}
   {{ parent() }}
   <script src="{{ asset('bundles/dashboard/material/js/select2.full.min.js') }}"></script>
+  <script src="{{ asset('bundles/dashboard/material/js/photoswipe-ui-default.min.js') }}"></script>
 
-  <script
-      src="http://maps.googleapis.com/maps/api/js?libraries=weather,geometry,visualization,places,drawing&amp;sensor=false"
-      type="text/javascript"></script>
+  <script src="http://maps.googleapis.com/maps/api/js?libraries=weather,geometry,visualization,places,drawing&amp;sensor=false" type="text/javascript"></script>
   <script src="{{ asset('bundles/dashboard/assets/libraries/jquery-google-map/infobox.js') }}"></script>
   <script src="{{ asset('bundles/dashboard/assets/libraries/jquery-google-map/markerclusterer.js') }}"></script>
   <script src="{{ asset('bundles/dashboard/assets/libraries/jquery-google-map/jquery-google-map.js') }}"></script>
