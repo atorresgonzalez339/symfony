@@ -28,10 +28,9 @@
         <div class="title">
           <h5> Attributes </h5>
         </div>
-        <div class="content" style="padding-top: 5px;padding-bottom: 5px;">
+        <div class="content" style="padding-top: 5px;padding-bottom: 15px;">
           <div class="row" style="margin-top: 5px;">
             <div class="col m6">
-              <br />
               <div class="input-field">
                 <i class="mdi-maps-hotel prefix"></i>
                 {{ form_widget(property_form.bedrooms, {'attr': {'id': 'bedrooms'}}) }}
@@ -57,11 +56,6 @@
                 {{ form_widget(property_form.year_built, {'attr': {'id': 'year_built'}}) }}
                 <label for="year_built" class="">Year Built</label>
               </div>
-              <div class="input-field">
-                {{ form_widget(property_form.for_rent, {'attr': {'id': 'for_rent', 'class':'filled-in'}}) }}
-                <label for="for_rent">Is it for rent?</label>
-              </div>
-              <br />
               <div class="input-field" style="margin-top: 3px;">
                 <i class="mdi-editor-attach-money prefix"></i>
                 {{ form_widget(property_form.list_price, {'attr': {'id': 'list_price'}}) }}
@@ -74,7 +68,6 @@
               </div>
             </div>
             <div class="col m6">
-              <br />
               <div class="input-field">
                 {{ form_widget(property_form.type)}}
                 {#<select class="select2">#}
@@ -84,7 +77,6 @@
                   {#<option value="HI">Villa</option>#}
                 {#</select>#}
               </div>
-              <br />
               <div class="input-field">
                 {{ form_widget(property_form.address, {'attr': {'id': 'address'}}) }}
                 <label for="address" class="">Address</label>
@@ -106,34 +98,45 @@
                 <label for="country" class="">Country</label>
               </div>
               <div class="input-field">
-                {{ form_widget(property_form.postal_code, {'attr': {'id': 'postal_code'}}) }}
-                <label for="postal_code" class="">Postal Code</label>
+                <div class="row" style="margin-top: 0px;">
+                  <div class="col m6">
+                    <div class="input-field" style="margin-top: 0px !important;">
+                      {{ form_widget(property_form.postal_code, {'attr': {'id': 'postal_code'}}) }}
+                      <label for="postal_code" class="">Postal Code</label>
+                    </div>
+                  </div>
+                  <div class="col m6">
+                    <p style="margin-top: 5px;">
+                      {{ form_widget(property_form.for_rent, {'attr': {'id': 'for_rent', 'class':'filled-in'}}) }}
+                      <label for="for_rent">Is it for rent?</label>
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-        <div class="card">
-          <div class="title">
-            <h5> Amenities </h5>
-          </div>
-          <div class="content" style="padding-top: 5px;padding-bottom: 5px;">
-            <div class="input-field">
-              {{ form_widget(property_form.amenities, {'attr': {'id': 'amenities', 'class':'materialize-textarea'}}) }}
-              <label for="amenities">Amenities</label>
-            </div>
-          </div>
-        </div>
 
         <div class="card">
           <div class="title">
-            <h5> Features </h5>
+            <h5> Amenities and Features </h5>
           </div>
           <div class="content" style="padding-top: 5px;padding-bottom: 5px;">
-            <div class="input-field">
-              {{ form_widget(property_form.features, {'attr': {'id': 'features', 'class':'materialize-textarea'}}) }}
-              <label for="features">Features</label>
+            <div class="row" style="margin-top: 0px">
+              <div class="col m6">
+                <div class="input-field">
+                  {{ form_widget(property_form.amenities, {'attr': {'id': 'amenities', 'class':'materialize-textarea'}}) }}
+                  <label for="amenities">Amenities</label>
+                </div>
+              </div>
+              <div class="col m6">
+                <div class="input-field">
+                  {{ form_widget(property_form.features, {'attr': {'id': 'features', 'class':'materialize-textarea'}}) }}
+                  <label for="features">Features</label>
+                </div>
+              </div>
             </div>
           </div>
         </div>
