@@ -86,6 +86,7 @@ class PropertyController extends BaseController
 			$property_form->handleRequest($request);
 
 			if($property_form->isValid()){
+				die('valid');
 				$this->getBusiness()->saveProperty($property);
 			}
 

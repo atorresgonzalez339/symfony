@@ -23,7 +23,8 @@ class PropertyType extends AbstractType
                 'choices' => PropertyEnumType::getChoices(),
                 'attr' => array('class' => 'select2'),
                 'empty_data' => null,
-                'empty_value' => 'Select unit type'
+                'required'    => false,
+                'placeholder' => 'Select unit type',
             ))
             ->add('for_rent')
             ->add('lease_term')
