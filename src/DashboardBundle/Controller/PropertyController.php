@@ -75,7 +75,7 @@ class PropertyController extends BaseController
 		}
 
 		/**
-		 * @Route("/properties", name="properties_save")
+		 * @Route("/properties/save", name="properties_save")
 		 */
 		public function saveAction(Request $request){
 
