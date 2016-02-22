@@ -5,8 +5,8 @@ use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 
 final class PropertyEnumType extends AbstractEnumType {
 
-  const HOUSE   = 'MALE';
-  const APARTMENT = 'FEMALE';
+  const HOUSE   = 'HOUSE';
+  const APARTMENT = 'APARTMENT';
   const CONDO   = 'CONDO';
   const TOWNHOME = 'TOWNHOME';
   const MANUFACTURED = 'MANUFACTURED';
