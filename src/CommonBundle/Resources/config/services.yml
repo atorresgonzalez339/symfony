@@ -2,3 +2,13 @@ services:
     common.base.business:
         class: CommonBundle\Business\BaseBusiness
         arguments: ["@service_container"]
+
+    common.transactional.pointcut:
+            class:    CommonBundle\Aop\TransactionPointcut
+            arguments: ["@annotation_reader"]
+            tags:
+              - { name: jms_aop.pointcut, interceptor: ralf.core.transactional.interceptor }
+
+    common.transactional.interceptor:
+        class:    CommonBundle\Aop\TransactionInterceptor
+        arguments: ["@doctrine.orm.entity_manager"]
