@@ -6,7 +6,7 @@
  * @version 1.0.0
  */
 
-namespace DashboardBundle\Controller;
+namespace CommonBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -92,12 +92,12 @@ class BaseController extends Controller {
         $salt = $this->getUserAuthenticated()->getSalt();
         $ralfSession = $this->findBusiness('ralf.core.business.ralfsession')->getRepository('Core', 'RalfSession')->findByKey($key,$salt);
         $em = $this->getDoctrine()->getManager();
-        
+
         if ($ralfSession) {
             $ralfSession->setKey($key);
             $ralfSession->setValue($value);
             $ralfSession->setSalt($salt);
-            
+
             $em->persist($ralfSession);
         }else{
             $valueNew = str_replace('"', '\"', $value);
@@ -119,7 +119,7 @@ class BaseController extends Controller {
 
         $salt = $this->getUserAuthenticated()->getSalt();
         $ralfSession = $this->findBusiness('ralf.core.business.ralfsession')->getRepository('Core', 'RalfSession')->findByKey($key,$salt);
-       
+
         if($ralfSession){
             return $ralfSession->getValue();
         }else{
@@ -175,7 +175,7 @@ class BaseController extends Controller {
 
         return $result;
     }
-    
+
     /**
      * @author  Livan L. Frometa Osorio <llfrometa@gmail.com>
      * @name    getSession($key)

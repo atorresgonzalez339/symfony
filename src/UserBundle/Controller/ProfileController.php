@@ -7,9 +7,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use UserBundle\Entity\UserProfile;
 use UserBundle\Form\ProfileType;
+use CommonBundle\Controller\BaseController;
 
-class ProfileController extends Controller
+class ProfileController extends BaseController
 {
+    private $serviceName = 'user.profile.business';
+
+    public function getBusiness() {
+      return parent::findBusiness($this->serviceName);
+    }
+
     /**
      * @Route("/profile", name="profile_index")
      */
@@ -33,9 +40,9 @@ class ProfileController extends Controller
     }
 
     /**
-     * @Route("/profile/update", name="profile_update")
+     * @Route("/profile/update", name="profile_save")
      */
-    public function updateAction(Request $request){
+    public function saveAction(Request $request){
       return $this->redirect($this->generateUrl('profile_index'));
     }
 }

@@ -239,8 +239,7 @@
 						</div>
 
 						<div class="row" style="padding-left: 20px;padding-right: 20px">
-							<form action="">
-
+							{{ form_start(profile_form, {'action': path('profile_save'), 'method': 'POST', 'id':'profile_form'}) }}
 								<div class="row" style="margin-top: 0rem;">
 									<div class="col m6" style="padding-bottom: 0px;">
 										<div class="input-field align-left">
@@ -333,11 +332,11 @@
 
 								<div class="row" style="padding-right: 25px;padding-top: 20px">
 									<div class="col s12">
-										<a class="waves-effect waves-light btn btn-small">SAVE</a>
+										<button type="submit" class="waves-effect waves-light btn btn-small">SAVE</button>
 										<a class="waves-effect waves-light btn btn-small red">CANCEL</a>
 									</div>
 								</div>
-							</form>
+							{{ form_end(profile_form) }}
 						</div>
 					</div>
 					<div id="test2" class="col s12">Test 2</div>
