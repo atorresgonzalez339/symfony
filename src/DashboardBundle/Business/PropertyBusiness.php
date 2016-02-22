@@ -68,12 +68,12 @@ class PropertyBusiness {
         'Heating: ' . $data['property']['heating'] . ' - ' .
         'Laundry Features: ' . $data['property']['laundryFeatures'] . ' - ' .
         'Interior Features: ' .  $data['property']['interiorFeatures'] . ' - ' .
-        'Exterior Features: ' . $data['property']['exteriorFeatures'] . ' - ');
+        'Exterior Features: ' . $data['property']['exteriorFeatures']);
       $property->setType($data['property']['type']);
       $property->setLeaseTerm($data['leaseTerm']);
       $property->setBedrooms($data['property']['bedrooms']);
       $property->setBathrooms($data['property']['bathsFull'] + $data['property']['bathsHalf']);
-      $property->setLotSize($data['property']['lotSize']);
+      $property->setUnitSize($data['property']['lotSize']);
       $property->setYearBuilt($data['property']['yearBuilt']);
       $property->setMlsId($data['mlsId']);
       $property->setAddress($data['address']['full']);

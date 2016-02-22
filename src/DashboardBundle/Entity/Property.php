@@ -5,6 +5,8 @@ namespace DashboardBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use APY\DataGridBundle\Grid\Mapping as GRID;
 use UserBundle\Entity\User;
+use DashboardBundle\DBAL\Types\PropertyEnumType;
+use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 
 
 /**
@@ -54,12 +56,13 @@ class Property
     protected $features;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="PropertyEnumType", nullable=true)
+     * @DoctrineAssert\Enum(entity="DashboardBundle\DBAL\Types\PropertyEnumType")
      */
     protected $type;
 
     /**
-     * @ORM\Column(type="boolean", nullable=false)
+     * @ORM\Column(type="boolean", nullable=true)
      * @GRID\Column(field="for_rent", type="boolean", filterable=false, title="For Rent?", sortable=true)
 
      */
@@ -68,7 +71,7 @@ class Property
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    protected $leaseTerm;
+    protected $lease_term;
 
     /**
      * @ORM\Column(type="smallint", nullable=true)
@@ -88,17 +91,17 @@ class Property
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    protected $lotSize;
+    protected $unit_size;
 
     /**
      * @ORM\Column(type="smallint", nullable=true)
      */
-    protected $yearBuilt;
+    protected $year_built;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    protected $mlsId;
+    protected $mls_id;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -128,7 +131,7 @@ class Property
     /**
      * @ORM\Column(type="smallint", nullable=true)
      */
-    protected $postalCode;
+    protected $postal_code;
 
     /**
      * @ORM\Column(type="float", nullable=true)
@@ -144,6 +147,18 @@ class Property
      * @ORM\Column(type="integer", nullable=true)
      */
     protected $list_price;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    protected $close_price;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    protected $rent_price;
+
+
 
     /**
      * Get id
@@ -294,26 +309,26 @@ class Property
     }
 
     /**
-     * Set leaseTerm
+     * Set lease_term
      *
      * @param string $leaseTerm
      * @return Property
      */
     public function setLeaseTerm($leaseTerm)
     {
-        $this->leaseTerm = $leaseTerm;
+        $this->lease_term = $leaseTerm;
 
         return $this;
     }
 
     /**
-     * Get leaseTerm
+     * Get lease_term
      *
      * @return string 
      */
     public function getLeaseTerm()
     {
-        return $this->leaseTerm;
+        return $this->lease_term;
     }
 
     /**
@@ -340,7 +355,22 @@ class Property
     }
 
     /**
-     * @return mixed
+     * Set bathrooms
+     *
+     * @param integer $bathrooms
+     * @return Property
+     */
+    public function setBathrooms($bathrooms)
+    {
+        $this->bathrooms = $bathrooms;
+
+        return $this;
+    }
+
+    /**
+     * Get bathrooms
+     *
+     * @return integer 
      */
     public function getBathrooms()
     {
@@ -348,15 +378,22 @@ class Property
     }
 
     /**
-     * @param mixed $bathrooms
+     * Set parking_spaces
+     *
+     * @param string $parkingSpaces
+     * @return Property
      */
-    public function setBathrooms($bathrooms)
+    public function setParkingSpaces($parkingSpaces)
     {
-        $this->bathrooms = $bathrooms;
+        $this->parking_spaces = $parkingSpaces;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * Get parking_spaces
+     *
+     * @return string 
      */
     public function getParkingSpaces()
     {
@@ -364,82 +401,72 @@ class Property
     }
 
     /**
-     * @param mixed $parking_spaces
-     */
-    public function setParkingSpaces($parking_spaces)
-    {
-        $this->parking_spaces = $parking_spaces;
-    }
-
-
-
-    /**
-     * Set lotSize
+     * Set unit_size
      *
-     * @param string $lotSize
+     * @param string $unitSize
      * @return Property
      */
-    public function setLotSize($lotSize)
+    public function setUnitSize($unitSize)
     {
-        $this->lotSize = $lotSize;
+        $this->unit_size = $unitSize;
 
         return $this;
     }
 
     /**
-     * Get lotSize
+     * Get unit_size
      *
      * @return string 
      */
-    public function getLotSize()
+    public function getUnitSize()
     {
-        return $this->lotSize;
+        return $this->unit_size;
     }
 
     /**
-     * Set yearBuilt
+     * Set year_built
      *
      * @param integer $yearBuilt
      * @return Property
      */
     public function setYearBuilt($yearBuilt)
     {
-        $this->yearBuilt = $yearBuilt;
+        $this->year_built = $yearBuilt;
 
         return $this;
     }
 
     /**
-     * Get yearBuilt
+     * Get year_built
      *
      * @return integer 
      */
     public function getYearBuilt()
     {
-        return $this->yearBuilt;
+        return $this->year_built;
     }
 
     /**
-     * Set mlsId
+     * Set mls_id
      *
      * @param integer $mlsId
      * @return Property
      */
     public function setMlsId($mlsId)
     {
-        $this->mlsId = $mlsId;
+        $this->mls_id = $mlsId;
 
         return $this;
     }
 
     /**
-     * Get mlsId
+     * Get mls_id
      *
      * @return integer 
      */
     public function getMlsId()
     {
-        return $this->mlsId;
+        return $this->mls_id;
     }
 
     /**
@@ -558,26 +585,26 @@ class Property
     }
 
     /**
-     * Set postalCode
+     * Set postal_code
      *
      * @param integer $postalCode
      * @return Property
      */
     public function setPostalCode($postalCode)
     {
-        $this->postalCode = $postalCode;
+        $this->postal_code = $postalCode;
 
         return $this;
     }
 
     /**
-     * Get postalCode
+     * Get postal_code
      *
      * @return integer 
      */
     public function getPostalCode()
     {
-        return $this->postalCode;
+        return $this->postal_code;
     }
 
     /**
@@ -647,6 +674,52 @@ class Property
     public function getListPrice()
     {
         return $this->list_price;
+    }
+
+    /**
+     * Set close_price
+     *
+     * @param integer $closePrice
+     * @return Property
+     */
+    public function setClosePrice($closePrice)
+    {
+        $this->close_price = $closePrice;
+
+        return $this;
+    }
+
+    /**
+     * Get close_price
+     *
+     * @return integer 
+     */
+    public function getClosePrice()
+    {
+        return $this->close_price;
+    }
+
+    /**
+     * Set rent_price
+     *
+     * @param integer $rentPrice
+     * @return Property
+     */
+    public function setRentPrice($rentPrice)
+    {
+        $this->rent_price = $rentPrice;
+
+        return $this;
+    }
+
+    /**
+     * Get rent_price
+     *
+     * @return integer 
+     */
+    public function getRentPrice()
+    {
+        return $this->rent_price;
     }
 
     /**

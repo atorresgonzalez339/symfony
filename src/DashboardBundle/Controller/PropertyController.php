@@ -74,6 +74,25 @@ class PropertyController extends BaseController
 			));
 		}
 
+		/**
+		 * @Route("/properties", name="properties_save")
+		 */
+		public function saveAction(Request $request){
+
+			$user = $this->getUser();
+			$property = new Property($user);
+			$property_form = $this->createForm(PropertyType::class, $property);
+
+			$property_form->handleRequest($request);
+
+			if($property_form->isValid()){
+				die('valid');
+			}
+
+			die('invalid');
+
+		}
+
     /**
      * @Route("/properties/mls", name="properties_mls")
      */
