@@ -12,33 +12,37 @@ class PropertyBusiness {
         $this->container = $container;
     }
 
-  public function getMlsProperties(){
-    $username = "simplyrets";
-    $password = "simplyrets";
-    $remote_url = 'https://api.simplyrets.com/properties';
+    public function saveProperty(Property $property){
 
-    $ch = curl_init($remote_url);
+    }
 
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-      "Authorization: Basic " . base64_encode("$username:$password"),
-    ));
+    public function getMlsProperties(){
+      $username = "simplyrets";
+      $password = "simplyrets";
+      $remote_url = 'https://api.simplyrets.com/properties';
 
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+      $ch = curl_init($remote_url);
 
-    $output = curl_exec($ch);
+      curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        "Authorization: Basic " . base64_encode("$username:$password"),
+      ));
 
-    $result = json_decode($output, true);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-    curl_close($ch);
+      $output = curl_exec($ch);
 
-    // $lat = '25.7824618';
-    // $lng = '-80.3011208';
+      $result = json_decode($output, true);
 
-    //$remote_url .= "?points=$lat,$lng";
-    return $result;
-  }
+      curl_close($ch);
 
-  public function getMlsProperty($id){
+      // $lat = '25.7824618';
+      // $lng = '-80.3011208';
+
+      //$remote_url .= "?points=$lat,$lng";
+      return $result;
+    }
+
+    public function getMlsProperty($id){
       $username = "simplyrets";
       $password = "simplyrets";
       $remote_url = 'https://api.simplyrets.com/properties/' . $id;
