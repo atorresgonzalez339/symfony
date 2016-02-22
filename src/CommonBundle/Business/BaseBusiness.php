@@ -8,7 +8,7 @@
 
 namespace CommonBundle\Business;
 
-use RALF\CoreBundle\Anotaciones\Transaccional;
+use CommonBundle\Annotations\Transactional;
 use Doctrine\ORM\EntityManager;
 
 class BaseBusiness {
@@ -31,14 +31,14 @@ class BaseBusiness {
     }
 
     /**
-     * @Transaccional
+     * @Transactional
      */
     public function saveData($data) {
         $this->em->persist($data);
     }
 
     /**
-     * @Transaccional
+     * @Transactional
      */
     public function remove($data) {
         $this->em->remove($data);

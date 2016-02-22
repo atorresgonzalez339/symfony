@@ -10,7 +10,7 @@ services:
 
   dashboard.property.business:
     class: DashboardBundle\Business\PropertyBusiness
-    arguments: ["@service_container"]
+    parent: common.base.business
 
   dashboard.flyer.business:
     class: DashboardBundle\Business\FlyerBusiness

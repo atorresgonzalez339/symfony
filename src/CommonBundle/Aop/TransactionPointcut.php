@@ -6,7 +6,7 @@
  * @version 1.0.0
  */
 
-namespace CommonBudnle\Aop;
+namespace CommonBundle\Aop;
 
 use Doctrine\Common\Annotations\Reader;
 use JMS\AopBundle\Aop\PointcutInterface;
