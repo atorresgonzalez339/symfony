@@ -1,13 +1,12 @@
 <?php
 
 namespace DashboardBundle\Business;
+use CommonBundle\Business\BaseBusiness;
 
-class FlyerBusiness {
+class FlyerBusiness extends BaseBusiness {
 	
-		private $container;
-
-		public function __construct($container) {
-        $this->container = $container;
+    public function __construct(EntityManager $em) {
+      parent::__construct($em);
     }
 
 }

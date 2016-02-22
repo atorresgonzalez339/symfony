@@ -2,18 +2,17 @@
 
 namespace DashboardBundle\Business;
 
+use CommonBundle\Business\BaseBusiness;
 use DashboardBundle\Entity\Property;
 
-class PropertyBusiness {
-	
-		private $container;
+class PropertyBusiness extends BaseBusiness {
 
-		public function __construct($container) {
-        $this->container = $container;
+    public function __construct($em) {
+      parent::__construct($em);
     }
 
     public function saveProperty(Property $property){
-
+      $this->saveData($property);
     }
 
     public function getMlsProperties(){

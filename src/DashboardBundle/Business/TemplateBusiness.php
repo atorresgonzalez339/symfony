@@ -2,12 +2,12 @@
 
 namespace DashboardBundle\Business;
 
-class TemplateBusiness {
-	
-		private $container;
+use CommonBundle\Business\BaseBusiness;
 
-		public function __construct($container) {
-        $this->container = $container;
+class TemplateBusiness extends BaseBusiness{
+
+    public function __construct(EntityManager $em) {
+      parent::__construct($em);
     }
 
 }

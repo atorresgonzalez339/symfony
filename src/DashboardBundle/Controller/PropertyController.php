@@ -87,9 +87,11 @@ class PropertyController extends BaseController
 
 			if($property_form->isValid()){
 				$this->getBusiness()->saveProperty($property);
-			}
 
-			die('invalid');
+			}
+			else{
+				die('invalid');
+			}
 
 			return $this->redirect($this->generateUrl('properties_design'));
 
