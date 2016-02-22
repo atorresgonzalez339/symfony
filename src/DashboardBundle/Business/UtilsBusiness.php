@@ -2,13 +2,13 @@
 
 namespace DashboardBundle\Business;
 
-class UtilsBusiness {
-	
-		private $container;
+use CommonBundle\Business\BaseBusiness;
 
-		public function __construct($container) {
-        $this->container = $container;
-    }
+class UtilsBusiness extends BaseBusiness{
+
+		public function __construct(EntityManager $em) {
+			parent::__construct($em);
+		}
 
 		public function upladImage($img, $folder = null){
 			$uploader = $this->container->get('speicher210_cloudinary.uploader');

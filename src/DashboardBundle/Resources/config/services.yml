@@ -14,11 +14,11 @@ services:
 
   dashboard.flyer.business:
     class: DashboardBundle\Business\FlyerBusiness
-    arguments: ["@service_container"]
+    parent: common.base.business
 
   dashboard.template.business:
     class: DashboardBundle\Business\TemplateBusiness
-    arguments: ["@service_container"]
+    parent: common.base.business
 
   ralf.common.twig.extension.functions:
     class: DashboardBundle\Twig\Extension\Functions
