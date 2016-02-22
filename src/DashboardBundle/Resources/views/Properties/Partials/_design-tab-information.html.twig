@@ -118,34 +118,33 @@
         </div>
       </div>
 
-
-        <div class="card">
-          <div class="title">
-            <h5> Amenities and Features </h5>
-          </div>
-          <div class="content" style="padding-top: 5px;padding-bottom: 5px;">
-            <div class="row" style="margin-top: 0px">
-              <div class="col m6">
-                <div class="input-field">
-                  {{ form_widget(property_form.amenities, {'attr': {'id': 'amenities', 'class':'materialize-textarea'}}) }}
-                  <label for="amenities">Amenities</label>
-                </div>
+      <div class="card">
+        <div class="title">
+          <h5> Amenities and Features </h5>
+        </div>
+        <div class="content" style="padding-top: 5px;padding-bottom: 5px;">
+          <div class="row" style="margin-top: 0px">
+            <div class="col m6">
+              <div class="input-field">
+                {{ form_widget(property_form.amenities, {'attr': {'id': 'amenities', 'class':'materialize-textarea'}}) }}
+                <label for="amenities">Amenities</label>
               </div>
-              <div class="col m6">
-                <div class="input-field">
-                  {{ form_widget(property_form.features, {'attr': {'id': 'features', 'class':'materialize-textarea'}}) }}
-                  <label for="features">Features</label>
-                </div>
+            </div>
+            <div class="col m6">
+              <div class="input-field">
+                {{ form_widget(property_form.features, {'attr': {'id': 'features', 'class':'materialize-textarea'}}) }}
+                <label for="features">Features</label>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
       <div class="card">
         <div class="title">
           <h5> Location </h5>
         </div>
-        <div class="content" style="padding-top: 5px;padding-bottom: 5px;">
+        <div class="content" style="padding-top: 5px;padding-bottom: 15px;">
           <div class="row" style="margin-top: 5px">
             <div class="col m12" style="padding-bottom: 5px;">
               <input id="pac-input" class="controls" type="text" placeholder="Enter a location">
