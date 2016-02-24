@@ -88,6 +88,12 @@ class PropertyBusiness extends BaseBusiness {
       $property->setLat($data['geo']['lat']);
       $property->setLng($data['geo']['lng']);
 
+      if(!empty($data['photos'])){
+        foreach($data['photos'] as $photo){
+          $property->getTempPhotos()->add($photo);
+        }
+      }
+
       return $property;
     }
 
