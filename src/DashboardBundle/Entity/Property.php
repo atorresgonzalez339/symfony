@@ -7,6 +7,7 @@ use APY\DataGridBundle\Grid\Mapping as GRID;
 use UserBundle\Entity\User;
 use DashboardBundle\DBAL\Types\PropertyEnumType;
 use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
+use Doctrine\Common\Collections\ArrayCollection;
 
 
 /**
@@ -16,10 +17,6 @@ use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
  */
 class Property
 {
-
-    public function __construct(User $user){
-        $this->user = $user;
-    }
 
     /**
      * @ORM\Column(type="integer")
@@ -158,7 +155,13 @@ class Property
      */
     protected $rent_price;
 
+    protected $temp_photos;
 
+
+    public function __construct(User $user){
+        $this->user = $user;
+        $this->temp_photos = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -744,4 +747,22 @@ class Property
     {
         return $this->user;
     }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getTempPhotos()
+    {
+        return $this->temp_photos;
+    }
+
+    /**
+     * @param ArrayCollection $temp_photos
+     */
+    public function setTempPhotos($temp_photos)
+    {
+        $this->temp_photos = $temp_photos;
+    }
+
+
 }
