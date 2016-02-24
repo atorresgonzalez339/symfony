@@ -10,13 +10,11 @@
           <div class="col m12">
             <div class="row photoswipe-gallery isotope mt-0" data-pswp-uid="1">
 
-              {% for i in 0..6 %}
-                <a class="col s12 m6 l3 item" href="{{ asset('bundles/dashboard/properties/1.jpg') }}" data-size="2880x1800"
-                   data-med="{{ asset('bundles/dashboard/properties/1.jpg') }}"
-                   data-med-size="1440x900"
-                   data-author="John Doe">
-                  <img src="{{ asset('bundles/dashboard/properties/1.jpg') }}" alt="">
-                  <figure>Magna tollit mei te</figure>
+              {% for photo in property.getTempPhotos().toArray() %}
+                <a class="col s12 m6 l3 item" href="{{ photo }}" data-size="2880x1800"
+                   data-med="{{ photo }}"
+                   data-med-size="1440x900">
+                  <img src="{{ photo }}" alt="">
                 </a>
               {% endfor %}
             </div>
