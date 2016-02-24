@@ -109,14 +109,36 @@
 {% endblock breadcrumb %}
 
 {% block content %}
+  <div class="row">
+    <div class="col s12">
+      <ul class="tabs z-depth-1" style="width: 100%;overflow-x: hidden;">
+        <li class="tab col s3"><a href="#test1" class="active"> Information </a></li>
+        <li class="tab col s3"><a href="#test2"> Gallery & Files </a></li>
+      </ul>
+    </div>
+    <div id="test1" class="col s12">
+      {% include 'DashboardBundle:Properties:Partials/_design-tab-information.html.twig' %}
+    </div>
+    <div id="test2" class="col s12">
+      {% include 'DashboardBundle:Properties:Partials/_design-tab-gallery.html.twig' %}
+    </div>
+  </div>
 
+  {#<div class="row">#}
+    {#<div class="col m12">#}
+      {#<ul class="tabs z-depth-1" style="width: 100%;overflow-x: hidden;">#}
+        {#<li class="tab col s3"><a class="active" href="#main-info"> Information</a></li>#}
+        {#<li class="tab col s3"><a href="#image-gallery" class=""> Gallery & Files</a></li>#}
+      {#</ul>#}
+    {#</div>#}
   {#TabBar#}
-  {% include 'DashboardBundle:Properties:Partials/_design-tabbar.html.twig' %}
+  {#{% include 'DashboardBundle:Properties:Partials/_design-tabbar.html.twig' %}#}
   {#Tab-Information#}
-  {% include 'DashboardBundle:Properties:Partials/_design-tab-information.html.twig' %}
+  {#{% include 'DashboardBundle:Properties:Partials/_design-tab-information.html.twig' %}#}
   {#Tab-Gallery#}
-  {% include 'DashboardBundle:Properties:Partials/_design-tab-gallery.html.twig' %}
+  {#{% include 'DashboardBundle:Properties:Partials/_design-tab-gallery.html.twig' %}#}
 
+  {#</div>#}
 {% endblock %}
 
 {% block javascripts %}
