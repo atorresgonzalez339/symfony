@@ -14,96 +14,98 @@ use CommonBundle\Controller\BaseController;
 class PropertyController extends BaseController
 {
 
-		private $serviceName = 'dashboard.property.business';
+  private $serviceName = 'dashboard.property.business';
 
-		public function getBusiness() {
-			return parent::findBusiness($this->serviceName);
-		}
+  public function getBusiness()
+  {
+    return parent::findBusiness($this->serviceName);
+  }
 
-		/**
-		 * @Route("/properties", name="properties_index")
-		 */
-		public function indexAction(Request $request){$source = new Entity('DashboardBundle:Property');
-			$grid = $this->get('grid');
-			$grid->setSource($source);
-			$grid->hideColumns(array('id'));
-			$grid->addMassAction(new DeleteMassAction());
-			$grid->setLimits($this->container->getParameter('admin.paginator.limits.config'));
+  /**
+   * @Route("/properties", name="properties_index")
+   */
+  public function indexAction(Request $request)
+  {
+    $source = new Entity('DashboardBundle:Property');
+    $grid = $this->get('grid');
+    $grid->setSource($source);
+    $grid->hideColumns(array('id'));
+    $grid->addMassAction(new DeleteMassAction());
+    $grid->setLimits($this->container->getParameter('admin.paginator.limits.config'));
 
-			if ($request->isXmlHttpRequest()) {
-				return $grid->getGridResponse('DashboardBundle:Propery:indexAjax.html.twig');
-			}
-			if ($grid->isReadyForRedirect() ) {
-				return new RedirectResponse($grid->getRouteUrl());
-			}
-
-			return $grid->getGridResponse('DashboardBundle:Properties:index.html.twig');
-		}
-
-		/**
-		 * @Route("/properties/design", name="properties_design")
-		 */
-		public function designAction(Request $request){
-
-			$mls_id = $request->get('mls_id');
-			$property_id = $request->get('property_id');
-			$user = $this->getUser();
-
-			//Design a property from MLS
-			if($mls_id){
-				$mls_property = $this->getBusiness()->getMlsProperty($mls_id);
-				$new_property = new Property($user);
-				$property = $this->getBusiness()->propertyApiMapper($mls_property, $new_property);
-			}
-			//Design an existing property
-			else if($property_id){
-				$property = $this->getDoctrine()
-					 							 ->getRepository('DashboardBundle:Property')
-											   ->find($property_id);
-			}
-			//Design an empty property
-			else{
-				$property = new Property($user);
-			}
-
-			$property_form = $this->createForm(PropertyType::class, $property);
-
-			return $this->render('DashboardBundle:Properties:design.html.twig', array(
-				'property' => $property,
-				'property_form' => $property_form->createView()
-			));
-		}
-
-		/**
-		 * @Route("/properties/save", name="properties_save")
-		 */
-		public function saveAction(Request $request){
-
-			$user = $this->getUser();
-			$property = new Property($user);
-			$property_form = $this->createForm(PropertyType::class, $property);
-
-			$property_form->handleRequest($request);
-
-			if($property_form->isValid()){
-				$this->getBusiness()->saveProperty($property);
-
-			}
-			else{
-				die('invalid');
-			}
-
-			return $this->redirect($this->generateUrl('properties_design'));
-
-		}
-
-    /**
-     * @Route("/properties/mls", name="properties_mls")
-     */
-    public function mlsAction(Request $request){
-			$properties = $this->getBusiness()->getMlsProperties();
-			return $this->render('DashboardBundle:Properties:mls.html.twig', array(
-				'properties' => $properties
-			));
+    if ($request->isXmlHttpRequest()) {
+      return $grid->getGridResponse('DashboardBundle:Propery:indexAjax.html.twig');
     }
+    if ($grid->isReadyForRedirect()) {
+      return new RedirectResponse($grid->getRouteUrl());
+    }
+
+    return $grid->getGridResponse('DashboardBundle:Properties:index.html.twig');
+  }
+
+  /**
+   * @Route("/properties/design", name="properties_design")
+   */
+  public function designAction(Request $request)
+  {
+
+    $mls_id = $request->get('mls_id');
+    $property_id = $request->get('property_id');
+    $user = $this->getUser();
+
+    //Design a property from MLS
+    if ($mls_id) {
+      $mls_property = $this->getBusiness()->getMlsProperty($mls_id);
+      $new_property = new Property($user);
+      $property = $this->getBusiness()->propertyApiMapper($mls_property, $new_property);
+    } //Design an existing property
+    else if ($property_id) {
+      $property = $this->getDoctrine()
+        ->getRepository('DashboardBundle:Property')
+        ->find($property_id);
+    } //Design an empty property
+    else {
+      $property = new Property($user);
+    }
+
+    $property_form = $this->createForm(PropertyType::class, $property);
+
+    return $this->render('DashboardBundle:Properties:design.html.twig', array(
+      'property' => $property,
+      'property_form' => $property_form->createView()
+    ));
+  }
+
+  /**
+   * @Route("/properties/save", name="properties_save")
+   */
+  public function saveAction(Request $request)
+  {
+
+    $user = $this->getUser();
+    $property = new Property($user);
+    $property_form = $this->createForm(PropertyType::class, $property);
+
+    $property_form->handleRequest($request);
+
+    if ($property_form->isValid()) {
+      $this->getBusiness()->saveProperty($property);
+      $this->addFlash('success', 'Property saved');
+      return $this->redirect($this->generateUrl('properties_design', array('property_id' => $property->getId())));
+    }
+
+    return $this->redirect($this->generateUrl('properties_design', array('property' => $property)));
+
+  }
+
+  /**
+   * @Route("/properties/mls", name="properties_mls")
+   */
+  public function mlsAction(Request $request)
+  {
+    $properties = $this->getBusiness()->getMlsProperties();
+    return $this->render('DashboardBundle:Properties:mls.html.twig', array(
+      'properties' => $properties
+    ));
+  }
 }
