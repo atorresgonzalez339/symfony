@@ -85,6 +85,7 @@ class PropertyController extends BaseController
     $user = $this->getUser();
     $property = new Property($user);
     $property_form = $this->createForm(PropertyType::class, $property);
+    $mls_id = $request->get('mls_id');
 
     $property_form->handleRequest($request);
 
@@ -94,7 +95,8 @@ class PropertyController extends BaseController
       return $this->redirect($this->generateUrl('properties_design', array('property_id' => $property->getId())));
     }
 
-    return $this->redirect($this->generateUrl('properties_design', array('property' => $property)));
+    $this->addFlash('error', 'Invalid data');
+    return $this->redirect($this->generateUrl('properties_design', array('mls_id' => $mls_id)));
 
   }
 

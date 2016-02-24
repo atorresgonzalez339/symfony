@@ -13,7 +13,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * @ORM\Entity
  * @ORM\Table(name="properties")
- * @GRID\Source(columns="id,name")
+ * @GRID\Source(columns="id,name,description")
  */
 class Property
 {
@@ -39,6 +39,7 @@ class Property
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @GRID\Column(field="description", type="text" , filterable=false, title="Description", size=50)
      */
     protected $description;
 
