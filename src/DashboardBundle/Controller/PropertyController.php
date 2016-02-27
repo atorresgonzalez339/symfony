@@ -49,9 +49,14 @@ class PropertyController extends BaseController
   public function designAction(Request $request)
   {
 
+
     $mls_id = $request->get('mls_id');
     $property_id = $request->get('property_id');
     $user = $this->getUser();
+
+    if($request->isMethod('POST')){
+      $property_id = $this->getFiertSelectetGridItem();
+    }
 
     //Design a property from MLS
     if ($mls_id) {
@@ -60,6 +65,7 @@ class PropertyController extends BaseController
       $property = $this->getBusiness()->propertyApiMapper($mls_property, $new_property);
     } //Design an existing property
     else if ($property_id) {
+
       $property = $this->getDoctrine()
         ->getRepository('DashboardBundle:Property')
         ->find($property_id);

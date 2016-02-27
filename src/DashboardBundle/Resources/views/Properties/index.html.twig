@@ -27,6 +27,16 @@
 			{{ grid(grid, 'DashboardBundle:Grid:gridTemplateAjax.html.twig') }}
 		</div>
 	</div>
+
+	<script>
+		$(document).ready(function(){
+			$('#edit_action').click(function(){
+				$('#{{idFormGrid}}').attr('action', '{{path("properties_design")}}');
+				$('#{{idFormGrid}}').submit();
+			});
+		});
+	</script>
+
 {% endblock content%}
 
 
