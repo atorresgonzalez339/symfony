@@ -56,8 +56,9 @@ $(document).ready(function() {
                 marker.setPosition(place.geometry.location);
                 marker.setVisible(true);
                 
-                $('#property_lat').val(place.geometry.location.lat());
-                $('#property_lng').val(place.geometry.location.lng());
+                $('#input-latitude').val(place.geometry.location.lat());
+
+                $('#input-longitude').val(place.geometry.location.lng());
 
                 var address = '';
                 if (place.address_components) {
