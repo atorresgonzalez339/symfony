@@ -71,6 +71,8 @@ class PropertyController extends BaseController
     $property_form = $this->createForm(PropertyType::class, $property);
 
     return $this->render('DashboardBundle:Properties:design.html.twig', array(
+      'mls_id' => $mls_id,
+      'property_id' => $property_id,
       'property' => $property,
       'property_form' => $property_form->createView()
     ));
