@@ -20,7 +20,10 @@
 					<i class="mdi mdi-content-create left"></i>
 					Edit
 				</a>
-				<a class="btn btn-small waves-dark waves-effect red"><i class="mdi mdi-content-clear left"></i>Delete</a>
+				<a id="delete_action" class="btn btn-small waves-dark waves-effect red">
+					<i class="mdi mdi-content-clear left"></i>
+					Delete
+				</a>
 			</div>
 		</div>
 		<div class="content">
@@ -32,6 +35,11 @@
 		$(document).ready(function(){
 			$('#edit_action').click(function(){
 				$('#{{idFormGrid}}').attr('action', '{{path("properties_design")}}');
+				$('#{{idFormGrid}}').submit();
+			});
+
+			$('#delete_action').click(function(){
+				$('#{{idFormGrid}}').attr('action', '{{path("properties_remove")}}');
 				$('#{{idFormGrid}}').submit();
 			});
 		});
