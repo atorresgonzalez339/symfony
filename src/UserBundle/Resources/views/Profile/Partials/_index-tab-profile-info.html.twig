@@ -1,0 +1,198 @@
+<div id="test1" class="col s12" style="color: #5e5e5e;">
+
+  <div class="row" style="margin-top: 0px;">
+    <nav style="padding-right: 25px;color: #424242;background-color: #fff;box-shadow: 0 0px 0px rgba(0,0,0,.26)!important;padding-left: 30px;">
+      <div class="nav-wrapper">
+        <a href="#!" class="brand-logo"></a>
+        <ul class="right hide-on-med-and-down">
+          <li>
+            <a id="edit-profile" style="color: #424242;" class="dropdown-button" href="#!">
+              <i class="mdi mdi-editor-mode-edit" style="font-size: 18px;"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+  </div>
+
+  <div class="row" id="edit-profile-information">
+
+    <div class="row" style="margin-top: 0px;">
+      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>First Name:</b> </strong></span></div>
+      <div class="col s9" style="padding-bottom: 10px;"> <span>	Livan</span></div>
+    </div>
+    <div class="row" style="margin-top: 0px;">
+      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Last Name:</b> </strong></span></div>
+      <div class="col s9" style="padding-bottom: 10px;"> <span>	Frometa</span></div>
+    </div>
+    <div class="row">
+      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Gender:</b> </strong></span></div>
+      <div class="col s9" style="padding-bottom: 10px;"> <span>	Male</span></div>
+    </div>
+    <div class="row">
+      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Birthday:</b> </strong></span></div>
+      <div class="col s9" style="padding-bottom: 10px;"> <span>	June 23, 1990</span></div>
+    </div>
+
+    <div class="row" style="margin-top: 0px;">
+      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Mobile Phone:</b> </strong></span></div>
+      <div class="col s9" style="padding-bottom: 10px;"> <span>	00971 12345678 9</span></div>
+    </div>
+    <div class="row" style="margin-top: 0px;">
+      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Office Phone:</b> </strong></span></div>
+      <div class="col s9" style="padding-bottom: 10px;"> <span>	00971 12345678 9</span></div>
+    </div>
+    <div class="row">
+      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Email Address:</b> </strong></span></div>
+      <div class="col s9" style="padding-bottom: 10px;"> <span>	malinda.h@gmail.com</span></div>
+    </div>
+    <div class="row">
+      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Company:</b> </strong></span></div>
+      <div class="col s9" style="padding-bottom: 10px;"> <span>	DWELL Real Estate</span></div>
+    </div>
+    <div class="row">
+      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Address:</b> </strong></span></div>
+      <div class="col s9" style="padding-bottom: 10px;"> <span>	1028 SW 66 AVE</span></div>
+    </div>
+    <div class="row">
+      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>City:</b> </strong></span></div>
+      <div class="col s9" style="padding-bottom: 10px;"> <span>	Miami</span></div>
+    </div>
+    <div class="row">
+      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>State:</b> </strong></span></div>
+      <div class="col s9" style="padding-bottom: 10px;"> <span>	Florida</span></div>
+    </div>
+    <div class="row">
+      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Country:</b> </strong></span></div>
+      <div class="col s9" style="padding-bottom: 10px;"> <span>	United States</span></div>
+    </div>
+    <div class="row">
+      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Website:</b> </strong></span></div>
+      <div class="col s9" style="padding-bottom: 10px;"> <span>	http://sample.com</span></div>
+    </div>
+    <div class="row">
+      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Twitter:</b> </strong></span></div>
+      <div class="col s9" style="padding-bottom: 10px;"> <span>	@malinda</span></div>
+    </div>
+    <div class="row">
+      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Skype:</b> </strong></span></div>
+      <div class="col s9" style="padding-bottom: 10px;"> <span>	malinda.hollaway</span></div>
+    </div>
+
+  </div>
+
+  <div id="edit-profile-container" style="display: none;">
+    <div class="row" style="padding-left: 20px;padding-right: 20px">
+      {{ form_start(profile_form, {'action': path('profile_save'), 'method': 'POST', 'id':'profile_form'}) }}
+      <div class="row" style="margin-top: 0rem;">
+        <div class="col m6" style="padding-bottom: 0px;">
+          <div class="input-field align-left">
+            {{ form_widget(profile_form.first_name, {'attr': {'id': 'first_name','class':'validate'}}) }}
+            <label for="first_name" class="">First Name</label>
+          </div>
+        </div>
+        <div class="col m6" style="padding-bottom: 0px;">
+          <div class="input-field align-left">
+            {{ form_widget(profile_form.address, {'attr': {'id': 'address','class':'validate'}}) }}
+            <label for="address" class="">Address</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: 0rem;">
+        <div class="col m6" style="padding-bottom: 0px;">
+          <div class="input-field align-left">
+            {{ form_widget(profile_form.last_name, {'attr': {'id': 'last_name','class':'validate'}}) }}
+            <label for="last_name" class="">Last Name</label>
+          </div>
+        </div>
+        <div class="col m6" style="padding-bottom: 0px;">
+          <div class="input-field align-left">
+            {{ form_widget(profile_form.city, {'attr': {'id': 'city','class':'validate'}}) }}
+            <label for="city" class="">City</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: 0rem;">
+        <div class="col m6" style="padding-bottom: 0px;">
+          <div class="input-field">
+            {{ form_widget(profile_form.email, {'attr': {'id': 'email','type':'email','class':'validate'}}) }}
+            <label for="email" class="">Email</label>
+          </div>
+        </div>
+        <div class="col m6" style="padding-bottom: 0px;">
+          <div class="input-field align-left">
+            {{ form_widget(profile_form.state, {'attr': {'id': 'state','class':'validate'}}) }}
+            <label for="state" class="">State</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: 0rem;">
+        <div class="col m6" style="padding-bottom: 0px;">
+          <div class="input-field">
+            {{ form_widget(profile_form.gender, {'attr': {'id': 'gender'}}) }}
+            <label for="profile_gender" style="transform: translateY(-170%);left: 0px;font-size: .8rem;">Gender</label>
+          </div>
+        </div>
+        <div class="col m6" style="padding-bottom: 0px;">
+          <div class="input-field align-left">
+            {{ form_widget(profile_form.country, {'attr': {'id': 'country','class':'validate'}}) }}
+            <label for="state" class="">Country</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: 0rem;">
+        <div class="col m6" style="padding-bottom: 0px;">
+          <div class="input-field">
+            {{ form_widget(profile_form.cell_phone, {'attr': {'id': 'cell_phone','class':'validate','data-inputmask':"'mask': '(999) 999-9999'"}}) }}
+            <label for="cell_phone" style="transform: translateY(-170%);left: 0px;">Cell Phone</label>
+          </div>
+        </div>
+        <div class="col m6" style="padding-bottom: 0px;">
+          <div class="input-field">
+            {{ form_widget(profile_form.office_phone, {'attr': {'id': 'office_phone','class':'validate','data-inputmask':"'mask': '(999) 999-9999'"}}) }}
+            <label for="office_phone" style="transform: translateY(-170%);left: 0px;">Office Phone</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: 0rem;">
+        <div class="col m6" style="padding-bottom: 0px;">
+          <div class="input-field align-left">
+            {{ form_widget(profile_form.company, {'attr': {'id': 'company','class':'validate'}}) }}
+            <label for="input_text_licence">Company</label>
+          </div>
+        </div>
+        <div class="col m6" style="padding-bottom: 0px;">
+          <div class="input-field align-left">
+            {{ form_widget(profile_form.website, {'attr': {'id': 'website','class':'validate'}}) }}
+            <label for="input_text_state">Website</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: 0rem;">
+        <div class="col m6" style="padding-bottom: 0px;">
+          <div class="input-field align-left">
+            {{ form_widget(profile_form.birth_date, {'attr': {'id': 'birth_date'}}) }}
+            <label for="profile_birth_date">Birth date</label>
+          </div>
+        </div>
+        <div class="col m6" style="padding-bottom: 0px;">
+        </div>
+      </div>
+
+      <div class="row" style="padding-right: 25px;padding-top: 20px">
+        <div class="col s12">
+          <button type="submit" class="waves-effect waves-light btn btn-small">SAVE</button>
+          <a id="btn-profile-cancel" class="waves-effect waves-light btn btn-small red">CANCEL</a>
+        </div>
+      </div>
+      {{ form_end(profile_form) }}
+    </div>
+  </div>
+</div>
