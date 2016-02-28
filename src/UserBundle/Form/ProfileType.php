@@ -20,7 +20,6 @@ class ProfileType extends AbstractType
             ->add('birth_date')
             ->add('cell_phone')
             ->add('office_phone')
-            ->add('office_phone')
             ->add('email')
             ->add('company')
             ->add('address')

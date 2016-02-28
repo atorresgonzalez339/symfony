@@ -1,5 +1,11 @@
 {% extends 'DashboardBundle:Common:backend2.html.twig' %}
 
+
+{% block stylesheets_priority %}
+  {{ parent() }}
+	<link href="{{ asset('bundles/dashboard/material/css/pikaday.css') }}" rel="stylesheet" type="text/css"/>
+{% endblock stylesheets_priority %}
+
 {% block breadcrumb %}
 	<li><a href="#">Profile</a></li>
 {% endblock breadcrumb%}
@@ -101,6 +107,10 @@
 			transform: translateY(-170%);
 			left: 0px;
 		}
+		nav, nav .button-collapse.sp-cancel, nav .button-collapse.sp-cancel i, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
+			height: 25px;
+			line-height: 25px;
+		}
 	</style>
 		<div class="row">
 			<div class="col m3" style="padding-right: 20px;">
@@ -138,17 +148,16 @@
 				<div class="row" style="margin-top: 0px">
 					<div class="col s12" style="padding-bottom: 5px;">
 						<ul class="tabs tab-nav">
-							<li class="tab col s1 waves-effect"><a href="#test1" class="active">ABOUT</a></li>
-							<li class="tab col s1 waves-effect"><a href="#test2">CONTACTS</a></li>
-							<li class="tab col s1 waves-effect"><a href="#test3">Test 3</a></li>
+							<li class="tab col s1 waves-effect"><a href="#test1" class="active">Profile</a></li>
+							<li class="tab col s1 waves-effect"><a href="#test2">Account Infotmation</a></li>
 						</ul>
 					</div>
 					<div id="test1" class="col s12" style="color: #5e5e5e;">
 
-						<div class="row">
-							<nav style="color: #424242;background-color: #fff;box-shadow: 0 0px 0px rgba(0,0,0,.26)!important;padding-left: 30px;">
+						<div class="row" style="margin-top: 0px;">
+							<nav style="padding-right: 25px;color: #424242;background-color: #fff;box-shadow: 0 0px 0px rgba(0,0,0,.26)!important;padding-left: 30px;">
 								<div class="nav-wrapper">
-									<a href="#!" class="brand-logo">Basic Information</a>
+									<a href="#!" class="brand-logo"></a>
 									<ul class="right hide-on-med-and-down">
 										<li>
 											<a style="color: #424242;" class="dropdown-button" href="#!">
@@ -178,18 +187,6 @@
 						</div>
 
 						<div class="row">
-							<nav style="color: #424242;background-color: #fff;box-shadow: 0 0px 0px rgba(0,0,0,.26)!important;padding-left: 30px;">
-								<div class="nav-wrapper">
-									<a href="#!" class="brand-logo">Contact  Information</a>
-									<ul class="right hide-on-med-and-down">
-										<li>
-											<a style="color: #424242;" class="dropdown-button" href="#!">
-												<i class="mdi mdi-editor-mode-edit" style="font-size: 18px;"></i>
-											</a>
-										</li>
-									</ul>
-								</div>
-							</nav>
 
 							<div class="row" style="margin-top: 0px;">
 								<div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Mobile Phone:</b> </strong></span></div>
@@ -243,14 +240,14 @@
 								<div class="row" style="margin-top: 0rem;">
 									<div class="col m6" style="padding-bottom: 0px;">
 										<div class="input-field align-left">
-											<input id="input_text_name" type="text" class="validate">
-											<label for="input_text_name">Name</label>
+											{{ form_widget(profile_form.first_name, {'attr': {'id': 'first_name','class':'validate'}}) }}
+											<label for="first_name" class="">First Name</label>
 										</div>
 									</div>
 									<div class="col m6" style="padding-bottom: 0px;">
 										<div class="input-field align-left">
-											<input id="input_text_dir" type="text" class="validate">
-											<label for="input_text_dir">Direction</label>
+											{{ form_widget(profile_form.address, {'attr': {'id': 'address','class':'validate'}}) }}
+											<label for="address" class="">Address</label>
 										</div>
 									</div>
 								</div>
@@ -258,29 +255,14 @@
 								<div class="row" style="margin-top: 0rem;">
 									<div class="col m6" style="padding-bottom: 0px;">
 										<div class="input-field align-left">
-											<input id="input_text_lastname" type="text" class="validate">
-											<label for="input_text_lastname">Last Name</label>
+											{{ form_widget(profile_form.last_name, {'attr': {'id': 'last_name','class':'validate'}}) }}
+											<label for="last_name" class="">Last Name</label>
 										</div>
 									</div>
 									<div class="col m6" style="padding-bottom: 0px;">
 										<div class="input-field align-left">
-											<input id="input_text_city" type="text" class="validate">
-											<label for="input_text_city">City</label>
-										</div>
-									</div>
-								</div>
-
-								<div class="row" style="margin-top: 0rem;">
-									<div class="col m6" style="padding-bottom: 0px;">
-										<div class="input-field">
-											<input id="input_email" type="email" class="validate">
-											<label for="input_email">Email</label>
-										</div>
-									</div>
-									<div class="col m6" style="padding-bottom: 0px;">
-										<div class="input-field align-left">
-											<input id="input_text_state" type="text" class="validate">
-											<label for="input_text_state">State</label>
+											{{ form_widget(profile_form.city, {'attr': {'id': 'city','class':'validate'}}) }}
+											<label for="city" class="">City</label>
 										</div>
 									</div>
 								</div>
@@ -288,14 +270,14 @@
 								<div class="row" style="margin-top: 0rem;">
 									<div class="col m6" style="padding-bottom: 0px;">
 										<div class="input-field">
-											<input id="masked-phone" type="text" data-inputmask="'mask': '(999) 999-9999'">
-											<label for="masked-phone" style="transform: translateY(-170%);left: 0px;">Phone</label>
+											{{ form_widget(profile_form.email, {'attr': {'id': 'email','type':'email','class':'validate'}}) }}
+											<label for="email" class="">Email</label>
 										</div>
 									</div>
 									<div class="col m6" style="padding-bottom: 0px;">
 										<div class="input-field align-left">
-											<input id="input_text_ra1" type="text" class="validate">
-											<label for="input_text_ra1">????</label>
+											{{ form_widget(profile_form.state, {'attr': {'id': 'state','class':'validate'}}) }}
+											<label for="state" class="">State</label>
 										</div>
 									</div>
 								</div>
@@ -303,14 +285,29 @@
 								<div class="row" style="margin-top: 0rem;">
 									<div class="col m6" style="padding-bottom: 0px;">
 										<div class="input-field">
-											<input id="masked-phone-alt" type="text" data-inputmask="'mask': '(999) 999-9999'">
-											<label for="masked-phone-alt" style="transform: translateY(-170%);left: 0px;">Alternative Phone</label>
+											{{ form_widget(profile_form.gender, {'attr': {'id': 'gender','class':'validate'}}) }}
+											<label for="gender" class="">Gender</label>
 										</div>
 									</div>
 									<div class="col m6" style="padding-bottom: 0px;">
 										<div class="input-field align-left">
-											<input id="input_text_ra1" type="text" class="validate">
-											<label for="input_text_ra1">Pa&iacute;s</label>
+											{{ form_widget(profile_form.country, {'attr': {'id': 'country','class':'validate'}}) }}
+											<label for="state" class="">Country</label>
+										</div>
+									</div>
+								</div>
+
+								<div class="row" style="margin-top: 0rem;">
+									<div class="col m6" style="padding-bottom: 0px;">
+										<div class="input-field">
+											{{ form_widget(profile_form.cell_phone, {'attr': {'id': 'cell_phone','class':'validate','data-inputmask':"'mask': '(999) 999-9999'"}}) }}
+											<label for="cell_phone" style="transform: translateY(-170%);left: 0px;">Cell Phone</label>
+										</div>
+									</div>
+									<div class="col m6" style="padding-bottom: 0px;">
+										<div class="input-field">
+											{{ form_widget(profile_form.office_phone, {'attr': {'id': 'office_phone','class':'validate','data-inputmask':"'mask': '(999) 999-9999'"}}) }}
+											<label for="office_phone" style="transform: translateY(-170%);left: 0px;">Office Phone</label>
 										</div>
 									</div>
 								</div>
@@ -318,17 +315,32 @@
 								<div class="row" style="margin-top: 0rem;">
 									<div class="col m6" style="padding-bottom: 0px;">
 										<div class="input-field align-left">
-											<input id="input_text_licence" type="text" class="validate">
-											<label for="input_text_licence">Licence</label>
+											{{ form_widget(profile_form.company, {'attr': {'id': 'company','class':'validate'}}) }}
+											<label for="input_text_licence">Company</label>
 										</div>
 									</div>
 									<div class="col m6" style="padding-bottom: 0px;">
 										<div class="input-field align-left">
-											<input id="input_text_state" type="text" class="validate">
-											<label for="input_text_state">Web</label>
+											{{ form_widget(profile_form.website, {'attr': {'id': 'website','class':'validate'}}) }}
+											<label for="input_text_state">Website</label>
 										</div>
 									</div>
 								</div>
+
+							<div class="row" style="margin-top: 0rem;">
+								<div class="col m6" style="padding-bottom: 0px;">
+									<div class="input-field align-left">
+										{{ form_widget(profile_form.company, {'attr': {'id': 'company','class':'validate'}}) }}
+										<label for="input_text_licence">Company</label>
+									</div>
+								</div>
+								<div class="col m6" style="padding-bottom: 0px;">
+									<div class="input-field align-left">
+										<input id="birth_date" type="text" value="{{ "now" | date('m/d/Y') }}">
+										<label for="birth_date">Company</label>
+									</div>
+								</div>
+							</div>
 
 								<div class="row" style="padding-right: 25px;padding-top: 20px">
 									<div class="col s12">
@@ -340,7 +352,6 @@
 						</div>
 					</div>
 					<div id="test2" class="col s12">Test 2</div>
-					<div id="test3" class="col s12">Test 3</div>
 				</div>
 			</div>
 		</div>
@@ -350,5 +361,14 @@
 {% block javascripts %}
 	{{parent()}}
 	<script src="{{ asset('bundles/dashboard/material/js/jquery.inputmask.bundle.min.js') }}"></script>
+	<script src="{{ asset('bundles/dashboard/material/js/moment.js') }}"></script>
+	<script src="{{ asset('bundles/dashboard/material/js/pikaday.js') }}"></script>
+	<script src="{{ asset('bundles/dashboard/material/js/pikaday.jquery.js') }}"></script>
+	<script>
+		var picker = new Pikaday({
+			field: document.getElementById('birth_date'),
+			format: 'L'
+		});
+	</script>
 {% endblock javascripts%}
 
