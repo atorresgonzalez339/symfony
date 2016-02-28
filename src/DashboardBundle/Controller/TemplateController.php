@@ -6,6 +6,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+use APY\DataGridBundle\Grid\Source\Entity;
+use APY\DataGridBundle\Grid\Action\DeleteMassAction;
+
 class TemplateController extends Controller{
 
 	/**
@@ -13,16 +16,32 @@ class TemplateController extends Controller{
  	 */
   public function indexAction(Request $request){
 
-    $property_id = $request->get('property_id');
+		$source = new Entity('DashboardBundle:Template');
+		$grid = $this->get('grid');
+		$grid->setSource($source);
+		$grid->hideColumns(array('id'));
+		$grid->addMassAction(new DeleteMassAction());
+		$grid->setLimits($this->container->getParameter('admin.paginator.limits.config'));
 
-  	$templates = $this->getDoctrine()
-        			->getRepository('DashboardBundle:Template')
-        			->findAll();
+		if ($request->isXmlHttpRequest()) {
+			return $grid->getGridResponse('DashboardBundle:Templates:indexAjax.html.twig');
+		}
+		if ($grid->isReadyForRedirect() ) {
+			return new RedirectResponse($grid->getRouteUrl());
+		}
 
-		return $this->render('DashboardBundle:Templates:index.html.twig', array(
-       'templates' => $templates,
-       'property_id' => $property_id,
-   	));
+		return $grid->getGridResponse('DashboardBundle:Templates:index.html.twig');
+
+//    $property_id = $request->get('property_id');
+//
+//  	$templates = $this->getDoctrine()
+//        			->getRepository('DashboardBundle:Template')
+//        			->findAll();
+//
+//		return $this->render('DashboardBundle:Templates:index.html.twig', array(
+//       'templates' => $templates,
+//       'property_id' => $property_id,
+//   	));
   }
 
 }

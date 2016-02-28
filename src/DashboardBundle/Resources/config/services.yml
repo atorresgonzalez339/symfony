@@ -2,6 +2,7 @@ parameters:
     admin.paginator.limits.config: [10, 15, 20, 30, 50,100,200,300,500]
     grid.column.textext.class: DashboardBundle\Grid\RalfTextColumn
     grid.column.icon.class: DashboardBundle\Grid\RalfIconColumn
+    grid.column.photo.class: DashboardBundle\Grid\RalfPhotoColumn
 
 services:
   dashboard.utils.business:
@@ -33,5 +34,10 @@ services:
 
   grid.column.icon:
     class: %grid.column.icon.class%
+    tags:
+      - { name: grid.column.extension }
+
+  grid.column.photo:
+    class: %grid.column.photo.class%
     tags:
       - { name: grid.column.extension }

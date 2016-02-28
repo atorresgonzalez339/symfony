@@ -3,10 +3,12 @@
 namespace DashboardBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use APY\DataGridBundle\Grid\Mapping as GRID;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="templates")
+ * @GRID\Source(columns="id,name,image")
  */
 class Template
 {
@@ -19,6 +21,7 @@ class Template
 
     /**
      * @ORM\Column(type="string", nullable=false)
+     * @GRID\Column(field="name", type="text" , filterable=false, title="Name",size=25)
      */
     private $name;
 
@@ -29,6 +32,7 @@ class Template
 
     /**
      * @ORM\Column(type="string", nullable=false)
+     * @GRID\Column(field="image", type="photo" , filterable=false, title="Image",size=25)
      */
     private $image;
 

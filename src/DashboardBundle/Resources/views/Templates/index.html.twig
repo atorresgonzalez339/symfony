@@ -20,31 +20,22 @@
   </div>
   <div class="content">
 
+    {{ grid(grid, 'DashboardBundle:Grid:gridTemplateTempAjax.html.twig') }}
+
   <div class="row">
-    {% for template in templates %}
-    <div class="col m3">
-      <div class="card small ">
-        <div class="card-image card-image-templeate hoverable"><img src="{{asset('bundles/dashboard/images/templates/' ~ template.image)}}">
-          <div class="card-action card-action-templeate">
-            <a href="{{path('flyer_design', {'property_id':property_id, 'id_template':template.id})}}" class="azure-text">{{template.name}}</a>
-            <a href="#" class="azure-text right"><i class="fa fa-heart"></i></a>
-            <a href="#" class="azure-text right"><i class="fa fa-share-alt"></i></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  {% endfor %}
-  </div>
-  <div class="row">
-    <ul class="pagination center">
-        <li class="disabled"><a href="#!"><i class="mdi-navigation-chevron-left"></i></a></li>
-        <li class="active"><a href="#!">1</a></li>
-        <li class="waves-effect"><a href="#!">2</a></li>
-        <li class="waves-effect"><a href="#!">3</a></li>
-        <li class="waves-effect"><a href="#!">4</a></li>
-        <li class="waves-effect"><a href="#!">5</a></li>
-        <li class="waves-effect"><a href="#!"><i class="mdi-navigation-chevron-right"></i></a></li>
-    </ul>
+    {#{% for template in templates %}#}
+    {#<div class="col m3">#}
+      {#<div class="card small ">#}
+        {#<div class="card-image card-image-templeate hoverable"><img src="{{asset('bundles/dashboard/images/templates/' ~ template.image)}}">#}
+          {#<div class="card-action card-action-templeate">#}
+            {#<a href="{{path('flyer_design', {'property_id':property_id, 'id_template':template.id})}}" class="azure-text">{{template.name}}</a>#}
+            {#<a href="#" class="azure-text right"><i class="fa fa-heart"></i></a>#}
+            {#<a href="#" class="azure-text right"><i class="fa fa-share-alt"></i></a>#}
+          {#</div>#}
+        {#</div>#}
+      {#</div>#}
+    {#</div>#}
+  {#{% endfor %}#}
   </div>
 </div>
 {% endblock content %}

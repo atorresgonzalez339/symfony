@@ -4,6 +4,11 @@
 	<li><a href="#">Flyers</a></li>
 {% endblock breadcrumb%}
 
+{% block stylesheets_priority %}
+  {{ parent() }}
+	<link href="{{ asset('bundles/dashboard/material/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
+{% endblock stylesheets_priority %}
+
 {% set idFormGrid  = grid.hash %}
 
 {% block content %}
@@ -33,3 +38,8 @@
 		});
 	</script>
 {% endblock content %}
+
+{% block javascripts %}
+  {{ parent() }}
+<script src="{{ asset('bundles/dashboard/material/js/select2.full.min.js') }}"></script>
+{% endblock javascripts %}
