@@ -91,7 +91,16 @@ class PropertyController extends BaseController
   {
 
     $user = $this->getUser();
-    $property = new Property($user);
+    $property_id = $request->get('property_id');
+    if($property_id){
+      $property = $this->getDoctrine()
+        ->getRepository('DashboardBundle:Property')
+        ->find($property_id);
+    }
+    else{
+      $property = new Property($user);
+    }
+
     $property_form = $this->createForm(PropertyType::class, $property);
     $mls_id = $request->get('mls_id');
 

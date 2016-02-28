@@ -37,8 +37,8 @@ class PropertyType extends AbstractType
             ->add('state')
             ->add('country')
             ->add('postal_code')
-            ->add('lat')
-            ->add('lng')
+            ->add('lat', 'hidden')
+            ->add('lng', 'hidden')
             ->add('list_price')
         ;
     }
