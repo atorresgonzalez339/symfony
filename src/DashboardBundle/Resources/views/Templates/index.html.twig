@@ -4,6 +4,11 @@
 	<li><a href="#">Templates</a></li>
 {% endblock breadcrumb%}
 
+{% block stylesheets_priority %}
+  {{ parent() }}
+  <link href="{{ asset('bundles/dashboard/material/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
+{% endblock stylesheets_priority %}
+
 {% block content %}
 <style>
     .card .card-action.card-action-templeate{
@@ -18,11 +23,11 @@
   <div class="title">
       <h5> <i class="mdi mdi-av-web"></i> Templeates </h5>
   </div>
-  <div class="content">
+  <div class="content" style="padding-top: 5px;">
 
     {{ grid(grid, 'DashboardBundle:Grid:gridTemplateTempAjax.html.twig') }}
 
-  <div class="row">
+  {#<div class="row">#}
     {#{% for template in templates %}#}
     {#<div class="col m3">#}
       {#<div class="card small ">#}
@@ -36,6 +41,11 @@
       {#</div>#}
     {#</div>#}
   {#{% endfor %}#}
-  </div>
+  {#</div>#}
 </div>
 {% endblock content %}
+
+{% block javascripts %}
+  {{ parent() }}
+	<script src="{{ asset('bundles/dashboard/material/js/select2.full.min.js') }}"></script>
+{% endblock javascripts %}

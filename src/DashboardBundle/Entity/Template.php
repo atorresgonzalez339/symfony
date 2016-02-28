@@ -21,7 +21,7 @@ class Template
 
     /**
      * @ORM\Column(type="string", nullable=false)
-     * @GRID\Column(field="name", type="text" , filterable=false, title="Name",size=25)
+     * @GRID\Column(field="name", type="text" , filterable=true, title="Name",size=25)
      */
     private $name;
 

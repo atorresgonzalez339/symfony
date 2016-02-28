@@ -93,12 +93,65 @@
                      </div>
                  </div>
                 <div id="genericContainerTable">
-                    <table style="position: relative;text-align: left" id="itemList" class="table table-hover">
-                       {% if grid.isTitleSectionVisible %}
-                           {{ grid_titles(grid) }}
-                       {% endif %}
-                       {{ grid_rows(grid) }}
-                   </table>
+                  <div class="row">
+                    {% for row in grid.rows %}
+                      <div class="col m3">
+                        <div class="card small ">
+                          <div class="card-image card-image-templeate hoverable">
+                            <img src="{{asset('bundles/dashboard/images/templates/' ~ row.entity.image)}}">
+                            <div class="card-action card-action-templeate">
+                              {#<a href="{{path('flyer_design', {'property_id':property_id, 'id_template':template.id})}}" class="azure-text">{{template.name}}</a>#}
+
+                              <a href="#" class="azure-text">{{row.entity.name }}</a>
+                              <a href="#" class="azure-text right"><i class="fa fa-heart"></i></a>
+                              <a href="#" class="azure-text right"><i class="fa fa-share-alt"></i></a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    {% endfor %}
+                  </div>
+
+                    {#{% for row in grid.rows %}#}
+                    {#{% set last_row = loop.last %}#}
+                    {#{% spaceless %}#}
+                    {#<tr id="avsys-grid-tr-{{row.getPrimaryKeyValue.id}}" trInputId ="{{row.primaryFieldValue }}" {% if row.color != '' %} style="background-color:{{ row.color }};"{% endif %} class="avsys-grid-tr grid-row-cells {{ cycle(['odd', 'even'], loop.index) }}{% if row.class != '' %} {{ row.class }}{% endif %}">#}
+                    {#{% for column in grid.columns %}#}
+                    {#{% if column.visible(grid.isReadyForExport) %}#}
+                    {#<td class="{% if column.class is defined %}{{column.class}}{%endif%}  grid-column-{{ column.renderBlockId }} align-{%if column.type == 'massaction' %}left{%else%}{{ column.align }}{% endif %}{% if loop.last %} last-column{% endif %}{% if last_row %} last-row{% endif %}">#}
+                    {#{{ grid_cell(column, row, grid)|raw }}#}
+                    {#</td>#}
+                    {#{% endif %}#}
+                    {#{% endfor %}#}
+                    {#{% endspaceless %}#}
+                    {#<script>#}
+                    {#$("#avsys-grid-tr-{{row.getPrimaryKeyValue.id}}").click(function(evt) {#}
+                    {#var self = $(this)[0];#}
+                    {##}
+                    {#if (evt.ctrlKey){#}
+                    {#if(arrayIdSelected.indexOf(self.id) ==-1){#}
+                    {#arrayIdSelected.push(self.id);#}
+                    {#}#}
+                    {#}else{#}
+                    {#arrayIdSelected = [];#}
+                    {#arrayIdSelected.push(self.id);#}
+                    {#}#}
+                    {##}
+                    {#onSelectedRow(self);#}
+                    {#});#}
+                    {#</script>      #}
+                    {#</tr>#}
+                    {#{% else %}#}
+                    {#{{ grid_no_result(grid) }}#}
+                    {#{% endfor %}#}
+
+
+                    {#<table style="position: relative;text-align: left" id="itemList" class="table table-hover">#}
+                       {#{% if grid.isTitleSectionVisible %}#}
+                           {#{{ grid_titles(grid) }}#}
+                       {#{% endif %}#}
+                       {#{{ grid_rows(grid) }}#}
+                   {#</table>#}
                     
 
                     {# Aqui se genera el paginado #}
@@ -233,20 +286,32 @@
 {% endblock grid_titles %}#}
 {# -------------------------------------------------- grid_filters --------------------------------------------------- #}
 {% block grid_filters %}
-    <ul class="collapsible" data-collapsible="accordion">
-        <li {% if grid.isFiltered %} class="active" {% endif %}>
-            <div class="align-left collapsible-header {% if grid.isFiltered %} active {% endif %}"><i class="mdi-content-filter-list"></i>{{'Filters'|trans}}</div>
-            <div class="collapsible-body" style="background-color: #FFFFFF">
+  {% for column in grid.columns %}
+    {% if loop.index0!=0 %}
+      {% if column.visible(grid.isReadyForExport) and column.filterable%}
+        <th {% if loop.last %} class="last-column"{%else%}class="col l3 column-{{ column.title }}"{% endif %}{% if(column.size > -1) %} style="width:" {% endif %}>
+          {% if column.filterable%}
+            {{ grid_filter(column, grid)|raw }}
+          {% endif %}
+        </th>
+      {% endif %}
+    {% endif %}
+  {% endfor %}
 
-                {% for column in grid.columns %}
-                <div class="row">
-                    {% for i in 0..3 %}
-                    <div class="col s3">
-                        dsds- {{ loop.index0 }}
-                    </div>
-                    {% endfor %}
-                </div>
-                {% endfor %}
+    {#<ul class="collapsible" data-collapsible="accordion">#}
+        {#<li {% if grid.isFiltered %} class="active" {% endif %}>#}
+            {#<div class="align-left collapsible-header {% if grid.isFiltered %} active {% endif %}"><i class="mdi-content-filter-list"></i>{{'Filters'|trans}}</div>#}
+            {#<div class="collapsible-body" style="background-color: #FFFFFF">#}
+
+                {#{% for column in grid.columns %}#}
+                {#<div class="row">#}
+                    {#{% for i in 0..3 %}#}
+                    {#<div class="col s3">#}
+                        {#dsds- {{ loop.index0 }}#}
+                    {#</div>#}
+                    {#{% endfor %}#}
+                {#</div>#}
+                {#{% endfor %}#}
 
                 {#<table>#}
                     {#<tr class="grid-row-filters row">#}
@@ -263,9 +328,9 @@
                         {#{% endfor %}#}
                     {#</tr>#}
                 {#</table>#}
-            </div>
-        </li>
-    </ul>
+            {#</div>#}
+        {#</li>#}
+    {#</ul>#}
             
 {% endblock grid_filters %}
 
@@ -302,19 +367,19 @@
 
             <span class="grid-filter-input-query">
                 <table class="">   
-                    <tr >
-                        <div style="margin-left: 20px;">
-                            {{ block('grid_column_operator')}}
-                        </div> 
-                    </tr>
+                    {#<tr >#}
+                        {#<div style="margin-left: 20px;">#}
+                            {#{{ block('grid_column_operator')}}#}
+                        {#</div> #}
+                    {#</tr>#}
                     <tr>
                         <div class="form-search" style="margin-left: 20px;">
                             <div id="filter-bar" class="btn-toolbar">
-                                <div class="filter-search btn-group pull-left input-append">
+                                <div class="filter-search btn-group pull-left input-append" style="margin-left: -20px;">
                                     <div class="span6">
                                         <div class="input-group input-group-sm">
                                             <div class="input-group input-group-sm">
-                                                <input style="margin-top: 5px !important;width: 175px" type="{{ column.inputType }}" value="{{ from }}" class="input-small  search-query input-small grid-filter-input-query-from " placeholder="{{ column.title|trans }}" name="{{ grid.hash }}[{{ column.id }}][from]" id="{{ grid.hash }}__{{ column.id }}__query__from" {% if submitOnChange is sameas(true) %}onkeypress="return {{ grid.hash }}_submitForm(event, this.form);"{% endif%} {{ ( op == isNullOperator or op == isNotNullOperator ) ? 'style="display: none;" disabled="disabled"' : '' }} />
+                                                <input style="margin-top: 5px !important;width: 280px" type="{{ column.inputType }}" value="{{ from }}" class="input-small  search-query input-small grid-filter-input-query-from " placeholder="{{ column.title|trans }}" name="{{ grid.hash }}[{{ column.id }}][from]" id="{{ grid.hash }}__{{ column.id }}__query__from" {% if submitOnChange is sameas(true) %}onkeypress="return {{ grid.hash }}_submitForm(event, this.form);"{% endif%} {{ ( op == isNullOperator or op == isNotNullOperator ) ? 'style="display: none;" disabled="disabled"' : '' }} />
                                                 <span class="input-group-btn">
                                                     <button style="padding-left: 11px;padding-right: 10px;margin-left: -4px;margin-top: -3px;border-top-left-radius: 0px;border-bottom-left-radius: 0px;min-height: 37px;" type="submit" onclick="return {{ grid.hash }}_submitForm(event, this.form);" class="btn btn-primary tooltipped" data-position="bottom" data-delay="50" data-tooltip="{{ 'Search'|trans }}" ><i class="mdi-action-search"></i> {#{{'SEARCH'|trans}}#} </button>
                                                 </span>
@@ -356,91 +421,91 @@
 {% endblock grid_search %}
 
 {# ---------------------------------------------------- grid_rows ---------------------------------------------------- #}
-    {% block grid_rows %}
-    
-    <tbody  id="tbodyRows">
-    {% for row in grid.rows %}
-    {% set last_row = loop.last %}
-    {% spaceless %}
-        <tr id="avsys-grid-tr-{{row.getPrimaryKeyValue.id}}" trInputId ="{{row.primaryFieldValue }}" {% if row.color != '' %} style="background-color:{{ row.color }};"{% endif %} class="avsys-grid-tr grid-row-cells {{ cycle(['odd', 'even'], loop.index) }}{% if row.class != '' %} {{ row.class }}{% endif %}">
-        {% for column in grid.columns %}
-            {% if column.visible(grid.isReadyForExport) %}
-            <td class="{% if column.class is defined %}{{column.class}}{%endif%}  grid-column-{{ column.renderBlockId }} align-{%if column.type == 'massaction' %}left{%else%}{{ column.align }}{% endif %}{% if loop.last %} last-column{% endif %}{% if last_row %} last-row{% endif %}">
-                    {{ grid_cell(column, row, grid)|raw }}
-                </td>
-            {% endif %}
-        {% endfor %}
-    {% endspaceless %}
-           <script>
-        $("#avsys-grid-tr-{{row.getPrimaryKeyValue.id}}").click(function(evt) {
-        var self = $(this)[0];
-        
-        if (evt.ctrlKey){
-            if(arrayIdSelected.indexOf(self.id) ==-1){
-                arrayIdSelected.push(self.id);
-            }
-        }else{
-          arrayIdSelected = [];
-          arrayIdSelected.push(self.id);
-        }
-       
-        onSelectedRow(self);
-    });
-    </script>      
-    </tr>
-    {% else %}
-        {{ grid_no_result(grid) }}
-    {% endfor %}
-    </tbody>
-    
-    <script>
-    
-    arrayIdSelected = Array();
+    {#AKIII#}
+    {#{% block grid_rows %}#}
+    {##}
+    {#<tbody  id="tbodyRows">#}
+    {#{% for row in grid.rows %}#}
+    {#{% set last_row = loop.last %}#}
+    {#{% spaceless %}#}
+        {#<tr id="avsys-grid-tr-{{row.getPrimaryKeyValue.id}}" trInputId ="{{row.primaryFieldValue }}" {% if row.color != '' %} style="background-color:{{ row.color }};"{% endif %} class="avsys-grid-tr grid-row-cells {{ cycle(['odd', 'even'], loop.index) }}{% if row.class != '' %} {{ row.class }}{% endif %}">#}
+        {#{% for column in grid.columns %}#}
+            {#{% if column.visible(grid.isReadyForExport) %}#}
+            {#<td class="{% if column.class is defined %}{{column.class}}{%endif%}  grid-column-{{ column.renderBlockId }} align-{%if column.type == 'massaction' %}left{%else%}{{ column.align }}{% endif %}{% if loop.last %} last-column{% endif %}{% if last_row %} last-row{% endif %}">#}
+                    {#{{ grid_cell(column, row, grid)|raw }}#}
+                {#</td>#}
+            {#{% endif %}#}
+        {#{% endfor %}#}
+    {#{% endspaceless %}#}
+           {#<script>#}
+        {#$("#avsys-grid-tr-{{row.getPrimaryKeyValue.id}}").click(function(evt) {#}
+        {#var self = $(this)[0];#}
+        {##}
+        {#if (evt.ctrlKey){#}
+            {#if(arrayIdSelected.indexOf(self.id) ==-1){#}
+                {#arrayIdSelected.push(self.id);#}
+            {#}#}
+        {#}else{#}
+          {#arrayIdSelected = [];#}
+          {#arrayIdSelected.push(self.id);#}
+        {#}#}
+       {##}
+        {#onSelectedRow(self);#}
+    {#});#}
+    {#</script>      #}
+    {#</tr>#}
+    {#{% else %}#}
+        {#{{ grid_no_result(grid) }}#}
+    {#{% endfor %}#}
+    {#</tbody>#}
+    {#<script>#}
+    {##}
+    {#arrayIdSelected = Array();#}
 
-    function onSelectedRow(self){
+    {#function onSelectedRow(self){#}
 
-            //Clear Selected
-            var trs = $( "#tbodyRows" ).find('.avsys-grid-tr');
-            
-            for(var i=0; i<trs.length; i++){
-                $('#'+trs[i].id).attr('style','background-color:#FAFAFA;cursor: pointer;color:#333644');
-                
-                var trSelected = $('#'+trs[i].id);
-                
-                //$("#checkbox-" + trSelected.attr('trInputId')).checked = false;
-                var id = "checkbox-" + trSelected.attr('trInputId');
-                var check = document.getElementById(id);
-                if (check.type == 'checkbox') {
-                    check.checked = false;
-                    $('label[for="'+id+'"]').removeClass('myclase1');
-                }
-                
-                ///alert("#checked-" + trSelected.attr('trInputId'))
+            {#//Clear Selected#}
+            {#var trs = $( "#tbodyRows" ).find('.avsys-grid-tr');#}
+            {##}
+            {#for(var i=0; i<trs.length; i++){#}
+                {#$('#'+trs[i].id).attr('style','background-color:#FAFAFA;cursor: pointer;color:#333644');#}
+                {##}
+                {#var trSelected = $('#'+trs[i].id);#}
+                {##}
+                {#//$("#checkbox-" + trSelected.attr('trInputId')).checked = false;#}
+                {#var id = "checkbox-" + trSelected.attr('trInputId');#}
+                {#var check = document.getElementById(id);#}
+                {#if (check.type == 'checkbox') {#}
+                    {#check.checked = false;#}
+                    {#$('label[for="'+id+'"]').removeClass('myclase1');#}
+                {#}#}
+                {##}
+                {#///alert("#checked-" + trSelected.attr('trInputId'))#}
 {#                console.info( '"'+id+'"')#}
 {#                console.info( check)#}
-            }
-            
-            //Selected Items
-            for(var i=0; i<arrayIdSelected.length; i++){
-                var trSelected = $('#'+arrayIdSelected[i]);
-                trSelected.attr('style','background-color:#4285f4;cursor: pointer;color:#FFFFFF');
-                
-                var id = "checkbox-" + trSelected.attr('trInputId');
-                var check = document.getElementById(id);
-                if (check.type == 'checkbox') {
-                    check.checked = true;
-                    $('label[for="'+id+'"]').addClass('myclase1');
-                }
-                //$("#checked-" + trSelected.attr('trInputId')).checked = true;
-            }
-{#
-            console.info(trs);
-            console.info(arrayIdSelected);#}
-        }
-    
-</script>
+            {#}#}
+            {##}
+            {#//Selected Items#}
+            {#for(var i=0; i<arrayIdSelected.length; i++){#}
+                {#var trSelected = $('#'+arrayIdSelected[i]);#}
+                {#trSelected.attr('style','background-color:#4285f4;cursor: pointer;color:#FFFFFF');#}
+                {##}
+                {#var id = "checkbox-" + trSelected.attr('trInputId');#}
+                {#var check = document.getElementById(id);#}
+                {#if (check.type == 'checkbox') {#}
+                    {#check.checked = true;#}
+                    {#$('label[for="'+id+'"]').addClass('myclase1');#}
+                {#}#}
+                {#//$("#checked-" + trSelected.attr('trInputId')).checked = true;#}
+            {#}#}
+{##}
+            {#console.info(trs);#}
+            {#console.info(arrayIdSelected);#}
+        {#}#}
+    {##}
+{#</script>#}
 
-{% endblock grid_rows %}
+{#{% endblock grid_rows %}#}
 {# ---------------------------------------------------- grid_pager -------------------------------------------------- #}
 {% block grid_pager %}
     {% if pagerfanta %}

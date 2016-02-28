@@ -4,6 +4,7 @@ namespace DashboardBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 use APY\DataGridBundle\Grid\Source\Entity;
@@ -21,7 +22,7 @@ class TemplateController extends Controller{
 		$grid->setSource($source);
 		$grid->hideColumns(array('id'));
 		$grid->addMassAction(new DeleteMassAction());
-		$grid->setLimits($this->container->getParameter('admin.paginator.limits.config'));
+		$grid->setLimits($this->container->getParameter('admin.paginator.limits.template.config'));
 
 		if ($request->isXmlHttpRequest()) {
 			return $grid->getGridResponse('DashboardBundle:Templates:indexAjax.html.twig');
