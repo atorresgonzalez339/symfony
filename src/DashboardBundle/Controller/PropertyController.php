@@ -118,6 +118,26 @@ class PropertyController extends BaseController
   }
 
   /**
+   * @Route("/properties/remove", name="properties_remove")
+   */
+  public function removeAction(Request $request)
+  {
+    $property_id = $this->getFiertSelectetGridItem();
+
+    $property = $this->getDoctrine()
+      ->getRepository('DashboardBundle:Property')
+      ->find($property_id);
+
+    $this->getBusiness()->getEM()->remove($property);
+    $this->getBusiness()->getEM()->flush();
+
+    $this->addFlash('success', 'Property deleted');
+
+    return $this->redirect($this->generateUrl('properties_index'));
+
+  }
+
+  /**
    * @Route("/properties/mls", name="properties_mls")
    */
   public function mlsAction(Request $request)

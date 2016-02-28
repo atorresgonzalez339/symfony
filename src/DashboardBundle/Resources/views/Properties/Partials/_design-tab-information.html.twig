@@ -16,11 +16,11 @@
         <div class="content" style="padding-top: 5px;padding-bottom: 5px;">
           <div class="input-field">
             {{ form_widget(property_form.name) }}
-            <label for="name" class="">Property Name</label>
+            <label for="property_name" class="">Property Name</label>
           </div>
           <div class="input-field">
             {{ form_widget(property_form.description, {'attr': {'class':'materialize-textarea'}}) }}
-            <label for="description">Property Description</label>
+            <label for="property_description">Property Description</label>
           </div>
         </div>
       </div>
@@ -71,7 +71,7 @@
                 {#</select>#}
               </div>
               <div class="input-field">
-                {{ form_widget(property_form.address) }}
+                {{ form_widget(property_form.address, {'attr':{'placeholder':''}}) }}
                 <label for="property_address" class="">Address</label>
               </div>
               <div class="input-field">
@@ -158,13 +158,14 @@
   $(document).ready(function(){
 
     if ($('#map-canvas').length != 0) {
-      var lat = {{ property.lat }};
-      var lng = {{ property.lng }};
+      var lat = {{ property.lat ? property.lat : '25.7823072' }};
+      var lng = {{ property.lng ? property.lng : '-80.3011208' }};
       var map_input_id = 'property_address';
       var map_input_lat_id = 'property_lat';
       var map_input_lng_id = 'property_lng';
+      var show_marker = '{{ property.lat and property.lng ? 'true'}}';
       google.maps.event.addDomListener(window, 'load', initialize(lat, lng,
-              map_input_id, map_input_lat_id, map_input_lng_id));
+              map_input_id, map_input_lat_id, map_input_lng_id, show_marker));
     }
 
     var componentForm = {
