@@ -90,7 +90,6 @@ class PropertyController extends BaseController
   public function saveAction(Request $request)
   {
 
-    $user = $this->getUser();
     $property_id = $request->get('property_id');
     if($property_id){
       $property = $this->getDoctrine()

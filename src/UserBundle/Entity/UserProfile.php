@@ -6,7 +6,7 @@ use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 use UserBundle\DBAL\Types\GenderType;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="UserBundle\Entity\Repository\UserProfileRepository")
  * @ORM\Table(name="user_profile")
  */
 class UserProfile
