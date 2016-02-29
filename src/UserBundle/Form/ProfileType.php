@@ -22,10 +22,12 @@ class ProfileType extends AbstractType
                 'choices' => GenderType::getChoices(),
                 'attr' => array('class' => 'select2 validate'),
                 'empty_data' => null,
-                'required'    => false,
+                'required'    => true,
                 'placeholder' => 'Select Gender',
             ))
             ->add('birth_date',null,array(
+                'input'  => 'datetime',
+                'format' => 'MM/dd/yyyy',
                 'widget' => 'single_text',
                 'attr' => array(
                     'type'=>'text',
