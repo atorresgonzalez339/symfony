@@ -38,8 +38,8 @@ class Functions extends \Twig_Extension {
     }
 
     public function getParamByKeyRequest($key) {
-//         $this->request->attributes->set('propert_id',11);
-        return $this->request->get($key);
+        if($this->request->attributes->has($key)) return $this->request->attributes->get($key);
+        return null;
     }
 
     public function parseInt($cadena) {
