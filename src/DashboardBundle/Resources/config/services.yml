@@ -42,3 +42,4 @@ services:
     class: %grid.column.photo.class%
     tags:
       - { name: grid.column.extension }
+

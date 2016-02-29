@@ -9,11 +9,16 @@ class Functions extends \Twig_Extension {
     private $twig;
     private $securityContext;
     protected $container;
+    protected $request;
 
     function __construct($twig, $securityContext, $container) {
         $this->twig = $twig;
         $this->securityContext = $securityContext;
         $this->container = $container;
+
+        if ($this->container->isScopeActive('request')) {
+            $this->request = $this->container->get('request');
+        }
     }
 
     public function getName() {
@@ -22,7 +27,7 @@ class Functions extends \Twig_Extension {
 
     public function getFunctions() {
         return array(
-            'main_menu' => new \Twig_Function_Method($this, 'dd'),
+            'request' => new \Twig_Function_Method($this, 'getParamByKeyRequest'),
         );
     }
 
@@ -31,7 +36,12 @@ class Functions extends \Twig_Extension {
             'parseInt' => new \Twig_Filter_Method($this, 'parseInt'),
         );
     }
-    
+
+    public function getParamByKeyRequest($key) {
+//         $this->request->attributes->set('propert_id',11);
+        return $this->request->get($key);
+    }
+
     public function parseInt($cadena) {
         return (int) $cadena;
     }

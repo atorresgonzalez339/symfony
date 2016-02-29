@@ -23,26 +23,9 @@ class TemplateController extends Controller{
 		$grid->hideColumns(array('id'));
 		$grid->addMassAction(new DeleteMassAction());
 		$grid->setLimits($this->container->getParameter('admin.paginator.limits.template.config'));
-
-		if ($request->isXmlHttpRequest()) {
-			return $grid->getGridResponse('DashboardBundle:Templates:indexAjax.html.twig');
-		}
-		if ($grid->isReadyForRedirect() ) {
-			return new RedirectResponse($grid->getRouteUrl());
-		}
-
+		if ($request->isXmlHttpRequest())return $grid->getGridResponse('DashboardBundle:Templates:indexAjax.html.twig');
+		if ($grid->isReadyForRedirect() )  return new RedirectResponse($grid->getRouteUrl());
 		return $grid->getGridResponse('DashboardBundle:Templates:index.html.twig');
-
-//    $property_id = $request->get('property_id');
-//
-//  	$templates = $this->getDoctrine()
-//        			->getRepository('DashboardBundle:Template')
-//        			->findAll();
-//
-//		return $this->render('DashboardBundle:Templates:index.html.twig', array(
-//       'templates' => $templates,
-//       'property_id' => $property_id,
-//   	));
   }
 
 }

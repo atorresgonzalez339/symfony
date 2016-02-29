@@ -94,15 +94,16 @@
                  </div>
                 <div id="genericContainerTable">
                   <div class="row">
+                    {% set property_id = request('propert_id') %}
                     {% for row in grid.rows %}
                       <div class="col m3">
                         <div class="card small ">
                           <div class="card-image card-image-templeate hoverable">
-                            <img src="{{asset('bundles/dashboard/images/templates/' ~ row.entity.image)}}">
+                            <a href="{{path('flyer_design', {'property_id':property_id, 'id_template':row.entity.id})}}" >
+                              <img src="{{asset('bundles/dashboard/images/templates/' ~ row.entity.image)}}">
+                            </a>
                             <div class="card-action card-action-templeate">
-                              {#<a href="{{path('flyer_design', {'property_id':property_id, 'id_template':template.id})}}" class="azure-text">{{template.name}}</a>#}
-
-                              <a href="#" class="azure-text">{{row.entity.name }}</a>
+                              <a href="{{path('flyer_design', {'property_id':property_id, 'id_template':row.entity.id})}}" class="azure-text">{{row.entity.name}}</a>
                               <a href="#" class="azure-text right"><i class="fa fa-heart"></i></a>
                               <a href="#" class="azure-text right"><i class="fa fa-share-alt"></i></a>
                             </div>
