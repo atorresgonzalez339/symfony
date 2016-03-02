@@ -29,7 +29,7 @@ class ProfileType extends AbstractType
                 'attr' => array(
                     'type'=>'text',
                 ),
-                'required' => false,
+                'required' => true,
             ))
             ->add('cell_phone')
             ->add('office_phone')
