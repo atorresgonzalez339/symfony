@@ -7,6 +7,15 @@
 {% set idFormGrid  = grid.hash %}
 
 {% block content %}
+	<style>
+		.card .card-action.card-action-templeate{
+			border-top: 1px solid rgba(160, 160, 160, .2);
+			padding: 10px 0px 10px 10px;
+		}
+		.card.small .card-image.card-image-templeate {
+			height: 100%;
+		}
+	</style>
 	<div class="card">
 		<div class="title">
 			<h5> My Properties </h5>
@@ -27,7 +36,7 @@
 			</div>
 		</div>
 		<div class="content">
-			{{ grid(grid, 'DashboardBundle:Grid:gridTemplateAjax.html.twig') }}
+			{{ grid(grid, 'DashboardBundle:Grid:gridTemplatePropertiesAjax.html.twig') }}
 		</div>
 	</div>
 
