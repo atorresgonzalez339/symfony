@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints\DateTime;
 use UserBundle\Entity\UserProfile;
+use UserBundle\Form\AccountType;
 use UserBundle\Form\ProfileType;
 use CommonBundle\Controller\BaseController;
 
@@ -34,10 +35,12 @@ class ProfileController extends BaseController
       }
 
       $profile_form = $this->createForm(ProfileType::class, $profile);
+      $account_form = $this->createForm(AccountType::class, $user);
 
       return $this->render('UserBundle:Profile:index.html.twig', array(
         'profile' => $profile,
-        'profile_form' => $profile_form->createView()
+        'profile_form' => $profile_form->createView(),
+        'account_form' => $account_form->createView()
       ));
     }
 
@@ -69,5 +72,25 @@ class ProfileController extends BaseController
       $this->addFlash('error', 'Invalid data');
       return $this->redirect($this->generateUrl('profile_index'));
     }
+
+  /**
+   * @Route("/profile/save_account", name="profile_save_account")
+   */
+  public function saveAccountAction(Request $request){
+    $user = $this->getUser();
+
+    $account_form = $this->createForm(AccountType::class, $user);
+
+    $account_form->handleRequest($request);
+
+    if ($account_form->isValid()) {
+      $this->getBusiness()->saveAccount($user);
+      $this->addFlash('success', 'Account updated');
+      return $this->redirect($this->generateUrl('profile_index'));
+    }
+
+    $this->addFlash('error', 'Invalid data');
+    return $this->redirect($this->generateUrl('profile_index'));
+  }
 
 }

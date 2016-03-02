@@ -1,13 +1,23 @@
 <div id="test2" class="col s12">
   <div id="edit-profile-container" style="display:block">
     <div class="row" style="padding-left: 20px;padding-right: 40%">
-
+      {{ form_start(account_form, {'action': path('profile_save_account'), 'method': 'POST', 'id':'profile_account_form'}) }}
       <div class="row" style="margin-top: 0rem;">
         <div class="col m12" style="padding-bottom: 0px;">
           <div class="input-field align-left">
             <i class="mdi mdi-social-person prefix"></i>
-            <input type="text" id="username" readonly="readonly" value="malinda.h@gmail.com">
-            <label for="username" class="">Username</label>
+            {{ form_widget(account_form.username, {'attr': {'readonly':true}}) }}
+            <label for="account_username" class="">Username</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: 0rem;">
+        <div class="col m12" style="padding-bottom: 0px;">
+          <div class="input-field align-left">
+            <i class="mdi mdi-communication-email prefix"></i>
+            {{ form_widget(account_form.email, {'attr': {'class':'validate', 'readonly':true}}) }}
+            <label for="account_email" class="">Email</label>
           </div>
         </div>
       </div>
@@ -16,8 +26,8 @@
         <div class="col m12" style="padding-bottom: 0px;">
           <div class="input-field align-left">
             <i class="mdi mdi-action-lock prefix"></i>
-            <input type="password" id="password" class="validate">
-            <label for="password" class="">Password</label>
+            {{ form_widget(account_form.password, {'attr': {'class':'validate'}}) }}
+            <label for="account_password" class="">Password</label>
           </div>
         </div>
       </div>
@@ -26,7 +36,7 @@
         <div class="col m12" style="padding-bottom: 0px;">
           <div class="input-field">
             <i class="mdi mdi-action-lock prefix"></i>
-            <input type="password" id="rpassword" required="required" class="validate">
+            <input type="password" id="rpassword" name="rpassword" required="required" class="validate">
             <label for="rpassword" class="">Repeate Password</label>
           </div>
         </div>
@@ -38,6 +48,7 @@
           <a id="btn-account-cancel" class="waves-effect waves-light btn btn-small red">CANCEL</a>
         </div>
       </div>
+      {{ form_end(account_form) }}
     </div>
   </div>
 

@@ -2,3 +2,4 @@ services:
     user.profile.business:
         class: UserBundle\Business\ProfileBusiness
         parent: common.base.business
+        arguments: ['@service_container']
