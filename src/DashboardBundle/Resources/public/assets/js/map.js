@@ -29,7 +29,11 @@ function initialize(lat, lng, map_input_id, map_input_lat_id, map_input_lng_id, 
 
     google.maps.event.addListener(map_autocomplete, 'place_changed', function () {
         infowindow.close();
-        marker.setVisible(false);
+
+        if(marker){
+            marker.setVisible(false);
+        }
+
         var place = map_autocomplete.getPlace();
         if (!place.geometry) {
             return;
