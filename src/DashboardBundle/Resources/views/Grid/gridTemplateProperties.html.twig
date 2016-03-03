@@ -105,12 +105,18 @@
           <div class="row">
             {% for row in grid.rows %}
               <div class="col m3">
+                <div class="hoverable">
                 <div class="card of-h">
-                  <div class="card-image waves-effect waves-block waves-light hoverable card-image-templeate">
+                  <div class="card-image waves-effect waves-block waves-light card-image-templeate">
                     <img class="activator" src="{{ asset('bundles/dashboard/properties/1.jpg') }}">
                   </div>
                   <div class="content" style=" padding-top: 10px; padding-bottom: 10px;">
-                    <span class="card-title activator grey-text text-darken-4" style="font-size: 20px;">{{ row.entity.name }}
+                    <span class="card-title activator grey-text text-darken-4" style="font-size: 20px;">
+                      <p style="position: absolute;top: 178px; margin-top: 5px; margin-bottom: 5px;left: 10px;">
+                        <input type="checkbox" class="filled-in" id="checkbox-{{ row.entity.id }}" />
+                        <label for="checkbox-{{ row.entity.id }}" style="font-size: 18px;color: #424242">{{ row.entity.name | slice(0, 15) }}</label>
+                      </p>
+
                       <i class="mdi-navigation-more-vert right"></i></span>
                   </div>
                   <div class="card-action card-action-templeate" style="font-size: 12px;background-color: #F0F0EE;padding-bottom: 0px;">
@@ -130,6 +136,8 @@
                   <div class="card-reveal">
                     <span class="card-title grey-text text-darken-4">{{ row.entity.name }} <i class="mdi-content-clear right"></i></span>
                     <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                  </div>
+
                   </div>
                 </div>
               </div>
