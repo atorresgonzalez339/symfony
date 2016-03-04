@@ -56,6 +56,7 @@ class PropertyController extends BaseController
 
     if($request->isMethod('POST')){
       $property_id = $this->getFiertSelectetGridItem();
+      die('id - '.$property_id);
     }
 
     //Design a property from MLS
