@@ -93,13 +93,26 @@
           </div>
         </div>
         <div id="genericContainerTable">
+          <script>
+//            $('.slider').slider({full_width: true,height:200px});
+          </script>
           <style>
-            .card .card-action.card-action-templeate{
-              border-top: 1px solid rgba(160, 160, 160, .2);
-              padding: 10px 0px 10px 10px;
+            .slider {
+              height: 201px !important;
             }
-            .card.small .card-image.card-image-templeate {
-              height: 100%;
+            .slider .slides{
+              height: 200px !important;
+            }
+            .slider .indicators .indicator-item.active {
+              background-color: #42A5F5;
+            }
+            .slider .indicators .indicator-item {
+              height: 10px;
+              width: 10px;
+              margin: 0 7px;
+            }
+            .slider .indicators {
+              z-index: 5;
             }
           </style>
           <div class="row">
@@ -108,15 +121,30 @@
                 <div class="hoverable">
                 <div class="card of-h">
                   <div class="card-image waves-effect waves-block waves-light card-image-templeate">
-                    <img class="activator" src="{{ asset('bundles/dashboard/properties/1.jpg') }}">
+                    <div class="slider" >
+                      <ul class="slides">
+                        <li>
+                          <img src="{{ asset('bundles/dashboard/properties/1.jpg') }}">
+                        </li>
+                        <li>
+                          <img src="{{ asset('bundles/dashboard/properties/2.jpg') }}">
+                        </li>
+                        <li>
+                          <img src="{{ asset('bundles/dashboard/properties/3.jpg') }}">
+                        </li>
+                        <li>
+                          <img src="{{ asset('bundles/dashboard/properties/4.jpg') }}">
+                        </li>
+                      </ul>
+                    </div>
+                    {#<img class="activator" src="{{ asset('bundles/dashboard/properties/1.jpg') }}">#}
                   </div>
                   <div class="content" style=" padding-top: 10px; padding-bottom: 10px;">
                     <span class="card-title activator grey-text text-darken-4" style="font-size: 20px;">
-                      <p style="position: absolute;top: 178px; margin-top: 5px; margin-bottom: 5px;left: 10px;">
-                        <input type="checkbox" class="filled-in" id="checkbox-{{ row.entity.id }}" />
+                      <p style="position: absolute;top: 207px; margin-top: 5px; margin-bottom: 5px;left: 10px;">
+                        <input type="checkbox" class="filled-in" id="checkbox-{{ row.entity.id }}" name="{{ grid.hash }}[__action][{{ row.primaryFieldValue }}]" value="{{ row.primaryFieldValue }}"/>
                         <label for="checkbox-{{ row.entity.id }}" style="font-size: 18px;color: #424242">{{ row.entity.name | slice(0, 15) }}</label>
                       </p>
-
                       <i class="mdi-navigation-more-vert right"></i></span>
                   </div>
                   <div class="card-action card-action-templeate" style="font-size: 12px;background-color: #F0F0EE;padding-bottom: 0px;">
@@ -141,18 +169,15 @@
                   </div>
                 </div>
               </div>
-
             {% endfor %}
           </div>
 
-          {##}
           {#<table style="position: relative;text-align: left" id="itemList" class="table table-hover">#}
           {#{% if grid.isTitleSectionVisible %}#}
           {#{{ grid_titles(grid) }}#}
           {#{% endif %}#}
           {#{{ grid_rows(grid) }}#}
           {#</table>#}
-
 
           {# Aqui se genera el paginado #}
           <div class="grid_footer">
