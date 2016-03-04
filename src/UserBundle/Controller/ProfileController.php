@@ -83,13 +83,23 @@ class ProfileController extends BaseController
 
     $account_form->handleRequest($request);
 
+
     if ($account_form->isValid()) {
-      $this->getBusiness()->saveAccount($user);
-      $this->addFlash('success', 'Account updated');
-      return $this->redirect($this->generateUrl('profile_index'));
+
+      $rpassword = $request->get('rpassword');
+
+      if($rpassword != $user->getPlainPassword()){
+        $this->addFlash('error', 'Passwords does not match');
+      }
+      else{
+        $this->getBusiness()->saveAccount($user);
+        $this->addFlash('success', 'Account updated');
+      }
+    }
+    else{
+      $this->addFlash('error', 'Invalid data');
     }
 
-    $this->addFlash('error', 'Invalid data');
     return $this->redirect($this->generateUrl('profile_index'));
   }
 

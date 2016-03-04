@@ -13,7 +13,7 @@ class AccountType extends AbstractType
         $builder
             ->add('username')
             ->add('email', 'email')
-            ->add('password', 'password')
+            ->add('plainPassword', 'password')
         ;
     }
 

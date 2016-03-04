@@ -26,7 +26,7 @@
         <div class="col m12" style="padding-bottom: 0px;">
           <div class="input-field align-left">
             <i class="mdi mdi-action-lock prefix"></i>
-            {{ form_widget(account_form.password, {'attr': {'class':'validate'}}) }}
+            {{ form_widget(account_form.plainPassword, {'attr': {'class':'validate'}}) }}
             <label for="account_password" class="">Password</label>
           </div>
         </div>
@@ -37,7 +37,7 @@
           <div class="input-field">
             <i class="mdi mdi-action-lock prefix"></i>
             <input type="password" id="rpassword" name="rpassword" required="required" class="validate">
-            <label for="rpassword" class="">Repeate Password</label>
+            <label for="rpassword" class="">Repeat Password</label>
           </div>
         </div>
       </div>
