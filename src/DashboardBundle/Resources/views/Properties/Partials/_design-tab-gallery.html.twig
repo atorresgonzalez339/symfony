@@ -8,6 +8,11 @@
       <div class="content">
         <div class="row">
           <div class="col m12">
+            <input name="file" type="file" class="cloudinary-fileupload" data-cloudinary-field="image_upload">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col m12">
             <div class="row photoswipe-gallery isotope mt-0" data-pswp-uid="1">
               {% if property.getTempPhotos() %}
                 {% for photo in property.getTempPhotos().toArray() %}
