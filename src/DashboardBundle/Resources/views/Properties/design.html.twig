@@ -147,13 +147,38 @@
     });
 
     Cloudinary.uploadDone(function(data){
-      console.log(data);
-      console.log('Done');
+      var id = data._time;
+      var img = $.cloudinary.image(data.result.public_id,{
+        format: data.result.format,
+        //width: 50,
+        //height: 50,
+        //crop: "fit"
+      });
+      var card = $('#card_' + id);
+      var card_img = card.find('img');
+      var card_progress = card.find('.progress');
+      var card_options = card.find('.card-action');
+      card_progress.remove();
+      card_options.removeClass("hide");
+      card_img.attr('src', img.first().attr('src'));
     });
 
     Cloudinary.uploadProgress(function(data){
-      console.log(data);
-      console.log( (data.loaded * 100.0) / data.total + '%');
+      var id = data._time;
+      var progress_val = (data.loaded * 100.0) / data.total;
+      var card = $('#card_' + id);
+      var gallery_image_box = $('.gallery-image-box');
+      if(card.length){
+        /*var progress = card.find('.progress');
+        progress.css('width', progress_val);
+        console.log('aki');*/
+      }
+      else{
+        var card = $('#card_upload').clone();
+        card.attr('id', 'card_' + id);
+        gallery_image_box.append(card);
+        card.removeClass('hide');
+      }
     });
   </script>
 

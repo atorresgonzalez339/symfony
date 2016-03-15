@@ -6,13 +6,19 @@
         <h5> Images </h5>
       </div>
       <div class="content">
+
         <div class="row">
           <div class="col m12">
-            <input name="file" type="file" multiple class="cloudinary-fileupload" data-cloudinary-field="image_upload">
+            <div class="file-field input-field">
+              <div class="btn">
+                <span>File</span>
+                <input multiple name="file" class="cloudinary-fileupload" data-cloudinary-field="image_upload" type="file">
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="row">
+        <div class="row hide" id="card_upload">
           <div class="col m3">
             <div class="card small">
               <div class="card-image">
@@ -23,9 +29,13 @@
               <div class="progress" style="height: 3px;margin-top: 0px;margin-bottom: 0px;">
                 <div class="indeterminate"></div>
               </div>
-              <div class="card-action" style="padding-top: 5px;"><a href="#!" class="blue-text right" style="margin-right: 0px;">ELIMINAR</a></div>
+              <div class="card-action hide" style="padding-top: 5px;"><a href="#!" class="blue-text right" style="margin-right: 0px;">ELIMINAR</a></div>
             </div>
           </div>
+        </div>
+
+        <div class="gallery-image-box">
+
         </div>
 
         <div class="row">
