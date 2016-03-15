@@ -148,9 +148,11 @@
 
     Cloudinary.uploadDone(function(data){
       console.log(data);
+      console.log('Done');
     });
 
     Cloudinary.uploadProgress(function(data){
+      console.log(data);
       console.log( (data.loaded * 100.0) / data.total + '%');
     });
   </script>
