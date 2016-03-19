@@ -152,7 +152,8 @@
         format: data.result.format,
         width: 232,
         height: 145,
-        crop: "scale"
+        crop: "fill",
+        gravity: "center"
       });
 
       var img_medium = $.cloudinary.image(data.result.public_id,{

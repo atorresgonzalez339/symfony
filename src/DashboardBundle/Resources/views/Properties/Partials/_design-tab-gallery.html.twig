@@ -41,11 +41,25 @@
                 </div>
                 {% if property.getTempPhotos() %}
                   {% for photo in property.getTempPhotos().toArray() %}
-                    <a class="col s12 m6 l3 item" href="{{ photo }}" data-size="2880x1800"
-                       data-med="{{ photo }}"
-                       data-med-size="1440x900">
-                      <img src="{{ photo }}" alt="">
-                    </a>
+                    <div class="col m3">
+                      <div class="card small">
+                        <div class="card-image" style="height: auto;">
+                          <a class="col s12 m12 l12 item" href="{{ photo }}" data-size="2880x1800"
+                             data-med="{{ photo }}"
+                             data-med-size="1440x900" style="padding-right: 0px;padding-bottom: 0px;">
+                            <img width="232" height="145" src="{{ photo }}" alt="">
+                          </a>
+                        </div>
+                        <div class="content" style="padding: 0px;">
+                        </div>
+                        <div class="progress" style="height: 3px;margin-top: 0px;margin-bottom: 0px;">
+                          <div class="indeterminate"></div>
+                        </div>
+                        <div class="card-action" style="">
+                          <a href="#!" class="blue-text" style="">ELIMINAR</a>
+                        </div>
+                      </div>
+                    </div>
                   {% endfor %}
                 {% endif %}
             </div>
