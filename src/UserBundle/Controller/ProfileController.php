@@ -3,13 +3,13 @@
 namespace UserBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Validator\Constraints\DateTime;
 use UserBundle\Entity\UserProfile;
 use UserBundle\Form\AccountType;
 use UserBundle\Form\ProfileType;
 use CommonBundle\Controller\BaseController;
+use UserBundle\Form\PictureType;
 
 class ProfileController extends BaseController
 {
@@ -36,11 +36,13 @@ class ProfileController extends BaseController
 
       $profile_form = $this->createForm(ProfileType::class, $profile);
       $account_form = $this->createForm(AccountType::class, $user);
+      $picture_form = $this->createForm(PictureType::class, $profile);
 
       return $this->render('UserBundle:Profile:index.html.twig', array(
         'profile' => $profile,
         'profile_form' => $profile_form->createView(),
-        'account_form' => $account_form->createView()
+        'account_form' => $account_form->createView(),
+        'picture_form' => $picture_form->createView()
       ));
     }
 
@@ -101,6 +103,33 @@ class ProfileController extends BaseController
     }
 
     return $this->redirect($this->generateUrl('profile_index'));
+  }
+
+  /**
+   * @Route("/profile/upload_picture", name="profile_upload_picture")
+   */
+  public function uploadPictureAction(Request $request){
+    $user = $this->getUser();
+
+    $profile = $this->getBusiness()
+                    ->getRepository('User', 'UserProfile')
+                    ->findByUserId($user->getId());
+
+    $picture_form = $this->createForm(PictureType::class, $profile);
+
+    $picture_form->handleRequest($request);
+
+    if ($picture_form->isValid()) {
+        $this->getBusiness()->saveProfile($profile);
+        return new JsonResponse(array(
+          'status' => 'ok'
+        ));
+    }
+    else{
+      return new JsonResponse(array(
+        'status' => 'error'
+      ));
+    }
   }
 
 }

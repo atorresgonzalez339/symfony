@@ -15,8 +15,12 @@
       <ul>
         <li class="yay-user-info">
           <a href="{{path('profile_index')}}">
-            <img src="{{ asset('bundles/dashboard/people/01.jpg') }}" alt="Livan Frometa" class="circle">
-            <h3 class="yay-user-info-name">Livan Frometa</h3>
+            {% if app.user.profile.photoId %}
+              <img class="profile-photo-thumb" src="{{ app.user.profile.photoId | cloudinary_url({'format':'png', 'crop':'crop', 'gravity':'face', 'radius':'max', 'width':250, 'height':250}) }}">
+            {% else %}
+              <img class="profile-photo-thumb" src="{{ asset('bundles/dashboard/people/01.jpg') }}">
+            {% endif %}
+            <h3 class="yay-user-info-name">{{ app.user.profile.fullName }}</h3>
             <div class="yay-user-location"><i class="fa fa-map-marker"></i> Las Vegas, NV</div>
           </a>
         </li>

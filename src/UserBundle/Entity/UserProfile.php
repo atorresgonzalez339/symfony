@@ -23,7 +23,7 @@ class UserProfile
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\OneToOne(targetEntity="User", inversedBy="cart")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
@@ -93,6 +93,16 @@ class UserProfile
      * @ORM\Column(type="string", nullable=true)
      */
     private $website;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $photo_id;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $photo_url;
 
 
     /**
@@ -426,4 +436,42 @@ class UserProfile
     {
         return $this->user;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPhotoId()
+    {
+        return $this->photo_id;
+    }
+
+    /**
+     * @param mixed $photo_id
+     */
+    public function setPhotoId($photo_id)
+    {
+        $this->photo_id = $photo_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPhotoUrl()
+    {
+        return $this->photo_url;
+    }
+
+    /**
+     * @param mixed $photo_url
+     */
+    public function setPhotoUrl($photo_url)
+    {
+        $this->photo_url = $photo_url;
+    }
+
+    public function getFullName(){
+        return $this->first_name . ' ' . $this->last_name;
+    }
+
+
 }

@@ -24,5 +24,4 @@ class ProfileBusiness extends BaseBusiness {
     $userManager = $this->container->get('fos_user.user_manager');
     $userManager->updateUser($user);
   }
-
 }
