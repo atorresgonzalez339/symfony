@@ -168,6 +168,12 @@
 					<div class="card-image card-image-profile">
 						<img src="{{ asset('bundles/dashboard/people/01.jpg') }}">
 					</div>
+					<div class="file-field input-field">
+						<div class="btn">
+							<span>File</span>
+							<input name="file" class="cloudinary-fileupload" data-cloudinary-field="image_upload" type="file">
+						</div>
+					</div>
 					{#<div class="card-action">#}
 						{#<div class="pmo-block pmo-contact hidden-xs">#}
 							{#<h2>Contact</h2>#}
@@ -218,6 +224,15 @@
 	<script src="{{ asset('bundles/dashboard/material/js/moment.js') }}"></script>
 	<script src="{{ asset('bundles/dashboard/material/js/pikaday.js') }}"></script>
 	<script src="{{ asset('bundles/dashboard/material/js/pikaday.jquery.js') }}"></script>
+
+	{# Upload scripts #}
+	<script src="{{ asset('bundles/common/bower_components/jquery-ui/ui/widget.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('bundles/common/bower_components/blueimp-file-upload/js/jquery.iframe-transport.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('bundles/common/bower_components/blueimp-file-upload/js/jquery.fileupload.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('bundles/common/bower_components/blueimp-file-upload/js/jquery.fileupload-image.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('bundles/common/bower_components/cloudinary-jquery-file-upload/cloudinary-jquery-file-upload.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('bundles/common/js/cloudinary.js') }}" type="text/javascript"></script>
+
 	<script>
 		$(document).ready(function(){
 
@@ -239,6 +254,26 @@
 			$('#edit-profile').click(function(){
 					$('#edit-profile-container').attr('style','display:block');
 					$('#edit-profile-information').attr('style','display:none');
+			});
+
+			//Upload Profile Picture
+			Cloudinary.init({
+				'preset': 'profile'
+			});
+
+			Cloudinary.uploadDone(function(data){
+				var img = $.cloudinary.image(data.result.public_id,{
+					format: data.result.format
+					//width: 50,
+					//height: 50,
+					//crop: "fit"
+				});
+				var profile_img = $('.card-image-profile img');
+				profile_img.attr('src', img.first().attr('src'));
+			});
+
+			Cloudinary.uploadProgress(function(data){
+				var progress_val = (data.loaded * 100.0) / data.total;
 			});
 		});
 	</script>
