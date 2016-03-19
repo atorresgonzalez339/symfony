@@ -148,19 +148,29 @@
 
     Cloudinary.uploadDone(function(data){
       var id = data._time;
-      var img = $.cloudinary.image(data.result.public_id,{
+      var img_default = $.cloudinary.image(data.result.public_id,{
         format: data.result.format,
-        //width: 50,
-        //height: 50,
-        //crop: "fit"
+        width: 232,
+        height: 145,
+        crop: "scale"
       });
+
+      var img_medium = $.cloudinary.image(data.result.public_id,{
+        format: data.result.format,
+        width: 1440,
+        height: 900,
+        crop: "fit"
+      });
+
       var card = $('#card_' + id);
       var card_img = card.find('img');
       var card_progress = card.find('.progress');
       var card_options = card.find('.card-action');
       card_progress.remove();
       card_options.removeClass("hide");
-      card_img.attr('src', img.first().attr('src'));
+      card_img.attr('src', img_default.first().attr('src'));
+      card_img.closest('a.item').attr('data-med', img_medium.first().attr('src'));
+      card_img.closest('a.item').attr('href', img_medium.first().attr('src'));
     });
 
     Cloudinary.uploadProgress(function(data){
