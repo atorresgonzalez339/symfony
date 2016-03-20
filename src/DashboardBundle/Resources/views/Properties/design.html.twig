@@ -150,7 +150,9 @@
     });
 
     Cloudinary.uploadDone(function(data){
-      var id = data._time;
+      var file_name = data.originalFiles[0].name.replace(/[_\W]+/g, "");
+      var last_modified = data.originalFiles[0].lastModified;
+      var id = file_name + last_modified;
       var img_default = $.cloudinary.image(data.result.public_id,{
         format: data.result.format,
         width: 232,
@@ -169,6 +171,7 @@
       {# Update Card View #}
       var card = $('#card_' + id);
       var card_img = card.find('img');
+      var card_progress = card.find('.progress');
       card.find('.card-action').removeClass("hide");
       card_img.attr('src', img_default.first().attr('src')).load(function(){
         card_progress.remove();
@@ -190,7 +193,9 @@
     });
 
     Cloudinary.uploadProgress(function(data){
-      var id = data._time;
+      var file_name = data.originalFiles[0].name.replace(/[_\W]+/g, "");
+      var last_modified = data.originalFiles[0].lastModified;
+      var id = file_name + last_modified;
       console.log(data);
       var progress_val = (data.loaded * 100.0) / data.total;
       var card = $('#card_' + id);

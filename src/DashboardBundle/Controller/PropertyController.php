@@ -170,6 +170,8 @@ class PropertyController extends BaseController
     $property_photo_form->handleRequest($request);
 
     if ($property_photo_form->isValid()) {
+      $property->addPhoto($propertyPhoto);
+      $this->getBusiness()->saveProperty($property);
       return new JsonResponse(array('status' => 'ok'));
     }
     else{
