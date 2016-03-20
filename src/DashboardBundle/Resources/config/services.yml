@@ -1,4 +1,46 @@
+parameters:
+    admin.paginator.limits.config: [10, 15, 20, 30, 50,100,200,300,500]
+    admin.paginator.limits.template.config: [8, 12, 16, 20]
+    grid.column.textext.class: DashboardBundle\Grid\RalfTextColumn
+    grid.column.icon.class: DashboardBundle\Grid\RalfIconColumn
+    grid.column.photo.class: DashboardBundle\Grid\RalfPhotoColumn
+
 services:
-#    dashboard.example:
-#        class: DashboardBundle\Example
-#        arguments: ["@service_id", "plain_value", %parameter%]
+  dashboard.utils.business:
+    class: DashboardBundle\Business\UtilBusiness
+    arguments: ["@service_container"]
+
+  dashboard.property.business:
+    class: DashboardBundle\Business\PropertyBusiness
+    parent: common.base.business
+    arguments: ["@service_container"]
+
+  dashboard.flyer.business:
+    class: DashboardBundle\Business\FlyerBusiness
+    parent: common.base.business
+
+  dashboard.template.business:
+    class: DashboardBundle\Business\TemplateBusiness
+    parent: common.base.business
+
+  ralf.common.twig.extension.functions:
+    class: DashboardBundle\Twig\Extension\Functions
+    arguments: ["@twig","@security.context","@service_container"]
+    tags:
+      - { name: twig.extension }
+
+  grid.column.textext:
+    class: %grid.column.textext.class%
+    tags:
+      - { name: grid.column.extension }
+
+  grid.column.icon:
+    class: %grid.column.icon.class%
+    tags:
+      - { name: grid.column.extension }
+
+  grid.column.photo:
+    class: %grid.column.photo.class%
+    tags:
+      - { name: grid.column.extension }
+

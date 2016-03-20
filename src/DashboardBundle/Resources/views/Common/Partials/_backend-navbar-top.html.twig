@@ -1,0 +1,72 @@
+<nav class="navbar-top">
+  <div class="nav-wrapper">
+    <a href="http://html.nkdev.info/_con/ui-buttons.html#" class="yay-toggle" style="width: 58px">
+      <div class="burg1"></div>
+      <div class="burg2"></div>
+      <div class="burg3"></div>
+    </a>
+    <a href="http://html.nkdev.info/_con/index.html" class="brand-logo" style="padding-left: 0px;">
+      <img src="{{ asset('bundles/common/images/logo-left.png') }}" alt="LOGO">
+    </a>
+    <ul>
+      <li>
+        <a class="dropdown-button" data-activates="test-dropdown" href="#">
+          <i class="mdi-communication-email"></i> <span class="badge new">2</span></a>
+        <div id="test-dropdown" class="dropdown-content dropdown-media" style="width: 51px; position: absolute; top: 0px; left: -299px; opacity: 1; display: none;">
+          <div class="card-panel">
+            <div class="media-heading">Messages
+              <a href="http://html.nkdev.info/_con/mail-compose.html">
+                <i class="mdi-content-add-circle-outline"></i>
+              </a>
+            </div>
+            <div class="media-footer">
+              <a href="http://html.nkdev.info/_con/mail-inbox.html">
+                <i class="mdi-hardware-keyboard-control"></i>
+              </a>
+            </div>
+            <div class="row mt-0">
+              <div class="col s2">
+                <img src="{{ asset('bundles/dashboard/people/02.jpg') }}" alt="" class="circle responsive-img"></div>
+              <div class="col s10">
+                <span class="media-date">9:02 AM</span>
+                <a href="http://html.nkdev.info/_con/ui-buttons.html#" class="media-title">Dianne Chambers</a>
+                <span>Ut feugiat tempus felis, sit amet mattis dolor accumsan quis...</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s2">
+                <img src="{{ asset('bundles/dashboard/people/04.jpg') }}" alt="" class="circle responsive-img">
+              </div>
+              <div class="col s10">
+                <span class="media-date">Dec 19</span>
+                <a href="http://html.nkdev.info/_con/ui-buttons.html#" class="media-title">Joanne Stephens</a>
+                <span>Proin suscipit lobortis porta. Interdum et malesuada fames ac ante ipsum primis in faucibus...</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="user">
+        <a class="dropdown-button" data-activates="user-dropdown" href="http://html.nkdev.info/_con/ui-buttons.html#!">
+          {% if app.user.profile.photoId %}
+            <img class="profile-photo-thumb" src="{{ app.user.profile.photoId | cloudinary_url({'format':'png', 'crop':'crop', 'gravity':'face', 'radius':'max', 'width':250, 'height':250}) }}">
+          {% else %}
+            <img class="profile-photo-thumb" src="{{ asset('bundles/dashboard/people/01.jpg') }}">
+          {% endif %}
+          {{ app.user.profile.fullName }}
+          <i class="mdi-navigation-expand-more right"></i>
+        </a>
+        <ul id="user-dropdown" class="dropdown-content">
+          <li><a href="{{path('profile_index')}}"><i class="fa fa-user"></i> Profile</a>
+          </li>
+          <li><a href="http://html.nkdev.info/_con/mail-inbox.html"><i class="fa fa-envelope"></i> Messages
+              <span class="badge new">2 new</span></a></li>
+          <li><a href="http://html.nkdev.info/_con/ui-buttons.html#!"><i class="fa fa-cogs"></i> Settings</a>
+          </li>
+          <li class="divider"></li>
+          <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out"></i>
+              Logout</a></li>
+        </ul>
+      </li>
+    </ul><!-- /Menu --></div>
+</nav>

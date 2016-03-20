@@ -9,6 +9,8 @@ use Composer\Autoload\ClassLoader;
 $loader = require __DIR__.'/../vendor/autoload.php';
 
 $loader->add('PhpThumb_', __DIR__.'/../libraries/phpthumb/lib');
+$loader->add('JMS', __DIR__.'/../vendor/bundles');
+$loader->add('JMS', __DIR__.'/../vendor/cg-library/src');
 
 AnnotationRegistry::registerLoader(array($loader, 'loadClass'));
 

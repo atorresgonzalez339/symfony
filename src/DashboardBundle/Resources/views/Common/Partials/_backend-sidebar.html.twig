@@ -1,0 +1,70 @@
+<aside class="yaybar yay-shrink yay-hide-to-small yay-gestures">
+  <div class="top">
+    <div><!-- Sidebar toggle --><a href="http://html.nkdev.info/_con/ui-buttons.html#" class="yay-toggle">
+        <div class="burg1"></div>
+        <div class="burg2"></div>
+        <div class="burg3"></div>
+      </a>
+      <a href="http://html.nkdev.info/_con/ui-buttons.html#!" class="brand-logo">
+        <img src="" alt="LOGO">
+      </a>
+    </div>
+  </div>
+  <div class="nano has-scrollbar">
+    <div class="nano-content" tabindex="0" style="right: -17px;">
+      <ul>
+        <li class="yay-user-info">
+          <a href="{{path('profile_index')}}">
+            {% if app.user.profile.photoId %}
+              <img class="profile-photo-thumb" src="{{ app.user.profile.photoId | cloudinary_url({'format':'png', 'crop':'crop', 'gravity':'face', 'radius':'max', 'width':250, 'height':250}) }}">
+            {% else %}
+              <img class="profile-photo-thumb" src="{{ asset('bundles/dashboard/people/01.jpg') }}">
+            {% endif %}
+            <h3 class="yay-user-info-name">{{ app.user.profile.fullName }}</h3>
+            <div class="yay-user-location"><i class="fa fa-map-marker"></i> Las Vegas, NV</div>
+          </a>
+        </li>
+        <li>
+          <a href="{{path('dashboard_index')}}" class="waves-effect waves-blue">
+            <i class="fa fa-home"></i> Dashboard
+          </a>
+        </li>
+        <li>
+          <a href="{{path('properties_index')}}" class="waves-effect waves-blue">
+            <i class="fa fa-building-o"></i> Properties
+          </a>
+        </li>
+        <li>
+          <a href="{{path('flyer_index')}}" class="waves-effect waves-blue"><i
+              class="fa fa-magic"></i> Flayers
+          </a>
+        </li>
+        <li>
+          <a href="{{path('template_index')}}" class="waves-effect waves-blue">
+            <i class="mdi mdi-av-web"></i> Templates
+            <span class="badge new">new</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="waves-effect waves-blue"><i
+              class="fa fa-users"></i> Contacts
+          </a>
+        </li>
+
+        <li class="label">Stats</li>
+        <li class="content"><span><i class="fa fa-spinner"></i> Server Load</span>
+          <div class="progress small light-green lighten-4">
+            <div class="light-green accent-5" style="width: 37%"></div>
+          </div>
+          <span><i class="fa fa-thumbs-o-up"></i> User Satisfaction</span>
+          <div class="progress small">
+            <div style="width: 91%"></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="nano-pane">
+      <div class="nano-slider" style="height: 302px; transform: translate(0px, 0px);"></div>
+    </div>
+  </div>
+</aside><!-- /Yay Sidebar -->

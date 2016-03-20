@@ -2,36 +2,96 @@
 
 namespace DashboardBundle\Controller;
 
+use CommonBundle\Controller\BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
-class FlyerController extends Controller
+use APY\DataGridBundle\Grid\Source\Entity;
+use APY\DataGridBundle\Grid\Action\DeleteMassAction;
+
+use DashboardBundle\Entity\Flyer;
+
+class FlyerController extends BaseController
 {
     /**
-     * @Route("/flyer/new", name="flyer_new")
+     * @Route("/flyer", name="flyer_index")
      */
-    public function newAction(Request $request){
-      $mls_id = $request->get('id_property');
-      $template = $request->get('id_template');
-      $property = $this->getProperty($mls_id);
+    public function indexAction(Request $request){
+      $source = new Entity('DashboardBundle:Flyer');
+      $grid = $this->get('grid');
+      $grid->setSource($source);
+      $grid->hideColumns(array('id'));
+      $grid->addMassAction(new DeleteMassAction());
+      $grid->setLimits($this->container->getParameter('admin.paginator.limits.config'));
+
+      if ($request->isXmlHttpRequest()) {
+        return $grid->getGridResponse('DashboardBundle:Flyer:indexAjax.html.twig');
+      }
+      if ($grid->isReadyForRedirect() ) {
+        return new RedirectResponse($grid->getRouteUrl());
+      }
+
+      return $grid->getGridResponse('DashboardBundle:Flyer:index.html.twig');
+    }
+
+    /**
+     * @Route("/flyer/design", name="flyer_design")
+     */
+    public function designAction(Request $request){
+
+      $property_id = $request->get('property_id');
+      $template_id = $request->get('id_template');
+      $flyer_id = $request->get('flyer_id');
+      $user = $this->getUser();
+
+      if($request->isMethod('POST')){
+        $flyer_id = $this->getFirstSelectetGridItem();
+        $flyer = $this->getDoctrine()
+                      ->getRepository('DashboardBundle:Flyer')
+                      ->find($flyer_id);
+
+        $property = $flyer->getProperty();
+        $template = $flyer->getTemplate();
+
+      }
 
       $photos = [];
 
-      foreach($property['photos'] as $photo){
-        $thumb = \PhpThumb_Factory::create($photo);
-        $img =  'data:image/png;base64,' . base64_encode($thumb->getImageAsString());
-        $photos[] = $img;
+      $property = $this->getDoctrine()
+            ->getRepository('DashboardBundle:Property')
+            ->find($property_id);
+
+      $template = $this->getDoctrine()
+        ->getRepository('DashboardBundle:Template')
+        ->find($template_id);
+
+      if($flyer_id){
+        $flyer = $this->getDoctrine()
+                     ->getRepository('DashboardBundle:Flyer')
+                     ->find($flyer_id);
+      }
+      else{
+        $flyer = new Flyer($user);
       }
 
-      // echo "<pre>";
-      // print_r($property);
+      $fliyer_view = $this->renderView('DashboardBundle:Themes:default.html.twig');
 
-      return $this->render('DashboardBundle:Flyer:edit.html.twig', array(
-        'property' => $property,
-        'photos' =>  $photos
+      return $this->render('DashboardBundle:Flyer:create.html.twig', array(
+        'flyer' => $flyer,
+        'fliyer_view' => $fliyer_view,
+        'photos' =>  $photos ? $photos : []
       ));
+    }
+
+    /**
+     * @Route("/flyer/create", name="flyer_create")
+     */
+    public function createAction()
+    {
+
     }
 
     /**

@@ -1,0 +1,78 @@
+
+.yaybar ul>li.yay-user-info {
+    background-color: #176CC1;
+}
+.nano > .nano-content {
+    background-color: #35384C;
+}
+.yaybar .nano > .nano-content{
+    background: #1976D2;
+}
+.content-wrap .page-title {
+    padding: 0.3rem 2rem;
+}
+.yaybar .nano-content>ul>li.active, .yaybar .nano-content>ul>li.open, .yaybar .nano-content>ul>li>ul {
+    background: #1976D2;
+}
+.card .card-image.image-properties img {
+    border-radius: 0px 0px 0 0;
+    box-shadow: 0 1px 2px rgba(0,0,0,.26)!important;
+    min-height: 192px;
+    max-height: 192px;
+}
+.card.body-properties {
+    border-radius: 0px 2px 2px 0px;
+    min-height: 192px;
+    max-height: 192px;
+}
+.dark-clare-text {
+    color: #616161!important;
+}
+.dark-text {
+    color: #424242!important;
+}
+.azure-text {
+    color: #42A5F5!important;
+}
+.property-row-location {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    display: block;
+    list-style: none;
+    margin: 0px 0px 10px 0px;
+    padding: 0px 0px 10px 0px;
+}
+.property-row-location li {
+    display: inline;
+}
+.property-row-location li a {
+    color: #9E9E9E;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+.card.body-properties .card-content {
+    padding: 5px 15px 15px 15px;
+}
+.card-action a > i {
+    margin-top: -2px;
+    font-size: 14px;
+}
+.card-action a.right > i {
+    font-size: 20px;
+}
+.card-action-properties{
+    padding: 13px;
+}
+.site .card .card-action-properties > a{
+    text-transform: none;
+}
+
+.card-data-grid {
+    margin-top: 0px !important;
+}
+
+.card-data-grid div.content {
+    padding-top: 1px !important;
+    padding-left: 10px;
+    padding-right: 10px;
+}

@@ -1,1 +1,9 @@
-Index Page...
+{% extends 'AppBundle:Common:frontend.html.twig' %}
+
+{% block banner  %}
+    {% include 'AppBundle:Common:Partials/_public-header-banner.html.twig' %}
+{% endblock banner  %}
+                            
+{% block content  %}
+    {% include 'AppBundle:Common:Partials/_public-index-content.html.twig' %}
+{% endblock content  %}

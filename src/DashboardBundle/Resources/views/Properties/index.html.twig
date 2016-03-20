@@ -1,12 +1,59 @@
-<ul>
-	{% for data in properties %}
-		<li>
-			<img height="150" src="{{data.photos.0}}" >
-			<br />
-			<a href="{{path('template_index')}}?id_property={{data.mlsId}}">
-				Property - {{loop.index}}
-			</a>
-			<hr />
-		</li>
-	{% endfor %}
-</ul>
+{% extends 'DashboardBundle:Common:backend2.html.twig' %}
+
+{% block breadcrumb %}
+	<li><a href="#">My Properties</a></li>
+{% endblock breadcrumb%}
+
+{% set idFormGrid  = grid.hash %}
+
+{% block content %}
+	<style>
+		.card .card-action.card-action-templeate{
+			border-top: 1px solid rgba(160, 160, 160, .2);
+			padding: 10px 0px 10px 10px;
+		}
+		.card.small .card-image.card-image-templeate {
+			height: 100%;
+		}
+	</style>
+	<div class="card">
+		<div class="title">
+			<h5> My Properties </h5>
+			<ul id='dropdown2' class='dropdown-content'>
+				<li><a href="{{ path('properties_design') }}">Empty</a></li>
+				<li><a href="{{ path('properties_mls') }}">From MLS</a></li>
+			</ul>
+			<div class="btn-group right">
+				<a href="#!" class="waves-effect waves-dark btn btn-small dropdown-button" data-activates='dropdown2'><i class="mdi mdi-content-add left"></i>Add</a>
+				<a id="edit_action" class="btn btn-small waves-dark waves-effect">
+					<i class="mdi mdi-content-create left"></i>
+					Edit
+				</a>
+				<a id="delete_action" class="btn btn-small waves-dark waves-effect red">
+					<i class="mdi mdi-content-clear left"></i>
+					Delete
+				</a>
+			</div>
+		</div>
+		<div class="content">
+			{{ grid(grid, 'DashboardBundle:Grid:gridTemplatePropertiesAjax.html.twig') }}
+		</div>
+	</div>
+
+	<script>
+		$(document).ready(function(){
+			$('#edit_action').click(function(){
+				$('#{{idFormGrid}}').attr('action', '{{path("properties_design")}}');
+				$('#{{idFormGrid}}').submit();
+			});
+
+			$('#delete_action').click(function(){
+				$('#{{idFormGrid}}').attr('action', '{{path("properties_remove")}}');
+				$('#{{idFormGrid}}').submit();
+			});
+		});
+	</script>
+
+{% endblock content%}
+
+

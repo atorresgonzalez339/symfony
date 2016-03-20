@@ -1,0 +1,253 @@
+{% extends 'DashboardBundle:Common:backend2.html.twig' %}
+
+{% block stylesheets_priority %}
+  {{ parent() }}
+  <link href="{{ asset('bundles/dashboard/material/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
+  <link href="{{ asset('bundles/dashboard/material/css/default-skin.css') }}" rel="stylesheet" type="text/css"/>
+  <link href="{{ asset('bundles/dashboard/material/css/photoswipe.css') }}" rel="stylesheet" type="text/css"/>
+  <style>
+    #map-canvas {
+      height: 350px;
+    }
+
+    #pac-input {
+      background-color: #fff;
+      padding: 0 11px 0 13px;
+      width: 400px;
+      font-family: Roboto;
+      font-size: 15px;
+      font-weight: 300;
+      text-overflow: ellipsis;
+    }
+
+    input[type=date], input[type=datetime-local], input[type=email],
+    input[type=number], input[type=password], input[type=search],
+    input[type=tel], input[type=text], input[type=time], input[type=url] {
+      height: 45px !important;
+      margin: 0 0 1px !important;
+
+      height: 35px !important;
+      text-indent: 5px;
+
+      border-left: 1px solid #ccc !important;
+      border-right: 1px solid #ccc !important;
+      border-top: 1px solid #ccc !important;
+      box-shadow: inset 0 1px 2px #eee;
+
+    }
+    .select2-container .select2-search--inline .select2-search__field {
+      border-left: none !important;
+      border-top: none !important;
+      border-right: none !important;
+      box-shadow: inset 0 0px 0px #eee !important;
+    }
+
+    .input-field {
+      margin-top: 1.5rem !important;
+    }
+
+    textarea{
+      border-left: 1px solid #ccc !important;
+      border-right: 1px solid #ccc !important;
+      border-top: 1px solid #ccc !important;
+      box-shadow: inset 0 1px 2px #eee !important;
+      text-indent: 5px;
+    }
+
+    .select2-selection{
+      border-left: 1px solid #ccc !important;
+      border-right: 1px solid #ccc !important;
+      border-top: 1px solid #ccc !important;
+      box-shadow: inset 0 1px 2px #eee;
+
+      height: 37px !important;
+      margin-top: 1px;
+      padding-left: 5px !important;
+    }
+
+    .select2-container--default .select2-selection--multiple,
+    .select2-container--default.select2-container--focus .select2-selection--multiple {
+      height: auto !important;
+    }
+
+    .select2-container--default .select2-search--inline .select2-search__field {
+      height: 30px !important;
+    }
+    .select2-container--default .select2-selection--multiple .select2-selection__choice {
+      margin-top: 6px !important;
+    }
+    .select2-container--default .select2-selection--multiple .select2-selection__rendered {
+      padding: 0 0px !important;
+    }
+    .select2-container {
+      max-width: 100% !important;
+      min-width: 100% !important;
+    }
+    .input-field label {
+      /*left: 0px;*/
+    }
+    .input-field label.active {
+      transform: translateY(-170%) !important;
+      left: 0px;
+    }
+    .input-field .prefix~label.active{
+      transform: translateY(-170%) !important;
+      margin-left: 0px;
+    }
+    .input-field > i.prefix{
+      text-indent: 5px;
+      color: #7C7E89;
+    }
+    .input-field > i.prefix + input {
+      text-indent: 40px;
+    }
+  </style>
+{% endblock stylesheets_priority %}
+
+{% block breadcrumb %}
+  <li><a href="#">Properties</a></li>
+{% endblock breadcrumb %}
+
+{% block content %}
+  <div class="row">
+    <div class="col s12">
+      {% include 'DashboardBundle:Properties:Partials/_design-tabbar.html.twig' %}
+    </div>
+    <div id="test1" class="col s12">
+      {% include 'DashboardBundle:Properties:Partials/_design-tab-information.html.twig' %}
+    </div>
+    <div id="tab-gallery" class="col s12">
+      {% include 'DashboardBundle:Properties:Partials/_design-tab-gallery.html.twig' %}
+    </div>
+  </div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('bundles/dashboard/material/js/select2.full.min.js') }}"></script>
+  <script src="{{ asset('bundles/dashboard/material/js/photoswipe.min.js') }}"></script>
+  <script src="{{ asset('bundles/dashboard/material/js/photoswipe-ui-default.min.js') }}"></script>
+
+  <script src="http://maps.googleapis.com/maps/api/js?libraries=weather,geometry,visualization,places,drawing&amp;sensor=false" type="text/javascript"></script>
+  <script src="{{ asset('bundles/dashboard/assets/libraries/jquery-google-map/infobox.js') }}"></script>
+  <script src="{{ asset('bundles/dashboard/assets/libraries/jquery-google-map/markerclusterer.js') }}"></script>
+  <script src="{{ asset('bundles/dashboard/assets/libraries/jquery-google-map/jquery-google-map.js') }}"></script>
+  <script src="{{ asset('bundles/dashboard/assets/js/map.js') }}"></script>
+
+  <script src="{{ asset('bundles/common/bower_components/jquery-ui/ui/widget.js') }}" type="text/javascript"></script>
+  <script src="{{ asset('bundles/common/bower_components/blueimp-file-upload/js/jquery.iframe-transport.js') }}" type="text/javascript"></script>
+  <script src="{{ asset('bundles/common/bower_components/blueimp-file-upload/js/jquery.fileupload.js') }}" type="text/javascript"></script>
+  <script src="{{ asset('bundles/common/bower_components/blueimp-file-upload/js/jquery.fileupload-image.js') }}" type="text/javascript"></script>
+  <script src="{{ asset('bundles/common/bower_components/cloudinary-jquery-file-upload/cloudinary-jquery-file-upload.js') }}" type="text/javascript"></script>
+  <script src="{{ asset('bundles/common/js/cloudinary.js') }}" type="text/javascript"></script>
+
+  <script>
+
+    var property_id = {{ property_id }};
+
+    Cloudinary.init({
+      'preset': 'property_photos'
+    });
+
+    Cloudinary.uploadDone(function(data){
+      var file_name = data.originalFiles[0].name.replace(/[_\W]+/g, "");
+      var last_modified = data.originalFiles[0].lastModified;
+      var id = file_name + last_modified;
+
+      {# Load Images from Cloudinary #}
+      var img_default = $.cloudinary.image(data.result.public_id,{
+        format: data.result.format,
+        width: 232,
+        height: 145,
+        crop: "fill",
+        gravity: "center"
+      });
+
+      var img_medium = $.cloudinary.image(data.result.public_id,{
+        format: data.result.format,
+        width: 1440,
+        height: 900,
+        crop: "fit"
+      });
+
+      var img_large = $.cloudinary.image(data.result.public_id,{
+        format: data.result.format,
+        width: 2880,
+        height: 1800,
+        crop: "fit"
+      });
+
+      {# Update Card View #}
+      var card = $('#card_' + id);
+      var card_img = card.find('img');
+      var card_progress = card.find('.progress');
+      var card_action = card.find('.card-action');
+
+      {# Change Card Action #}
+      card_action.removeClass("hide");
+      card_action.find('a').data('photoid', data.result.public_id);
+
+      {# Change Card Image #}
+      card_img.closest('a.item').attr('data-med', img_medium.first().attr('src'));
+      card_img.closest('a.item').attr('href', img_large.first().attr('src'));
+      card_img.attr('src', img_default.first().attr('src')).load(function(){
+        card_progress.addClass('hide');
+      });
+
+      {# Update Property Photos #}
+      var form_upload = $('form[name=property_photo]').clone();
+      form_upload.find('#property_photo_photo_id').val(data.result.public_id);
+      form_upload.find('#property_photo_photo_url').val(data.result.url);
+
+      var data = form_upload.serialize();
+
+      $.post("{{ path('properties_upload_photo') }}", data, function(result){
+        console.log(result);
+      });
+
+      linkDeletePhoto();
+
+    });
+
+    Cloudinary.uploadProgress(function(data){
+      var file_name = data.originalFiles[0].name.replace(/[_\W]+/g, "");
+      var last_modified = data.originalFiles[0].lastModified;
+      var id = file_name + last_modified;
+      var progress_val = (data.loaded * 100.0) / data.total;
+      var card = $('#card_' + id);
+      var gallery_image_box = $('.gallery-image-box');
+      if(card.length){
+        /*var progress = card.find('.progress');
+        progress.css('width', progress_val);
+        console.log('aki');*/
+      }
+      else{
+        var card = $('#card_upload').clone();
+        card.attr('id', 'card_' + id);
+        gallery_image_box.append(card);
+        card.removeClass('hide');
+      }
+    });
+
+    function linkDeletePhoto(){
+      $('.delete-property-photo').click(function(){
+        var _this = this;
+        var progress = $(this).parent().parent().find('.progress');
+        progress.removeClass('hide');
+
+        var data = {
+          photo_id: $(this).data('photoid'),
+          property_id: property_id
+        };
+
+        $.post("{{ path('properties_delete_photo') }}", data, function(result){
+          console.log(result);
+          $(_this).closest('.card-upload').remove();
+        });
+      });
+    }
+
+    linkDeletePhoto();
+  </script>
+
+{% endblock javascripts %}

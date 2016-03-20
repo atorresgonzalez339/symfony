@@ -10,3 +10,12 @@
 /vendor/
 /bin/
 /composer.phar
+.idea/
+
+composer.lock
+
+app/cache/.gitkeep
+
+composer.lock
+
+.idea/workspace.xml

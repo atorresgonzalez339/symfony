@@ -18,9 +18,13 @@ class AppKernel extends Kernel
             new Speicher210\CloudinaryBundle\Speicher210CloudinaryBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+            new Fresh\DoctrineEnumBundle\FreshDoctrineEnumBundle(),
+            new JMS\AopBundle\JMSAopBundle(),
             new AppBundle\AppBundle(),
             new UserBundle\UserBundle(),
             new DashboardBundle\DashboardBundle(),
+            new APY\DataGridBundle\APYDataGridBundle(),
+            new CommonBundle\CommonBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

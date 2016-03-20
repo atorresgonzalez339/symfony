@@ -23,7 +23,10 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "speicher210/cloudinary-bundle": "^0.2.0",
         "friendsofsymfony/user-bundle": "~2.0@dev",
-        "doctrine/doctrine-migrations-bundle": "^1.0"
+        "doctrine/doctrine-migrations-bundle": "^1.0",
+        "apy/datagrid-bundle":"2.2.16",
+        "fresh/doctrine-enum-bundle": "^2.6",
+        "jms/aop-bundle": "^1.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "~3.0",

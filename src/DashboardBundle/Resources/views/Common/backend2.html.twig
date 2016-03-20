@@ -1,0 +1,96 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}{% endblock title %}
+
+{% block stylesheets %}
+    {{parent()}}
+
+    {% block stylesheets_priority %} {% endblock stylesheets_priority %}
+    <link  href="{{ asset('bundles/dashboard/material/css/nanoscroller.css') }}" rel="stylesheet" type="text/css" />
+    <link  href="{{ asset('bundles/dashboard/material/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
+    <link  href="{{ asset('bundles/dashboard/material/css/material-design-icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link  href="{{ asset('bundles/dashboard/material/css/ionicons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link  href="{{ asset('bundles/dashboard/material/css/weather-icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link  href="{{ asset('bundles/dashboard/material/css/con-base.min.css') }}" rel="stylesheet" type="text/css" />
+    <link  href="{{ asset('bundles/dashboard/main/css/main.css') }}" rel="stylesheet" type="text/css" />
+    <script src="{{ asset('bundles/dashboard/material/js/jquery-1.11.2.min.js') }}"></script>
+{% endblock stylesheets %}
+
+{% block body %}
+
+  {% block viewport %}
+
+    {% block north %}
+      {% include 'DashboardBundle:Common:Partials/_backend-navbar-top.html.twig' %}
+    {% endblock north%}
+
+    {% block west %}
+      {% include 'DashboardBundle:Common:Partials/_backend-sidebar.html.twig' %}
+    {% endblock west%}
+
+    {% block center %}
+    <section class="content-wrap">
+      {% block breadcrumb_body %}
+        {% include 'DashboardBundle:Common:Partials/_backend-breadcrumb-body-top.html.twig' %}
+              {% block breadcrumb %} {% endblock breadcrumb%}
+        {% include 'DashboardBundle:Common:Partials/_backend-breadcrumb-body-down.html.twig' %}
+      {% endblock breadcrumb_body%}
+
+      {% block flash_message %}
+        {% include 'DashboardBundle:Common:Partials/_backend-flash-message.html.twig' %}
+      {% endblock flash_message %}
+
+      {% block content %} {% endblock content%}
+    </section>
+    {% endblock center%}
+
+    {% block east  %}
+      {% include 'DashboardBundle:Common:Partials/_backend-floting-botton.html.twig' %}
+      {% include 'DashboardBundle:Common:Partials/_backend-chat.html.twig' %}
+    {% endblock east %}
+
+    {% block south %}
+      {% include 'DashboardBundle:Common:Partials/_backend-footer.html.twig' %}
+    {% endblock south%}
+
+    {% endblock viewport %}
+
+{% endblock body%}
+
+{% block javascripts %}
+    {{parent()}}
+    <script src="{{ asset('bundles/dashboard/material/js/jquery.requestAnimationFrame.min.js') }}"></script>
+    <script src="{{ asset('bundles/dashboard/material/js/jquery.nanoscroller.min.js') }}"></script>
+    <script src="{{ asset('bundles/dashboard/material/js/materialize.js') }}"></script>
+    <script src="{{ asset('bundles/dashboard/material/js/Sortable.min.js') }}"></script>
+    <script src="{{ asset('bundles/dashboard/material/js/_con.min.js') }}"></script>
+    <script src="{{ asset('bundles/dashboard/material/js/prettify.js') }}"></script>
+{% endblock javascripts%}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

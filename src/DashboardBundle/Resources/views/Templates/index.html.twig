@@ -1,9 +1,51 @@
-<ul>
-	{% for template in templates %}
-	<li>
-		<a href="{{path('flyer_new', {'id_template':loop.index, 'id_property':id_property})}}">
-			Templaste - {{loop.index}}
-		</a>
-	</li>
-	{% endfor %}
-</ul>
+{% extends 'DashboardBundle:Common:backend2.html.twig' %}
+
+{% block breadcrumb %}
+	<li><a href="#">Templates</a></li>
+{% endblock breadcrumb%}
+
+{% block stylesheets_priority %}
+  {{ parent() }}
+  <link href="{{ asset('bundles/dashboard/material/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
+{% endblock stylesheets_priority %}
+
+{% block content %}
+<style>
+    .card .card-action.card-action-templeate{
+        border-top: 1px solid rgba(160, 160, 160, .2);
+        padding: 10px 0px 10px 10px;
+    }
+    .card.small .card-image.card-image-templeate {
+        height: 100%;
+    }
+</style>
+<div class="card">
+  <div class="title">
+      <h5> <i class="mdi mdi-av-web"></i> Templeates </h5>
+  </div>
+  <div class="content" style="padding-top: 5px;">
+
+    {{ grid(grid, 'DashboardBundle:Grid:gridTemplateTempAjax.html.twig') }}
+
+  {#<div class="row">#}
+    {#{% for template in templates %}#}
+    {#<div class="col m3">#}
+      {#<div class="card small ">#}
+        {#<div class="card-image card-image-templeate hoverable"><img src="{{asset('bundles/dashboard/images/templates/' ~ template.image)}}">#}
+          {#<div class="card-action card-action-templeate">#}
+            {#<a href="{{path('flyer_design', {'property_id':property_id, 'id_template':template.id})}}" class="azure-text">{{template.name}}</a>#}
+            {#<a href="#" class="azure-text right"><i class="fa fa-heart"></i></a>#}
+            {#<a href="#" class="azure-text right"><i class="fa fa-share-alt"></i></a>#}
+          {#</div>#}
+        {#</div>#}
+      {#</div>#}
+    {#</div>#}
+  {#{% endfor %}#}
+  {#</div>#}
+</div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ parent() }}
+	<script src="{{ asset('bundles/dashboard/material/js/select2.full.min.js') }}"></script>
+{% endblock javascripts %}

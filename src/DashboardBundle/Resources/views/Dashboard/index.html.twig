@@ -1,4 +1,8 @@
-Dashboard
+{% extends 'DashboardBundle:Common:backend2.html.twig' %}
 
-<a href="{{path('properties_index')}}">Properties</a>
-<a href="{{path('fos_user_security_logout')}}">Log out</a>
+{% block content %}
+    Dashboard
+    <a href="{{path('properties_index')}}">Properties</a>
+    <a href="{{path('fos_user_security_logout')}}">Log out</a>
+
+{% endblock content%}

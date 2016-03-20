@@ -1,0 +1,92 @@
+{% extends 'DashboardBundle:Common:backend2.html.twig' %}
+
+{% block content %}
+<style>
+  .cropit-image-preview {
+    background-color: #f8f8f8;
+    background-size: cover;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-top: 7px;
+    width: 600px;
+    height: 250px;
+    cursor: move;
+  }
+  .cropit-image-background {
+    opacity: .2;
+    cursor: auto;
+  }
+  .image-size-label {
+    margin-top: 10px;
+  }
+  input {
+    display: block;
+  }
+  .export {
+    margin-top: 10px;
+  }
+</style>
+
+<div style="width: 600px;">
+{{fliyer_view | raw}}
+</div>
+
+<ul>
+	{% for photo in photos  %}
+	<li>
+		<div class="image-editor">
+      <img style="display: none;" src="{{photo}}">
+      <div class="cropit-image-preview"></div>
+		</div>
+	</li>
+	{% endfor %}
+	<button class="export">Export</button>
+</ul>
+
+<script>
+
+function cropImages(){
+  var crop_images = $('.image-editor');
+  var result = [];
+  for(var i = 0; i < crop_images.length; i++){
+    var crop_image = $(crop_images[i]);
+    var data_crop = crop_image.cropit('export');
+    result.push(data_crop);
+  }
+  return result;
+}
+
+$(document).ready(function(){
+
+  $.cloudinary.config({ cloud_name: 'dnm1l8ric', api_key: '146447182555489'})
+
+  $('.image-editor').each(function(index, value){
+  	var elm = $(value);
+    var img_src = elm.find('img').attr('src');
+  	elm.cropit({ 
+  		imageState: { 
+  			src: img_src
+  		}
+		});
+  });
+
+  $('.export').click(function() {
+    var post_data = {}; 
+    post_data.images = cropImages();
+    $.post( "{{path('eblast_update')}}", post_data, function( data ) {
+      console.log(data);
+    });
+  });
+
+});
+</script>
+{% endblock content %}
+
+{% block javascripts %}
+  {{parent()}}
+  <script src="{{asset('bundles/dashboard/bower_components/jquery-ui/ui/widget.js')}}" type="text/javascript"></script>
+  <script src="{{asset('bundles/dashboard/bower_components/blueimp-file-upload/js/jquery.iframe-transport.js')}}" type="text/javascript"></script>
+  <script src="{{asset('bundles/dashboard/bower_components/blueimp-file-upload/js/jquery.fileupload.js')}}" type="text/javascript"></script>
+  <script src="{{asset('bundles/dashboard/bower_components/cloudinary-jquery-file-upload/cloudinary-jquery-file-upload.js')}}" type="text/javascript"></script>
+  <script src="{{asset('bundles/dashboard/bower_components/cropit/dist/jquery.cropit.js')}}"></script>
+{% endblock javascripts%}

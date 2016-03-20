@@ -1,0 +1,14 @@
+services:
+  common.base.business:
+    class: CommonBundle\Business\BaseBusiness
+    arguments: ["@doctrine.orm.entity_manager"]
+
+  common.transactional.pointcut:
+    class:    CommonBundle\Aop\TransactionPointcut
+    arguments: ["@annotation_reader"]
+    tags:
+      - { name: jms_aop.pointcut, interceptor: common.transactional.interceptor }
+
+  common.transactional.interceptor:
+    class:    CommonBundle\Aop\TransactionInterceptor
+    arguments: ["@doctrine.orm.entity_manager"]
