@@ -110,13 +110,19 @@ class PropertyBusiness extends BaseBusiness {
     }
 
     public function uploadImg($img = null){
-
       return $uploader->upload($img, array('folder' => 'eblast'));
     }
 
-//    foreach($property['photos'] as $photo){
-//      $thumb = \PhpThumb_Factory::create($photo);
-//      $img =  'data:image/png;base64,' . base64_encode($thumb->getImageAsString());
-//      $photos[] = $img;
-//    }
+    public function removePhoto(Property $property, $photo_id){
+      $cloudinaryApi = $this->container->get('speicher210_cloudinary.api');
+      foreach($property->getPhotos() as $photo){
+        if($photo->getPhotoId() == $photo_id){
+          $this->getEM()->remove($photo);
+          $this->getEM()->flush();
+          $cloudinaryApi->delete_resources(array($photo_id));
+          break;
+        }
+      }
+    }
+
 }

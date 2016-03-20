@@ -153,6 +153,8 @@
       var file_name = data.originalFiles[0].name.replace(/[_\W]+/g, "");
       var last_modified = data.originalFiles[0].lastModified;
       var id = file_name + last_modified;
+
+      {# Load Images from Cloudinary #}
       var img_default = $.cloudinary.image(data.result.public_id,{
         format: data.result.format,
         width: 232,
@@ -168,16 +170,29 @@
         crop: "fit"
       });
 
+      var img_large = $.cloudinary.image(data.result.public_id,{
+        format: data.result.format,
+        width: 2880,
+        height: 1800,
+        crop: "fit"
+      });
+
       {# Update Card View #}
       var card = $('#card_' + id);
       var card_img = card.find('img');
       var card_progress = card.find('.progress');
-      card.find('.card-action').removeClass("hide");
-      card_img.attr('src', img_default.first().attr('src')).load(function(){
-        card_progress.remove();
-      });
+      var card_action = card.find('.card-action');
+
+      {# Change Card Action #}
+      card_action.removeClass("hide");
+      card_action.find('a').data('photoid', data.result.public_id);
+
+      {# Change Card Image #}
       card_img.closest('a.item').attr('data-med', img_medium.first().attr('src'));
-      card_img.closest('a.item').attr('href', img_medium.first().attr('src'));
+      card_img.closest('a.item').attr('href', img_large.first().attr('src'));
+      card_img.attr('src', img_default.first().attr('src')).load(function(){
+        card_progress.addClass('hide');
+      });
 
       {# Update Property Photos #}
       var form_upload = $('form[name=property_photo]').clone();
@@ -188,7 +203,9 @@
 
       $.post("{{ path('properties_upload_photo') }}", data, function(result){
         console.log(result);
-      })
+      });
+
+      linkDeletePhoto();
 
     });
 
@@ -196,7 +213,6 @@
       var file_name = data.originalFiles[0].name.replace(/[_\W]+/g, "");
       var last_modified = data.originalFiles[0].lastModified;
       var id = file_name + last_modified;
-      console.log(data);
       var progress_val = (data.loaded * 100.0) / data.total;
       var card = $('#card_' + id);
       var gallery_image_box = $('.gallery-image-box');
@@ -212,6 +228,26 @@
         card.removeClass('hide');
       }
     });
+
+    function linkDeletePhoto(){
+      $('.delete-property-photo').click(function(){
+        var _this = this;
+        var progress = $(this).parent().parent().find('.progress');
+        progress.removeClass('hide');
+
+        var data = {
+          photo_id: $(this).data('photoid'),
+          property_id: property_id
+        };
+
+        $.post("{{ path('properties_delete_photo') }}", data, function(result){
+          console.log(result);
+          $(_this).closest('.card-upload').remove();
+        });
+      });
+    }
+
+    linkDeletePhoto();
   </script>
 
 {% endblock javascripts %}

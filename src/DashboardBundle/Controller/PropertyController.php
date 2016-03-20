@@ -178,4 +178,24 @@ class PropertyController extends BaseController
       return new JsonResponse(array('status' => 'error'));
     }
   }
+
+  /**
+   * @Route("/properties/delete_photo", name="properties_delete_photo")
+   */
+  public function deletePhotoAction(Request $request)
+  {
+    $property_id = $request->get('property_id');
+    $photo_id = $request->get('photo_id');
+    $property = $this->getDoctrine()
+      ->getRepository('DashboardBundle:Property')
+      ->find($property_id);
+
+    if ($property) {
+      $this->getBusiness()->removePhoto($property, $photo_id);
+      return new JsonResponse(array('status' => 'ok'));
+    }
+    else{
+      return new JsonResponse(array('status' => 'error'));
+    }
+  }
 }
