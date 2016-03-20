@@ -152,13 +152,13 @@
                     <a href="#!" class="" style="color: #9E9E9E;font-size: 11px;font-weight: 600;">GARAGES</a>
                   </div>
                   <div class="card-action card-action-templeate" style="border-top: 0px;background-color: #F0F0EE;font-size: 25px;padding: 0px 0px 0px 10px;">
-                    <a href="#!" class="" style="margin-right: 4rem;margin-left: 8px;color: #424242;font-size: 22px;font-weight: normal; opacity: .85;">2</a>
-                    <a href="#!" class="" style="margin-right: 4rem;color: #424242;font-size: 22px;font-weight: normal; opacity: .85;">4</a>
-                    <a href="#!" class="" style="margin-right: 4rem;color: #424242;font-size: 22px;font-weight: normal; opacity: .85;">1</a>
+                    <a href="#!" class="" style="margin-right: 4rem;margin-left: 8px;color: #424242;font-size: 18px;font-weight: normal; opacity: .85;">{{ row.entity.bathrooms ? row.entity.bathrooms : '-' }}</a>
+                    <a href="#!" class="" style="margin-right: 4rem;color: #424242;font-size: 18px;font-weight: normal; opacity: .85;">{{ row.entity.bedrooms ? row.entity.bedrooms : '-' }}</a>
+                    <a href="#!" class="" style="margin-right: 4rem;color: #424242;font-size: 18px;font-weight: normal; opacity: .85;">{{ row.entity.parkingSpaces ? row.entity.parkingSpaces : '-' }}</a>
                   </div>
-                  <div class="card-action card-action-templeate" style="font-size: 10px;">
-                    <a href="#!" class="blue-text" style="margin-right: 0.3rem;color: #9E9E9E!important"><i class="mdi-communication-location-on"></i></a>
-                    <a href="#!" class="blue-text" style="margin-right: 0rem;color: #9E9E9E!important;">Miami Beach, Florida, Estados Unidos</a>
+                  <div class="card-action card-action-templeate" style="font-size: 12px; text-align: left">
+                    <a href="#!" class="blue-text" style="margin-right: 0.1rem;color: #9E9E9E!important"><i class="mdi-communication-location-on"></i></a>
+                    <a href="#!" class="blue-text" style="margin-right: 0rem;color: #9E9E9E!important;">{{ row.entity.address ? row.entity.fullAddress : 'No address defined' }}</a>
                   </div>
                   <div class="card-action card-action-templeate">
                     <a href="#!" class="blue-text" style="margin-right: 3rem;font-size: 15px">

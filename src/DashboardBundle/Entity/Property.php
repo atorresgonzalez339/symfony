@@ -786,4 +786,8 @@ class Property
     {
         return $this->photos;
     }
+
+    public function getFullAddress(){
+        return $this->address . ', ' . $this->state . ', ' . $this->country . ', ' . $this->postal_code;
+    }
 }
