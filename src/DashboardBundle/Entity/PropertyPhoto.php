@@ -8,8 +8,10 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="property_photos")
  */
-class PropertyPhotos
+class PropertyPhoto
 {
+
+
 	/**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -26,7 +28,21 @@ class PropertyPhotos
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private $url;
+    private $photo_id;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $photo_url;
+
+    /**
+     * PropertyPhoto constructor.
+     * @param $property
+     */
+    public function __construct(Property $property)
+    {
+        $this->property = $property;
+    }
 
     /**
      * Get id
@@ -39,27 +55,38 @@ class PropertyPhotos
     }
 
     /**
-     * Set url
-     *
-     * @param string $url
-     * @return PropertyPhotos
+     * @return mixed
      */
-    public function setUrl($url)
+    public function getPhotoId()
     {
-        $this->url = $url;
-
-        return $this;
+        return $this->photo_id;
     }
 
     /**
-     * Get url
-     *
-     * @return string 
+     * @param mixed $photo_id
      */
-    public function getUrl()
+    public function setPhotoId($photo_id)
     {
-        return $this->url;
+        $this->photo_id = $photo_id;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPhotoUrl()
+    {
+        return $this->photo_url;
+    }
+
+    /**
+     * @param mixed $photo_url
+     */
+    public function setPhotoUrl($photo_url)
+    {
+        $this->photo_url = $photo_url;
+    }
+
+
 
     /**
      * Set property

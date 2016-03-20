@@ -6,12 +6,11 @@
         <h5> Images </h5>
       </div>
       <div class="content">
-
         <div class="row">
           <div class="col m12">
             <div class="file-field input-field">
               <div class="btn">
-                <span>File</span>
+                <span>Upload</span>
                 <input multiple name="file" class="cloudinary-fileupload" data-cloudinary-field="image_upload" type="file">
               </div>
             </div>
@@ -20,40 +19,20 @@
         <div class="row">
           <div class="col m12">
             <div class="row photoswipe-gallery isotope mt-0 gallery-image-box" data-pswp-uid="1">
-                <div class="col m3 hide" id="card_upload">
-                  <div class="card small">
-                    <div class="card-image" style="height: auto;">
-                      <a class="col s12 m12 l12 item" href="{{ asset('bundles/dashboard/properties/4.jpg') }}" data-size="2880x1800"
-                         data-med="{{ asset('bundles/dashboard/properties/4.jpg') }}"
-                         data-med-size="1440x900" style="padding-right: 0px;padding-bottom: 0px;">
-                        <img src="{{ asset('bundles/dashboard/properties/4.jpg') }}" alt="">
-                      </a>
-                    </div>
-                    <div class="content" style="padding: 0px;">
-                    </div>
-                    <div class="progress" style="height: 3px;margin-top: 0px;margin-bottom: 0px;">
-                      <div class="indeterminate"></div>
-                    </div>
-                    <div class="card-action hide" style="">
-                      <a href="#!" class="blue-text" style="">ELIMINAR</a>
-                    </div>
-                  </div>
-                </div>
-                {% if property.getTempPhotos() %}
-                  {% for photo in property.getTempPhotos().toArray() %}
+                {% if property.getPhotos() %}
+                  {% for photo in property.getPhotos() %}
                     <div class="col m3">
                       <div class="card small">
                         <div class="card-image" style="height: auto;">
-                          <a class="col s12 m12 l12 item" href="{{ photo }}" data-size="2880x1800"
-                             data-med="{{ photo }}"
+                          <a class="col s12 m12 l12 item"
+                             href="{{ photo.photoUrl | cloudinary_url({'crop':'fill', 'width':400, 'height':400}) }}"
+                             data-size="2880x1800"
+                             data-med="{{ photo.photoUrl | cloudinary_url({'crop':'fill', 'width':400, 'height':400}) }}"
                              data-med-size="1440x900" style="padding-right: 0px;padding-bottom: 0px;">
-                            <img src="{{ photo }}" alt="">
+                            <img src="{{ photo.photoUrl | cloudinary_url({'crop':'fill', 'width':400, 'height':400}) }}" alt="">
                           </a>
                         </div>
                         <div class="content" style="padding: 0px;">
-                        </div>
-                        <div class="progress" style="height: 3px;margin-top: 0px;margin-bottom: 0px;">
-                          <div class="indeterminate"></div>
                         </div>
                         <div class="card-action" style="">
                           <a href="#!" class="blue-text" style="">ELIMINAR</a>
@@ -84,3 +63,30 @@
     </div>
   </div>
 </div>
+
+{# Hidden Content #}
+
+<div class="col m3 hide" id="card_upload">
+  <div class="card small">
+    <div class="card-image" style="height: auto;">
+      <a class="col s12 m12 l12 item" href="{{ asset('bundles/dashboard/properties/4.jpg') }}" data-size="2880x1800"
+         data-med="{{ asset('bundles/dashboard/properties/4.jpg') }}"
+         data-med-size="1440x900" style="padding-right: 0px;padding-bottom: 0px;">
+        <img src="{{ asset('bundles/dashboard/properties/4.jpg') }}" alt="">
+      </a>
+    </div>
+    <div class="content" style="padding: 0px;">
+    </div>
+    <div class="progress" style="height: 3px;margin-top: 0px;margin-bottom: 0px;">
+      <div class="indeterminate"></div>
+    </div>
+    <div class="card-action hide" style="">
+      <a href="#!" class="blue-text" style="">ELIMINAR</a>
+    </div>
+  </div>
+</div>
+
+{{ form_start(property_photo_form) }}
+  <input type="hidden" name="property_id" value="{{ property_id }}">
+{{ form_end(property_photo_form) }}
+

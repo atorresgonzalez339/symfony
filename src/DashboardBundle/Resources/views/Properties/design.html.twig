@@ -116,7 +116,7 @@
     <div id="test1" class="col s12">
       {% include 'DashboardBundle:Properties:Partials/_design-tab-information.html.twig' %}
     </div>
-    <div id="test2" class="col s12">
+    <div id="tab-gallery" class="col s12">
       {% include 'DashboardBundle:Properties:Partials/_design-tab-gallery.html.twig' %}
     </div>
   </div>
@@ -142,6 +142,9 @@
   <script src="{{ asset('bundles/common/js/cloudinary.js') }}" type="text/javascript"></script>
 
   <script>
+
+    var property_id = {{ property_id }};
+
     Cloudinary.init({
       'preset': 'properties'
     });
@@ -163,19 +166,32 @@
         crop: "fit"
       });
 
+      {# Update Card View #}
       var card = $('#card_' + id);
       var card_img = card.find('img');
-      var card_progress = card.find('.progress');
-      var card_options = card.find('.card-action');
-      card_progress.remove();
-      card_options.removeClass("hide");
-      card_img.attr('src', img_default.first().attr('src'));
+      card.find('.card-action').removeClass("hide");
+      card_img.attr('src', img_default.first().attr('src')).load(function(){
+        card_progress.remove();
+      });
       card_img.closest('a.item').attr('data-med', img_medium.first().attr('src'));
       card_img.closest('a.item').attr('href', img_medium.first().attr('src'));
+
+      {# Update Property Photos #}
+      var form_upload = $('form[name=property_photo]').clone();
+      form_upload.find('#property_photo_photo_id').val(data.result.public_id);
+      form_upload.find('#property_photo_photo_url').val(data.result.url);
+
+      var data = form_upload.serialize();
+
+      $.post("{{ path('properties_upload_photo') }}", data, function(result){
+        console.log(result);
+      })
+
     });
 
     Cloudinary.uploadProgress(function(data){
       var id = data._time;
+      console.log(data);
       var progress_val = (data.loaded * 100.0) / data.total;
       var card = $('#card_' + id);
       var gallery_image_box = $('.gallery-image-box');

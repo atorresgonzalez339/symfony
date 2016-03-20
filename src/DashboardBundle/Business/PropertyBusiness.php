@@ -4,11 +4,15 @@ namespace DashboardBundle\Business;
 
 use CommonBundle\Business\BaseBusiness;
 use DashboardBundle\Entity\Property;
+use DashboardBundle\Entity\PropertyPhoto;
 
 class PropertyBusiness extends BaseBusiness {
 
-    public function __construct($em) {
+    private $container;
+
+    public function __construct($em, $container) {
       parent::__construct($em);
+      $this->container = $container;
     }
 
     public function saveProperty(Property $property){
@@ -61,6 +65,9 @@ class PropertyBusiness extends BaseBusiness {
     }
 
     public function propertyApiMapper($data, Property $property){
+
+      $uploader = $this->container->get('speicher210_cloudinary.uploader');
+
       $property->setName($data['property']['subdivision']);
       $property->setDescription($data['property']['lotDescription']);
       $property->setFeatures(
@@ -72,7 +79,7 @@ class PropertyBusiness extends BaseBusiness {
         'Laundry Features: ' . $data['property']['laundryFeatures'] . ' - ' .
         'Interior Features: ' .  $data['property']['interiorFeatures'] . ' - ' .
         'Exterior Features: ' . $data['property']['exteriorFeatures']);
-      $property->setType($data['property']['type']);
+      //$property->setType($data['property']['type']);
       $property->setLeaseTerm($data['leaseTerm']);
       $property->setBedrooms($data['property']['bedrooms']);
       $property->setBathrooms($data['property']['bathsFull'] + $data['property']['bathsHalf']);
@@ -90,15 +97,20 @@ class PropertyBusiness extends BaseBusiness {
 
       if(!empty($data['photos'])){
         foreach($data['photos'] as $photo){
-          $property->getTempPhotos()->add($photo);
+          $result = $uploader->upload($photo, array('folder' => 'properties'));
+          $propertyPhoto = new PropertyPhoto($property);
+          $propertyPhoto->setPhotoId($result['public_id']);
+          $propertyPhoto->setPhotoUrl($result['url']);
+          $property->addPhoto($propertyPhoto);
         }
       }
 
+      $this->saveProperty($property);
       return $property;
     }
 
     public function uploadImg($img = null){
-      $uploader = $this->get('speicher210_cloudinary.uploader');
+
       return $uploader->upload($img, array('folder' => 'eblast'));
     }
 

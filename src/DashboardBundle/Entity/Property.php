@@ -156,12 +156,15 @@ class Property
      */
     protected $rent_price;
 
-    protected $temp_photos;
+    /**
+     * @ORM\OneToMany(targetEntity="PropertyPhoto", mappedBy="property", cascade={"persist", "remove"})
+     */
+    private $photos;
 
 
     public function __construct(User $user){
         $this->user = $user;
-        $this->temp_photos = new ArrayCollection();
+        $this->photos = new ArrayCollection();
     }
 
     /**
@@ -749,21 +752,38 @@ class Property
         return $this->user;
     }
 
+    
+
     /**
-     * @return ArrayCollection
+     * Add photos
+     *
+     * @param \DashboardBundle\Entity\PropertyPhoto $photos
+     * @return Property
      */
-    public function getTempPhotos()
+    public function addPhoto(\DashboardBundle\Entity\PropertyPhoto $photos)
     {
-        return $this->temp_photos;
+        $this->photos[] = $photos;
+
+        return $this;
     }
 
     /**
-     * @param ArrayCollection $temp_photos
+     * Remove photos
+     *
+     * @param \DashboardBundle\Entity\PropertyPhoto $photos
      */
-    public function setTempPhotos($temp_photos)
+    public function removePhoto(\DashboardBundle\Entity\PropertyPhoto $photos)
     {
-        $this->temp_photos = $temp_photos;
+        $this->photos->removeElement($photos);
     }
 
-
+    /**
+     * Get photos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPhotos()
+    {
+        return $this->photos;
+    }
 }

@@ -1,6 +1,6 @@
 <div class="row" id="main-info" style="margin-top: 0px;">
   <div class="col m12">
-    {{ form_start(property_form, {'action': path('properties_save', {'property_id':property.id}), 'method': 'POST', 'id':'property_form'}) }}
+    {{ form_start(property_form, {'action': path('properties_save'), 'method': 'POST', 'id':'property_form'}) }}
       <div class="card">
         <div class="title">
           <h5> Basic Information </h5>
@@ -148,7 +148,6 @@
       </div>
       {{ form_widget(property_form.lat) }}
       {{ form_widget(property_form.lng) }}
-      <input type="hidden" value="{{ mls_id }}" name="mls_id" >
       <input type="hidden" value="{{ property_id }}" name="property_id" >
     {{ form_end(property_form) }}
   </div>

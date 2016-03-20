@@ -2,10 +2,13 @@
 
 namespace DashboardBundle\Controller;
 
+use DashboardBundle\Entity\PropertyPhoto;
+use DashboardBundle\Form\PropertyPhotoType;
 use DashboardBundle\Form\PropertyType;
 use DashboardBundle\Entity\Property;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use APY\DataGridBundle\Grid\Source\Entity;
 use APY\DataGridBundle\Grid\Action\DeleteMassAction;
@@ -48,15 +51,13 @@ class PropertyController extends BaseController
    */
   public function designAction(Request $request)
   {
-
-
     $mls_id = $request->get('mls_id');
     $property_id = $request->get('property_id');
     $user = $this->getUser();
 
     if($request->isMethod('POST')){
-      $property_id = $this->getFiertSelectetGridItem();
-      die('id - '.$property_id);
+      $property_id = $this->getFirstSelectetGridItem();
+      return $this->redirectToRoute('properties_design', array('property_id' => $property_id));
     }
 
     //Design a property from MLS
@@ -64,24 +65,30 @@ class PropertyController extends BaseController
       $mls_property = $this->getBusiness()->getMlsProperty($mls_id);
       $new_property = new Property($user);
       $property = $this->getBusiness()->propertyApiMapper($mls_property, $new_property);
+      $property_id = $property->getId();
+      return $this->redirectToRoute('properties_design', array('property_id' => $property_id));
     } //Design an existing property
     else if ($property_id) {
-
       $property = $this->getDoctrine()
         ->getRepository('DashboardBundle:Property')
         ->find($property_id);
     } //Design an empty property
     else {
       $property = new Property($user);
+      $property->setName('New Property');
+      $this->getBusiness()->saveProperty($property);
+      $property_id = $property->getId();
     }
 
     $property_form = $this->createForm(PropertyType::class, $property);
+    $property_photo_form = $this->createForm(PropertyPhotoType::class, new PropertyPhoto($property));
 
     return $this->render('DashboardBundle:Properties:design.html.twig', array(
       'mls_id' => $mls_id,
       'property_id' => $property_id,
       'property' => $property,
-      'property_form' => $property_form->createView()
+      'property_form' => $property_form->createView(),
+      'property_photo_form' => $property_photo_form->createView()
     ));
   }
 
@@ -122,7 +129,7 @@ class PropertyController extends BaseController
    */
   public function removeAction(Request $request)
   {
-    $property_id = $this->getFiertSelectetGridItem();
+    $property_id = $this->getFirstSelectetGridItem();
 
     $property = $this->getDoctrine()
       ->getRepository('DashboardBundle:Property')
@@ -134,7 +141,6 @@ class PropertyController extends BaseController
     $this->addFlash('success', 'Property deleted');
 
     return $this->redirect($this->generateUrl('properties_index'));
-
   }
 
   /**
@@ -146,5 +152,28 @@ class PropertyController extends BaseController
     return $this->render('DashboardBundle:Properties:mls.html.twig', array(
       'properties' => $properties
     ));
+  }
+
+  /**
+   * @Route("/properties/upload_photo", name="properties_upload_photo")
+   */
+  public function uploadPhotoAction(Request $request)
+  {
+    $property_id = $request->get('property_id');
+    $property = $this->getDoctrine()
+      ->getRepository('DashboardBundle:Property')
+      ->find($property_id);
+
+    $propertyPhoto = new PropertyPhoto($property);
+    $property_photo_form = $this->createForm(PropertyPhotoType::class, $propertyPhoto);
+
+    $property_photo_form->handleRequest($request);
+
+    if ($property_photo_form->isValid()) {
+      return new JsonResponse(array('status' => 'ok'));
+    }
+    else{
+      return new JsonResponse(array('status' => 'error'));
+    }
   }
 }

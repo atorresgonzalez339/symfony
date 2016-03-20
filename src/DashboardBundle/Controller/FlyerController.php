@@ -48,7 +48,7 @@ class FlyerController extends BaseController
       $user = $this->getUser();
 
       if($request->isMethod('POST')){
-        $flyer_id = $this->getFiertSelectetGridItem();
+        $flyer_id = $this->getFirstSelectetGridItem();
         $flyer = $this->getDoctrine()
                       ->getRepository('DashboardBundle:Flyer')
                       ->find($flyer_id);

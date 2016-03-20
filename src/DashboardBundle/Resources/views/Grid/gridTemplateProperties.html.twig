@@ -123,18 +123,17 @@
                   <div class="card-image waves-effect waves-block waves-light card-image-templeate">
                     <div class="slider" >
                       <ul class="slides">
-                        <li>
-                          <img class="activator" src="{{ asset('bundles/dashboard/properties/1.jpg') }}">
-                        </li>
-                        <li>
-                          <img class="activator" src="{{ asset('bundles/dashboard/properties/2.jpg') }}">
-                        </li>
-                        <li>
-                          <img class="activator" src="{{ asset('bundles/dashboard/properties/3.jpg') }}">
-                        </li>
-                        <li>
-                          <img class="activator" src="{{ asset('bundles/dashboard/properties/4.jpg') }}">
-                        </li>
+                        {% if row.entity.photos | length > 0 %}
+                          {% for photo in row.entity.photos %}
+                            <li>
+                              <img class="activator" src="{{ photo.photoUrl }}">
+                            </li>
+                          {% endfor %}
+                        {% else %}
+                          <li>
+                            <img class="activator" src="{{ asset('bundles/dashboard/images/properties/no-image.png') }}">
+                          </li>
+                        {% endif %}
                       </ul>
                     </div>
                     {#<img class="activator" src="{{ asset('bundles/dashboard/properties/1.jpg') }}">#}
