@@ -13,6 +13,7 @@ class UserProfile
 {
     public function __construct(User $user){
         $this->user = $user;
+        $this->is_completed = false;
     }
 
     /**
@@ -103,6 +104,11 @@ class UserProfile
      * @ORM\Column(type="string", nullable=true)
      */
     private $photo_url;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    private $is_completed;
 
 
     /**
@@ -472,6 +478,18 @@ class UserProfile
     public function getFullName(){
         return $this->first_name . ' ' . $this->last_name;
     }
-
-
+    /**
+     * @return mixed
+     */
+    public function getIsCompleted()
+    {
+        return $this->is_completed;
+    }
+    /**
+     * @param mixed $is_completed
+     */
+    public function setIsCompleted($is_completed)
+    {
+        $this->is_completed = $is_completed;
+    }
 }

@@ -1,4 +1,10 @@
 services:
+    user.profile.listener:
+        class: UserBundle\EventListener\ProfileListener
+        parent: common.base.business
+        arguments: ['@security.context', '@router']
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
     user.profile.business:
         class: UserBundle\Business\ProfileBusiness
         parent: common.base.business
