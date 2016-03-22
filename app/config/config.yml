@@ -90,3 +90,13 @@ doctrine_migrations:
     namespace: Application\Migrations
     table_name: migration_versions
     name: Application Migrations
+
+hip_mandrill:
+    api_key: dzTYHcxm5N7IQIswifXIZA
+    disable_delivery: true # useful for dev/test environment. Default value is 'false'
+    # debug: passed to \Mandrill causing it to output curl requests. Useful to see output
+    # from CLI script. Default value is 'false'
+    debug: true
+    default:
+        sender: atorresgonzalez339@gmail.com
+        sender_name: AgentsBud # Optionally define a sender name (from name)
