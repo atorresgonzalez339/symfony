@@ -3,6 +3,7 @@
 namespace DashboardBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use UserBundle\Entity\User;
 
 /**
  * @ORM\Entity
@@ -24,7 +25,7 @@ class UserPlan
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Plan")
+     * @ORM\ManyToOne(targetEntity="Plan", inversedBy="plans")
      * @ORM\JoinColumn(name="plan_id", referencedColumnName="id")
      */
     private $plan;
@@ -48,6 +49,20 @@ class UserPlan
      * @ORM\Column(type="datetime", nullable=false)
      */
     private $date_end;
+
+    /**
+     * UserPlan constructor.
+     */
+    public function __construct(User $user, Plan $plan)
+    {
+        $this->user = $user;
+        $this->plan = $plan;
+        $this->total_flyers = 0;
+        $this->total_emails = 0;
+        $this->date_start = new \DateTime();
+        $this->date_end = new \DateTime();
+        $this->date_end->add(new \DateInterval('P1M'));
+    }
 
     /**
      * Get id

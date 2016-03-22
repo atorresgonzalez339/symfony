@@ -24,7 +24,7 @@ class UserProfile
     protected $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="User", inversedBy="cart")
+     * @ORM\OneToOne(targetEntity="User", inversedBy="profile")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;

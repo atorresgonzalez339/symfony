@@ -22,6 +22,11 @@ class User extends BaseUser
      */
     private $profile;
 
+    /**
+     * @ORM\OneToMany(targetEntity="\DashboardBundle\Entity\UserPlan", mappedBy="user")
+     */
+    private $plans;
+
     public function __construct()
     {
         parent::__construct();
@@ -44,5 +49,43 @@ class User extends BaseUser
         $this->profile = $profile;
     }
 
+
+
+    /**
+     * Add plans
+     *
+     * @param \DashboardBundle\Entity\UserPlan $plans
+     * @return User
+     */
+    public function addPlan(\DashboardBundle\Entity\UserPlan $plans)
+    {
+        $this->plans[] = $plans;
+
+        return $this;
+    }
+
+    /**
+     * Remove plans
+     *
+     * @param \DashboardBundle\Entity\UserPlan $plans
+     */
+    public function removePlan(\DashboardBundle\Entity\UserPlan $plans)
+    {
+        $this->plans->removeElement($plans);
+    }
+
+    /**
+     * Get plans
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPlans()
+    {
+        return $this->plans;
+    }
+
+    public function getCurrentPlan(){
+        return $this->getPlans()->last();
+    }
 
 }

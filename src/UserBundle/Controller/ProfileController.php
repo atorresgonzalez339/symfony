@@ -65,7 +65,18 @@ class ProfileController extends BaseController
       $profile_form->handleRequest($request);
 
       if ($profile_form->isValid()) {
+
         $this->getBusiness()->saveProfile($profile);
+
+        //Add free Plan to the user after complete profile
+        if(!$user->getCurrentPlan()){
+          $freePlan =  $this->getBusiness()
+                            ->getRepository('Dashboard', 'Plan')
+                            ->find(1);
+          $upgradeBusiness = $this->findBusiness('dashboard.upgrade.business');
+          $upgradeBusiness->addUserPlan($user, $freePlan);
+        }
+
         $this->addFlash('success', 'Profile saved');
         return $this->redirect($this->generateUrl('profile_index'));
       }
