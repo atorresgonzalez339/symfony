@@ -27,7 +27,7 @@
         "apy/datagrid-bundle":"2.2.16",
         "fresh/doctrine-enum-bundle": "^2.6",
         "jms/aop-bundle": "^1.2",
-        "hipaway-travel/mandrill-bundle": "dev-master"
+        "hipaway-travel/mandrill-bundle": "1.0.10"
     },
     "require-dev": {
         "sensio/generator-bundle": "~3.0",

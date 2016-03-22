@@ -13,28 +13,27 @@
     <div class="container">
         <div class="content">
             <div class="col-sm-4 col-sm-offset-4">
-                <h2 class="page-header center">SIGN IN</h2>
+                <h2 class="page-header center">SIGN UP</h2>
 
                 <div class="box">
                     {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
                         <div class="form-group">
-                            {{ form_label(form.email) }}
-                            {{ form_widget(form.email) }}
+                            {{ form_widget(form.email, {'attr': {'class':'form-control','placeholder':'Email'}}) }}
                             {{ form_errors(form.email) }}
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" id="password" name="_password" required="required" placeholder="Password"/>
+                            {{ form_widget(form.username, {'attr': {'class':'form-control','placeholder':'Username'}}) }}
+                            {{ form_errors(form.username) }}
                         </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <input type="checkbox" id="remember_me" name="_remember_me" value="on"/> Remember me
-                                </div> </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <a href=""> Forgot password</a>
-                                </div> </div>
+                        <div class="form-group">
+                            {{ form_widget(form.plainPassword.first, {'attr': {'class':'form-control','placeholder':'Password'}}) }}
+                            {{ form_errors(form.plainPassword.first) }}
                         </div>
+                    <div class="form-group">
+                        {{ form_widget(form.plainPassword.second, {'attr': {'class':'form-control','placeholder':'Confirm password'}}) }}
+                        {{ form_errors(form.plainPassword.second) }}
+                    </div>
+
                         <button type="submit" class="btn">{{ 'registration.submit'|trans }}</button>
                     {{ form_end(form) }}
                 </div>
