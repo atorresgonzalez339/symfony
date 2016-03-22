@@ -28,7 +28,7 @@ class ProfileListener extends BaseBusiness
 
     if ($isProfilePath === false && $isAjaxRequest == false && $this->security_context->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
         $user = $this->security_context->getToken()->getUser();
-        if ( $user->getProfile() && !$user->getProfile()->getIsCompleted()) {
+        if ( !$user->getProfile() || !$user->getProfile()->getIsCompleted()) {
           $url = $this->router->generate('profile_index');
           $event->setResponse(new RedirectResponse($url));
         }
