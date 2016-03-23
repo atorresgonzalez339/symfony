@@ -27,6 +27,10 @@ services:
       class: DashboardBundle\Business\UpgradeBusiness
       parent: common.base.business
 
+  dashboard.contact.business:
+      class: DashboardBundle\Business\ContactBusiness
+      parent: common.base.business
+
   ralf.common.twig.extension.functions:
     class: DashboardBundle\Twig\Extension\Functions
     arguments: ["@twig","@security.context","@service_container"]

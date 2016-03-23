@@ -26,6 +26,14 @@ class BaseController extends Controller {
         return $this->get($service);
     }
 
+    protected function genericNew($nameEntity, $nameFormEntity, $renderDir, $nameFormView = 'form') {
+        $entity = new $nameEntity();
+        $form = $this->createForm(new $nameFormEntity(), $entity);
+        return $this->render($renderDir, array(
+            $nameFormView => $form->createView(),
+        ));
+    }
+
     /**
      * @author  Livan L. Frometa Osorio <llfrometa@gmail.com>
      */

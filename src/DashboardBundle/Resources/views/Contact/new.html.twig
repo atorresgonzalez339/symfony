@@ -2,6 +2,7 @@
 
 {% block breadcrumb %}
 	<li><a href="#">Contacts</a></li>
+	<li><a href="#">New</a></li>
 {% endblock breadcrumb%}
 
 {% block content %}
@@ -9,7 +10,7 @@
 		<div class="title">
 			<h5> Contacts </h5>
 			<div class="btn-group right">
-				<a href="{{ path('contact_new') }}" class="btn btn-small waves-dark waves-effect"><i class="mdi mdi-content-add left"></i>Add</a>
+				<a class="btn btn-small waves-dark waves-effect"><i class="mdi mdi-content-add left"></i>Add</a>
 				<a id="edit_action" class="btn btn-small waves-dark waves-effect">
 					<i class="mdi mdi-content-create left"></i>
 					Edit
@@ -18,7 +19,16 @@
 			</div>
 		</div>
 		<div class="content">
-			{{ grid(grid, 'DashboardBundle:Grid:gridTemplateAjax.html.twig') }}
+			<form id="formSubmit" class="form-horizontal" action="{{ path('contact_create') }}" method="post" {{ form_enctype(form) }}>
+				<div class="row">
+					<div class="col l6">
+						{{ form_widget(form) }}
+					</div>
+					<div class="col l6">
+
+					</div>
+				</div>
+			</form>
 		</div>
 	</div>
 {% endblock content %}

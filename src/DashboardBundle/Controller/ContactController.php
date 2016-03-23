@@ -2,19 +2,28 @@
 
 namespace DashboardBundle\Controller;
 
+use CommonBundle\Controller\BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use APY\DataGridBundle\Grid\Source\Entity;
 use APY\DataGridBundle\Grid\Action\DeleteMassAction;
 
-class ContactController extends Controller{
+class ContactController extends BaseController{
 
-	/**
- 	 * @Route("/contacts", name="contact_index")
- 	 */
-  public function indexAction(Request $request){
+    private $nameEntity     = '\DashboardBundle\Entity\Contact';
+    private $nameFormEntity = '\DashboardBundle\Form\ContactType';
+    private $nameService    = 'dashboard.contact.business';
+    private $indexRouting   = 'contact_index';
+
+    public function getBusiness() {
+        return parent::findBusiness($this->nameService);
+    }
+
+  /**
+   * @Route("/contacts", name="contact_index")
+   */
+    public function indexAction(Request $request){
       $source = new Entity('DashboardBundle:Contact');
       $grid = $this->get('grid');
       $grid->setSource($source);
@@ -24,6 +33,21 @@ class ContactController extends Controller{
       if ($request->isXmlHttpRequest()) return $grid->getGridResponse('DashboardBundle:Contact:indexAjax.html.twig');
       if ($grid->isReadyForRedirect())return new RedirectResponse($grid->getRouteUrl());
       return $grid->getGridResponse('DashboardBundle:Contact:index.html.twig');
-  }
+    }
+
+    /**
+     * @Route("/contacts/new", name="contact_new")
+     */
+    public function newAction() {
+        $renderDir = 'DashboardBundle:Contact:new.html.twig';
+        return $this->genericNew($this->nameEntity, $this->nameFormEntity, $renderDir);
+    }
+
+    /**
+     * @Route("/contacts/create", name="contact_create")
+     */
+    public function createAction() {
+
+    }
 
 }
