@@ -22,12 +22,6 @@ class UpgradeBusiness extends BaseBusiness
     \Stripe::setApiKey($apiKey);
   }
 
-  public function addUserPlan(User $user, Plan $plan)
-  {
-    $userPlan = new UserPlan($user, $plan);
-    $this->saveData($userPlan);
-  }
-
   public function updatePlan(User $user, Plan $plan, $coupon_id = null)
   {
 
@@ -35,9 +29,6 @@ class UpgradeBusiness extends BaseBusiness
     $new_plan_id = $plan->getId();
 
     if ($customer_id) {
-
-      $userPlan = $user->getCurrentPlan();
-      $currentPlan = $userPlan->getPlan();
 
       $customer = \Stripe_Customer::retrieve($customer_id);
 

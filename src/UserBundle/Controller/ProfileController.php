@@ -74,7 +74,7 @@ class ProfileController extends BaseController
                             ->getRepository('Dashboard', 'Plan')
                             ->find(1);
           $upgradeBusiness = $this->findBusiness('dashboard.upgrade.business');
-          $upgradeBusiness->addUserPlan($user, $freePlan);
+          $upgradeBusiness->updatePlan($user, $freePlan);
         }
 
         $this->addFlash('success', 'Profile saved');

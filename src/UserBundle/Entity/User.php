@@ -23,7 +23,7 @@ class User extends BaseUser
     private $profile;
 
     /**
-     * @ORM\OneToMany(targetEntity="\DashboardBundle\Entity\UserPlan", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="\DashboardBundle\Entity\UserPlan", mappedBy="user", cascade={"persist", "remove"})
      */
     private $plans;
 
