@@ -17,12 +17,30 @@
 		</div>
 		<div class="content">
 			<form id="formSubmit" class="form-horizontal" action="{{ path('contact_create') }}" method="post" {{ form_enctype(form) }}>
-				<div class="row">
-					<div class="col l6">
-						{{ form_widget(form) }}
+				<div class="row" style="padding-left: 20px;padding-right: 50%;margin-top: 0rem;">
+					<div class="row" style="margin-top: 0rem;">
+						<div class="col m12" style="padding-bottom: 0px;">
+							<div class="input-field">
+								{{ form_widget(form.first_name) }}
+								<label for="property_lease_term" class="">First Name</label>
+							</div>
+						</div>
 					</div>
-					<div class="col l6">
-
+					<div class="row" style="margin-top: 0rem;">
+						<div class="col m12" style="padding-bottom: 0px;">
+							<div class="input-field">
+								{{ form_widget(form.last_name) }}
+								<label for="property_lease_term" class="">Last Name</label>
+							</div>
+						</div>
+					</div>
+					<div class="row" style="margin-top: 0rem;">
+						<div class="col m12">
+							<div class="input-field">
+								{{ form_widget(form.email) }}
+								<label for="property_lease_term" class="">Email</label>
+							</div>
+						</div>
 					</div>
 				</div>
 			</form>
