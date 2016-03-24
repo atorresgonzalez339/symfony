@@ -51,9 +51,25 @@
                 {{ form_widget(property_form.year_built) }}
                 <label for="property_year_built" class="">Year Built</label>
               </div>
-              <div class="input-field" style="margin-top: 3px;">
-                {{ form_widget(property_form.list_price) }}
-                <label for="property_list_price" class="">Price</label>
+              {#<div class="input-field" style="margin-top: 3px;">#}
+                {#{{ form_widget(property_form.list_price) }}#}
+                {#<label for="property_list_price" class="">Price</label>#}
+              {#</div>#}
+              <div class="input-field">
+                <div class="row" style="margin-top: 0px;">
+                  <div class="col m6">
+                    <div class="input-field" style="margin-top: 0px !important;">
+                      {{ form_widget(property_form.list_price) }}
+                      <label for="property_list_price" class="">Price</label>
+                    </div>
+                  </div>
+                  <div class="col m6">
+                    <p style="margin-top: 5px;">
+                      {{ form_widget(property_form.for_rent, {'attr': {'class':'filled-in'}}) }}
+                      <label for="property_for_rent">Is it for rent?</label>
+                    </p>
+                  </div>
+                </div>
               </div>
               <div class="input-field">
                 {{ form_widget(property_form.lease_term) }}
@@ -63,12 +79,6 @@
             <div class="col m6">
               <div class="input-field">
                 {{ form_widget(property_form.type)}}
-                {#<select class="select2">#}
-                  {#<option value="AK">Apartament</option>#}
-                  {#<option value="HI">Condo</option>#}
-                  {#<option value="HI">House</option>#}
-                  {#<option value="HI">Villa</option>#}
-                {#</select>#}
               </div>
               <div class="input-field">
                 {{ form_widget(property_form.address, {'attr':{'placeholder':''}}) }}
@@ -91,20 +101,8 @@
                 <label for="property_country" class="">Country</label>
               </div>
               <div class="input-field">
-                <div class="row" style="margin-top: 0px;">
-                  <div class="col m6">
-                    <div class="input-field" style="margin-top: 0px !important;">
-                      {{ form_widget(property_form.postal_code) }}
-                      <label for="property_postal_code" class="">Postal Code</label>
-                    </div>
-                  </div>
-                  <div class="col m6">
-                    <p style="margin-top: 5px;">
-                      {{ form_widget(property_form.for_rent, {'attr': {'class':'filled-in'}}) }}
-                      <label for="property_for_rent">Is it for rent?</label>
-                    </p>
-                  </div>
-                </div>
+                {{ form_widget(property_form.postal_code) }}
+                <label for="property_postal_code" class="">Postal Code</label>
               </div>
             </div>
           </div>
@@ -119,13 +117,13 @@
           <div class="row" style="margin-top: 0px">
             <div class="col m6">
               <div class="input-field">
-                {{ form_widget(property_form.amenities, {'attr': {'class':'materialize-textarea'}}) }}
+                {{ form_widget(property_form.amenities, {'attr': {'class':'materialize-textarea min-h-80'}}) }}
                 <label for="property_amenities">Amenities</label>
               </div>
             </div>
             <div class="col m6">
               <div class="input-field">
-                {{ form_widget(property_form.features, {'attr': {'class':'materialize-textarea'}}) }}
+                {{ form_widget(property_form.features, {'attr': {'class':'materialize-textarea min-h-80'}}) }}
                 <label for="property_features">Features</label>
               </div>
             </div>
