@@ -16,84 +16,32 @@
     </div>
     <div class="content">
       <div class="row">
+        {% for plan in plans %}
         <div class="col m3">
-          <div class="active-plan">
+          <div {{ plan.id == current_plan.plan.id ? 'class="active-plan"' }}>
             <div class="card small">
               <div class="content" style="padding-top: 10px;padding-bottom: 10px;">
-                <center class="" style="font-size: 20px"> <span style="color: #424242;">FREE</span> </center>
+                <center class="" style="font-size: 20px"> <span style="color: #424242;">{{ plan.name | upper }}</span> </center>
               </div>
               <div class="content" style="padding-top: 10px;padding-bottom: 10px;background-color: #F0F0EE;">
-                <center class="" style="font-size: 18px;color: #424242;"> <strong>$6.95</strong> <span style="color: #9E9E9E;">/ month </span></center>
+                <center class="" style="font-size: 18px;color: #424242;"> <strong>${{ plan.price | number_format(2) }}</strong> <span style="color: #9E9E9E;">/ month </span></center>
               </div>
               <div class="content" style="padding-top: 15px;padding-bottom: 15px;">
-                <p> 10 contact</p>
-                <p> 10 contact</p>
-                <p> 10 contact</p>
-                <p> 10 contact</p>
+                <p> Up to {{ plan.totalFlyers }} Flyers</p>
+                <p> Up to {{ plan.totalEmails }} Email</p>
+                <p> Up to {{ plan.totalContacts }} Contacts</p>
               </div>
               <div class="content" style="padding-top: 15px;padding-bottom: 15px;">
-                <center>  <a class="btn"><i class="mdi mdi-editor-attach-money left"></i>BUY NOW</a> </center>
+                {% if plan.id != current_plan.plan.id %}
+                  <center>  <a class="btn"><i class="mdi mdi-editor-attach-money left"></i>BUY NOW</a> </center>
+                {% else %}
+                  <center>  Your current Plan </center>
+                {% endif %}
               </div>
             </div>
           </div>
         </div>
-        <div class="col m3">
-          <div class="card small">
-            <div class="content" style="padding-top: 10px;padding-bottom: 10px;">
-              <center class="" style="font-size: 20px"> <span style="color: #424242;">GOLD</span> </center>
-            </div>
-            <div class="content" style="padding-top: 10px;padding-bottom: 10px;background-color: #F0F0EE;">
-              <center class="" style="font-size: 18px;color: #424242;"> <strong>$6.95</strong> <span style="color: #9E9E9E;">/ month </span></center>
-            </div>
-            <div class="content" style="padding-top: 15px;padding-bottom: 15px;">
-              <p> 10 contact</p>
-              <p> 10 contact</p>
-              <p> 10 contact</p>
-              <p> 10 contact</p>
-            </div>
-            <div class="content" style="padding-top: 15px;padding-bottom: 15px;">
-              <center>  <a class="btn"><i class="mdi mdi-editor-attach-money left"></i>BUY NOW</a> </center>
-            </div>
-          </div>
-        </div>
-        <div class="col m3">
-          <div class="card small">
-            <div class="content" style="padding-top: 10px;padding-bottom: 10px;">
-              <center class="" style="font-size: 20px"> <span style="color: #424242;">TOP</span> </center>
-            </div>
-            <div class="content" style="padding-top: 10px;padding-bottom: 10px;background-color: #F0F0EE;">
-              <center class="" style="font-size: 18px;color: #424242;"> <strong>$6.95</strong> <span style="color: #9E9E9E;">/ month </span></center>
-            </div>
-            <div class="content" style="padding-top: 15px;padding-bottom: 15px;">
-              <p> 10 contact</p>
-              <p> 10 contact</p>
-              <p> 10 contact</p>
-              <p> 10 contact</p>
-            </div>
-            <div class="content" style="padding-top: 15px;padding-bottom: 15px;">
-              <center>  <a class="btn"><i class="mdi mdi-editor-attach-money left"></i>BUY NOW</a> </center>
-            </div>
-          </div>
-        </div>
-        <div class="col m3">
-          <div class="card small">
-            <div class="content" style="padding-top: 10px;padding-bottom: 10px;">
-              <center class="" style="font-size: 20px"> <span style="color: #424242;">PREMIUN</span> </center>
-            </div>
-            <div class="content" style="padding-top: 10px;padding-bottom: 10px;background-color: #F0F0EE;">
-              <center class="" style="font-size: 18px;color: #424242;"> <strong>$6.95</strong> <span style="color: #9E9E9E;">/ month </span></center>
-            </div>
-            <div class="content" style="padding-top: 15px;padding-bottom: 15px;">
-              <p> 10 contact</p>
-              <p> 10 contact</p>
-              <p> 10 contact</p>
-              <p> 10 contact</p>
-            </div>
-            <div class="content" style="padding-top: 15px;padding-bottom: 15px;">
-              <center>  <a class="btn"><i class="mdi mdi-editor-attach-money left"></i>BUY NOW</a> </center>
-            </div>
-          </div>
-        </div>
+        {% endfor %}
       </div>
     </div>
   </div>

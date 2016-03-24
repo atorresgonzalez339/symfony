@@ -10,14 +10,33 @@ use Symfony\Component\HttpFoundation\Request;
 use APY\DataGridBundle\Grid\Source\Entity;
 use APY\DataGridBundle\Grid\Action\DeleteMassAction;
 
-class UpgradeController extends Controller{
+class UpgradeController extends Controller
+{
 
-	/**
- 	 * @Route("/upgrade", name="upgrade_index")
- 	 */
-  public function indexAction(Request $request){
+  private $serviceName = 'dashboard.upgrade.business';
 
-    return $this->render('DashboardBundle:Upgrade:index.html.twig');
+  public function getBusiness()
+  {
+    return parent::findBusiness($this->serviceName);
+  }
+
+  /**
+   * @Route("/upgrade", name="upgrade_index")
+   */
+  public function indexAction(Request $request)
+  {
+    $user = $this->getUser();
+
+    $plans = $this->getDoctrine()
+      ->getRepository('DashboardBundle:Plan')
+      ->findAll();
+
+    $currentPlan = $user->getCurrentPlan();
+
+    return $this->render('DashboardBundle:Upgrade:index.html.twig', array(
+      'plans' => $plans,
+      'current_plan' => $currentPlan
+    ));
 
   }
 

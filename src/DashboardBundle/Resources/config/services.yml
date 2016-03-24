@@ -26,6 +26,7 @@ services:
   dashboard.upgrade.business:
       class: DashboardBundle\Business\UpgradeBusiness
       parent: common.base.business
+      arguments: ["@service_container"]
 
   dashboard.contact.business:
       class: DashboardBundle\Business\ContactBusiness

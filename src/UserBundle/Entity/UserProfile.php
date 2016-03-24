@@ -110,6 +110,11 @@ class UserProfile
      */
     private $is_completed;
 
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $customer_id;
+
 
     /**
      * Get id
@@ -492,4 +497,22 @@ class UserProfile
     {
         $this->is_completed = $is_completed;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCustomerId()
+    {
+        return $this->customer_id;
+    }
+
+    /**
+     * @param mixed $customer_id
+     */
+    public function setCustomerId($customer_id)
+    {
+        $this->customer_id = $customer_id;
+    }
+
+
 }
