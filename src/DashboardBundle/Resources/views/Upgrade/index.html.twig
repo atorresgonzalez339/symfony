@@ -43,6 +43,15 @@
         </div>
         {% endfor %}
       </div>
+
+      {% include 'DashboardBundle:Upgrade:Partials/_stripe_card_form.html.twig' %}
+
     </div>
   </div>
 {% endblock content %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+  <script src="{{ asset('bundles/dashboard/assets/js/stripe.js') }}"></script>
+{% endblock %}
