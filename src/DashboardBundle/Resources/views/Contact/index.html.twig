@@ -14,11 +14,19 @@
 					<i class="mdi mdi-content-create left"></i>
 					Edit
 				</a>
-				<a class="btn btn-small waves-dark waves-effect red"><i class="mdi mdi-content-clear left"></i>Delete</a>
+				<a id="delete_action" class="btn btn-small waves-dark waves-effect red"><i class="mdi mdi-content-clear left"></i>Delete</a>
 			</div>
 		</div>
 		<div class="content">
 			{{ grid(grid, 'DashboardBundle:Grid:gridTemplateAjax.html.twig') }}
 		</div>
 	</div>
+	<script src="{{ asset('bundles/common/js/application.js') }}" type="text/javascript"></script>
+	<script>
+		$(document).ready(function(){
+			$('#delete_action').click(function(){
+				App.submit('{{ grid.hash }}','{{ path('contact_delete') }}')
+			});
+		});
+	</script>
 {% endblock content %}

@@ -15,6 +15,7 @@ class ContactController extends BaseController{
     private $nameFormEntity = '\DashboardBundle\Form\ContactType';
     private $nameService    = 'dashboard.contact.business';
     private $indexRouting   = 'contact_index';
+    private $newRouting     = 'contact_new';
 
     public function getBusiness() {
         return parent::findBusiness($this->nameService);
@@ -46,8 +47,32 @@ class ContactController extends BaseController{
     /**
      * @Route("/contacts/create", name="contact_create")
      */
-    public function createAction() {
-
+    public function createAction(Request $request) {
+        $renderDir = 'DashboardBundle:Contact:new.html.twig';
+        $messageSucccess = 'Save contact success';
+        $messageError    = 'Exist error in the data form';
+        return $this->genericCreate($this->nameEntity, $this->nameFormEntity, $renderDir, $this->nameService, $this->newRouting,$messageSucccess,$messageError);
     }
+
+    /**
+     * @Route("/contacts/create_close", name="contact_create_close")
+     */
+    public function createAndCloseAction(Request $request) {
+        $renderDir       = 'DashboardBundle:Contact:new.html.twig';
+        $messageSucccess = 'Save contact success';
+        $messageError    = 'Exist error in the data form';
+        return $this->genericCreate($this->nameEntity, $this->nameFormEntity, $renderDir, $this->nameService, $this->indexRouting,$messageSucccess,$messageError);
+    }
+
+    /**
+     * @Route("/contacts/delete", name="contact_delete")
+     */
+    public function deleteAction() {
+        $messageInfo = 'Selected one or more contact to delete';
+        $messageSucccess = 'Delete contact success';
+        $messageError = 'Error in the delete progress';
+        return $this->genericDelete($this->nameService, $this->indexRouting,$messageInfo, $messageSucccess,$messageError);
+    }
+
 
 }

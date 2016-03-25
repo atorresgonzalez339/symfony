@@ -26,12 +26,52 @@ class BaseController extends Controller {
         return $this->get($service);
     }
 
+    /**
+     * @author  Livan L. Frometa Osorio <llfrometa@gmail.com>
+     */
     protected function genericNew($nameEntity, $nameFormEntity, $renderDir, $nameFormView = 'form') {
         $entity = new $nameEntity();
         $form = $this->createForm(new $nameFormEntity(), $entity);
         return $this->render($renderDir, array(
             $nameFormView => $form->createView(),
         ));
+    }
+
+    /**
+     * @author  Livan L. Frometa Osorio <llfrometa@gmail.com>
+     */
+    public function genericCreate($nameEntity, $nameFormEntity, $renderDir, $nameService, $routing, $messageSucccess = '', $messageError = '', $nameFormView = 'form') {
+        $request = $this->getRequest();
+        $entity = new $nameEntity();
+        $form = $this->createForm(new $nameFormEntity(), $entity);
+        $form->bind($request);
+        if ($form->isValid()) {
+            $this->findBusiness($nameService)->saveData($entity);
+            $this->addFlash('success', $messageSucccess, $routing);
+            return $this->redirect($this->generateUrl($routing));
+        } else {
+//            print_r('<pre>');print_r($form->getErrorsAsString());die;
+            $this->addFlash('info', $messageError);
+            return $this->render($renderDir, array('entity' => $entity,$nameFormView => $form->createView()));
+        }
+    }
+
+    /**
+     * @author  Livan L. Frometa Osorio <llfrometa@gmail.com>
+     */
+    public function genericDelete($nameService, $indexRouting,$messageInfo = '', $messageSucccess = '',$messageError = '') {
+        $ids = $this->getSelectetGridItems();
+        if (!$ids) {
+            $this->addFlash('info', $messageInfo);
+            return $this->redirect($this->generateUrl($indexRouting));
+        }
+        $business   = $this->findBusiness($nameService);
+        $result     = $business->removeAll($ids);
+        if ($result) {
+            return $this->addFlash('success', $messageSucccess, $indexRouting);
+        } else {
+            return $this->addFlash('info', $messageError, $indexRouting);
+        }
     }
 
     /**
