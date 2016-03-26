@@ -8,7 +8,7 @@ use APY\DataGridBundle\Grid\Mapping as GRID;
 /**
  * @ORM\Entity
  * @ORM\Table(name="contact_list")
- * @ORM\Entity(repositoryClass="DashboardBundle\Repository\ContactRepository")
+ * @ORM\Entity(repositoryClass="DashboardBundle\Repository\ContactListRepository")
  * @GRID\Source(columns="id,name")
  */
 class ContactList
