@@ -7,9 +7,9 @@
 {% block content %}
 	<div class="card card-data-grid">
 		<div class="title">
-			<h5> Contacts </h5>
+			<h5> Contacts List</h5>
 			<div class="btn-group right">
-				<a href="{{ path('contact_new') }}" class="btn btn-small waves-dark waves-effect"><i class="mdi mdi-content-add left"></i>Add</a>
+				<a href="{{ path('contactlist_new') }}" class="btn btn-small waves-dark waves-effect"><i class="mdi mdi-content-add left"></i>Add</a>
 				<a id="edit_action" class="btn btn-small waves-dark waves-effect">
 					<i class="mdi mdi-content-create left"></i>
 					Edit
@@ -25,10 +25,10 @@
 	<script>
 		$(document).ready(function(){
 			$('#delete_action').click(function(){
-				App.submit('{{ grid.hash }}','{{ path('contact_delete') }}')
+				App.submit('{{ grid.hash }}','{{ path('contactlist_delete') }}')
 			});
 			$('#edit_action').click(function(){
-				App.submit('{{ grid.hash }}','{{ path('contact_edit') }}')
+				App.submit('{{ grid.hash }}','{{ path('contactlist_edit') }}')
 			});
 		});
 	</script>

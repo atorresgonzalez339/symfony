@@ -23,7 +23,7 @@ class ContactList
 
     /**
      * @ORM\Column(name="name",type="string", nullable=false)
-     * @GRID\Column(field="name", type="text" , filterable=true, title="First Name",size=30)
+     * @GRID\Column(field="name", type="text" , filterable=true, title="Name",size=100)
      */
     private $name;
 

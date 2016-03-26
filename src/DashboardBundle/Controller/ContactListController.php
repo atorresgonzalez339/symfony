@@ -13,7 +13,7 @@ class ContactListController extends BaseController{
 
     private $nameEntity     = '\DashboardBundle\Entity\ContactList';
     private $nameFormEntity = '\DashboardBundle\Form\ContactListType';
-    private $nameService    = 'dashboard.contact.business';
+    private $nameService    = 'dashboard.contactlist.business';
     private $indexRouting   = 'contactlist_index';
     private $newRouting     = 'contactlist_new';
 

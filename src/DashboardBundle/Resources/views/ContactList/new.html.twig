@@ -1,8 +1,8 @@
 {% extends 'DashboardBundle:Common:backend2.html.twig' %}
 
 {% block breadcrumb %}
-	<li><a href="{{ path('contact_index') }}">Contacts</a></li>
-	<li><a href="#">Edir</a></li>
+	<li><a href="#">Contacts List</a></li>
+	<li><a href="#">New</a></li>
 {% endblock breadcrumb%}
 
 {% block content %}
@@ -10,34 +10,19 @@
 		<div class="title">
 			<h5> Contacts </h5>
 			<div class="btn-group right">
-				<a href="{{ path('contact_index') }}" class="btn btn-small waves-dark waves-effect"><i class="mdi mdi-hardware-keyboard-arrow-left left"></i>Back</a>
+				<a href="{{ path('contactlist_index') }}" class="btn btn-small waves-dark waves-effect"><i class="mdi mdi-hardware-keyboard-arrow-left left"></i>Back</a>
 				<a id="save_action" class="btn btn-small waves-dark waves-effect"> <i class="mdi mdi-content-save left"></i> Save</a>
+				<a id="save_and_close_action" class="btn btn-small waves-dark waves-effect"> <i class="mdi mdi-action-done left"></i> Save and Close</a>
 			</div>
 		</div>
 		<div class="content">
 			<form id="formSubmit" class="form-horizontal" action="" method="post" {{ form_enctype(form) }}>
 				<div class="row" style="padding-left: 20px;padding-right: 50%;margin-top: 0rem;">
 					<div class="row" style="margin-top: 0rem;">
-						<div class="col m12" style="padding-bottom: 0px;">
-							<div class="input-field">
-								{{ form_widget(form.first_name) }}
-								<label for="property_lease_term" class="">First Name</label>
-							</div>
-						</div>
-					</div>
-					<div class="row" style="margin-top: 0rem;">
-						<div class="col m12" style="padding-bottom: 0px;">
-							<div class="input-field">
-								{{ form_widget(form.last_name) }}
-								<label for="property_lease_term" class="">Last Name</label>
-							</div>
-						</div>
-					</div>
-					<div class="row" style="margin-top: 0rem;">
 						<div class="col m12">
 							<div class="input-field">
-								{{ form_widget(form.email) }}
-								<label for="property_lease_term" class="">Email</label>
+								{{ form_widget(form.name) }}
+								<label for="property_lease_term" class="">Name</label>
 							</div>
 						</div>
 					</div>
@@ -50,7 +35,11 @@
 	<script>
 		$(document).ready(function(){
 			$('#save_action').click(function(){
-				App.submit('formSubmit','{{ path('contact_update', { 'id': entity.id }) }}')
+				App.submit('formSubmit','{{ path('contactlist_create') }}')
+			});
+
+			$('#save_and_close_action').click(function(){
+				App.submit('formSubmit','{{ path('contactlist_create_close') }}')
 			});
 		});
 	</script>
