@@ -595,9 +595,11 @@
 {% block grid_column_boolean_cell %}
     {% set value = value is sameas(false) ? 'false' : value %}
         {%if value=='true' %}
-            <a class="btn-floating btn-large green btn-small btn-mini-small"><i class="mdi-action-done"></i></a>
+            <a class="btn-floating btn-large green btn-small btn-mini-small" style="width: 25.6px;height: 25.6px;">
+                <i class="mdi-action-done" style="font-size: 1.0rem !important;line-height: 25.6px;"></i></a>
         {%else%}
-            <a class="btn-floating btn-large red btn-small btn-mini-small"><i class="mdi-content-clear"></i></a>
+            <a class="btn-floating btn-large red btn-small btn-mini-small" style="width: 25.6px;height: 25.6px;">
+                <i class="mdi-content-clear" style="font-size: 1.0rem !important;line-height: 25.6px;"></i></a>
         {%endif%}
 {% endblock grid_column_boolean_cell %}
 {# ------------------------------------------------ grid_column_boolean_cell --------------------------------------------- #}

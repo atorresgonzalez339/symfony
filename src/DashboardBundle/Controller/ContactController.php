@@ -74,5 +74,41 @@ class ContactController extends BaseController{
         return $this->genericDelete($this->nameService, $this->indexRouting,$messageInfo, $messageSucccess,$messageError);
     }
 
+    /**
+     * @Route("/contacts/edit", name="contact_edit")
+     */
+    public function editAction(){
+        $renderDir       = 'DashboardBundle:Contact:edit.html.twig';
+        $messageInfoNotSelected = 'Selected one or more contact to delete';
+        $messageInfo = 'Not has selected entity contact success';
+        return $this->genericEdit($this->nameFormEntity, $renderDir, $this->nameService, $this->indexRouting,$messageInfoNotSelected,$messageInfo);
+    }
+
+    /**
+     * @Route("/contacts/update/{id}", name="contact_update")
+     */
+    public function updateAction($id) {
+        $renderDir       = 'DashboardBundle:Con tact:edit.html.twig';
+        $messageInfoNotSelected = 'Selected one or more contact to delete';
+        $messageSucccess = 'Update contact success';
+        $messageError    = 'Exist error in the data form';
+        return $this->genericUpdate($id, $this->nameFormEntity, $renderDir, $this->nameService, $this->indexRouting,$messageInfoNotSelected,$messageSucccess,$messageError);
+    }
+
+    public function genericCreate($nameEntity, $nameFormEntity, $renderDir, $nameService, $routing, $messageSucccess = '', $messageError = '', $nameFormView = 'form') {
+        $request = $this->getRequest();
+        $entity = new $nameEntity();
+        $form = $this->createForm(new $nameFormEntity(), $entity);
+        $form->bind($request);
+        if ($form->isValid()) {
+            $entity->setUser($this->getUserAuthenticated());
+            $this->findBusiness($nameService)->saveData($entity);
+            $this->addFlash('success', $messageSucccess, $routing);
+            return $this->redirect($this->generateUrl($routing));
+        } else {
+            $this->addFlash('info', $messageError);
+            return $this->render($renderDir, array('entity' => $entity,$nameFormView => $form->createView()));
+        }
+    }
 
 }

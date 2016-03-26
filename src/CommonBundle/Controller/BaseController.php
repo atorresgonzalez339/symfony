@@ -29,6 +29,13 @@ class BaseController extends Controller {
     /**
      * @author  Livan L. Frometa Osorio <llfrometa@gmail.com>
      */
+    protected function getUserAuthenticated() {
+        return $this->get('security.context')->getToken()->getUser();
+    }
+
+    /**
+     * @author  Livan L. Frometa Osorio <llfrometa@gmail.com>
+     */
     protected function genericNew($nameEntity, $nameFormEntity, $renderDir, $nameFormView = 'form') {
         $entity = new $nameEntity();
         $form = $this->createForm(new $nameFormEntity(), $entity);
@@ -50,7 +57,6 @@ class BaseController extends Controller {
             $this->addFlash('success', $messageSucccess, $routing);
             return $this->redirect($this->generateUrl($routing));
         } else {
-//            print_r('<pre>');print_r($form->getErrorsAsString());die;
             $this->addFlash('info', $messageError);
             return $this->render($renderDir, array('entity' => $entity,$nameFormView => $form->createView()));
         }
@@ -72,6 +78,55 @@ class BaseController extends Controller {
         } else {
             return $this->addFlash('info', $messageError, $indexRouting);
         }
+    }
+
+    /**
+     * @author  Livan L. Frometa Osorio <llfrometa@gmail.com>
+     */
+    public function genericEdit($nameFormEntity, $renderDir, $nameService, $indexRouting,$messageInfoNotSelected ='',$messageInfo ='', $nameFormView = 'form') {
+        $idSelected = $this->getFiertSelectetGridItem();
+        if (!$idSelected) {
+            $this->addFlash('info', $messageInfoNotSelected);
+            return $this->redirect($this->generateUrl($indexRouting));
+        }
+        $entity = $this->findBusiness($nameService)->findByID($idSelected);
+        if (!$entity) {
+            return $this->addFlash('info', $messageInfo, $indexRouting);
+        }
+        $editForm = $this->createForm(new $nameFormEntity(), $entity);
+        return $this->render($renderDir, array(
+            'entity' => $entity,
+            $nameFormView => $editForm->createView(),
+        ));
+    }
+
+    /**
+     * @author  Livan L. Frometa Osorio <llfrometa@gmail.com>
+     */
+    public function genericUpdate($idEntity, $nameFormEntity, $renderDir, $nameService, $indexRouting,$messageInfoNotSelected = '',$messageSucccess ='',$messageError = '', $nameFormView = 'form') {
+        $request = $this->getRequest();
+        $business = $this->findBusiness($nameService);
+        $entity = $business->findByID($idEntity);
+        if (!$entity) return $this->addFlash('info', $messageInfoNotSelected, $indexRouting);
+        $form = $this->createForm(new $nameFormEntity(), $entity);
+        $form->bind($request);
+        if ($form->isValid()) {
+            $business->saveData($entity);
+            return $this->addFlash('success', $messageSucccess, $indexRouting);
+        } else {
+            $this->addFlash('info', $messageError);
+            return $this->render($renderDir, array( 'entity' => $entity, $nameFormView => $form->createView()
+            ));
+        }
+        return $this->redirect($this->generateUrl($indexRouting));
+    }
+
+    /**
+     * @author  Livan L. Frometa Osorio <llfrometa@gmail.com>
+     */
+    public function getFiertSelectetGridItem() {
+        $ids = $this->getSelectetGridItems();
+        return $ids[0];
     }
 
     /**

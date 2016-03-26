@@ -27,6 +27,9 @@
 			$('#delete_action').click(function(){
 				App.submit('{{ grid.hash }}','{{ path('contact_delete') }}')
 			});
+			$('#edit_action').click(function(){
+				App.submit('{{ grid.hash }}','{{ path('contact_edit') }}')
+			});
 		});
 	</script>
 {% endblock content %}

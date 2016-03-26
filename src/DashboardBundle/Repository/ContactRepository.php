@@ -10,6 +10,16 @@ class ContactRepository extends BaseRepository{
     }
 
     public function findByID($id) {
+        $em = $this->getEntityManager();
+        $queryBuilder = $em->createQueryBuilder();
+        $queryBuilder = $queryBuilder->select('l')
+            ->from('DashboardBundle:Contact', 'l')
+            ->where('l.id = :id')
+            ->setParameter(':id', $id);
+
+        $result = $queryBuilder->getQuery()->getResult();
+        if (count($result)) return $result[0];
+        return null;
     }
 
     public function findByIDs($ids) {

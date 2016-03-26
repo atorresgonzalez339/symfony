@@ -11,6 +11,10 @@ class ContactBusiness extends BaseBusiness {
       parent::__construct($em);
     }
 
+    public function findByID($id) {
+        return $this->getRepository("DashboardBundle", "Contact")->findByID($id);
+    }
+
     public function removeAll($ids) {
         try {
             $entities = $this->getRepository("DashboardBundle", "Contact")->findByIDs($ids);
