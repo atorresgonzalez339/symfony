@@ -2,15 +2,12 @@
 
 namespace DashboardBundle\Controller;
 
+use CommonBundle\Controller\BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-use APY\DataGridBundle\Grid\Source\Entity;
-use APY\DataGridBundle\Grid\Action\DeleteMassAction;
-
-class UpgradeController extends Controller
+class UpgradeController extends BaseController
 {
 
   private $serviceName = 'dashboard.upgrade.business';
@@ -37,7 +34,16 @@ class UpgradeController extends Controller
       'plans' => $plans,
       'current_plan' => $currentPlan
     ));
+  }
 
+  /**
+   * @Route("/update_card", name="upgrade_update_card")
+   */
+  public function updateCardAction(Request $request){
+    $user = $this->getUser();
+    $token = $request->get('token');
+    $result = $this->getBusiness()->updateCard($user, $token);
+    return new JsonResponse($result);
   }
 
 }
