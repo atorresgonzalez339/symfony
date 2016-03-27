@@ -117,6 +117,23 @@ class UpgradeBusiness extends BaseBusiness
     return $plan;
   }
 
+  public function updateCard(User $user, $token){
+
+    $customer_id = $user->getProfile()->getCustomerId();
+
+    $customer = \Stripe_Customer::retrieve($customer_id);
+
+    $cards = $customer->sources->all(array("object" => "card"));
+
+    if ($cards) {
+      foreach ($cards->data as $card) {
+        $customer->sources->retrieve($card['id'])->delete();
+      }
+    }
+
+    return $customer->sources->create(array("source" => $token))->__toArray(true);;
+  }
+
   public function getCouponById($coupon_id)
   {
 

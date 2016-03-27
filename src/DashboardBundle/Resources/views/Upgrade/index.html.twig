@@ -54,4 +54,20 @@
   {{ parent() }}
   <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
   <script src="{{ asset('bundles/dashboard/assets/js/stripe.js') }}"></script>
+
+  <script>
+    MyStripe.init({
+      form_selector: '#card-information-form'
+    });
+
+    MyStripe.success(function(token){
+      var data = {
+        token: token
+      };
+      $.post('{{ path('upgrade_update_card') }}', data, function(result){
+        console.log(result);
+      });
+    });
+  </script>
+
 {% endblock %}
