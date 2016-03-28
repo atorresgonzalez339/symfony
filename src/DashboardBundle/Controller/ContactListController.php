@@ -4,6 +4,7 @@ namespace DashboardBundle\Controller;
 
 use CommonBundle\Controller\BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use APY\DataGridBundle\Grid\Source\Entity;
@@ -79,6 +80,7 @@ class ContactListController extends BaseController{
 
     /**
      * @Route("/contactslist/edit", name="contactlist_edit")
+     * @Method({"GET","POST"})
      */
     public function editAction(){
         $renderDir       = 'DashboardBundle:ContactList:edit.html.twig';
@@ -125,6 +127,13 @@ class ContactListController extends BaseController{
         $idSelected = $this->getFiertSelectetGridItem();
 
         $isRedirectGrid = $this->isRedirectFromGrid($queryString);
+
+//        print_r('<pre>');
+//        print_r('idSelected '.$idSelected);
+//        print_r('<br>');
+//        print_r('isRedirectGrid '.$isRedirectGrid);
+//        die;
+
         if($isRedirectGrid)
             $idSelected = $this->getIdContactListIsRedirectFromGrid($queryString);
 
