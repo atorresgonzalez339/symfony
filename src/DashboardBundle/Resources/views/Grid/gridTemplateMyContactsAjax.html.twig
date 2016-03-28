@@ -10,8 +10,13 @@
 
 function {{ grid.hash }}_goto(url, data, type)
 {
-    var id = {{ getSession('SELECTED_EDIT_CONTACTLIST_ID')}}
-    url = url + '&SELECTED_EDIT_CONTACTLIST_ID='+ id + '&REDIRECT_GRID=SECOND';
+    if(type === 'POST'){
+        var id = {{ getSession('SELECTED_EDIT_CONTACTLIST_ID')}}
+        url = url + '?SELECTED_EDIT_CONTACTLIST_ID='+ id + '&REDIRECT_GRID=SECOND';
+    }else{
+        var id = {{ getSession('SELECTED_EDIT_CONTACTLIST_ID')}}
+        url = url + '&SELECTED_EDIT_CONTACTLIST_ID='+ id + '&REDIRECT_GRID=SECOND';
+    }
 
     type = type || 'GET';
     data = data || [];
