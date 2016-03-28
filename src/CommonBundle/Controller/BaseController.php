@@ -219,28 +219,27 @@ class BaseController extends Controller {
      * @example $this->getSession('security');
      */
     protected function getSession($key) {
-
-        $salt = $this->getUserAuthenticated()->getSalt();
-        $ralfSession = $this->findBusiness('ralf.core.business.ralfsession')->getRepository('Core', 'RalfSession')->findByKey($key,$salt);
-
-        if($ralfSession){
-            return $ralfSession->getValue();
-        }else{
-            return null;
-        }
+        $request = $this->getRequest();
+        $session = $request->getSession();
+        return $session->get($key);
     }
 
-    /**
-     * @author  Livan L. Frometa Osorio <llfrometa@gmail.com>
-     * @name    getSession($key)
-     * @see     this method remove a object in the session by key.
-     * @param   $key
-     * @example $this->removeSession('security');
-     */
+    protected function hasSession($key) {
+        $request = $this->getRequest();
+        $session = $request->getSession();
+        return $session->has($key);
+    }
+
     protected function removeSession($key) {
-        $peticion = $this->getRequest();
-        $session = $peticion->getSession();
+        $request = $this->getRequest();
+        $session = $request->getSession();
         return $session->remove($key);
+    }
+
+    protected function setSession($key,$value) {
+        $request = $this->getRequest();
+        $session = $request->getSession();
+        return $session->set($key,$value);
     }
 
     /**

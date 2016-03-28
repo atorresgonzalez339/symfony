@@ -24,14 +24,17 @@ class ContactListController extends BaseController{
   /**
    * @Route("/contactslist", name="contactlist_index")
    */
-    public function indexAction(Request $request){
+    public function index122Action(Request $request){
       $source = new Entity('DashboardBundle:ContactList');
       $grid = $this->get('grid');
       $grid->setSource($source);
       $grid->hideColumns(array('id'));
       $grid->addMassAction(new DeleteMassAction());
-      $grid->setLimits($this->container->getParameter('admin.paginator.limits.config'));
-      if ($request->isXmlHttpRequest()) return $grid->getGridResponse('DashboardBundle:ContactList:indexAjax.html.twig');
+//      $grid->setLimits($this->container->getParameter('admin.paginator.limits.config'));
+      $grid->setLimits(array(1));
+      if ($request->isXmlHttpRequest()){
+          return $grid->getGridResponse('DashboardBundle:ContactList:indexAjax.html.twig');
+      }
       if ($grid->isReadyForRedirect())return new RedirectResponse($grid->getRouteUrl());
       return $grid->getGridResponse('DashboardBundle:ContactList:index.html.twig');
     }
@@ -81,7 +84,100 @@ class ContactListController extends BaseController{
         $renderDir       = 'DashboardBundle:ContactList:edit.html.twig';
         $messageInfoNotSelected = 'Selected one or more contact list to delete';
         $messageInfo = 'Not has selected entity contact list success';
+
         return $this->genericEdit($this->nameFormEntity, $renderDir, $this->nameService, $this->indexRouting,$messageInfoNotSelected,$messageInfo);
+    }
+
+    private function isRedirectFromGrid($queryString){
+        $queryStringArray = explode('&',$queryString);
+        if(count($queryString)==0) return false;
+        $redirectGridParam = $queryStringArray[count($queryStringArray)-1];
+        $redirectGridParamArray = explode('=',$redirectGridParam);
+        $redirectGridParamFirst = $redirectGridParamArray[0];
+        if($redirectGridParamFirst == 'REDIRECT_GRID') return true;
+        return false;
+    }
+
+    private function getIdContactListIsRedirectFromGrid($queryString){
+        $queryStringArray = explode('&',$queryString);
+        if(count($queryString)==0) return false;
+        $redirectGridParam = $queryStringArray[count($queryStringArray)-2];
+        $redirectGridParamArray = explode('=',$redirectGridParam);
+        $redirectGridParamSecond = $redirectGridParamArray[1];
+        return $redirectGridParamSecond;
+    }
+
+    public function genericEdit($nameFormEntity, $renderDir, $nameService, $indexRouting,$messageInfoNotSelected ='',$messageInfo ='', $nameFormView = 'form') {
+        $queryString = $_SERVER['QUERY_STRING'];
+        $idSelected = $this->getFiertSelectetGridItem();
+
+        $isRedirectGrid = $this->isRedirectFromGrid($queryString);
+        if($isRedirectGrid)
+            $idSelected = $this->getIdContactListIsRedirectFromGrid($queryString);
+
+//        print_r('<pre>');
+//        print_r('id '.$idSelected);
+//        print_r('<br>');
+//        print_r($isRedirectGrid);
+//        print_r('<br>');
+//        die('aaaaaaaaaaaaaaaaaaaaa '.$idSelected);
+
+        if (!$idSelected && !$isRedirectGrid) {
+            $this->addFlash('info', $messageInfoNotSelected);
+            return $this->redirect($this->generateUrl($indexRouting));
+        }else{
+            $this->setSession('SELECTED_EDIT_CONTACTLIST_ID',$idSelected);
+        }
+        $entity = $this->findBusiness($nameService)->findByID($idSelected);
+        if (!$entity) {
+            return $this->addFlash('info', $messageInfo, $indexRouting);
+        }
+        $editForm = $this->createForm(new $nameFormEntity(), $entity);
+
+        $source = new Entity('DashboardBundle:Contact');
+        $gridManager = $this->get('grid.manager');
+        $grid = $gridManager->createGrid('FIRST');
+        $grid->setSource($source);
+        $grid->hideColumns(array('id'));
+        $grid->addMassAction(new DeleteMassAction());
+        $grid->setLimits(array(5));
+        $grid->setPage(2);
+
+        $grid2 = $gridManager->createGrid('SECOND');
+        $grid2->setSource($source);
+        $grid2->hideColumns(array('id'));
+        $grid2->addMassAction(new DeleteMassAction());
+        $grid2->setLimits(array(5));
+
+        $request = $this->getRequest();
+
+        if ($request->isXmlHttpRequest()){
+            return $grid->getGridResponse('DashboardBundle:ContactList:contactAjax.html.twig');
+        }
+
+        if ($gridManager->isReadyForRedirect()) {
+            return new RedirectResponse($gridManager->getRouteUrl());
+        }
+        else
+        {
+            return $this->render($renderDir, array(
+                'entity' => $entity,
+                $nameFormView => $editForm->createView(),
+                'grid' => $grid,
+                'grid2' => $grid2,
+            ));
+        }
+
+//        return $grid->getGridResponse('DashboardBundle:ContactList:edit.html.twig',array(
+//            'entity' => $entity,
+//            $nameFormView => $editForm->createView(),
+//        ))      ;
+//
+//
+//        return $this->render($renderDir, array(
+//            'entity' => $entity,
+//            $nameFormView => $editForm->createView(),
+//        ));
     }
 
     /**

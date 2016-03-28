@@ -28,7 +28,31 @@ class Functions extends \Twig_Extension {
     public function getFunctions() {
         return array(
             'request' => new \Twig_Function_Method($this, 'getParamByKeyRequest'),
+            'getSession' => new \Twig_Function_Method($this, 'getSession'),
+            'hasSession' => new \Twig_Function_Method($this, 'hasSession'),
+            'removeSession' => new \Twig_Function_Method($this, 'removeSession'),
+            'setSession' => new \Twig_Function_Method($this, 'setSession'),
         );
+    }
+
+    public function getSession($key) {
+        $session = $this->request->getSession();
+        return $session->get($key);
+    }
+
+    public function hasSession($key) {
+        $session = $this->request->getSession();
+        return $session->has($key);
+    }
+
+    public function removeSession($key) {
+        $session = $this->request->getSession();
+        return $session->remove($key);
+    }
+
+    public function setSession($key,$value) {
+        $session = $this->request->getSession();
+        return $session->set($key,$value);
     }
 
     public function getFilters() {

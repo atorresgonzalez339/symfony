@@ -2,7 +2,7 @@
 
 {% block breadcrumb %}
   <li>
-    <a href="{{ path('contactlist_index') }}">Contacts</a>
+    <a href="{{ path('contactlist_index') }}">Contacts List</a>
     <i class="mdi-navigation-chevron-right"></i>
   </li>
   <li><a href="#">Edit</a></li>
@@ -10,77 +10,77 @@
 
 {% block content %}
   <style>
-    .collection .collection-item.avatar i.circle-avatar-status {
-      font-size: 18px;
-      line-height: 39px;
-      color: #fff;
-      text-align: center;
-    }
+    /*.collection .collection-item.avatar i.circle-avatar-status {*/
+      /*font-size: 18px;*/
+      /*line-height: 39px;*/
+      /*color: #fff;*/
+      /*text-align: center;*/
+    /*}*/
 
-    i.circle-avatar-status.red {
-      border: 3px solid pink;
-    }
+    /*i.circle-avatar-status.red {*/
+      /*border: 3px solid pink;*/
+    /*}*/
 
-    i.circle-avatar-status.green {
-      border: 3px solid #94fc98;
-    }
+    /*i.circle-avatar-status.green {*/
+      /*border: 3px solid #94fc98;*/
+    /*}*/
 
-    .collection .collection-item.avatar i.circle-avatar-status > span {
-      font-size: 16px;
-      font-style: normal;
-    }
+    /*.collection .collection-item.avatar i.circle-avatar-status > span {*/
+      /*font-size: 16px;*/
+      /*font-style: normal;*/
+    /*}*/
 
-    .collection .collection-item.avatar {
-      min-height: 60px;
-    }
+    /*.collection .collection-item.avatar {*/
+      /*min-height: 60px;*/
+    /*}*/
 
-    .circle-status.red {
-      position: absolute;
-      width: 15px;
-      height: 15px;
-      overflow: hidden;
-      left: 190px;
-      display: inline-block;
-      vertical-align: middle;
-    }
+    /*.circle-status.red {*/
+      /*position: absolute;*/
+      /*width: 15px;*/
+      /*height: 15px;*/
+      /*overflow: hidden;*/
+      /*left: 190px;*/
+      /*display: inline-block;*/
+      /*vertical-align: middle;*/
+    /*}*/
 
-    .circle-status.green {
-      position: absolute;
-      width: 15px;
-      height: 15px;
-      overflow: hidden;
-      left: 15px;
-      display: inline-block;
-      vertical-align: middle;
-    }
+    /*.circle-status.green {*/
+      /*position: absolute;*/
+      /*width: 15px;*/
+      /*height: 15px;*/
+      /*overflow: hidden;*/
+      /*left: 15px;*/
+      /*display: inline-block;*/
+      /*vertical-align: middle;*/
+    /*}*/
 
-    .arrow-switch{
-      color: #424242;
-      font-size: 30px;
-      background-color: #F9F9F9;
-      border-radius: 4px;
-    }
+    /*.arrow-switch{*/
+      /*color: #424242;*/
+      /*font-size: 30px;*/
+      /*background-color: #F9F9F9;*/
+      /*border-radius: 4px;*/
+    /*}*/
 
-    .secundary-content-center{
-       top: 20px !important;
-     }
+    /*.secundary-content-center{*/
+       /*top: 20px !important;*/
+     /*}*/
 
-    .arrow-switch:hover{
-      background-color: #9E9E9E;
-    }
+    /*.arrow-switch:hover{*/
+      /*background-color: #9E9E9E;*/
+    /*}*/
 
-    .primary-content{
-      position: absolute;
-      top: 20px !important;
-      left: 15px;
-    }
-    .circle-right{
-      left: 60px !important;
-    }
+    /*.primary-content{*/
+      /*position: absolute;*/
+      /*top: 20px !important;*/
+      /*left: 15px;*/
+    /*}*/
+    /*.circle-right{*/
+      /*left: 60px !important;*/
+    /*}*/
 
-    .avatar-right{
-      padding-left: 115px !important;
-    }
+    /*.avatar-right{*/
+      /*padding-left: 115px !important;*/
+    /*}*/
 
   </style>
   <div class="card card-data-grid">
@@ -111,70 +111,12 @@
       <div class="row">
         <div class="col m5">
           <span><b> My Contacts</b></span>
-          <ul class="collection">
-            <li class="collection-item avatar">
-              <i class="red circle circle-avatar-status"> <span>LF</span></i>
-              <span class="title" style="padding: 0px;">Livan Frometa</span>
-              <p>llfrometa@gmail.com</p>
-              <a href="#!" class="secondary-content secundary-content-center">
-                <i class="mdi mdi-hardware-keyboard-arrow-right arrow-switch"></i>
-              </a>
-            </li>
-            <li class="collection-item avatar">
-              <i class="green circle circle-avatar-status"> <span>LF</span></i>
-              <span class="title" style="padding: 0px;">Livan Frometa</span>
-              <p>llfrometa@gmail.com</p>
-              <a href="#!" class="secondary-content">
-                <i class="mdi mdi-hardware-keyboard-arrow-right  arrow-switch"></i>
-              </a>
-            </li>
-          </ul>
+          {{ grid(grid2, 'DashboardBundle:Grid:gridTemplateMyContactsAjax.html.twig') }}
         </div>
         <div class="col m1"></div>
         <div class="col m5">
           <span><b> Contacts</b></span>
-          <ul class="collection">
-            <li class="collection-item avatar avatar-right">
-              <a href="#!" class="secondary-content primary-content">
-                <i class="mdi mdi-hardware-keyboard-arrow-left arrow-switch"></i>
-              </a>
-              <i class="red circle circle-avatar-status circle-right"> <span>LF</span></i>
-              <span class="title" style="padding: 0px;">Livan Frometa</span>
-              <p>llfrometa@gmail.com</p>
-            </li>
-            <li class="collection-item avatar avatar-right">
-              <a href="#!" class="secondary-content primary-content">
-                <i class="mdi mdi-hardware-keyboard-arrow-left arrow-switch"></i>
-              </a>
-              <i class="red circle circle-avatar-status circle-right"> <span>LF</span></i>
-              <span class="title" style="padding: 0px;">Livan Frometa</span>
-              <p>llfrometa@gmail.com</p>
-            </li>
-            <li class="collection-item avatar avatar-right">
-              <a href="#!" class="secondary-content primary-content">
-                <i class="mdi mdi-hardware-keyboard-arrow-left arrow-switch"></i>
-              </a>
-              <i class="red circle circle-avatar-status circle-right"> <span>LF</span></i>
-              <span class="title" style="padding: 0px;">Livan Frometa</span>
-              <p>llfrometa@gmail.com</p>
-            </li>
-            <li class="collection-item avatar avatar-right">
-              <a href="#!" class="secondary-content primary-content">
-                <i class="mdi mdi-hardware-keyboard-arrow-left arrow-switch"></i>
-              </a>
-              <i class="green circle circle-avatar-status circle-right"> <span>LF</span></i>
-              <span class="title" style="padding: 0px;">Livan Frometa</span>
-              <p>llfrometa@gmail.com</p>
-            </li>
-            <li class="collection-item avatar avatar-right">
-              <a href="#!" class="secondary-content primary-content">
-                <i class="mdi mdi-hardware-keyboard-arrow-left arrow-switch"></i>
-              </a>
-              <i class="green circle circle-avatar-status circle-right"> <span>LF</span></i>
-              <span class="title" style="padding: 0px;">Livan Frometa</span>
-              <p>llfrometa@gmail.com</p>
-            </li>
-          </ul>
+          {{ grid(grid, 'DashboardBundle:Grid:gridTemplateContactsAjax.html.twig') }}
         </div>
       </div>
 

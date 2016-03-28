@@ -13,8 +13,9 @@ use APY\DataGridBundle\Grid\Mapping as GRID;
  */
 class Contact
 {
+    const SPACE = ' ';
 
-	/**
+    /**
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -72,6 +73,14 @@ class Contact
 
     public function getId() {
         return $this->id;
+    }
+
+    public function getCompleteName() {
+        return $this->first_name . self::SPACE . $this->last_name;
+    }
+
+    public function getFirstLetter() {
+        return strtoupper($this->first_name[0] . $this->last_name[0]);
     }
 
     public function setFirstName($firstName) {
