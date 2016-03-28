@@ -94,6 +94,7 @@
       </div>
     </div>
     <div class="content">
+
       <form id="formSubmit" class="form-horizontal" action="" method="post" {{ form_enctype(form) }}>
         <div class="row" style="padding-left: 20px;padding-right: 50%;margin-top: 1rem;">
           <div class="row" style="margin-top: 0rem;">
@@ -109,26 +110,25 @@
       </form>
 
       <div class="row">
-        <div class="col m5">
+        <div class="col m6">
           <span><b> My Contacts</b></span>
           {{ grid(grid2, 'DashboardBundle:Grid:gridTemplateMyContactsAjax.html.twig') }}
         </div>
-        <div class="col m1"></div>
-        <div class="col m5">
+        <div class="col m6">
           <span><b> Contacts</b></span>
           {{ grid(grid, 'DashboardBundle:Grid:gridTemplateContactsAjax.html.twig') }}
         </div>
       </div>
 
-      <div class="row">
-        <div class="col m2" style="padding-right: 0px">
-          <i class="green circle circle-status"> <span></span></i> <b style="margin-left: 30px;"> Enable contact</b>
-        </div>
+      {#<div class="row">#}
+        {#<div class="col m2" style="padding-right: 0px">#}
+          {#<i class="green circle circle-status"> <span></span></i> <b style="margin-left: 30px;"> Enable contact</b>#}
+        {#</div>#}
 
-        <div class="col m2">
-          <i class="red circle circle-status"> <span></span></i> <b style="margin-left: 30px;"> Disable contact</b>
-        </div>
-      </div>
+        {#<div class="col m2">#}
+          {#<i class="red circle circle-status"> <span></span></i> <b style="margin-left: 30px;"> Disable contact</b>#}
+        {#</div>#}
+      {#</div>#}
 
     </div>
   </div>

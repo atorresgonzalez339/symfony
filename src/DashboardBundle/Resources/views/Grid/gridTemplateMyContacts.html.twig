@@ -92,9 +92,9 @@
             </div>
           </div>
         </div>
-        <div id="genericContainerTable">
+        <div id="genericContainerTable2">
           <script>
-//            $('.slider').slider({full_width: true,height:200px});
+            //            $('.slider').slider({full_width: true,height:200px});
           </script>
           <style>
             .collection .collection-item.avatar i.circle-avatar-status {
@@ -171,77 +171,21 @@
             }
           </style>
           <div class="row">
-          <div class="col m12">
-            <ul class="collection">
-            {% for row in grid.rows %}
-              <li class="collection-item avatar">
-                <i class="{% if(row.entity.getIsActive()) %}green{% else %} red {% endif %} circle circle-avatar-status">
-                  <span>{{ row.entity.getFirstLetter()}}</span></i>
-                <p style="font-size: 16px;">{{ row.entity.getCompleteName()}}</p>
-                <p>{{ row.entity.email }}</p>
-                <a href="#!" class="secondary-content secundary-content-center">
-                  <i class="mdi mdi-hardware-keyboard-arrow-right arrow-switch"></i>
-                </a>
-              </li>
-            {% endfor %}
-            </ul>
-              {#<div class="col m3">#}
-                {#<div class="hoverable">#}
-                {#<div class="card of-h">#}
-                  {#<div class="card-image waves-effect waves-block waves-light card-image-templeate">#}
-                    {#<div class="slider" >#}
-                      {#<ul class="slides">#}
-                        {#{% if row.entity.photos | length > 0 %}#}
-                          {#{% for photo in row.entity.photos %}#}
-                            {#<li>#}
-                              {#<img class="activator" src="{{ photo.photoUrl }}">#}
-                            {#</li>#}
-                          {#{% endfor %}#}
-                        {#{% else %}#}
-                          {#<li>#}
-                            {#<img class="activator" src="{{ asset('bundles/dashboard/images/properties/no-image.png') }}">#}
-                          {#</li>#}
-                        {#{% endif %}#}
-                      {#</ul>#}
-                    {#</div>#}
-                    {#<img class="activator" src="{{ asset('bundles/dashboard/properties/1.jpg') }}">#}
-                  {#</div>#}
-                  {#<div class="content" style=" padding-top: 10px; padding-bottom: 10px;">#}
-                    {#<span class="card-title activator grey-text text-darken-4" style="font-size: 20px;">#}
-                      {#<p style="position: absolute;top: 207px; margin-top: 5px; margin-bottom: 5px;left: 10px;">#}
-                        {#<input type="checkbox" class="filled-in" id="checkbox-{{ row.entity.id }}" name="{{ grid.hash }}[__action][{{ row.primaryFieldValue }}]" value="{{ row.primaryFieldValue }}"/>#}
-                        {#<label for="checkbox-{{ row.entity.id }}" style="font-size: 18px;color: #424242">{{ row.entity.name | slice(0, 15) }}</label>#}
-                      {#</p>#}
-                      {#<i class="mdi-navigation-more-vert right"></i></span>#}
-                  {#</div>#}
-                  {#<div class="card-action card-action-templeate" style="font-size: 12px;background-color: #F0F0EE;padding-bottom: 0px;">#}
-                    {#<a href="#!" class="" style="color: #9E9E9E;font-size: 11px;font-weight: 600;">BATHS</a>#}
-                    {#<a href="#!" class="" style="color: #9E9E9E;font-size: 11px;font-weight: 600;">BEDS</a>#}
-                    {#<a href="#!" class="" style="color: #9E9E9E;font-size: 11px;font-weight: 600;">GARAGES</a>#}
-                  {#</div>#}
-                  {#<div class="card-action card-action-templeate" style="border-top: 0px;background-color: #F0F0EE;font-size: 25px;padding: 0px 0px 0px 10px;">#}
-                    {#<a href="#!" class="" style="margin-right: 4rem;margin-left: 8px;color: #424242;font-size: 18px;font-weight: normal; opacity: .85;">{{ row.entity.bathrooms ? row.entity.bathrooms : '-' }}</a>#}
-                    {#<a href="#!" class="" style="margin-right: 4rem;color: #424242;font-size: 18px;font-weight: normal; opacity: .85;">{{ row.entity.bedrooms ? row.entity.bedrooms : '-' }}</a>#}
-                    {#<a href="#!" class="" style="margin-right: 4rem;color: #424242;font-size: 18px;font-weight: normal; opacity: .85;">{{ row.entity.parkingSpaces ? row.entity.parkingSpaces : '-' }}</a>#}
-                  {#</div>#}
-                  {#<div class="card-action card-action-templeate" style="font-size: 12px; text-align: left">#}
-                    {#<a href="#!" class="blue-text" style="margin-right: 0.1rem;color: #9E9E9E!important"><i class="mdi-communication-location-on"></i></a>#}
-                    {#<a href="#!" class="blue-text" style="margin-right: 0rem;color: #9E9E9E!important;">{{ row.entity.address ? row.entity.fullAddress : 'No address defined' }}</a>#}
-                  {#</div>#}
-                  {#<div class="card-action card-action-templeate">#}
-                    {#<a href="#!" class="blue-text" style="margin-right: 3rem;font-size: 15px">#}
-                      {#<i class="mdi-editor-attach-money" style="font-size: 15px;"></i>12.000</a>#}
-                    {#<a href="#!" class="blue-text right">VIEW DETAIL</a>#}
-                  {#</div>#}
-                  {#<div class="card-reveal">#}
-                    {#<span class="card-title grey-text text-darken-4">{{ row.entity.name }} <i class="mdi-content-clear right"></i></span>#}
-                    {#<p>Here is some more information about this product that is only revealed once clicked on.</p>#}
-                  {#</div>#}
-
-                  {#</div>#}
-                {#</div>#}
-              {#</div>#}
-          </div>
+            <div class="col m12">
+              <ul class="collection">
+                {% for row in grid.rows %}
+                  <li class="collection-item avatar">
+                    <i class="{% if(row.entity.getIsActive()) %}green{% else %} red {% endif %} circle circle-avatar-status">
+                      <span>{{ row.entity.getFirstLetter()}}</span></i>
+                    <p style="font-size: 16px;">{{ row.entity.getCompleteName()}}</p>
+                    <p>{{ row.entity.email }}</p>
+                    <a href="#!" class="secondary-content secundary-content-center">
+                      <i class="mdi mdi-hardware-keyboard-arrow-right arrow-switch"></i>
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
           </div>
 
           {#<table style="position: relative;text-align: left" id="itemList" class="table table-hover">#}
@@ -264,7 +208,6 @@
 
         </div>
       </div>
-  </div>
   {% if withjs %}
     {{ grid_scripts(grid) }}
   {% endif %}
@@ -645,11 +588,11 @@
            class="btn btn-primary {% if grid.page <= 0 %}disabled{% endif %}"
            {% if grid.page <= 0 %}disabled="disabled" {% else %} onclick="return {{ grid.hash }}_previousPage();" {% endif %}><i
               class="mdi-hardware-keyboard-arrow-left"></i></a>
-               <input type='text' class="" value="{{ grid.page + 1 }}"
+        <input type='text' class="" value="{{ grid.page + 1 }}"
                style="  width: 34px;margin-right: 10px !important;margin-left: 10px !important;text-align: center;position: relative;top: -17px; max-height: 34px;text-indent: -1px;"
                onkeypress="return {{ grid.hash }}_enterPage(event, parseInt(this.value)-1);"/><a style="margin-top: -35px;width: 25px;padding-left: 10px;"
-           class="btn btn-primary {% if grid.page >= grid.pageCount-1 %}disabled {% endif %}"
-           {% if grid.page >= grid.pageCount-1 %}disabled="disabled" {% else %}  onclick="return {{ grid.hash }}_nextPage();" {% endif %}><i
+                                                                                                 class="btn btn-primary {% if grid.page >= grid.pageCount-1 %}disabled {% endif %}"
+                                                                                                 {% if grid.page >= grid.pageCount-1 %}disabled="disabled" {% else %}  onclick="return {{ grid.hash }}_nextPage();" {% endif %}><i
               class="mdi-hardware-keyboard-arrow-right"></i></a>
       </div>
       <div class="col l2">
@@ -911,7 +854,7 @@
   function {{ grid.hash }}_nextPage()
   {
 
-   {#alert("grid.page: " + {{ grid.page }} + " grid.pageCount: " + {{ grid.pageCount }}+ " grid.id: " + '{{ grid.getId() }}');#}
+  {#alert("grid.page: " + {{ grid.page }} + " grid.pageCount: " + {{ grid.pageCount }}+ " grid.id: " + '{{ grid.getId() }}');#}
 
   {#var limit = $("#btnLimit{{ grid.hash }}").val();
   OFFSET = OFFSET + parseInt(limit);

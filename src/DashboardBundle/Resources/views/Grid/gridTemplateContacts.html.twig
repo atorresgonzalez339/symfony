@@ -93,9 +93,6 @@
           </div>
         </div>
         <div id="genericContainerTable">
-          <script>
-//            $('.slider').slider({full_width: true,height:200px});
-          </script>
           <style>
             .collection .collection-item.avatar i.circle-avatar-status {
               font-size: 18px;
@@ -171,20 +168,20 @@
             }
           </style>
           <div class="row">
-          <div class="col m12">
-            <ul class="collection">
-            {% for row in grid.rows %}
-                <li class="collection-item avatar avatar-right">
-                  <a href="#!" class="secondary-content primary-content">
-                    <i class="mdi mdi-hardware-keyboard-arrow-left arrow-switch"></i>
-                  </a>
-                  <i class=" {% if(row.entity.getIsActive()) %}green{% else %} red {% endif %} circle circle-avatar-status circle-right"> <span>{{ row.entity.getFirstLetter()}}</span></i>
-                  <p style="font-size: 16px;">{{ row.entity.getCompleteName()}}</p>
-                  <p>{{ row.entity.email }}</p>
-                </li>
-            {% endfor %}
-              </ul>
-          </div>
+            <div class="col m12">
+              <ul class="collection">
+              {% for row in grid.rows %}
+                  <li class="collection-item avatar avatar-right">
+                    <a href="#!" class="secondary-content primary-content">
+                      <i class="mdi mdi-hardware-keyboard-arrow-left arrow-switch"></i>
+                    </a>
+                    <i class=" {% if(row.entity.getIsActive()) %}green{% else %} red {% endif %} circle circle-avatar-status circle-right"> <span>{{ row.entity.getFirstLetter()}}</span></i>
+                    <p style="font-size: 16px;">{{ row.entity.getCompleteName()}}</p>
+                    <p>{{ row.entity.email }}</p>
+                  </li>
+              {% endfor %}
+                </ul>
+            </div>
           </div>
 
           {#<table style="position: relative;text-align: left" id="itemList" class="table table-hover">#}
@@ -207,7 +204,6 @@
 
         </div>
       </div>
-  </div>
   {% if withjs %}
     {{ grid_scripts(grid) }}
   {% endif %}
