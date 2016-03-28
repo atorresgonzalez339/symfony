@@ -98,6 +98,19 @@ class ContactListController extends BaseController{
         return false;
     }
 
+
+    private function isRedirectFromFirstGrid($queryString){
+        $queryStringArray = explode('&',$queryString);
+        if(count($queryString)==0) return false;
+        $redirectGridParam = $queryStringArray[count($queryStringArray)-1];
+        $redirectGridParamArray = explode('=',$redirectGridParam);
+        $redirectGridParamFirst = $redirectGridParamArray[1];
+//        print_r('<pre>');
+//        print_r($redirectGridParamFirst);die;
+        if($redirectGridParamFirst == 'FIRST') return true;
+        return false;
+    }
+
     private function getIdContactListIsRedirectFromGrid($queryString){
         $queryStringArray = explode('&',$queryString);
         if(count($queryString)==0) return false;
@@ -114,13 +127,6 @@ class ContactListController extends BaseController{
         $isRedirectGrid = $this->isRedirectFromGrid($queryString);
         if($isRedirectGrid)
             $idSelected = $this->getIdContactListIsRedirectFromGrid($queryString);
-
-//        print_r('<pre>');
-//        print_r('id '.$idSelected);
-//        print_r('<br>');
-//        print_r($isRedirectGrid);
-//        print_r('<br>');
-//        die('aaaaaaaaaaaaaaaaaaaaa '.$idSelected);
 
         if (!$idSelected && !$isRedirectGrid) {
             $this->addFlash('info', $messageInfoNotSelected);
@@ -152,7 +158,11 @@ class ContactListController extends BaseController{
         $request = $this->getRequest();
 
         if ($request->isXmlHttpRequest()){
-            return $grid->getGridResponse('DashboardBundle:ContactList:contactAjax.html.twig');
+            if($this->isRedirectFromFirstGrid($queryString))
+                return $grid->getGridResponse('DashboardBundle:ContactList:contactAjax.html.twig');
+            else
+                return $grid2->getGridResponse('DashboardBundle:ContactList:myContactAjax.html.twig');
+
         }
 
         if ($gridManager->isReadyForRedirect()) {
