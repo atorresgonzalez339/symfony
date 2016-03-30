@@ -13,7 +13,6 @@ use APY\DataGridBundle\Grid\Mapping as GRID;
  */
 class ContactList
 {
-
 	/**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -32,6 +31,14 @@ class ContactList
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Contact")
+     * @ORM\JoinTable(name="contactlist_contact",
+     *     joinColumns={@ORM\JoinColumn(name="idcontactlist", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="idcontact", referencedColumnName="id")})
+     */
+    protected $contacts;
 
     public function getId() {
         return $this->id;
@@ -56,4 +63,13 @@ class ContactList
     public function setUser($user) {
         $this->user = $user;
     }
+
+    public function getContacts() {
+        return $this->contacts;
+    }
+
+    public function setContacts($contacts) {
+        $this->contacts = $contacts;
+    }
+
 }

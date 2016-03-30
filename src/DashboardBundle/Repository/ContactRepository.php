@@ -25,11 +25,28 @@ class ContactRepository extends BaseRepository{
     public function findByIDs($ids) {
         $em = $this->getEntityManager();
         $queryBuilder = $em->createQueryBuilder();
-
         $queryBuilder = $queryBuilder->select('l')
                 ->from('DashboardBundle:Contact', 'l')
                 ->where('l.id IN (:ids)')
                 ->setParameter(':ids', $ids);
         return $queryBuilder->getQuery()->getResult();
+    }
+
+    public function getIdContactByIdContactList($iContactList){
+        $em = $this->getEntityManager();
+        $queryBuilder = $em->createQueryBuilder();
+        $queryBuilder = $queryBuilder->select('l.id')
+            ->from('DashboardBundle:Contact', 'l')
+            ->leftJoin('l.contactList','cl')
+            ->where('cl.id = :idContactList')
+            ->setParameter(':idContactList', $iContactList);
+        $results = $queryBuilder->getQuery()->getResult();
+
+        if(!$results) return array();
+        if($results) {
+            $ids = array();
+            foreach ($results as $item) $ids[] = $item['id'];
+            return $ids;
+        }
     }
 }

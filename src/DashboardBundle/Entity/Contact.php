@@ -64,8 +64,21 @@ class Contact
     private $unsubscribed_comment;
 
     /**
-     * Contact constructor.
+     * @ORM\ManyToMany(targetEntity="ContactList", mappedBy="contacts", cascade={"persist"})
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idcontactlist", referencedColumnName="id")
+     * })
      */
+    private $contactList;
+
+    public function getContactList() {
+        return $this->contactList;
+    }
+
+    public function setContactList($contactList) {
+        $this->contactList = $contactList;
+    }
+
     public function __construct() {
         $this->is_active = true;
         $this->is_unsubscribed = false;
@@ -110,68 +123,35 @@ class Contact
         return $this->email;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getIsActive()
-    {
+    public function getIsActive() {
         return $this->is_active;
     }
 
-    /**
-     * @param mixed $is_active
-     */
-    public function setIsActive($is_active)
-    {
+    public function setIsActive($is_active) {
         $this->is_active = $is_active;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getIsUnsubscribed()
-    {
+    public function getIsUnsubscribed() {
         return $this->is_unsubscribed;
     }
 
-    /**
-     * @param mixed $is_unsubscribed
-     */
-    public function setIsUnsubscribed($is_unsubscribed)
-    {
+    public function setIsUnsubscribed($is_unsubscribed) {
         $this->is_unsubscribed = $is_unsubscribed;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getUnsubscribedComment()
-    {
+    public function getUnsubscribedComment() {
         return $this->unsubscribed_comment;
     }
 
-    /**
-     * @param mixed $unsubscribed_comment
-     */
-    public function setUnsubscribedComment($unsubscribed_comment)
-    {
+    public function setUnsubscribedComment($unsubscribed_comment) {
         $this->unsubscribed_comment = $unsubscribed_comment;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getUser()
-    {
+    public function getUser() {
         return $this->user;
     }
 
-    /**
-     * @param mixed $user
-     */
-    public function setUser($user)
-    {
+    public function setUser($user) {
         $this->user = $user;
     }
-
 }

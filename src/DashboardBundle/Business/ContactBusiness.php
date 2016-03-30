@@ -15,6 +15,10 @@ class ContactBusiness extends BaseBusiness {
         return $this->getRepository("DashboardBundle", "Contact")->findByID($id);
     }
 
+    public function getIdContactByIdContactList($iContactList) {
+        return $this->getRepository("DashboardBundle", "Contact")->getIdContactByIdContactList($iContactList);
+    }
+
     public function removeAll($ids) {
         try {
             $entities = $this->getRepository("DashboardBundle", "Contact")->findByIDs($ids);

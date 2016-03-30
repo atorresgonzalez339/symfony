@@ -174,14 +174,13 @@
             <div class="col m12">
               <ul class="collection">
                 {% for row in grid.rows %}
-                  <li class="collection-item avatar">
-                    <i class="{% if(row.entity.getIsActive()) %}green{% else %} red {% endif %} circle circle-avatar-status">
-                      <span>{{ row.entity.getFirstLetter()}}</span></i>
+                  <li class="collection-item avatar avatar-right">
+                    <a href="#!" class="secondary-content primary-content">
+                      <i class="mdi mdi-hardware-keyboard-arrow-left arrow-switch"></i>
+                    </a>
+                    <i class=" {% if(row.entity.getIsActive()) %}green{% else %} red {% endif %} circle circle-avatar-status circle-right"> <span>{{ row.entity.getFirstLetter()}}</span></i>
                     <p style="font-size: 16px;">{{ row.entity.getCompleteName()}}</p>
                     <p>{{ row.entity.email }}</p>
-                    <a href="#!" class="secondary-content secundary-content-center">
-                      <i class="mdi mdi-hardware-keyboard-arrow-right arrow-switch"></i>
-                    </a>
                   </li>
                 {% endfor %}
               </ul>

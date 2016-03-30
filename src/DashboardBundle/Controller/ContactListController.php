@@ -125,17 +125,8 @@ class ContactListController extends BaseController{
     public function genericEdit($nameFormEntity, $renderDir, $nameService, $indexRouting,$messageInfoNotSelected ='',$messageInfo ='', $nameFormView = 'form') {
         $queryString = $_SERVER['QUERY_STRING'];
         $idSelected = $this->getFiertSelectetGridItem();
-
         $isRedirectGrid = $this->isRedirectFromGrid($queryString);
-
-//        print_r('<pre>');
-//        print_r('idSelected '.$idSelected);
-//        print_r('<br>');
-//        print_r('isRedirectGrid '.$isRedirectGrid);
-//        die;
-
-        if($isRedirectGrid)
-            $idSelected = $this->getIdContactListIsRedirectFromGrid($queryString);
+        if($isRedirectGrid) $idSelected = $this->getIdContactListIsRedirectFromGrid($queryString);
 
         if (!$idSelected && !$isRedirectGrid) {
             $this->addFlash('info', $messageInfoNotSelected);
@@ -152,26 +143,39 @@ class ContactListController extends BaseController{
         $source = new Entity('DashboardBundle:Contact');
         $gridManager = $this->get('grid.manager');
         $grid = $gridManager->createGrid('FIRST');
-        $grid->setSource($source);
         $grid->hideColumns(array('id'));
         $grid->addMassAction(new DeleteMassAction());
         $grid->setLimits(array(5));
-        $grid->setPage(2);
+        $idContacts = $this->findBusiness('dashboard.contact.business')->getIdContactByIdContactList($idSelected);
+        $tableAlias = $source->getTableAlias();
+        $source->manipulateQuery(
+            function ($query) use ($tableAlias,$idContacts) {
+                    $query->andWhere($tableAlias.'.id NOT IN(:ids)' )
+                          ->setParameter(':ids', $idContacts);
+            }
+        );
+        $grid->setSource($source);
 
+        $source2 = new Entity('DashboardBundle:Contact');
         $grid2 = $gridManager->createGrid('SECOND');
-        $grid2->setSource($source);
         $grid2->hideColumns(array('id'));
         $grid2->addMassAction(new DeleteMassAction());
         $grid2->setLimits(array(5));
+        $tableAlias2 = $source2->getTableAlias();
+        $source2->manipulateQuery(
+            function ($query) use ($tableAlias2,$idSelected) {
+                $query->leftJoin($tableAlias2.'.contactList', 'cl')
+                      ->andWhere('cl.id = '.$idSelected );
+            }
+        );
+        $grid2->setSource($source2);
 
         $request = $this->getRequest();
-
         if ($request->isXmlHttpRequest()){
             if($this->isRedirectFromFirstGrid($queryString))
                 return $grid->getGridResponse('DashboardBundle:ContactList:contactAjax.html.twig');
             else
                 return $grid2->getGridResponse('DashboardBundle:ContactList:myContactAjax.html.twig');
-
         }
 
         if ($gridManager->isReadyForRedirect()) {
