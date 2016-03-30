@@ -57,7 +57,7 @@
 
       <form id="formSubmit" class="form-horizontal" action="" method="post" {{ form_enctype(form) }}>
         <div class="row" style="padding-left: 20px;padding-right: 3%;margin-top: 1rem;">
-          <div class="row" style="margin-top: 0rem;margin-left: -20px;">
+          <div class="row" style="margin-top: 0rem;">
             <div class="col m6" style="padding-bottom: 15px;">
               <div class="input-field">
                 {{ form_widget(form.name) }}
@@ -77,10 +77,22 @@
   <div class="title">
     <h5> Add contacts of current list</h5>
     <div class="btn-group right">
-      <a id="save_action" class="btn btn-small waves-dark waves-effect"> <i class="mdi mdi-content-add left"></i>
-        Add contact</a>
+      <a class="btn btn-small waves-dark waves-effect modal-trigger"  href="#modal1"> <i class="mdi mdi-content-add left"></i>Add contact</a>
     </div>
   </div>
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Add contacts of current list</h4>
+      <p>Text</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Cancel</a>
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Acept</a>
+    </div>
+  </div>
+
   <div class="content" style="padding-top: 5px">
     <div class="row" style="margin-top: 5px;">
       <div class="col m6">
