@@ -146,13 +146,16 @@ class ContactListController extends BaseController{
         $grid->addMassAction(new DeleteMassAction());
         $grid->setLimits(array(5));
         $idContacts = $this->findBusiness('dashboard.contact.business')->getIdContactByIdContactList($idSelected);
-        $tableAlias = $source->getTableAlias();
-        $source->manipulateQuery(
-            function ($query) use ($tableAlias,$idContacts) {
-                    $query->andWhere($tableAlias.'.id NOT IN(:ids)' )
-                          ->setParameter(':ids', $idContacts);
-            }
-        );
+
+        if($idContacts){
+            $tableAlias = $source->getTableAlias();
+            $source->manipulateQuery(
+              function ($query) use ($tableAlias,$idContacts) {
+                  $query->andWhere($tableAlias.'.id NOT IN(:ids)' )
+                    ->setParameter(':ids', $idContacts);
+              }
+            );
+        }
         $grid->setSource($source);
 
         $source2 = new Entity('DashboardBundle:Contact');
