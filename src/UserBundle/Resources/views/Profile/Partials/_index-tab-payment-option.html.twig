@@ -1,0 +1,219 @@
+<div id="test3" class="col s12" style="color: #5e5e5e;">
+
+  <div class="row" style="margin-top: 0px;">
+    <nav style="padding-right: 25px;color: #424242;background-color: #fff;box-shadow: 0 0px 0px rgba(0,0,0,.26)!important;padding-left: 30px;">
+      <div class="nav-wrapper">
+        <a href="#!" class="brand-logo"></a>
+        <ul class="right hide-on-med-and-down">
+          <li>
+            <a id="edit-profile" style="color: #9E9E9E" class="dropdown-button" href="#!">
+              <i class="mdi mdi-editor-mode-edit" style="font-size: 18px;"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <div class="row" id="edit-profile-information">
+    <div class="row" style="margin-top: 0px;">
+      <div class="col s3" style="padding-bottom: 10px;">
+        <span class="right">
+          <strong>
+            <b>Billed to:</b>
+          </strong>
+        </span>
+      </div>
+      <div class="col s9" style="padding-bottom: 10px;">
+        <span>
+          {% if card_info %}
+            xxxx-xxxx-xxxx-{{ card_info.last4 }}
+          {% else %}
+            No card
+          {% endif %}
+        </span>
+      </div>
+    </div>
+    <div class="row" style="margin-top: 0px;">
+      <div class="col s3" style="padding-bottom: 10px;">
+        <span class="right">
+          <strong><b>Card Type:</b> </strong>
+        </span>
+      </div>
+      <div class="col s9" style="padding-bottom: 10px;">
+        <span>
+          {% if card_info %}
+            {{ card_info.brand }}
+          {% endif %}
+        </span>
+      </div>
+    </div>
+    <div class="row" style="margin-top: 0px;">
+      <div class="col s12" style="padding-bottom: 10px;">
+          <button class="btn">Update Credit Card</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+      <h3>Invoices History:</h3>
+      <table class="row">
+        <thead>
+          <tr>
+            <th>
+              Plan
+            </th>
+            <th>
+              Amount
+            </th>
+            <th>
+              Date
+            </th>
+            <th>
+              Status
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+        {% if invoices %}
+          {% for invoice in invoices %}
+            <tr>
+              <td>
+                {{ invoice.lines.data.0.plan.name }}
+              </td>
+              <td>
+                $ {{ invoice.amount_due | number_format(2) }}
+              </td>
+              <td>
+                {{ invoice.date | date('M Y') }}
+              </td>
+              <td>
+                {{ invoice.closed ? 'PAYD' : 'UNPAYD' }}
+              </td>
+            </tr>
+          {% endfor %}
+        {% else %}
+          <tr>
+            <td>
+              No invoices found
+            </td>
+          </tr>
+        {% endif %}
+        </tbody>
+      </table>
+  </div>
+
+  <div id="edit-profile-container" style="display: none;">
+    <div class="row" style="padding-left: 20px;padding-right: 20px">
+      {{ form_start(profile_form, {'action': path('profile_save'), 'method': 'POST', 'id':'profile_form'}) }}
+      <div class="row" style="margin-top: 0rem;">
+        <div class="col m6" style="padding-bottom: 0px;">
+          <div class="input-field align-left">
+            {{ form_widget(profile_form.first_name, {'attr': {'class':'validate'}}) }}
+            <label for="profile_first_name" class="">First Name</label>
+          </div>
+        </div>
+        <div class="col m6" style="padding-bottom: 0px;">
+          <div class="input-field align-left">
+            {{ form_widget(profile_form.address, {'attr': {'class':'validate'}}) }}
+            <label for="profile_address" class="">Address</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: 0rem;">
+        <div class="col m6" style="padding-bottom: 0px;">
+          <div class="input-field align-left">
+            {{ form_widget(profile_form.last_name, {'attr': {'class':'validate'}}) }}
+            <label for="profile_last_name" class="">Last Name</label>
+          </div>
+        </div>
+        <div class="col m6" style="padding-bottom: 0px;">
+          <div class="input-field align-left">
+            {{ form_widget(profile_form.city, {'attr': {'class':'validate'}}) }}
+            <label for="profile_city" class="">City</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: 0rem;">
+        <div class="col m6" style="padding-bottom: 0px;">
+          <div class="input-field">
+            {{ form_widget(profile_form.email, {'attr': {'type':'email','class':'validate'}}) }}
+            <label for="profile_email" class="">Email</label>
+          </div>
+        </div>
+        <div class="col m6" style="padding-bottom: 0px;">
+          <div class="input-field align-left">
+            {{ form_widget(profile_form.state, {'attr': {'class':'validate'}}) }}
+            <label for="profile_state" class="">State</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: 0rem;">
+        <div class="col m6" style="padding-bottom: 0px;">
+          <div class="input-field">
+            {{ form_widget(profile_form.gender) }}
+            <label for="profile_gender" style="transform: translateY(-170%);left: 0px;font-size: .8rem;">Gender</label>
+          </div>
+        </div>
+        <div class="col m6" style="padding-bottom: 0px;">
+          <div class="input-field align-left">
+            {{ form_widget(profile_form.country, {'attr': {'class':'validate'}}) }}
+            <label for="profile_country" class="">Country</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: 0rem;">
+        <div class="col m6" style="padding-bottom: 0px;">
+          <div class="input-field">
+            {{ form_widget(profile_form.cell_phone, {'attr': {'class':'validate','data-inputmask':"'mask': '(999) 999-9999'"}}) }}
+            <label for="profile_cell_phone" style="transform: translateY(-170%);left: 0px;">Cell Phone</label>
+          </div>
+        </div>
+        <div class="col m6" style="padding-bottom: 0px;">
+          <div class="input-field">
+            {{ form_widget(profile_form.office_phone, {'attr': {'class':'validate','data-inputmask':"'mask': '(999) 999-9999'"}}) }}
+            <label for="profile_office_phone" style="transform: translateY(-170%);left: 0px;">Office Phone</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: 0rem;">
+        <div class="col m6" style="padding-bottom: 0px;">
+          <div class="input-field align-left">
+            {{ form_widget(profile_form.company, {'attr': {'class':'validate'}}) }}
+            <label for="profile_company">Company</label>
+          </div>
+        </div>
+        <div class="col m6" style="padding-bottom: 0px;">
+          <div class="input-field align-left">
+            {{ form_widget(profile_form.website, {'attr': {'class':'validate'}}) }}
+            <label for="profile_website">Website</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: 0rem;">
+        <div class="col m6" style="padding-bottom: 0px;">
+          <div class="input-field align-left">
+            {{ form_widget(profile_form.birth_date) }}
+            <label for="profile_birth_date">Birth date</label>
+          </div>
+        </div>
+        <div class="col m6" style="padding-bottom: 0px;">
+        </div>
+      </div>
+
+      <div class="row" style="padding-right: 25px;padding-top: 20px">
+        <div class="col s12">
+          <button type="submit" class="waves-effect waves-light btn btn-small">SAVE</button>
+          <a id="btn-profile-cancel" class="waves-effect waves-light btn btn-small red">CANCEL</a>
+        </div>
+      </div>
+      {{ form_end(profile_form) }}
+    </div>
+  </div>
+</div>

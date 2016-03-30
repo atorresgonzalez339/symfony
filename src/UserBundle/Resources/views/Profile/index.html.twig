@@ -209,7 +209,8 @@
 					<div class="col s12" style="padding-bottom: 5px;">
 						<ul class="tabs tab-nav">
 							<li class="tab col s1 waves-effect"><a href="#test1" class="active">Profile</a></li>
-							<li class="tab col s1 waves-effect"><a href="#test2">Account Infotmation</a></li>
+							<li class="tab col s1 waves-effect"><a href="#test2">Account</a></li>
+							<li class="tab col s1 waves-effect"><a href="#test3">Billing</a></li>
 						</ul>
 					</div>
 
@@ -218,6 +219,8 @@
 
           {#Tab Account Info#}
           {% include 'UserBundle:Profile:Partials/_index-tab-account-info.html.twig' %}
+
+		  {% include 'UserBundle:Profile:Partials/_index-tab-payment-option.html.twig' %}
 
 				</div>
 			</div>
