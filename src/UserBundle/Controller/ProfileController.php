@@ -26,9 +26,16 @@ class ProfileController extends BaseController
 
       $user = $this->getUser();
 
+      $upgradeBusiness = $this->findBusiness('dashboard.upgrade.business');
+
       $profile = $this->getBusiness()
                       ->getRepository('User', 'UserProfile')
                       ->findByUserId($user->getId());
+
+      $cardInfo = $upgradeBusiness->getCardInformation($user);
+
+      $invoices = $upgradeBusiness->getInvoices($user);
+
 
       if(!$profile){
       	$profile = new UserProfile($user);
@@ -42,7 +49,9 @@ class ProfileController extends BaseController
         'profile' => $profile,
         'profile_form' => $profile_form->createView(),
         'account_form' => $account_form->createView(),
-        'picture_form' => $picture_form->createView()
+        'picture_form' => $picture_form->createView(),
+        'card_info' => $cardInfo,
+        'invoices' => $invoices
       ));
     }
 

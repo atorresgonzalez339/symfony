@@ -1,4 +1,4 @@
-<form action="" method="POST" id="card-information-form">
+<form id="stripe-card-form" class="{{ hide is defined and hide ? 'hide' : '' }}">
     <span class="errors"></span>
 
     <div class="form-row">
@@ -24,5 +24,5 @@
         <input type="text" size="4" data-stripe="exp-year"/>
     </div>
 
-    <button type="submit">Submit Payment</button>
+    <button class="btn" type="submit">{{ btn_title is defined and btn_title ? btn_title : 'Update' }}</button>
 </form>

@@ -39,31 +39,30 @@ class UpgradeBusiness extends BaseBusiness
 
       if ($new_plan_id !== 1) {
 
-        $plan_amount = $plan->getPrice();
-
-        $invoiceItem = \Stripe_InvoiceItem::create(
-          array(
-            "customer" => $customer_id,
-            "amount" => $plan_amount * 100,
-            "currency" => "usd"
-          )
-        );
+        $currentSubscription = $this->getCurrentSubscription($user, $customer);
+        $subscription = $customer->subscriptions->retrieve($currentSubscription['id']);
+        $subscription->plan = $new_plan_id;
+        $proration_date = new \DateTime();
+        $subscription->proration_date = $proration_date->getTimestamp();
+        $subscription->save();
 
         $invoice = \Stripe_Invoice::create(array(
           "customer" => $customer_id,
+          "subscription" => $subscription['id']
         ));
 
         $result = $invoice->pay();
 
-        if ($result->paid == true) {
-          $customer->updateSubscription(array(
-            'plan' => $new_plan_id,
-            'prorate' => false
-          ));
-        } else {
+        if ($result->paid != true) {
+          $current_plan_id =  $user->getCurrentPlan()->getPlan()->getId();
           $invoice->closed = true;
           $invoice->save();
+          $customer->updateSubscription(array(
+            'plan' => $current_plan_id,
+            'prorate' => false
+          ));
         }
+
       } else {
 
         $customer->updateSubscription(array(
@@ -125,13 +124,44 @@ class UpgradeBusiness extends BaseBusiness
 
     $cards = $customer->sources->all(array("object" => "card"));
 
-    if ($cards) {
+    if ($cards && $cards->data) {
       foreach ($cards->data as $card) {
         $customer->sources->retrieve($card['id'])->delete();
       }
     }
 
     return $customer->sources->create(array("source" => $token))->__toArray(true);;
+  }
+
+  public function getCardInformation(User $user){
+    $customer_id = $user->getProfile()->getCustomerId();
+
+    if($customer_id) {
+
+      $customer = \Stripe_Customer::retrieve($customer_id);
+
+      $cards = $customer->sources->all(array("object" => "card"));
+
+      if ($cards && $cards->data) {
+        return $cards->data[0]->__toArray();
+      }
+    }
+
+    return null;
+  }
+
+  public function getInvoices(User $user){
+    $customer_id = $user->getProfile()->getCustomerId();
+
+    if($customer_id) {
+      $invoices = \Stripe_Invoice::all(array("customer" => $customer_id));
+
+      if ($invoices && $invoices->data) {
+        return $invoices->data;
+      }
+    }
+
+    return null;
   }
 
   public function getCouponById($coupon_id)
@@ -144,6 +174,23 @@ class UpgradeBusiness extends BaseBusiness
     } else {
       throw new \Stripe_Error('Coupon is expired or invalid.');
     }
+
+  }
+
+  private function getCurrentSubscription(User $user, $customer){
+
+    $currentPlan = $user->getCurrentPlan();
+    $plan = $currentPlan->getPlan();
+
+    $subscriptions = $customer->subscriptions->all();
+
+    foreach($subscriptions->data as $subscription){
+      if($subscription['plan']['id'] == $plan->getId()){
+        return $subscription;
+      }
+    }
+
+    return null;
 
   }
 

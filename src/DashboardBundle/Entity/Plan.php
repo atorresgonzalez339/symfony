@@ -38,7 +38,7 @@ class Plan
     private $total_contacts;
 
     /**
-     * @ORM\Column(type="integer", nullable=false)
+     * @ORM\Column(type="decimal", scale=2, nullable=false)
      */
     private $price;
 
