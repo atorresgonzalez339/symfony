@@ -25,14 +25,13 @@ class ContactListController extends BaseController{
   /**
    * @Route("/contactslist", name="contactlist_index")
    */
-    public function index122Action(Request $request){
+    public function indexAction(Request $request){
       $source = new Entity('DashboardBundle:ContactList');
       $grid = $this->get('grid');
       $grid->setSource($source);
       $grid->hideColumns(array('id'));
       $grid->addMassAction(new DeleteMassAction());
-//      $grid->setLimits($this->container->getParameter('admin.paginator.limits.config'));
-      $grid->setLimits(array(1));
+      $grid->setLimits($this->container->getParameter('admin.paginator.limits.config'));
       if ($request->isXmlHttpRequest()){
           return $grid->getGridResponse('DashboardBundle:ContactList:indexAjax.html.twig');
       }

@@ -111,11 +111,11 @@
 
       <div class="row">
         <div class="col m6">
-          <span><b>All Contacts</b></span>
+          <span><b>All contacts</b></span>
           {{ grid(grid, 'DashboardBundle:Grid:gridTemplateContactsAjax.html.twig') }}
         </div>
         <div class="col m6">
-          <span><b> My Contacts</b></span>
+          <span><b>Contacts of current list:</b></span>
           {{ grid(grid2, 'DashboardBundle:Grid:gridTemplateMyContactsAjax.html.twig') }}
         </div>
       </div>
@@ -124,9 +124,13 @@
         <div class="col m2" style="padding-right: 0px">
           <i class="green circle circle-status"> <span></span></i> <b style="margin-left: 30px;"> Enable contact</b>
         </div>
-
         <div class="col m2">
           <i class="red circle circle-status"> <span></span></i> <b style="margin-left: 30px;"> Disable contact</b>
+        </div>
+        <div class="col m4">
+          <i class="mdi mdi-hardware-keyboard-arrow-right arrow-switch"></i>
+          <i class="mdi mdi-hardware-keyboard-arrow-left arrow-switch"></i>
+          asdasd
         </div>
       </div>
 
