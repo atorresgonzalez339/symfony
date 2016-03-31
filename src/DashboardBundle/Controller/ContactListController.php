@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use APY\DataGridBundle\Grid\Source\Entity;
 use APY\DataGridBundle\Grid\Action\DeleteMassAction;
+use Symfony\Component\HttpFoundation\Response;
 
 class ContactListController extends BaseController{
 
@@ -192,17 +193,6 @@ class ContactListController extends BaseController{
                 'grid2' => $grid2,
             ));
         }
-
-//        return $grid->getGridResponse('DashboardBundle:ContactList:edit.html.twig',array(
-//            'entity' => $entity,
-//            $nameFormView => $editForm->createView(),
-//        ))      ;
-//
-//
-//        return $this->render($renderDir, array(
-//            'entity' => $entity,
-//            $nameFormView => $editForm->createView(),
-//        ));
     }
 
     /**
@@ -230,6 +220,18 @@ class ContactListController extends BaseController{
             $this->addFlash('info', $messageError);
             return $this->render($renderDir, array('entity' => $entity,$nameFormView => $form->createView()));
         }
+    }
+
+    /**
+     * @Route("/contactslist/switch2contactlist", name="contactlist_switch2contactlist")
+     */
+    public function switch2contactlistAction() {
+        $response = new Response();
+        $response->headers->set('Content-Type', 'text/html');
+
+        $request = $this->getRequest();
+        $idContactList = $request->get('idContactList');
+        die('aaaaaaa' . $idContactList);
     }
 
 }

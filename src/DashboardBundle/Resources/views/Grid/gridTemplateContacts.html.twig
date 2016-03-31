@@ -101,14 +101,6 @@
               text-align: center;
             }
 
-            /*i.circle-avatar-status.red {*/
-              /*border: 3px solid pink;*/
-            /*}*/
-
-            /*i.circle-avatar-status.green {*/
-              /*border: 3px solid #94fc98;*/
-            /*}*/
-
             .collection .collection-item.avatar i.circle-avatar-status > span {
               font-size: 16px;
               font-style: normal;
@@ -156,20 +148,33 @@
               {% for row in grid.rows %}
                 <li class="collection-item avatar avatar-left">
                   <i class="{% if(row.entity.getIsActive()) %}green{% else %} red {% endif %} circle circle-status">
-                    {#<span>{{ row.entity.getFirstLetter()}}</span>#}
                   </i>
                   <div class="row" style="margin-top: 0px;">
-                    <div class="col m5" style="padding-bottom: 0px;"> <p style="font-size: 16px;">{{ row.entity.getCompleteName()}}</p> </div>
+                    <div class="col m5" style="padding-bottom: 0px;"> <p style="font-size: 15px;">{{ row.entity.getCompleteName()}}</p> </div>
                     <div class="col m7" style="padding-bottom: 0px;"> <p>{{ row.entity.email }}</p> </div>
                   </div>
                   <a href="#!" class="secondary-content secundary-content-center">
-                    <i class="mdi mdi-hardware-keyboard-arrow-right arrow-switch"></i>
+                    <i class="mdi mdi-hardware-keyboard-arrow-right arrow-switch action-arrow-switch" data-id="{{ row.entity.id }}"></i>
                   </a>
                 </li>
               {% endfor %}
                 </ul>
             </div>
           </div>
+
+          <script>
+            $(".action-arrow-switch").click(function (evt) {
+              var idSelected = $(this).attr('data-id');
+              $.ajax({
+                type: "GET",
+                url: '{{ path('contactlist_switch2contactlist') }}',
+                data: {idContactList:idSelected},
+                success: function(data) {
+                },
+                dataType: 'html'
+              });
+            });
+          </script>
 
           {# Aqui se genera el paginado #}
           <div class="grid_footer">
