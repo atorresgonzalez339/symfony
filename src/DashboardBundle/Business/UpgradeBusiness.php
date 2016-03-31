@@ -25,7 +25,7 @@ class UpgradeBusiness extends BaseBusiness
   public function updatePlan(User $user, Plan $plan, $coupon_id = null)
   {
 
-    $customer_id = $user->getProfile()->getCustomerId();
+    $customer_id = $user->getProfile() ? $user->getProfile()->getCustomerId() : null;
     $new_plan_id = $plan->getId();
 
     if ($customer_id) {
@@ -40,38 +40,33 @@ class UpgradeBusiness extends BaseBusiness
       if ($new_plan_id !== 1) {
 
         $currentSubscription = $this->getCurrentSubscription($user, $customer);
+
         $subscription = $customer->subscriptions->retrieve($currentSubscription['id']);
         $subscription->plan = $new_plan_id;
         $proration_date = new \DateTime();
         $subscription->proration_date = $proration_date->getTimestamp();
         $subscription->save();
 
-        $invoice = \Stripe_Invoice::create(array(
-          "customer" => $customer_id,
-          "subscription" => $subscription['id']
-        ));
+        $current_plan_id = $user->getCurrentPlan()->getPlan()->getId();
 
-        $result = $invoice->pay();
+        if ($current_plan_id != 1) {
 
-        if ($result->paid != true) {
-          $current_plan_id =  $user->getCurrentPlan()->getPlan()->getId();
-          $invoice->closed = true;
-          $invoice->save();
-          $customer->updateSubscription(array(
-            'plan' => $current_plan_id,
-            'prorate' => false
+          $invoice = \Stripe_Invoice::create(array(
+            "customer" => $customer_id,
+            "subscription" => $subscription['id']
           ));
+
+          $result = $invoice->pay();
+
+          if ($result->paid != true) {
+            $invoice->closed = true;
+            $invoice->save();
+            $customer->updateSubscription(array(
+              'plan' => $current_plan_id,
+              'prorate' => false
+            ));
+          }
         }
-
-      } else {
-
-        $customer->updateSubscription(array(
-          'plan' => $new_plan_id,
-          'prorate' => false
-        ));
-
-        $customer->save();
-
       }
     } else {
 
@@ -116,7 +111,8 @@ class UpgradeBusiness extends BaseBusiness
     return $plan;
   }
 
-  public function updateCard(User $user, $token){
+  public function updateCard(User $user, $token)
+  {
 
     $customer_id = $user->getProfile()->getCustomerId();
 
@@ -133,10 +129,11 @@ class UpgradeBusiness extends BaseBusiness
     return $customer->sources->create(array("source" => $token))->__toArray(true);;
   }
 
-  public function getCardInformation(User $user){
-    $customer_id = $user->getProfile()->getCustomerId();
+  public function getCardInformation(User $user)
+  {
+    $customer_id = $user->getProfile() ? $user->getProfile()->getCustomerId() : null;
 
-    if($customer_id) {
+    if ($customer_id) {
 
       $customer = \Stripe_Customer::retrieve($customer_id);
 
@@ -150,10 +147,11 @@ class UpgradeBusiness extends BaseBusiness
     return null;
   }
 
-  public function getInvoices(User $user){
-    $customer_id = $user->getProfile()->getCustomerId();
+  public function getInvoices(User $user)
+  {
+    $customer_id = $user->getProfile() ? $user->getProfile()->getCustomerId() : null;
 
-    if($customer_id) {
+    if ($customer_id) {
       $invoices = \Stripe_Invoice::all(array("customer" => $customer_id));
 
       if ($invoices && $invoices->data) {
@@ -177,15 +175,16 @@ class UpgradeBusiness extends BaseBusiness
 
   }
 
-  private function getCurrentSubscription(User $user, $customer){
+  private function getCurrentSubscription(User $user, $customer)
+  {
 
     $currentPlan = $user->getCurrentPlan();
     $plan = $currentPlan->getPlan();
 
     $subscriptions = $customer->subscriptions->all();
 
-    foreach($subscriptions->data as $subscription){
-      if($subscription['plan']['id'] == $plan->getId()){
+    foreach ($subscriptions->data as $subscription) {
+      if ($subscription['plan']['id'] == $plan->getId()) {
         return $subscription;
       }
     }

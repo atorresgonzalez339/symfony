@@ -46,7 +46,7 @@
                 <i class="fa {{ card_info ? 'fa-pencil' : 'fa-credit-card' }}"></i>{{ card_info ? 'Update' : 'Add' }} Credit Card</div>
               <div class="collapsible-body">
                 <div style="padding: 20px;">
-                  {% include 'DashboardBundle:Upgrade:Partials/_stripe_card_form.html.twig' with {'hide': false, 'btn_title':'Process Checkout' } %}
+                  {% include 'DashboardBundle:Upgrade:Partials/_stripe_card_form.html.twig' with {'btn_title':'Process Checkout' } %}
                 </div>
               </div>
             </li>
