@@ -339,9 +339,9 @@
 
 				$.post('{{ path('upgrade_update_card') }}', data, function(result){
 					if(result.status == 'ok'){
-						alert('ok');
+						$('#stripe-update-card-modal').closeModal();
 						$form_update_card.trigger("reset");
-						$('#stripe-update-card-modal').modal('hide');
+						$('a.modal-action').prop('disabled', true);
 					}
 				});
 			});
@@ -351,6 +351,7 @@
 			});
 
 			$('a#stripe-modal-accept').click(function(){
+				$('a.modal-action').prop('disabled', true);
 				$form_update_card.submit();
 			});
 
