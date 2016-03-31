@@ -50,7 +50,13 @@
     </div>
     <div class="row" style="margin-top: 0px;">
       <div class="col s12" style="padding-bottom: 10px;">
-          <button class="btn">Update Credit Card</button>
+          <a class="btn modal-trigger"  href="#stripe-update-card-modal">
+            {% if card_info %}
+              Update Credit Card
+            {% else %}
+              Add Credit Card
+            {% endif %}
+          </a>
       </div>
     </div>
   </div>
@@ -64,10 +70,13 @@
               Plan
             </th>
             <th>
-              Amount
+              Date
             </th>
             <th>
-              Date
+              Prorate
+            </th>
+            <th>
+              Amount
             </th>
             <th>
               Status
@@ -79,13 +88,19 @@
           {% for invoice in invoices %}
             <tr>
               <td>
-                {{ invoice.lines.data.0.plan.name }}
-              </td>
-              <td>
-                $ {{ (invoice.amount_due / 100) | number_format(2) }}
+                {% set line_first = invoice.lines.data | first %}
+                {% set line_last = invoice.lines.data | last %}
+                {{ line_last.plan.name }}
               </td>
               <td>
                 {{ invoice.date | date('M Y') }}
+              </td>
+              <td>
+                {% set prorate = invoice.amount_due - line_first.plan.amount %}
+                $ {{ (prorate > 0 ? prorate / 100 : prorate * -1 / 100) | number_format(2) }}
+              </td>
+              <td>
+                $ {{ (invoice.amount_due / 100) | number_format(2) }}
               </td>
               <td>
                 {{ invoice.closed ? 'PAYD' : 'UNPAYD' }}
@@ -102,118 +117,16 @@
         </tbody>
       </table>
   </div>
+</div>
 
-  <div id="edit-profile-container" style="display: none;">
-    <div class="row" style="padding-left: 20px;padding-right: 20px">
-      {{ form_start(profile_form, {'action': path('profile_save'), 'method': 'POST', 'id':'profile_form'}) }}
-      <div class="row" style="margin-top: 0rem;">
-        <div class="col m6" style="padding-bottom: 0px;">
-          <div class="input-field align-left">
-            {{ form_widget(profile_form.first_name, {'attr': {'class':'validate'}}) }}
-            <label for="profile_first_name" class="">First Name</label>
-          </div>
-        </div>
-        <div class="col m6" style="padding-bottom: 0px;">
-          <div class="input-field align-left">
-            {{ form_widget(profile_form.address, {'attr': {'class':'validate'}}) }}
-            <label for="profile_address" class="">Address</label>
-          </div>
-        </div>
-      </div>
-
-      <div class="row" style="margin-top: 0rem;">
-        <div class="col m6" style="padding-bottom: 0px;">
-          <div class="input-field align-left">
-            {{ form_widget(profile_form.last_name, {'attr': {'class':'validate'}}) }}
-            <label for="profile_last_name" class="">Last Name</label>
-          </div>
-        </div>
-        <div class="col m6" style="padding-bottom: 0px;">
-          <div class="input-field align-left">
-            {{ form_widget(profile_form.city, {'attr': {'class':'validate'}}) }}
-            <label for="profile_city" class="">City</label>
-          </div>
-        </div>
-      </div>
-
-      <div class="row" style="margin-top: 0rem;">
-        <div class="col m6" style="padding-bottom: 0px;">
-          <div class="input-field">
-            {{ form_widget(profile_form.email, {'attr': {'type':'email','class':'validate'}}) }}
-            <label for="profile_email" class="">Email</label>
-          </div>
-        </div>
-        <div class="col m6" style="padding-bottom: 0px;">
-          <div class="input-field align-left">
-            {{ form_widget(profile_form.state, {'attr': {'class':'validate'}}) }}
-            <label for="profile_state" class="">State</label>
-          </div>
-        </div>
-      </div>
-
-      <div class="row" style="margin-top: 0rem;">
-        <div class="col m6" style="padding-bottom: 0px;">
-          <div class="input-field">
-            {{ form_widget(profile_form.gender) }}
-            <label for="profile_gender" style="transform: translateY(-170%);left: 0px;font-size: .8rem;">Gender</label>
-          </div>
-        </div>
-        <div class="col m6" style="padding-bottom: 0px;">
-          <div class="input-field align-left">
-            {{ form_widget(profile_form.country, {'attr': {'class':'validate'}}) }}
-            <label for="profile_country" class="">Country</label>
-          </div>
-        </div>
-      </div>
-
-      <div class="row" style="margin-top: 0rem;">
-        <div class="col m6" style="padding-bottom: 0px;">
-          <div class="input-field">
-            {{ form_widget(profile_form.cell_phone, {'attr': {'class':'validate','data-inputmask':"'mask': '(999) 999-9999'"}}) }}
-            <label for="profile_cell_phone" style="transform: translateY(-170%);left: 0px;">Cell Phone</label>
-          </div>
-        </div>
-        <div class="col m6" style="padding-bottom: 0px;">
-          <div class="input-field">
-            {{ form_widget(profile_form.office_phone, {'attr': {'class':'validate','data-inputmask':"'mask': '(999) 999-9999'"}}) }}
-            <label for="profile_office_phone" style="transform: translateY(-170%);left: 0px;">Office Phone</label>
-          </div>
-        </div>
-      </div>
-
-      <div class="row" style="margin-top: 0rem;">
-        <div class="col m6" style="padding-bottom: 0px;">
-          <div class="input-field align-left">
-            {{ form_widget(profile_form.company, {'attr': {'class':'validate'}}) }}
-            <label for="profile_company">Company</label>
-          </div>
-        </div>
-        <div class="col m6" style="padding-bottom: 0px;">
-          <div class="input-field align-left">
-            {{ form_widget(profile_form.website, {'attr': {'class':'validate'}}) }}
-            <label for="profile_website">Website</label>
-          </div>
-        </div>
-      </div>
-
-      <div class="row" style="margin-top: 0rem;">
-        <div class="col m6" style="padding-bottom: 0px;">
-          <div class="input-field align-left">
-            {{ form_widget(profile_form.birth_date) }}
-            <label for="profile_birth_date">Birth date</label>
-          </div>
-        </div>
-        <div class="col m6" style="padding-bottom: 0px;">
-        </div>
-      </div>
-
-      <div class="row" style="padding-right: 25px;padding-top: 20px">
-        <div class="col s12">
-          <button type="submit" class="waves-effect waves-light btn btn-small">SAVE</button>
-          <a id="btn-profile-cancel" class="waves-effect waves-light btn btn-small red">CANCEL</a>
-        </div>
-      </div>
-      {{ form_end(profile_form) }}
-    </div>
+<!-- Modal Structure -->
+<div id="stripe-update-card-modal" class="modal">
+  <div class="modal-content">
+    <h4>Update Credit Card</h4>
+    {% include 'DashboardBundle:Upgrade:Partials/_stripe_card_form.html.twig' with {'hide_btn': true} %}
+  </div>
+  <div class="modal-footer">
+    <a href="#!" id="stripe-modal-cancel" class="modal-action modal-close waves-effect waves-red btn-flat ">Cancel</a>
+    <a href="#!" id="stripe-modal-accept" class="modal-action waves-effect waves-green btn-flat ">Accept</a>
   </div>
 </div>

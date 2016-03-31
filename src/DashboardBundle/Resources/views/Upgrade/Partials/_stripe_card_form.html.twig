@@ -1,4 +1,4 @@
-<form id="stripe-card-form" class="{{ hide is defined and hide ? 'hide' : '' }}">
+<form id="stripe-card-form">
     <span class="errors"></span>
 
     <div class="form-row">
@@ -23,6 +23,5 @@
         <span> / </span>
         <input type="text" size="4" data-stripe="exp-year"/>
     </div>
-
-    <button class="btn" type="submit">{{ btn_title is defined and btn_title ? btn_title : 'Update' }}</button>
+    <button class="btn {{ hide_btn is defined and hide_btn ? 'hide' : '' }}" type="submit">{{ btn_title is defined and btn_title ? btn_title : 'Save' }}</button>
 </form>

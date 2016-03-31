@@ -36,7 +36,6 @@ class ProfileController extends BaseController
 
       $invoices = $upgradeBusiness->getInvoices($user);
 
-
       if(!$profile){
       	$profile = new UserProfile($user);
       }

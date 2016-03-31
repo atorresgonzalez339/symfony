@@ -244,6 +244,10 @@
 	<script src="{{ asset('bundles/common/bower_components/cloudinary-jquery-file-upload/cloudinary-jquery-file-upload.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('bundles/common/js/cloudinary.js') }}" type="text/javascript"></script>
 
+	{# Add Update Credit Card Scripts #}
+	<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+	<script src="{{ asset('bundles/dashboard/assets/js/stripe.js') }}"></script>
+
 	<script>
 		$(document).ready(function(){
 
@@ -319,6 +323,37 @@
 				var progress = $('#profile-left-box .progress');
 				progress.removeClass('hide');
 			});
+
+			// Add & Update Credit Card
+
+			var $form_update_card = $('form#stripe-card-form');
+
+			MyStripe.init({
+				form_selector: '#stripe-card-form'
+			});
+
+			MyStripe.success(function(token){
+				var data = {
+					token: token
+				};
+
+				$.post('{{ path('upgrade_update_card') }}', data, function(result){
+					if(result.status == 'ok'){
+						alert('ok');
+						$form_update_card.trigger("reset");
+						$('#stripe-update-card-modal').modal('hide');
+					}
+				});
+			});
+
+			$('a#stripe-modal-cancel').click(function(){
+				$form_update_card.trigger("reset");
+			});
+
+			$('a#stripe-modal-accept').click(function(){
+				$form_update_card.submit();
+			});
+
 		});
 	</script>
 {% endblock javascripts%}
