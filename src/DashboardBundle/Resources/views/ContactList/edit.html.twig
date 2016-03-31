@@ -11,24 +11,54 @@
 {% block content %}
   <style>
 
-    .circle-status.red {
+    .avatar-right{
+      padding-left: 90px !important;
+    }
+
+    .primary-content{
       position: absolute;
-      width: 15px;
-      height: 15px;
-      overflow: hidden;
+      top: 10px !important;
+      left: 15px !important;
+      right: 100% !important;
+    }
+
+    .secundary-content-center{
+      top: 10px !important;
+    }
+
+    .collection .collection-item.avatar {
+      min-height: 40px;
+    }
+
+    .collection .collection-item.avatar-left {
+      padding-left: 45px !important;
+    }
+
+    .circle-status-bootom{
+      width: 15px !important;
+      height: 15px !important;
+      position: absolute !important;
+      overflow: hidden!important;
+      display: inline-block!important;
+      vertical-align: middle!important;
+    }
+
+    .circle-status{
+      width: 15px !important;
+      height: 15px !important;
+      position: absolute !important;
+      overflow: hidden!important;
+      display: inline-block!important;
+      vertical-align: middle!important;
+      top: 12px;
+    }
+
+    .circle-status.red {
       left: 190px;
-      display: inline-block;
-      vertical-align: middle;
     }
 
     .circle-status.green {
-      position: absolute;
-      width: 15px;
-      height: 15px;
-      overflow: hidden;
       left: 15px;
-      display: inline-block;
-      vertical-align: middle;
     }
 
     .arrow-switch-legent{
@@ -107,10 +137,10 @@
 
     <div class="row">
       <div class="col m2" style="padding-right: 0px">
-        <i class="green circle circle-status"> <span></span></i> <b style="margin-left: 30px;"> Enable contact</b>
+        <i class="green circle circle-status-bootom"> <span></span></i> <b style="margin-left: 30px;"> Enable contact</b>
       </div>
       <div class="col m2">
-        <i class="red circle circle-status"> <span></span></i> <b style="margin-left: 30px;"> Disable contact</b>
+        <i class="red circle circle-status-bootom"> <span></span></i> <b style="margin-left: 30px;"> Disable contact</b>
       </div>
       <div class="col m4">
         <div style="margin-top: -6px;">

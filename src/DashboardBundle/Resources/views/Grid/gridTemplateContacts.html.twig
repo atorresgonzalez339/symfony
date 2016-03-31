@@ -101,21 +101,17 @@
               text-align: center;
             }
 
-            i.circle-avatar-status.red {
-              border: 3px solid pink;
-            }
+            /*i.circle-avatar-status.red {*/
+              /*border: 3px solid pink;*/
+            /*}*/
 
-            i.circle-avatar-status.green {
-              border: 3px solid #94fc98;
-            }
+            /*i.circle-avatar-status.green {*/
+              /*border: 3px solid #94fc98;*/
+            /*}*/
 
             .collection .collection-item.avatar i.circle-avatar-status > span {
               font-size: 16px;
               font-style: normal;
-            }
-
-            .collection .collection-item.avatar {
-              min-height: 60px;
             }
 
             .circle-status.red {
@@ -145,37 +141,27 @@
               border-radius: 4px;
             }
 
-            .secundary-content-center{
-              top: 20px !important;
-            }
-
             .arrow-switch:hover{
               background-color: #9E9E9E;
             }
 
-            .primary-content{
-              position: absolute;
-              top: 20px !important;
-              left: 15px !important;
-              right: 100% !important;
-            }
             .circle-right{
               left: 60px !important;
             }
 
-            .avatar-right{
-              padding-left: 115px !important;
-            }
           </style>
           <div class="row">
             <div class="col m12">
               <ul class="collection">
               {% for row in grid.rows %}
-                <li class="collection-item avatar">
-                  <i class="{% if(row.entity.getIsActive()) %}green{% else %} red {% endif %} circle circle-avatar-status">
-                    <span>{{ row.entity.getFirstLetter()}}</span></i>
-                  <p style="font-size: 16px;">{{ row.entity.getCompleteName()}}</p>
-                  <p>{{ row.entity.email }}</p>
+                <li class="collection-item avatar avatar-left">
+                  <i class="{% if(row.entity.getIsActive()) %}green{% else %} red {% endif %} circle circle-status">
+                    {#<span>{{ row.entity.getFirstLetter()}}</span>#}
+                  </i>
+                  <div class="row" style="margin-top: 0px;">
+                    <div class="col m5" style="padding-bottom: 0px;"> <p style="font-size: 16px;">{{ row.entity.getCompleteName()}}</p> </div>
+                    <div class="col m7" style="padding-bottom: 0px;"> <p>{{ row.entity.email }}</p> </div>
+                  </div>
                   <a href="#!" class="secondary-content secundary-content-center">
                     <i class="mdi mdi-hardware-keyboard-arrow-right arrow-switch"></i>
                   </a>
@@ -184,13 +170,6 @@
                 </ul>
             </div>
           </div>
-
-          {#<table style="position: relative;text-align: left" id="itemList" class="table table-hover">#}
-          {#{% if grid.isTitleSectionVisible %}#}
-          {#{{ grid_titles(grid) }}#}
-          {#{% endif %}#}
-          {#{{ grid_rows(grid) }}#}
-          {#</table>#}
 
           {# Aqui se genera el paginado #}
           <div class="grid_footer">
