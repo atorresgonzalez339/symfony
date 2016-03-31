@@ -15,7 +15,9 @@ var MyStripe = {
             button.prop('disabled', true);
             Stripe.card.createToken($form, function(status, response){
                 if (response.error) {
-                    $form.find('.payment-errors').text(response.error.message);
+                    var $errors = $form.find('.payment-errors');
+                    $errors.text(response.error.message);
+                    $errors.parent().removeClass('hide');
                     button.prop('disabled', false);
                 }
                 else{

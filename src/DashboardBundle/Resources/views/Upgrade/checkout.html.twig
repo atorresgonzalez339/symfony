@@ -31,12 +31,15 @@
                     Type: {{ card_info.brand }}
                   </p>
                 </div>
-                <div>
-                  <p style="padding: 10px">
-                    <a class="btn" href="{{ path('upgrade_change_plan', {'plan_id':plan.id}) }}">
-                      Process Checkout
-                    </a>
-                  </p>
+                <div class="container">
+                    <center>
+                      <div style="margin: 20px;">
+                        <a class="btn" href="{{ path('upgrade_change_plan', {'plan_id':plan.id}) }}">
+                          Process Checkout
+                        </a>
+                      </div>
+
+                    </center>
                 </div>
               </div>
             </li>
@@ -45,9 +48,7 @@
               <div class="collapsible-header {{ card_info ? '' : 'active' }}">
                 <i class="fa {{ card_info ? 'fa-pencil' : 'fa-credit-card' }}"></i>{{ card_info ? 'Update' : 'Add' }} Credit Card</div>
               <div class="collapsible-body">
-                <div style="padding: 20px;">
                   {% include 'DashboardBundle:Upgrade:Partials/_stripe_card_form.html.twig' with {'btn_title':'Process Checkout' } %}
-                </div>
               </div>
             </li>
           </ul>

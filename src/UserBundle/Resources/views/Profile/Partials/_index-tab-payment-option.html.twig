@@ -120,10 +120,18 @@
 </div>
 
 <!-- Modal Structure -->
-<div id="stripe-update-card-modal" class="modal">
+<div id="stripe-update-card-modal" class="modal modal-fixed-footer">
   <div class="modal-content">
-    <h4>Update Credit Card</h4>
-    {% include 'DashboardBundle:Upgrade:Partials/_stripe_card_form.html.twig' with {'hide_btn': true} %}
+    <h4>
+      {% if card_info %}
+        Update Credit Card
+      {% else %}
+        Add Credit Card
+      {% endif %}
+    </h4>
+    <div>
+      {% include 'DashboardBundle:Upgrade:Partials/_stripe_card_form.html.twig' with {'hide_btn': true} %}
+    </div>
   </div>
   <div class="modal-footer">
     <a href="#!" id="stripe-modal-cancel" class="modal-action modal-close waves-effect waves-red btn-flat ">Cancel</a>

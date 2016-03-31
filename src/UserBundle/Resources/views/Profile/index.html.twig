@@ -346,13 +346,14 @@
 				});
 			});
 
+
 			$('a#stripe-modal-cancel').click(function(){
 				$form_update_card.trigger("reset");
 			});
 
 			$('a#stripe-modal-accept').click(function(){
 				$('a.modal-action').prop('disabled', true);
-				$form_update_card.submit();
+				$form_update_card.find('#stripe-btn-submit').click();
 			});
 
 		});
