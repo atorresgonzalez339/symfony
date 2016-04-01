@@ -24,19 +24,19 @@ class Contact
 
     /**
      * @ORM\Column(name="first_name",type="string", nullable=false)
-     * @GRID\Column(field="first_name", type="text" , filterable=true, title="First Name",size=30)
+     * @GRID\Column(field="first_name", type="text" , filterable=false, title="Last Name",size=30)
      */
     private $first_name;
 
     /**
      * @ORM\Column(name="last_name",type="string", nullable=false)
-     * @GRID\Column(field="last_name", type="text" , filterable=true, title="Last Name",size=30)
+     * @GRID\Column(field="last_name", type="text" , filterable=false, title="Last Name",size=30)
      */
     private $last_name;
 
     /**
      * @ORM\Column(name="email",type="string", nullable=false)
-     * @GRID\Column(field="email", type="text" , filterable=true, title="Email",size=30)
+     * @GRID\Column(field="email", type="text" , filterable=false, title="Email",size=30)
      */
     private $email;
 
@@ -49,6 +49,8 @@ class Contact
     /**
      * @ORM\Column(type="boolean", options={"default":true})
      * @GRID\Column(field="is_active", type="boolean" , filterable=false, title="Enable",size=10, sortable=false)
+     * @GRID\Column(field="is_active", type="join", columns = {"first_name","last_name", "email"}, title="First and Last Names, Email", filterable=true, operatorsVisible=false)
+
      */
     private $is_active;
 
