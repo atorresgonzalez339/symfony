@@ -9,7 +9,7 @@ use APY\DataGridBundle\Grid\Mapping as GRID;
  * @ORM\Entity
  * @ORM\Table(name="contact")
  * @ORM\Entity(repositoryClass="DashboardBundle\Repository\ContactRepository")
- * @GRID\Source(columns="id,first_name,last_name,email,is_active")
+ * @GRID\Source(columns="id,first_name,last_name,email,is_active,is_unsubscribed")
  */
 class Contact
 {
@@ -49,14 +49,13 @@ class Contact
     /**
      * @ORM\Column(type="boolean", options={"default":true})
      * @GRID\Column(field="is_active", type="boolean" , filterable=false, title="Enable",size=10, sortable=false)
-     * @GRID\Column(field="is_active", type="join", columns = {"first_name","last_name", "email"}, title="First and Last Names, Email", filterable=true, operatorsVisible=false)
-
      */
     private $is_active;
 
     /**
      * @ORM\Column(type="boolean", options={"default":false})
      * @GRID\Column(field="is_unsubscribed", type="boolean" , filterable=false, title="Unsubcribed",size=10, sortable=false)
+     * @GRID\Column(field="is_unsubscribed", type="join", columns = {"first_name","last_name", "email"}, title="First and Last Names, Email", filterable=true, operatorsVisible=false)
      */
     private $is_unsubscribed;
 

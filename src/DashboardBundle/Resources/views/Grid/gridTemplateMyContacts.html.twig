@@ -168,7 +168,7 @@
           </div>
 
           {# Aqui se genera el paginado #}
-          <div class="grid_footer">
+          <div class="grid_footer" style="height: 60px;">
             {% if grid.isPagerSectionVisible %}
               {{ grid_pager(grid) }}
             {% endif %}
@@ -468,11 +468,11 @@
     {{ grid_pagerfanta(grid) }}
   {% else %}
 
-    <div class="row">
-      <div class="col m2">
+    <div class="row" style="margin-top: 0px">
+      <div class="col m2" style="padding-bottom: 0px;">
         {{ grid_pager_totalcount(grid) }}
       </div>
-      <div class="col m10">
+      <div class="col m10" style="padding-bottom: 0px;">
         {{ grid_pager_selectpage(grid) }}
       </div>
     </div>

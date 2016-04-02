@@ -28,7 +28,7 @@ class ContactController extends BaseController{
       $source = new Entity('DashboardBundle:Contact');
       $grid = $this->get('grid');
       $grid->setSource($source);
-      $grid->hideColumns(array('id'));
+      $grid->hideColumns(array('id','is_unsubscribed'));
       $grid->addMassAction(new DeleteMassAction());
       $grid->setLimits($this->container->getParameter('admin.paginator.limits.config'));
       if ($request->isXmlHttpRequest()) return $grid->getGridResponse('DashboardBundle:Contact:indexAjax.html.twig');
