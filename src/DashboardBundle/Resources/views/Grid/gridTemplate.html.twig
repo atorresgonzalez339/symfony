@@ -19,7 +19,11 @@
     });
 
 </script>
-
+    <style>
+        .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+            padding: 5px;
+        }
+    </style>
 <div class="grid">
     
 {% if grid.totalCount > 0 or grid.isFiltered or grid.noDataMessage is sameas(false) %}
@@ -423,7 +427,7 @@
             //Selected Items
             for(var i=0; i<arrayIdSelected.length; i++){
                 var trSelected = $('#'+arrayIdSelected[i]);
-                trSelected.attr('style','background-color:#4285f4;cursor: pointer;color:#FFFFFF');
+                trSelected.attr('style','background-color:#dee8f2;cursor: pointer;color:#424242');
                 
                 var id = "checkbox-" + trSelected.attr('trInputId');
                 var check = document.getElementById(id);
