@@ -10,17 +10,14 @@
 {% block grid %}
 
   <script type="text/javascript">
-
     (function ($) {
       function getIdFormGrid() {
-        // alert('entroo')
         return $("#idFormGrid").attr("value");
       }
     });
-
   </script>
 
-  <div class="grid">
+  <div class="grid" style="padding-top: 0px;">
 
     {% if grid.totalCount > 0 or grid.isFiltered or grid.noDataMessage is sameas(false) %}
     <form id="{{ grid.hash }}" action="{{ grid.routeUrl }}" method="post">
@@ -212,7 +209,65 @@
   {% endif %}
   </form>
   {% else %}
-    {{ grid_no_data(grid) }}
+    <div class="row center-align grid-loading2" style="display: none">
+      <div class="col s12">
+        <!-- Circular big -->
+        <div class="preloader-wrapper big active">
+          <div class="spinner-layer spinner-blue">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+              <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+
+          <div class="spinner-layer spinner-red">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+              <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+
+          <div class="spinner-layer spinner-yellow">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+              <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+
+          <div class="spinner-layer spinner-green">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+              <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="genericContainerTable2">
+      {{ grid_no_data(grid) }}
+    </div>
+
+    {{ grid_scripts(grid) }}
   {% endif %}
   </div>
 {% endblock grid %}

@@ -7,7 +7,11 @@
 {% extends 'DashboardBundle:Grid:gridTemplateContacts.html.twig' %}
 
 {% block grid_scripts_goto %}
-
+    function {{ grid.hash }}_updateGrid(event)
+    {
+    page = 0;
+    {{ grid.hash }}_goto('{{ grid_url('page', grid) }}' + page);
+    }
 function {{ grid.hash }}_goto(url, data, type)
 {
     if(type === 'POST'){
@@ -29,7 +33,7 @@ function {{ grid.hash }}_goto(url, data, type)
         data: data,
         type: type
     }).done(function( msg ) {
-    
+        $('#genericContainerTable').html(msg);
         $('#{{ grid.hash }}').parent().replaceWith(msg);
         $('.grid-loading').css('display','none');
         $(".collapsible").collapsible();
