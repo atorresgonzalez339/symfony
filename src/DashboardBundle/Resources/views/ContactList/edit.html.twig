@@ -192,6 +192,9 @@
           Materialize.toast(data.message, 4000);
           if(data.code == 200){
             grid_SECOND_updateGrid(event);
+            $('#contact_first_name').val('');
+            $('#contact_last_name').val('');
+            $('#contact_email').val('');
             $('#modalAddContat').closeModal();
           }
         });
