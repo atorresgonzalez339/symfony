@@ -27,10 +27,18 @@ class ContactController extends BaseController{
     public function indexAction(Request $request){
       $source = new Entity('DashboardBundle:Contact');
       $grid = $this->get('grid');
-      $grid->setSource($source);
       $grid->hideColumns(array('id','is_unsubscribed'));
       $grid->addMassAction(new DeleteMassAction());
       $grid->setLimits($this->container->getParameter('admin.paginator.limits.config'));
+      $tableAlias = $source->getTableAlias();
+      $source->manipulateQuery(
+        function ($query) use ($tableAlias) {
+            $query->addOrderBy($tableAlias.'.id', 'DESC');
+        }
+      );
+      $grid->setSource($source);
+
+
       if ($request->isXmlHttpRequest()) return $grid->getGridResponse('DashboardBundle:Contact:indexAjax.html.twig');
       if ($grid->isReadyForRedirect())return new RedirectResponse($grid->getRouteUrl());
       return $grid->getGridResponse('DashboardBundle:Contact:index.html.twig');

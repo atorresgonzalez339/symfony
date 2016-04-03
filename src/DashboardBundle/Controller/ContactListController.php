@@ -3,6 +3,8 @@
 namespace DashboardBundle\Controller;
 
 use CommonBundle\Controller\BaseController;
+use DashboardBundle\Entity\Contact;
+use DashboardBundle\Form\ContactType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -100,15 +102,12 @@ class ContactListController extends BaseController{
         return false;
     }
 
-
     private function isRedirectFromFirstGrid($queryString){
         $queryStringArray = explode('&',$queryString);
         if(count($queryString)==0) return false;
         $redirectGridParam = $queryStringArray[count($queryStringArray)-1];
         $redirectGridParamArray = explode('=',$redirectGridParam);
         $redirectGridParamFirst = $redirectGridParamArray[1];
-//        print_r('<pre>');
-//        print_r($redirectGridParamFirst);die;
         if($redirectGridParamFirst == 'FIRST') return true;
         return false;
     }
@@ -139,6 +138,7 @@ class ContactListController extends BaseController{
             return $this->addFlash('info', $messageInfo, $indexRouting);
         }
         $editForm = $this->createForm(new $nameFormEntity(), $entity);
+        $formContact = $this->createForm(new ContactType(), new Contact());
 
         $source = new Entity('DashboardBundle:Contact');
         $gridManager = $this->get('grid.manager');
@@ -153,7 +153,8 @@ class ContactListController extends BaseController{
             $source->manipulateQuery(
               function ($query) use ($tableAlias,$idContacts) {
                   $query->andWhere($tableAlias.'.id NOT IN(:ids)' )
-                    ->setParameter(':ids', $idContacts);
+                        ->addOrderBy($tableAlias.'.id', 'DESC')
+                        ->setParameter(':ids', $idContacts);
               }
             );
         }
@@ -168,7 +169,8 @@ class ContactListController extends BaseController{
         $source2->manipulateQuery(
             function ($query) use ($tableAlias2,$idSelected) {
                 $query->leftJoin($tableAlias2.'.contactList', 'cl')
-                      ->andWhere('cl.id = '.$idSelected );
+                      ->andWhere('cl.id = '.$idSelected )
+                      ->addOrderBy($tableAlias2.'.id', 'DESC');
             }
         );
         $grid2->setSource($source2);
@@ -189,6 +191,7 @@ class ContactListController extends BaseController{
             return $this->render($renderDir, array(
                 'entity' => $entity,
                 $nameFormView => $editForm->createView(),
+                'form_contact' => $formContact->createView(),
                 'grid' => $grid,
                 'grid2' => $grid2,
             ));
@@ -232,7 +235,7 @@ class ContactListController extends BaseController{
         $idContactList = $request->get('idContactList');
         $idContact     = $request->get('idContact');
         if (!$idContact && !$idContactList) {
-            $messageInfoNotSelected = 'Selected one or more contact list to assign the current contact list';
+            $messageInfoNotSelected = 'Selected one contact list to assign the current contact list';
             $response->setStatusCode(401);
             $response->setContent(json_encode(array('message'=>$messageInfoNotSelected)));
             return $response;
@@ -258,7 +261,6 @@ class ContactListController extends BaseController{
         $response->setContent(json_encode(array('message'=>$messageInfo,'code'=>200)));
         return $response;
     }
-
     /**
      * @Route("/contactslist/remove2contactlist", name="contactlist_remove2contactlist")
      */
@@ -291,6 +293,77 @@ class ContactListController extends BaseController{
         $messageInfo = 'The contact remove to current contact list';
         $result = $this->getBusiness()->removeContact($entityContactList,$entityContact);
         if($result == false) $messageInfo = 'Error to remove the contact to current contact list';
+        $response->setStatusCode(200);
+        $response->setContent(json_encode(array('message'=>$messageInfo,'code'=>200)));
+        return $response;
+    }
+    /**
+     * @Route("/contactslist/addcontact2contactlist", name="contactlist_addcontact2contactlist")
+     */
+    public function addcontact2contactlistAction() {
+        $response = new Response();
+        $response->headers->set('Content-Type', 'text/html');
+        $request = $this->getRequest();
+        $idContactList = $this->getSession('SELECTED_EDIT_CONTACTLIST_ID');
+        if (!$idContactList) {
+            $messageInfoNotSelected = 'Selected one contact list to assign the current contact list';
+            $response->setStatusCode(401);
+            $response->setContent(json_encode(array('message'=>$messageInfoNotSelected)));
+            return $response;
+        }
+        $entityContactList = $this->getBusiness()->findByID($idContactList);
+        if(!$entityContactList){
+            $messageInfo = 'Not has selected entity contact list success';
+            $response->setStatusCode(401);
+            $response->setContent(json_encode(array('message'=>$messageInfo,'code'=>401)));
+            return $response;
+        }
+
+        $entityContact = new Contact();
+        $formContact   = $this->createForm(new ContactType(), $entityContact);
+        $formContact->bind($request);
+
+        if ($formContact->isValid()) {
+            $this->findBusiness($this->nameService)->saveData($entityContact);
+            $result = $this->getBusiness()->addContact($entityContactList,$entityContact);
+            $messageInfo = 'The contact add to current contact list';
+            if($result == false) $messageInfo = 'Error to add the contact in current contact list';
+            $response->setStatusCode(200);
+            $response->setContent(json_encode(array('message'=>$messageInfo,'code'=>200)));
+            return $response;
+        }else{
+            echo '<pre>';
+            print_r($formContact->getErrorsAsString());die;
+
+            $messageInfo = 'Exist error in the data contact';
+            $response->setStatusCode(401);
+            $response->setContent(json_encode(array('message'=>$messageInfo,'code'=>401)));
+            return $response;
+        }
+
+//        if (!$idContact && !$idContactList) {
+//            $messageInfoNotSelected = 'Selected one or more contact list to assign the current contact list';
+//            $response->setStatusCode(401);
+//            $response->setContent(json_encode(array('message'=>$messageInfoNotSelected)));
+//            return $response;
+//        }
+//        $entityContact = $this->findBusiness('dashboard.contact.business')->findByID($idContact);
+//        if(!$entityContact){
+//            $messageInfo = 'Not has selected entity contact success';
+//            $response->setStatusCode(401);
+//            $response->setContent(json_encode(array('message'=>$messageInfo,'code'=>401)));
+//            return $response;
+//        }
+//        $entityContactList = $this->getBusiness()->findByID($idContactList);
+//        if(!$entityContactList){
+//            $messageInfo = 'Not has selected entity contact list success';
+//            $response->setStatusCode(401);
+//            $response->setContent(json_encode(array('message'=>$messageInfo,'code'=>401)));
+//            return $response;
+//        }
+        $messageInfo = 'The contact add to current contact list';
+//        $result = $this->getBusiness()->addContact($entityContactList,$entityContact);
+//        if($result == false) $messageInfo = 'Error to change the contact to current contact list';
         $response->setStatusCode(200);
         $response->setContent(json_encode(array('message'=>$messageInfo,'code'=>200)));
         return $response;

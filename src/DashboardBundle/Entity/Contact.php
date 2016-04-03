@@ -21,7 +21,6 @@ class Contact
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-
     /**
      * @ORM\Column(name="first_name",type="string", nullable=false)
      * @GRID\Column(field="first_name", type="text" , filterable=false, title="Last Name",size=30)
