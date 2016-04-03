@@ -9,6 +9,8 @@
 {# ------------------------------------------------------ grid ------------------------------------------------------ #}
 {% block grid %}
 
+    <link href="{{ asset('bundles/dashboard/material/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
+    <script src="{{ asset('bundles/dashboard/material/js/select2.full.min.js') }}"></script>
 <script type="text/javascript">
 
     (function ($) {
@@ -194,82 +196,21 @@
     {% endfor %}
     <thead>
 {% endblock grid_titles %}
-{#{% block grid_titles %}
-            <tr>
-                {% set isOrderable = (grid.isOrderable is defined ? grid.isOrderable : false) %}
-                {% if isOrderable %}
-                    <th class="" style="width: 1%;">
-                        <i class="fa fa-hand-o-up"></i>
-                    </th>
-                {% endif %}
-                {%set firtColumnH = false%}
-                {% for column in grid.columns %}
-                    {% if column.visible(grid.isReadyForExport) %}
-                        {% if firtColumnH==false %}
-                           {%set firtColumnH = true%}
-                           <th class="{% if column.align != 'left'%}align-{{ column.align }}{% endif %}{% if loop.last %} last-column{% endif %}"{% if(column.size > -1) %} style="width:{{ column.size }}px;"{% endif %}>
-                        {% else %}
-                           <th class="{% if column.align != 'left'%}align-{{ column.align }}{% endif %}{% if loop.last %} last-column{% endif %}"{% if(column.size > -1) %} style="width:{{ column.size }}px;"{% endif %}>
-                        {% endif %}
-                        {% if column.type == 'massaction' %}
-                                <i style="font-size: 12px;color: #428bca" class="icon-ok"></i> 
-                        {% else %}
-                            {% set columnTitle = grid.prefixTitle ~ column.title ~ '__abbr' %}
-                            {% if columnTitle|trans == columnTitle %}
-                                {% set columnTitle = grid.prefixTitle ~ column.title %}
-                            {% endif %}
-                            {% if (column.sortable) %}
-                                <a style="font-size: 13px" data-toggle="tooltip" data-placement="top" class="order" href="{{ grid_url('order', grid, column) }}" title="{{ 'Order by'|trans }} {{ columnTitle|trans }}">{{ columnTitle|trans }}</a>
-                                {% if column.order == 'asc' %}
-                                <i class="icon-chevron-up"></i>
-                                {% elseif column.order == 'desc' %}
-                                <i class="icon-chevron-down"></i>
-                                {% else %}
-                                {% endif %}
-                            {% else %}
-                                {{ columnTitle|trans }}
-                            {% endif %}
-                        {% endif %}
-                            </th>
-                    {% endif %}
-                {% endfor %}
-            </tr>
-{% endblock grid_titles %}#}
 {# -------------------------------------------------- grid_filters --------------------------------------------------- #}
 {% block grid_filters %}
-    <ul class="collapsible" data-collapsible="accordion">
-        <li {% if grid.isFiltered %} class="active" {% endif %}>
-            <div class="align-left collapsible-header {% if grid.isFiltered %} active {% endif %}"><i class="mdi-content-filter-list"></i>{{'Filters'|trans}}</div>
-            <div class="collapsible-body" style="background-color: #FFFFFF">
-
-                {% for column in grid.columns %}
-                <div class="row">
-                    {% for i in 0..3 %}
-                    <div class="col s3">
-                        dsds- {{ loop.index0 }}
-                    </div>
-                    {% endfor %}
-                </div>
-                {% endfor %}
-
-                {#<table>#}
-                    {#<tr class="grid-row-filters row">#}
-                        {#{% for column in grid.columns %}#}
-                           {#{% if loop.index0!=0 %}#}
-                             {#{% if column.visible(grid.isReadyForExport) and column.filterable%}#}
-                                {#<th {% if loop.last %} class="last-column"{%else%}class="col l3 column-{{ column.title }}"{% endif %}{% if(column.size > -1) %} style="width:" {% endif %}>#}
-                                    {#{% if column.filterable%}#}
-                                        {#{{ grid_filter(column, grid)|raw }}#}
-                                    {#{% endif %}#}
-                                {#</th>#}
-                             {#{% endif %}#}
-                           {#{% endif %}#}
-                        {#{% endfor %}#}
-                    {#</tr>#}
-                {#</table>#}
-            </div>
-        </li>
-    </ul>
+    <div class="row" style="margin-top: 0px;">
+        <div class="col m12" style="padding-bottom: 5px;">
+            {% for column in grid.columns %}
+                {% if loop.index0!=0 %}
+                    {% if column.visible(grid.isReadyForExport) and column.filterable %}
+                        {% if column.filterable %}
+                            {{ grid_filter(column, grid)|raw }}
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
             
 {% endblock grid_filters %}
 
@@ -312,13 +253,13 @@
                         </div> 
                     </tr>
                     <tr>
-                        <div class="form-search" style="margin-left: 20px;">
+                        <div class="form-search">
                             <div id="filter-bar" class="btn-toolbar">
                                 <div class="filter-search btn-group pull-left input-append">
                                     <div class="span6">
                                         <div class="input-group input-group-sm">
                                             <div class="input-group input-group-sm">
-                                                <input style="margin-top: 5px !important;width: 175px" type="{{ column.inputType }}" value="{{ from }}" class="input-small  search-query input-small grid-filter-input-query-from " placeholder="{{ column.title|trans }}" name="{{ grid.hash }}[{{ column.id }}][from]" id="{{ grid.hash }}__{{ column.id }}__query__from" {% if submitOnChange is sameas(true) %}onkeypress="return {{ grid.hash }}_submitForm(event, this.form);"{% endif%} {{ ( op == isNullOperator or op == isNotNullOperator ) ? 'style="display: none;" disabled="disabled"' : '' }} />
+                                                <input style="margin-top: 5px !important;width: 300px" type="{{ column.inputType }}" value="{{ from }}" class="input-small  search-query input-small grid-filter-input-query-from " placeholder="{{ column.title|trans }}" name="{{ grid.hash }}[{{ column.id }}][from]" id="{{ grid.hash }}__{{ column.id }}__query__from" {% if submitOnChange is sameas(true) %}onkeypress="return {{ grid.hash }}_submitForm(event, this.form);"{% endif%} {{ ( op == isNullOperator or op == isNotNullOperator ) ? 'style="display: none;" disabled="disabled"' : '' }} />
                                                 <span class="input-group-btn">
                                                     <button style="padding-left: 11px;padding-right: 10px;margin-left: -4px;margin-top: -3px;border-top-left-radius: 0px;border-bottom-left-radius: 0px;min-height: 37px;" type="submit" onclick="return {{ grid.hash }}_submitForm(event, this.form);" class="btn btn-primary tooltipped" data-position="bottom" data-delay="50" data-tooltip="{{ 'Search'|trans }}" ><i class="mdi-action-search"></i> {#{{'SEARCH'|trans}}#} </button>
                                                 </span>
@@ -418,10 +359,6 @@
                     check.checked = false;
                     $('label[for="'+id+'"]').removeClass('myclase1');
                 }
-                
-                ///alert("#checked-" + trSelected.attr('trInputId'))
-{#                console.info( '"'+id+'"')#}
-{#                console.info( check)#}
             }
             
             //Selected Items
@@ -437,9 +374,6 @@
                 }
                 //$("#checked-" + trSelected.attr('trInputId')).checked = true;
             }
-{#
-            console.info(trs);
-            console.info(arrayIdSelected);#}
         }
     
 </script>
@@ -573,15 +507,6 @@
 {% block grid_column_massaction_cell %}
     <input type="checkbox" id="checkbox-{{ row.primaryFieldValue }}" name="{{ grid.hash }}[{{ column.id }}][{{ row.primaryFieldValue }}]" class="clickedRadio clickedRadio-{{row.primaryFieldValue }}" value="{{ row.primaryFieldValue }}">
     <label for="checkbox-{{ row.primaryFieldValue }}"></label>
-{#    <input type="checkbox" class="action" value="1" name="{{ grid.hash }}[{{ column.id }}][{{ row.primaryFieldValue }}]"/>#}
-{#{% endblock grid_column_massaction_cell %}#}
-    
-{#{% block grid_column_massaction_cell %}#}
-                                                    
-{#    <input id="checked-{{row.primaryFieldValue }}" type="checkbox" style="visibility: visible;" class="clickedRadio clickedRadio-{{row.primaryFieldValue }}" value="{{ row.primaryFieldValue }}" name="{{ grid.hash }}[{{ column.id }}][{{ row.primaryFieldValue }}]"/>#}
-                                                 
-{#    <input type="checkbox" style="visibility: visible;" class="action" value="{{ row.primaryFieldValue }}" name="{{ grid.hash }}[{{ column.id }}][{{ row.primaryFieldValue }}]"/>#}
-
 <script>
     $('label[for="checked-{{row.primaryFieldValue }}"]').click(function(event){
         alert('aaaa')

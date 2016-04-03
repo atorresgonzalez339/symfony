@@ -27,7 +27,7 @@ class ContactController extends BaseController{
     public function indexAction(Request $request){
       $source = new Entity('DashboardBundle:Contact');
       $grid = $this->get('grid');
-      $grid->hideColumns(array('id','is_unsubscribed'));
+      $grid->hideColumns(array('id'));
       $grid->addMassAction(new DeleteMassAction());
       $grid->setLimits($this->container->getParameter('admin.paginator.limits.config'));
       $tableAlias = $source->getTableAlias();
