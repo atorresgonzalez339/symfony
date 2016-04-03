@@ -56,6 +56,39 @@ class UpgradeController extends BaseController
   }
 
   /**
+   * @Route("/add_next_plan", name="upgrade_add_next_plan")
+   */
+  public function addNextPlanAction(Request $request)
+  {
+    $user = $this->getUser();
+    $next_plan_id = $request->get('next_plan_id');
+
+    $currentPlan = $user->getCurrentPlan();
+
+    if(!$next_plan_id || $next_plan_id == $currentPlan->getPlan()->getId() ) {
+      return $this->redirectToRoute('upgrade_index');
+    }
+    else if($next_plan_id == '-1'){
+      $nextPlan = null;
+      $message = 'Next plan canceled';
+    }
+    else{
+      $nextPlan = $this->getDoctrine()
+        ->getRepository('DashboardBundle:Plan')
+        ->find($next_plan_id);
+      $message = 'Next plan set up';
+    }
+
+
+    $this->getBusiness()->addNextPlan($currentPlan, $nextPlan);
+
+    $this->addFlash('success', $message);
+
+    return $this->redirectToRoute('upgrade_index');
+
+  }
+
+  /**
    * @Route("/checkout/{plan_id}", name="upgrade_checkout")
    */
   public function checkoutAction(Request $request, $plan_id)
@@ -81,7 +114,7 @@ class UpgradeController extends BaseController
     $user = $this->getUser();
     $token = $request->get('token');
     $result = $this->getBusiness()->updateCard($user, $token);
-    return new JsonResponse(array('status' => 'ok'));
+    return new JsonResponse(array('status' => 'ok', 'data' => $result));
   }
 
 }

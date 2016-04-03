@@ -15,6 +15,14 @@
       <h5> Plans </h5>
     </div>
     <div class="content">
+
+      {% if current_plan.nextPlan %}
+        <div class="alert blue lighten-2 white-text lighten-4 alert-dismissible" style="margin-top: 0px; padding-bottom: 17px;">
+          <strong>Next Plan Set Up!</strong> We will change your {{ current_plan.plan.name | upper }} current plan for the {{ current_plan.nextPlan.name | upper }} plan in the next billing period ({{ current_plan.dateEnd | date('M d')}}).
+          <a class="red btn-small btn right" href="{{ path('upgrade_add_next_plan', {'next_plan_id':'-1'}) }}">Cancel</a>
+        </div>
+      {% endif %}
+
       <div class="row">
         {% for plan in plans %}
         <div class="col m3">
@@ -32,10 +40,19 @@
                 <p> Up to {{ plan.totalContacts }} Contacts</p>
               </div>
               <div class="content" style="padding-top: 15px;padding-bottom: 15px;">
-                {% if plan.id != current_plan.plan.id %}
-                  <center>  <a class="btn" href="{{ path('upgrade_checkout', {'plan_id':plan.id}) }}"><i class="mdi mdi-editor-attach-money left"></i>BUY NOW</a> </center>
+                {% if current_plan.nextPlan and plan.id == current_plan.nextPlan.id %}
+                  <center>
+                    Set up for: {{ current_plan.dateEnd | date('M d')}}
+                    <a class="red btn-small btn" href="{{ path('upgrade_add_next_plan', {'next_plan_id':'-1'}) }}">Cancel</a>
+                  </center>
+                {% elseif plan.id != current_plan.plan.id %}
+                  <center>  <a class="btn btn_change_plan" data-plan="{{ plan.id }}" href="{{ path('upgrade_checkout', {'plan_id':plan.id}) }}">CHANGE NOW</a> </center>
                 {% else %}
-                  <center>  Your current Plan </center>
+                  <div class="alert green lighten-2 white-text lighten-4" style="margin: 0; padding: 8px">
+                    <center>
+                      <b>Your current Plan</b>
+                    </center>
+                  </div>
                 {% endif %}
               </div>
             </div>
@@ -45,4 +62,47 @@
       </div>
     </div>
   </div>
+
+  <!-- Modal Structure -->
+  <div id="next-plan-dialog" class="modal modal-fixed-footer" style="width: 40%; height: 200px">
+    <div class="modal-content">
+      <h4>Confirmation</h4>
+      <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+      <button href="#!" id="next-modal-cancel" class="modal-action modal-close waves-effect waves-red btn-flat ">Cancel</button>
+      <button href="#!" id="next-modal-accept" class="modal-action waves-effect waves-green btn-flat ">
+        <i id="next-modal-spiner" class="fa fa-spinner fa-spin right hide" style="margin-left: 5px;"></i>
+        Accept
+      </button>
+    </div>
+  </div>
 {% endblock content %}
+
+{% block javascripts %}
+  {{ parent() }}
+
+  <script>
+
+    var current_plan = {{ current_plan.id }};
+    var next_plan = null;
+
+    $('.btn_change_plan').click(function(e){
+      e.preventDefault();
+      next_plan = $(this).data('plan');
+      if(next_plan < current_plan){
+        $('#next-plan-dialog').openModal();
+      }
+      else{
+        $(this).unbind('click').click();
+      }
+    });
+
+    $('#next-modal-accept').click(function(){
+      $('#next-modal-spiner').removeClass('hide');
+      window.location.href = "{{ path('upgrade_add_next_plan') }}" + "?next_plan_id=" + next_plan;
+    });
+
+  </script>
+
+{% endblock %}
