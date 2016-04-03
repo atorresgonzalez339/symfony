@@ -152,10 +152,9 @@
 
                   <li class="collection-item avatar avatar-right">
                     <a href="#!" class="secondary-content primary-content">
-                      <i class="mdi mdi-hardware-keyboard-arrow-left arrow-switch"></i>
+                      <i class="mdi mdi-hardware-keyboard-arrow-left arrow-switch action-arrow-remove" data-id="{{ row.entity.id }}"></i>
                     </a>
                     <i class=" {% if(row.entity.getIsActive()) %}green{% else %} red {% endif %} circle circle-status circle-right">
-                      {#<span>{{ row.entity.getFirstLetter()}}</span>#}
                     </i>
                     <div class="row" style="margin-top: 0px;">
                       <div class="col m5" style="padding-bottom: 0px;"> <p style="font-size: 15px;">{{ row.entity.getCompleteName()}}</p> </div>
@@ -166,6 +165,34 @@
               </ul>
             </div>
           </div>
+
+          <script>
+            $(".action-arrow-remove").click(function (evt) {
+              var idContact     = $(this).attr('data-id');
+              var idContactList = {{ getSession('SELECTED_EDIT_CONTACTLIST_ID')}};
+
+              var currentHtml = $('#genericContainerTable2').html();
+              $('#genericContainerTable2').html('');
+              $('.grid-loading2').css('display','block');
+
+              $.ajax({
+                type: "GET",
+                url: '{{ path('contactlist_remove2contactlist') }}',
+                data: {idContactList:idContactList,idContact:idContact},
+                success: function(data) {
+                  data = JSON.parse(data);
+                  Materialize.toast(data.message, 4000);
+                  if(data.code == 200){
+                    grid_FIRST_updateGrid(event);
+                    grid_SECOND_updateGrid(event);
+                  }else{
+                    $('#genericContainerTable2').html(currentHtml);
+                  }
+                },
+                dataType: 'html'
+              });
+            });
+          </script>
 
           {# Aqui se genera el paginado #}
           <div class="grid_footer" style="height: 60px;">
@@ -803,6 +830,12 @@
 
   return false;
   }
+  }
+
+  function {{ grid.hash }}_updateGrid(event)
+  {
+  page = 0;
+  {{ grid.hash }}_goto('{{ grid_url('page', grid) }}' + page);
   }
 {% endblock grid_scripts_enter_page %}
 

@@ -228,10 +228,72 @@ class ContactListController extends BaseController{
     public function switch2contactlistAction() {
         $response = new Response();
         $response->headers->set('Content-Type', 'text/html');
-
         $request = $this->getRequest();
         $idContactList = $request->get('idContactList');
-        die('aaaaaaa' . $idContactList);
+        $idContact     = $request->get('idContact');
+        if (!$idContact && !$idContactList) {
+            $messageInfoNotSelected = 'Selected one or more contact list to assign the current contact list';
+            $response->setStatusCode(401);
+            $response->setContent(json_encode(array('message'=>$messageInfoNotSelected)));
+            return $response;
+        }
+        $entityContact = $this->findBusiness('dashboard.contact.business')->findByID($idContact);
+        if(!$entityContact){
+            $messageInfo = 'Not has selected entity contact success';
+            $response->setStatusCode(401);
+            $response->setContent(json_encode(array('message'=>$messageInfo,'code'=>401)));
+            return $response;
+        }
+        $entityContactList = $this->getBusiness()->findByID($idContactList);
+        if(!$entityContactList){
+            $messageInfo = 'Not has selected entity contact list success';
+            $response->setStatusCode(401);
+            $response->setContent(json_encode(array('message'=>$messageInfo,'code'=>401)));
+            return $response;
+        }
+        $messageInfo = 'The contact change to current contact list';
+        $result = $this->getBusiness()->addContact($entityContactList,$entityContact);
+        if($result == false) $messageInfo = 'Error to change the contact to current contact list';
+        $response->setStatusCode(200);
+        $response->setContent(json_encode(array('message'=>$messageInfo,'code'=>200)));
+        return $response;
+    }
+
+    /**
+     * @Route("/contactslist/remove2contactlist", name="contactlist_remove2contactlist")
+     */
+    public function remove2contactlistAction() {
+        $response = new Response();
+        $response->headers->set('Content-Type', 'text/html');
+        $request = $this->getRequest();
+        $idContactList = $request->get('idContactList');
+        $idContact     = $request->get('idContact');
+        if (!$idContact && !$idContactList) {
+            $messageInfoNotSelected = 'Selected one or more contact list to assign the current contact list';
+            $response->setStatusCode(401);
+            $response->setContent(json_encode(array('message'=>$messageInfoNotSelected)));
+            return $response;
+        }
+        $entityContact = $this->findBusiness('dashboard.contact.business')->findByID($idContact);
+        if(!$entityContact){
+            $messageInfo = 'Not has selected entity contact success';
+            $response->setStatusCode(401);
+            $response->setContent(json_encode(array('message'=>$messageInfo,'code'=>401)));
+            return $response;
+        }
+        $entityContactList = $this->getBusiness()->findByID($idContactList);
+        if(!$entityContactList){
+            $messageInfo = 'Not has selected entity contact list success';
+            $response->setStatusCode(401);
+            $response->setContent(json_encode(array('message'=>$messageInfo,'code'=>401)));
+            return $response;
+        }
+        $messageInfo = 'The contact remove to current contact list';
+        $result = $this->getBusiness()->removeContact($entityContactList,$entityContact);
+        if($result == false) $messageInfo = 'Error to remove the contact to current contact list';
+        $response->setStatusCode(200);
+        $response->setContent(json_encode(array('message'=>$messageInfo,'code'=>200)));
+        return $response;
     }
 
 }

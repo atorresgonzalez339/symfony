@@ -164,12 +164,26 @@
 
           <script>
             $(".action-arrow-switch").click(function (evt) {
-              var idSelected = $(this).attr('data-id');
+              var idContact     = $(this).attr('data-id');
+              var idContactList = {{ getSession('SELECTED_EDIT_CONTACTLIST_ID')}};
+
+              var currentHtml = $('#genericContainerTable').html();
+              $('#genericContainerTable').html('');
+              $('.grid-loading').css('display','block');
+
               $.ajax({
                 type: "GET",
                 url: '{{ path('contactlist_switch2contactlist') }}',
-                data: {idContactList:idSelected},
+                data: {idContactList:idContactList,idContact:idContact},
                 success: function(data) {
+                  data = JSON.parse(data);
+                  Materialize.toast(data.message, 4000);
+                  if(data.code == 200){
+                    grid_FIRST_updateGrid(event);
+                    grid_SECOND_updateGrid(event);
+                  }else{
+                    $('#genericContainerTable').html(currentHtml);
+                  }
                 },
                 dataType: 'html'
               });
@@ -816,6 +830,13 @@
   return false;
   }
   }
+
+  function {{ grid.hash }}_updateGrid(event)
+  {
+    page = 0;
+    {{ grid.hash }}_goto('{{ grid_url('page', grid) }}' + page);
+  }
+
 {% endblock grid_scripts_enter_page %}
 
 {% block grid_scripts_results_per_page %}

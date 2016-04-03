@@ -63,13 +63,44 @@ class ContactList
     public function setUser($user) {
         $this->user = $user;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->contacts = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
-    public function getContacts() {
+    /**
+     * Add contacts
+     *
+     * @param \DashboardBundle\Entity\Contact $contacts
+     * @return ContactList
+     */
+    public function addContact(\DashboardBundle\Entity\Contact $contacts)
+    {
+        $this->contacts[] = $contacts;
+
+        return $this;
+    }
+
+    /**
+     * Remove contacts
+     *
+     * @param \DashboardBundle\Entity\Contact $contacts
+     */
+    public function removeContact(\DashboardBundle\Entity\Contact $contacts)
+    {
+        $this->contacts->removeElement($contacts);
+    }
+
+    /**
+     * Get contacts
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getContacts()
+    {
         return $this->contacts;
     }
-
-    public function setContacts($contacts) {
-        $this->contacts = $contacts;
-    }
-
 }
