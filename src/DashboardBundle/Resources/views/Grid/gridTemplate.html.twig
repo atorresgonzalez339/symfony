@@ -466,14 +466,14 @@
 {% block grid_pager_results_perpage %}
 {# <!-- {{ ', Display'|trans }} -->#}
         <div class="row" style="margin-top: -8px">
-            <div class="col l3" >
-                <select style="width: 60px;margin-top: -4px" onchange="return {{ grid.hash }}_resultsPerPage(this.value);" size="1" class="select2-offscreen select2">
+            <div class="col m3" style="padding-right: 10px;">
+                <select style="width: 100px;margin-top: -4px" onchange="return {{ grid.hash }}_resultsPerPage(this.value);" size="1" class="select2-offscreen select2">
                     {% for key, value in grid.limits %}
                             <option value="{{ key }}"{% if (key == grid.limit) %} selected="selected"{% endif %}>{{ value }}</option>
                     {% endfor %}
                 </select>
             </div>
-            <div class="col l5">
+            <div class="col m5" style="padding-right: 10px;">
                     <p style="color: rgba(0,0,0,.65);font-size: 12px"> <strong>{{ 'Items per page'|trans }} </strong></p>
             </div>
         </div> 
