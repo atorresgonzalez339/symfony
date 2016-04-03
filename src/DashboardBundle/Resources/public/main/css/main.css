@@ -177,3 +177,7 @@ textarea.min-h-80{
 .input-field > i.prefix + input {
     text-indent: 40px;
 }
+
+ul.parsley-errors-list.filled {
+    margin-bottom: 0px !important;
+}
