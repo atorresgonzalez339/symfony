@@ -31,6 +31,12 @@ class UserPlan
     private $plan;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Plan")
+     * @ORM\JoinColumn(name="next_plan_id", referencedColumnName="id")
+     */
+    private $next_plan;
+
+    /**
      * @ORM\Column(type="integer", nullable=false)
      */
     private $total_flyers;
@@ -210,5 +216,28 @@ class UserPlan
     public function getPlan()
     {
         return $this->plan;
+    }
+
+    /**
+     * Set next_plan
+     *
+     * @param \DashboardBundle\Entity\Plan $nextPlan
+     * @return UserPlan
+     */
+    public function setNextPlan(\DashboardBundle\Entity\Plan $nextPlan = null)
+    {
+        $this->next_plan = $nextPlan;
+
+        return $this;
+    }
+
+    /**
+     * Get next_plan
+     *
+     * @return \DashboardBundle\Entity\Plan 
+     */
+    public function getNextPlan()
+    {
+        return $this->next_plan;
     }
 }

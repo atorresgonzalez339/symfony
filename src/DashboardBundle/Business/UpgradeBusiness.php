@@ -111,6 +111,40 @@ class UpgradeBusiness extends BaseBusiness
     return $plan;
   }
 
+  public function addNextPlan(UserPlan $currentPlan, Plan $nextPlan = null) {
+
+    $customer_id = $currentPlan->getUser()->getProfile()->getCustomerId();
+
+    $customer = \Stripe_Customer::retrieve($customer_id);
+
+    $this->getEM()->beginTransaction();
+
+    try {
+
+      if($nextPlan){
+        $currentPlan->setNextPlan($nextPlan);
+      }
+      else{
+        $currentPlan->setNextPlan(null);
+      }
+
+      $this->saveData($currentPlan);
+      $this->getEM()->commit();
+
+      $customer->updateSubscription(array(
+        'plan' => $nextPlan ? $nextPlan->getId() : $currentPlan->getPlan()->getId(),
+        'prorate' => false
+      ));
+
+      $customer->save();
+
+
+    } catch (\Exception $e) {
+      $this->getEM()->rollback();
+      throw $e;
+    }
+  }
+
   public function updateCard(User $user, $token)
   {
 

@@ -7,7 +7,7 @@ var MyStripe = {
         Stripe.setPublishableKey(STRIPE_PUBLIC_KEY);
         $form = $(options.form_selector);
     },
-    success: function(callback){
+    process: function(callback, callbackError){
         $form.submit(function(event) {
             event.preventDefault();
             // Disable the submit button to prevent repeated clicks
@@ -15,10 +15,11 @@ var MyStripe = {
             button.prop('disabled', true);
             Stripe.card.createToken($form, function(status, response){
                 if (response.error) {
-                    var $errors = $form.find('.payment-errors');
+                    var $errors = $form.find('#stripe-payment-errors');
                     $errors.text(response.error.message);
                     $errors.parent().removeClass('hide');
                     button.prop('disabled', false);
+                    callbackError(response);
                 }
                 else{
                     var token = response.id;

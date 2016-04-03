@@ -1,0 +1,46 @@
+<h4>
+    Payment Method:
+</h4>
+<ul class="collapsible" data-collapsible="accordion">
+    {% if card_info %}
+        <li class="active">
+            <div class="collapsible-header active"><i class="fa fa-credit-card"></i>Pay with stored credit card</div>
+            <div class="collapsible-body">
+                <div>
+                    <p style="padding: 5px 0 0 10px;">
+                        Card Holder: {{ card_info.name }}
+                    </p>
+                </div>
+                <div>
+                    <p style="padding: 5px 0 0 10px;">
+                        Card Ended: xxxx-xxxx-xxxx-{{ card_info.last4 }}
+                    </p>
+                </div>
+                <div>
+                    <p style="padding: 5px 0 0 10px;">
+                        Card Type: {{ card_info.brand }}
+                    </p>
+                </div>
+                <div class="container">
+                    <center>
+                        <div style="margin: 20px;">
+                            <a class="btn" href="{{ path('upgrade_change_plan', {'plan_id':plan.id}) }}">
+                                Process Checkout
+                            </a>
+                        </div>
+
+                    </center>
+                </div>
+            </div>
+        </li>
+    {% endif %}
+    <li class="{{ card_info ? '' : 'active' }}">
+        <div class="collapsible-header {{ card_info ? '' : 'active' }}">
+            <i class="fa {{ card_info ? 'fa-pencil' : 'fa-credit-card' }}"></i>{{ card_info ? 'Update' : 'Add' }} Credit
+            Card
+        </div>
+        <div class="collapsible-body">
+            {% include 'DashboardBundle:Upgrade:Partials/_stripe_card_form.html.twig' with {'btn_title':'Process Checkout' } %}
+        </div>
+    </li>
+</ul>
