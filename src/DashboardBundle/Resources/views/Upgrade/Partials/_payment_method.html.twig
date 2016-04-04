@@ -40,7 +40,9 @@
             Card
         </div>
         <div class="collapsible-body">
-            {% include 'DashboardBundle:Upgrade:Partials/_stripe_card_form.html.twig' with {'btn_title':'Process Checkout' } %}
+            <div class="container" style="width: 95%;">
+                {% include 'DashboardBundle:Upgrade:Partials/_stripe_card_form.html.twig' with {'btn_title':'Process Checkout' } %}
+            </div>
         </div>
     </li>
 </ul>

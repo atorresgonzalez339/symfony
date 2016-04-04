@@ -232,8 +232,7 @@ class UpgradeBusiness extends BaseBusiness
 
   public function getTotalAmount(Plan $plan){
     $tax = $plan->getPrice() * 0.07;
-    $sub_total = $tax + $transFee;
-    return $plan->getPrice() + $sub_total;
+    return $plan->getPrice() + $tax;
   }
 
 
