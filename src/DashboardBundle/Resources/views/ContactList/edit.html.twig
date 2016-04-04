@@ -2,7 +2,7 @@
 
 {% block breadcrumb %}
   <li>
-    <a href="{{ path('contactlist_index') }}">Contacts List</a>
+    <a href="{{ path('contactlist_index') }}">Contact List</a>
     <i class="mdi-navigation-chevron-right"></i>
   </li>
   <li><a href="#">Edit</a></li>
@@ -75,7 +75,7 @@
   </style>
   <div class="card card-data-grid">
     <div class="title">
-      <h5> Contacts List</h5>
+      <h5> Edit Contact List</h5>
       <div class="btn-group right">
         <a href="{{ path('contactlist_index') }}" class="btn btn-small waves-dark waves-effect"><i
               class="mdi mdi-hardware-keyboard-arrow-left left"></i>Back</a>
@@ -105,7 +105,7 @@
 
 <div class="card">
   <div class="title">
-    <h5> Add contacts of current list</h5>
+    <h5> Manage contacts </h5>
     <div class="btn-group right">
       <a class="btn btn-small waves-dark waves-effect modal-trigger"  href="#modalAddContat"> <i class="mdi mdi-content-add left"></i>Add contact</a>
     </div>
@@ -114,7 +114,7 @@
   <!-- Modal Structure -->
   <div id="modalAddContat" class="modal" style="overflow-x: hidden;width: 35%;">
     <div class="modal-content">
-      <h4>Add contacts of current list</h4>
+      <h4>Add contact</h4>
       <form data-parsley-validate id="formContact" class="form-horizontal" action="" method="post" {{ form_enctype(form_contact) }}>
         <div class="row" style="padding-right: 7%;margin-top: 1rem;">
           <div class="row" style="margin-top: 0rem;">
@@ -158,7 +158,7 @@
         {{ grid(grid, 'DashboardBundle:Grid:gridTemplateContactsAjax.html.twig') }}
       </div>
       <div class="col m6" style="padding-bottom: 0px;">
-        <span style="font-size: 18px">Contacts of current list:</span>
+        <span style="font-size: 18px">Contacts in this list:</span>
         {{ grid(grid2, 'DashboardBundle:Grid:gridTemplateMyContactsAjax.html.twig') }}
       </div>
     </div>

@@ -43,6 +43,8 @@ class UpgradeController extends BaseController
   {
     $user = $this->getUser();
 
+    $totalAmount =
+
     $plan = $this->getDoctrine()
       ->getRepository('DashboardBundle:Plan')
       ->find($plan_id);
@@ -91,9 +93,11 @@ class UpgradeController extends BaseController
   /**
    * @Route("/checkout/{plan_id}", name="upgrade_checkout")
    */
-  public function checkoutAction(Request $request, $plan_id)
+  public function checkoutAction(Request $request, $plan_id = null)
   {
     $user = $this->getUser();
+
+    $plan_id = $plan_id ? $plan_id : $request->get('plan_id');
 
     $plan = $this->getDoctrine()
                  ->getRepository('DashboardBundle:Plan')
@@ -101,9 +105,12 @@ class UpgradeController extends BaseController
 
     $cardInfo = $this->getBusiness()->getCardInformation($user);
 
+    $total_amount = $this->getBusiness()->getTotalAmount($plan);
+
     return $this->render('DashboardBundle:Upgrade:checkout.html.twig', array(
       'plan' => $plan,
-      'card_info' => $cardInfo
+      'card_info' => $cardInfo,
+      'total_amount' => $total_amount
     ));
   }
 

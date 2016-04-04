@@ -31,29 +31,17 @@
             </td>
         </tr>
         <tr>
-            <td colspan="4" rowspan="4"></td>
-            <td class="right-align"><strong>Tax (7%)</strong></td>
-            {% set tax = plan.price * 0.07 %}
-            <td class="right-align" colspan="4">${{ tax | number_format(2) }}</td>
-        </tr>
-        <tr>
-            <td class="right-align"><strong>Trans Fee</strong></td>
-            {% set fee = 2 %}
-            <td class="right-align" colspan="4">${{ fee | number_format(2) }}</td>
-        </tr>
-        <tr>
-            <td class="right-align"><strong>Subtotal</strong></td>
-            {% set sub_total = tax + fee %}
-            <td class="right-align" colspan="4">${{ sub_total | number_format(2) }}</td>
+            <td colspan="4" rowspan="2"></td>
+            <td class="right-align"><strong>Tax and Fees:</strong></td>
+            <td class="right-align" colspan="4">${{ (total_amount - plan.price) | number_format(2) }}</td>
         </tr>
         <tr>
             <td class="right-align"><strong>Total</strong></td>
-            {% set total = plan.price + sub_total %}
-            <td class="right-align" colspan="4"><strong class="h2">${{ total | number_format(2) }}</strong></td>
+            <td class="right-align" colspan="4"><strong class="h2">${{ total_amount | number_format(2) }}</strong></td>
         </tr>
         </tbody>
     </table>
 </div>
 <div class="alert orange lighten-2 white-text">
-    <strong><i class="fa fa-lg fa-exclamation-triangle"></i> IMPORTANT!</strong> It is a subscription plan. We will charge ${{ total | number_format(2)}} every month in your stored card until you change or cancel this plan.
+    <strong><i class="fa fa-lg fa-exclamation-triangle"></i> IMPORTANT!</strong> It is a subscription plan. We will charge ${{ total_amount | number_format(2)}} every month in your stored card until you change or cancel this plan.
 </div>

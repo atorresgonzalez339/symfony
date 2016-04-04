@@ -45,6 +45,7 @@ class UpgradeBusiness extends BaseBusiness
         $subscription->plan = $new_plan_id;
         $proration_date = new \DateTime();
         $subscription->proration_date = $proration_date->getTimestamp();
+        $subscription->tax_percent = 7;
         $subscription->save();
 
         $current_plan_id = $user->getCurrentPlan()->getPlan()->getId();
@@ -63,7 +64,9 @@ class UpgradeBusiness extends BaseBusiness
             $invoice->save();
             $customer->updateSubscription(array(
               'plan' => $current_plan_id,
-              'prorate' => false
+              'prorate' => false,
+              'application_fee_percent' => 4,
+              'tax_percent' => 7
             ));
           }
         }
@@ -225,6 +228,12 @@ class UpgradeBusiness extends BaseBusiness
 
     return null;
 
+  }
+
+  public function getTotalAmount(Plan $plan){
+    $tax = $plan->getPrice() * 0.07;
+    $sub_total = $tax + $transFee;
+    return $plan->getPrice() + $sub_total;
   }
 
 

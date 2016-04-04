@@ -254,9 +254,9 @@ class ContactListController extends BaseController{
             $response->setContent(json_encode(array('message'=>$messageInfo,'code'=>401)));
             return $response;
         }
-        $messageInfo = 'The contact change to current contact list';
+        $messageInfo = 'New contact added to this list';
         $result = $this->getBusiness()->addContact($entityContactList,$entityContact);
-        if($result == false) $messageInfo = 'Error to change the contact to current contact list';
+        if($result == false) $messageInfo = 'Error moving the contact';
         $response->setStatusCode(200);
         $response->setContent(json_encode(array('message'=>$messageInfo,'code'=>200)));
         return $response;
@@ -290,9 +290,9 @@ class ContactListController extends BaseController{
             $response->setContent(json_encode(array('message'=>$messageInfo,'code'=>401)));
             return $response;
         }
-        $messageInfo = 'The contact remove to current contact list';
+        $messageInfo = 'A contact removed from this list';
         $result = $this->getBusiness()->removeContact($entityContactList,$entityContact);
-        if($result == false) $messageInfo = 'Error to remove the contact to current contact list';
+        if($result == false) $messageInfo = 'Error removing the contact';
         $response->setStatusCode(200);
         $response->setContent(json_encode(array('message'=>$messageInfo,'code'=>200)));
         return $response;
@@ -326,8 +326,8 @@ class ContactListController extends BaseController{
         if ($formContact->isValid()) {
             $this->findBusiness($this->nameService)->saveData($entityContact);
             $result = $this->getBusiness()->addContact($entityContactList,$entityContact);
-            $messageInfo = 'The contact add to current contact list';
-            if($result == false) $messageInfo = 'Error to add the contact in current contact list';
+            $messageInfo = 'New contact added to this list';
+            if($result == false) $messageInfo = 'Error adding a new contact';
             $response->setStatusCode(200);
             $response->setContent(json_encode(array('message'=>$messageInfo,'code'=>200)));
             return $response;

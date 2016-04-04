@@ -84,7 +84,7 @@
 
   <script>
 
-    var current_plan = {{ current_plan.id }};
+    var current_plan = {{ current_plan.plan.id }};
     var next_plan = null;
 
     $('.btn_change_plan').click(function(e){
@@ -94,7 +94,7 @@
         $('#next-plan-dialog').openModal();
       }
       else{
-        $(this).unbind('click').click();
+        window.location.href = "{{ path('upgrade_checkout') }}" + "?plan_id=" + next_plan;
       }
     });
 
