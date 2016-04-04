@@ -31,11 +31,22 @@ class ContactListController extends BaseController{
     public function indexAction(Request $request){
       $source = new Entity('DashboardBundle:ContactList');
       $grid = $this->get('grid');
-      $grid->setSource($source);
       $grid->hideColumns(array('id'));
       $grid->addMassAction(new DeleteMassAction());
       $grid->setLimits($this->container->getParameter('admin.paginator.limits.config'));
-      if ($request->isXmlHttpRequest()){
+      $tableAlias = $source->getTableAlias();
+
+       $source->manipulateQuery(
+            function ($query) use ($tableAlias) {
+                $idUser = $this->getUserAuthenticated()->getId();
+                $query->leftJoin($tableAlias.'.user', 'u')
+                    ->andWhere('u.id = '. $idUser)
+                    ->addOrderBy($tableAlias.'.id', 'DESC');
+            }
+        );
+        $grid->setSource($source);
+
+        if ($request->isXmlHttpRequest()){
           return $grid->getGridResponse('DashboardBundle:ContactList:indexAjax.html.twig');
       }
       if ($grid->isReadyForRedirect())return new RedirectResponse($grid->getRouteUrl());
