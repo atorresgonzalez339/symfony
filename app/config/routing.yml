@@ -8,6 +8,11 @@ dashboard:
     type:     annotation
     prefix:   /dashboard
 
+listener:
+    resource: "@DashboardBundle/Controller/HandlerController.php"
+    type:     annotation
+    prefix:   /handler
+
 user:
     resource: "@UserBundle/Controller/"
     type:     annotation
