@@ -148,6 +148,37 @@ class UpgradeBusiness extends BaseBusiness
     }
   }
 
+  public function renewPlan($stripe_event) {
+    $customer_id = $eventStripe->data->object->customer;
+
+    $userProfile = $this->getRepository('User', 'UserProfile')
+      ->findOneBy(array('customer_id' => $customer_id));
+
+    $user = $userProfile->getUser();
+
+    $currentPlan = $user->getCurrentPlan();
+
+    $dateStart = $currentPlam->getDateStart();
+
+    if($dateStart->getTimestamp() !== $eventStripe->data->object->lines->data[0]->period->start)
+    {
+      $idplan = $eventStripe->data->object->lines->data[0]->plan->id;
+      $idplan = $idplan ? $idplan : 1;
+      $this->updatePlan($member, $idplan);
+    }
+  }
+
+  public function cancelSubscription(){
+    $customerId = $eventStripe->customer;
+
+    $member = $this->getRepository('Contakta', 'Member')
+      ->findOneBy(array('customerid' => $customerId));
+
+    if($member){
+      $this->updatePlan($member, 1);
+    }
+  }
+
   public function updateCard(User $user, $token)
   {
 
