@@ -98,8 +98,6 @@
         </div>
         {{ form_rest(form) }}
       </form>
-
-
     </div>
   </div>
 
@@ -107,50 +105,13 @@
   <div class="title">
     <h5> Manage contacts </h5>
     <div class="btn-group right">
-      <a class="btn btn-small waves-dark waves-effect modal-trigger"  href="#modalAddContat"> <i class="mdi mdi-content-add left"></i>Add contact</a>
-      <a class="btn btn-small waves-dark waves-effect"  href="#modalAddContat"> <i class="mdi mdi-communication-import-export left"></i>Import contact</a>
+      <a class="btn btn-small waves-dark waves-effect modal-trigger"  href="#modalAddContat"> <i class="mdi mdi-social-group-add left"></i>Add contact</a>
+      <a class="btn btn-small waves-dark waves-effect modal-trigger"  href="#modalImportContact"> <i class="mdi mdi-communication-import-export left"></i>Import contact</a>
     </div>
   </div>
 
-  <!-- Modal Structure -->
-  <div id="modalAddContat" class="modal" style="overflow-x: hidden;width: 35%;">
-    <div class="modal-content">
-      <h4>Add contact</h4>
-      <form data-parsley-validate id="formContact" class="form-horizontal" action="" method="post" {{ form_enctype(form_contact) }}>
-        <div class="row" style="padding-right: 7%;margin-top: 1rem;">
-          <div class="row" style="margin-top: 0rem;">
-            <div class="col m12" style="padding-bottom: 0px;">
-              <div class="input-field">
-                {{ form_widget(form_contact.first_name, {'attr': {'required':'required'}}) }}
-                <label for="contact_first_name" class="">First Name</label>
-              </div>
-            </div>
-          </div>
-          <div class="row" style="margin-top: 0rem;">
-            <div class="col m12" style="padding-bottom: 0px;">
-              <div class="input-field">
-                {{ form_widget(form_contact.last_name, {'attr': {'required':'required'}}) }}
-                <label for="contact_last_name" class="">Last Name</label>
-              </div>
-            </div>
-          </div>
-          <div class="row" style="margin-top: 0rem;">
-            <div class="col m12">
-              <div class="input-field">
-                {{ form_widget(form_contact.email, {'attr': {'required':'required'}}) }}
-                <label for="contact_email" class="">Email</label>
-              </div>
-            </div>
-          </div>
-        </div>
-        {{ form_rest(form_contact) }}
-      </form>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Cancel</a>
-      <a id="button_addcontac" href="#!" class="modal-action waves-effect waves-green btn-flat ">Acept</a>
-    </div>
-  </div>
+  {% include 'DashboardBundle:ContactList:Partials/_modal-add-contact.html.twig' %}
+  {% include 'DashboardBundle:ContactList:Partials/_modal-import-contact.html.twig' %}
 
   <div class="content" style="padding-top: 5px">
     <div class="row" style="margin-top: 5px;">
