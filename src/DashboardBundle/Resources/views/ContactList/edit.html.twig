@@ -172,6 +172,11 @@
         App.submit('formContact', '{{ path('contactlist_addcontact2contactlist') }}')
       });
 
+      $('li.collection-item').click(function () {
+        $('li.collection-item').removeClass('active');
+        $(this).addClass('active');
+      });
+
     });
   </script>
 {% endblock content %}
