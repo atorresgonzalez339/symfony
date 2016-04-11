@@ -45,13 +45,13 @@
           <div class="col m12" style="padding-bottom: 5px;">
             <div class="btn-group right" style="width: 252px;">
               <div class="file-field input-field">
-                <div class="btn  btn-small" style="height: 25.2px;line-height: 25px;font-size: .8rem;">
+                <div class="btn  btn-small" style="height: 25.2px;line-height: 25px;font-size: .8rem;" onclick="$('#importcontact').removeClass('disabled')">
                   <span>Select CVS</span>
-                  <input multiple name="file" class="cloudinary-fileupload" data-cloudinary-field="image_upload" type="file">
+                  <input id="fileinput" multiple name="file" class="" data-cloudinary-field="image_upload" type="file">
                 </div>
               </div>
               {#<a class="btn btn-small waves-dark waves-effect"> <i class="mdi mdi-editor-insert-drive-file left"></i>Select CVS</a>#}
-              <a class="btn btn-small waves-dark waves-effect disabled"> <i class="mdi mdi-communication-import-export left"></i>Import</a>
+              <a id="importcontact" class="btn btn-small waves-dark waves-effect disabled" onclick="handleFileSelect();"> <i class="mdi mdi-communication-import-export left"></i>Import</a>
             </div>
           </div>
         </div>

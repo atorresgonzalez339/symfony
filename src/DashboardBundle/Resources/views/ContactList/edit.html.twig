@@ -144,6 +144,7 @@
 </div>
   <script src="{{ asset('bundles/dashboard/material/js/parsley.min.js') }}" type="text/javascript"></script>
   <script src="{{ asset('bundles/common/js/jquery/plugin/jquery.form.js') }}" type="text/javascript"></script>
+  <script src="{{ asset('bundles/common/js/papaparse.js') }}" type="text/javascript"></script>
   <script src="{{ asset('bundles/common/js/application.js') }}" type="text/javascript"></script>
   <script>
     $(document).ready(function () {
@@ -178,5 +179,81 @@
       });
 
     });
+
+      function handleFileSelect() {
+        if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {
+          alert('The File APIs are not fully supported in this browser.');
+          return;
+        }
+        input = document.getElementById('fileinput');
+        if (!input) alert("Um, couldn't find the fileinput element.");
+        else if (!input.files) alert("This browser doesn't seem to support the `files` property of file inputs.");
+        else if (!input.files[0]) alert("Please select a file before clicking 'Load'");
+        else {
+          file = input.files[0];
+          Papa.parse(file, {
+            config: {
+              header: true
+            },
+            before: function(file, inputElem){
+              console.log('before!');
+            },
+            error: function(err, file, inputElem, reason){
+              console.log('error!');
+            },
+            complete: function(results) {
+              var contacts = results.data;
+              var providerType = $('li.collection-item.active').data('email');
+              var dataArray = Array();
+              var requestArray = Array();
+              for(var i = 0;i < contacts.length;i++){
+                value = contacts[i];
+                switch(providerType){
+                  case 'topproducer':
+                    dataEmail = value[17];
+                    dataName = value[4];
+                    dataLastName = value[5];
+                    break;
+                  case 'mailchimp':
+                    dataEmail = value[0];
+                    dataName = value[1];
+                    dataLastName = value[2];
+                    break;
+                  case 'outlook':
+                    dataEmail = value[46];
+                    dataName = value[1];
+                    dataLastName = value[3];
+                    break;
+                  case 'constantcontact':
+                    dataEmail = value[2];
+                    dataName = value[0];
+                    dataLastName = value[1];
+                    break;
+                  case 'gmail':
+                    if(i!=0){
+                      if(value[14]!=undefined){
+                        dataEmail       = value[14];
+                        dataName        = value[0];
+                        middleName      = value[1];
+                        dataLastName    = value[2];
+                        var itemContact = {firstNme:dataName,lastName:dataLastName,email:dataEmail,middleName:middleName};
+                        dataArray.push(itemContact);
+                      }
+                    }
+                    break;
+                  default:
+                    return false;
+                    break;
+                }
+              }
+              var privider = { provider:providerType };
+              var data     = { data:dataArray };
+              requestArray.push(privider);
+              requestArray.push(data);
+              console.info(requestArray);
+            }
+          });
+        }
+      }
   </script>
 {% endblock content %}
