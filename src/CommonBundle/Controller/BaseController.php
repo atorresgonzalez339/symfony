@@ -132,7 +132,7 @@ class BaseController extends Controller {
     /**
      * @author  Livan L. Frometa Osorio <llfrometa@gmail.com>
      */
-    public function getFirstSelectetGridItem() {
+    public function getFirstSelectedGridItem() {
         $ids = $this->getSelectetGridItems();
         return $ids[0];
     }

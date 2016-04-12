@@ -16,7 +16,7 @@
 		<div class="title">
 			<h5> Flyers </h5>
 			<div class="btn-group right">
-				<a class="btn btn-small waves-dark waves-effect"><i class="mdi mdi-content-add left"></i>Add</a>
+				<a class="btn btn-small waves-dark waves-effect" href="{{ path('flyer_design', {'property_id':'20', 'template_id':'1'}) }}"><i class="mdi mdi-content-add left"></i>Add</a>
 				<a id="edit_action" class="btn btn-small waves-dark waves-effect">
 					<i class="mdi mdi-content-create left"></i>
 					Edit
@@ -32,7 +32,7 @@
 	<script>
 		$(document).ready(function(){
 			$('#edit_action').click(function(){
-				$('#{{idFormGrid}}').attr('action', '{{path("flyer_create")}}');
+				$('#{{idFormGrid}}').attr('action', '{{path("flyer_edit")}}');
     		$('#{{idFormGrid}}').submit();
 			});
 		});

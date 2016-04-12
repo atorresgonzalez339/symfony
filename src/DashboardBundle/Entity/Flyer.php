@@ -14,12 +14,11 @@ use UserBundle\Entity\User;
 class Flyer
 {
 
-    public function __construct(User $user){
+    public function __construct(User $user, Property $property){
         $this->user = $user;
         $this->creation_date = new \DateTime();
         $this->modification_date = $this->creation_date;
         $this->map_active = true;
-        $this->map_active = 0;
     }
     
 	/**
@@ -131,4 +130,451 @@ class Flyer
      * @ORM\Column(type="smallint", nullable=false)
      */
     private $total_sent;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Flyer
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set html
+     *
+     * @param string $html
+     * @return Flyer
+     */
+    public function setHtml($html)
+    {
+        $this->html = $html;
+
+        return $this;
+    }
+
+    /**
+     * Get html
+     *
+     * @return string 
+     */
+    public function getHtml()
+    {
+        return $this->html;
+    }
+
+    /**
+     * Set creation_date
+     *
+     * @param \DateTime $creationDate
+     * @return Flyer
+     */
+    public function setCreationDate($creationDate)
+    {
+        $this->creation_date = $creationDate;
+
+        return $this;
+    }
+
+    /**
+     * Get creation_date
+     *
+     * @return \DateTime 
+     */
+    public function getCreationDate()
+    {
+        return $this->creation_date;
+    }
+
+    /**
+     * Set modification_date
+     *
+     * @param \DateTime $modificationDate
+     * @return Flyer
+     */
+    public function setModificationDate($modificationDate)
+    {
+        $this->modification_date = $modificationDate;
+
+        return $this;
+    }
+
+    /**
+     * Get modification_date
+     *
+     * @return \DateTime 
+     */
+    public function getModificationDate()
+    {
+        return $this->modification_date;
+    }
+
+    /**
+     * Set last_sent_date
+     *
+     * @param \DateTime $lastSentDate
+     * @return Flyer
+     */
+    public function setLastSentDate($lastSentDate)
+    {
+        $this->last_sent_date = $lastSentDate;
+
+        return $this;
+    }
+
+    /**
+     * Get last_sent_date
+     *
+     * @return \DateTime 
+     */
+    public function getLastSentDate()
+    {
+        return $this->last_sent_date;
+    }
+
+    /**
+     * Set message
+     *
+     * @param string $message
+     * @return Flyer
+     */
+    public function setMessage($message)
+    {
+        $this->message = $message;
+
+        return $this;
+    }
+
+    /**
+     * Get message
+     *
+     * @return string 
+     */
+    public function getMessage()
+    {
+        return $this->message;
+    }
+
+    /**
+     * Set address
+     *
+     * @param string $address
+     * @return Flyer
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return string 
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * Set map_active
+     *
+     * @param boolean $mapActive
+     * @return Flyer
+     */
+    public function setMapActive($mapActive)
+    {
+        $this->map_active = $mapActive;
+
+        return $this;
+    }
+
+    /**
+     * Get map_active
+     *
+     * @return boolean 
+     */
+    public function getMapActive()
+    {
+        return $this->map_active;
+    }
+
+    /**
+     * Set map_zoom
+     *
+     * @param integer $mapZoom
+     * @return Flyer
+     */
+    public function setMapZoom($mapZoom)
+    {
+        $this->map_zoom = $mapZoom;
+
+        return $this;
+    }
+
+    /**
+     * Get map_zoom
+     *
+     * @return integer 
+     */
+    public function getMapZoom()
+    {
+        return $this->map_zoom;
+    }
+
+    /**
+     * Set map_marker
+     *
+     * @param float $mapMarker
+     * @return Flyer
+     */
+    public function setMapMarker($mapMarker)
+    {
+        $this->map_marker = $mapMarker;
+
+        return $this;
+    }
+
+    /**
+     * Get map_marker
+     *
+     * @return float 
+     */
+    public function getMapMarker()
+    {
+        return $this->map_marker;
+    }
+
+    /**
+     * Set sender_name
+     *
+     * @param string $senderName
+     * @return Flyer
+     */
+    public function setSenderName($senderName)
+    {
+        $this->sender_name = $senderName;
+
+        return $this;
+    }
+
+    /**
+     * Get sender_name
+     *
+     * @return string 
+     */
+    public function getSenderName()
+    {
+        return $this->sender_name;
+    }
+
+    /**
+     * Set subject
+     *
+     * @param string $subject
+     * @return Flyer
+     */
+    public function setSubject($subject)
+    {
+        $this->subject = $subject;
+
+        return $this;
+    }
+
+    /**
+     * Get subject
+     *
+     * @return string 
+     */
+    public function getSubject()
+    {
+        return $this->subject;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return Flyer
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set email_reply
+     *
+     * @param string $emailReply
+     * @return Flyer
+     */
+    public function setEmailReply($emailReply)
+    {
+        $this->email_reply = $emailReply;
+
+        return $this;
+    }
+
+    /**
+     * Get email_reply
+     *
+     * @return string 
+     */
+    public function getEmailReply()
+    {
+        return $this->email_reply;
+    }
+
+    /**
+     * Set total_sent
+     *
+     * @param integer $totalSent
+     * @return Flyer
+     */
+    public function setTotalSent($totalSent)
+    {
+        $this->total_sent = $totalSent;
+
+        return $this;
+    }
+
+    /**
+     * Get total_sent
+     *
+     * @return integer 
+     */
+    public function getTotalSent()
+    {
+        return $this->total_sent;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \UserBundle\Entity\User $user
+     * @return Flyer
+     */
+    public function setUser(\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set property
+     *
+     * @param \DashboardBundle\Entity\Property $property
+     * @return Flyer
+     */
+    public function setProperty(\DashboardBundle\Entity\Property $property = null)
+    {
+        $this->property = $property;
+
+        return $this;
+    }
+
+    /**
+     * Get property
+     *
+     * @return \DashboardBundle\Entity\Property 
+     */
+    public function getProperty()
+    {
+        return $this->property;
+    }
+
+    /**
+     * Set template
+     *
+     * @param \DashboardBundle\Entity\Template $template
+     * @return Flyer
+     */
+    public function setTemplate(\DashboardBundle\Entity\Template $template = null)
+    {
+        $this->template = $template;
+
+        return $this;
+    }
+
+    /**
+     * Get template
+     *
+     * @return \DashboardBundle\Entity\Template 
+     */
+    public function getTemplate()
+    {
+        return $this->template;
+    }
+
+    /**
+     * Set status
+     *
+     * @param \DashboardBundle\Entity\FlyerStatus $status
+     * @return Flyer
+     */
+    public function setStatus(\DashboardBundle\Entity\FlyerStatus $status = null)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return \DashboardBundle\Entity\FlyerStatus 
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
 }

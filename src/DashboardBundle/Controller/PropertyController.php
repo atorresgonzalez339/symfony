@@ -56,7 +56,7 @@ class PropertyController extends BaseController
     $user = $this->getUser();
 
     if($request->isMethod('POST')){
-      $property_id = $this->getFirstSelectetGridItem();
+      $property_id = $this->getFirstSelectedGridItem();
       return $this->redirectToRoute('properties_design', array('property_id' => $property_id));
     }
 
@@ -129,7 +129,7 @@ class PropertyController extends BaseController
    */
   public function removeAction(Request $request)
   {
-    $property_id = $this->getFirstSelectetGridItem();
+    $property_id = $this->getFirstSelectedGridItem();
 
     $property = $this->getDoctrine()
       ->getRepository('DashboardBundle:Property')
