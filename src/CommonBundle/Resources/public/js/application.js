@@ -1,4 +1,5 @@
 var App;
+
 App = {
     submit: function (idForm,route) {
         if(idForm === null) idForm = 'formSubmit'
