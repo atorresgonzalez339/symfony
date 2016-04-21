@@ -350,4 +350,46 @@ class ContactListController extends BaseController{
         }
     }
 
+    /**
+     * @Route("/contactslist/bulk_addcontact2contactlist", name="bulk_addcontact2contactlist")
+     */
+    public function bulk_addcontact2contactlistAction(){
+        $response = new Response();
+        $response->headers->set('Content-Type', 'text/html');
+        $request        = $this->getRequest();
+        $requestArray   = $request->get('requestArray');
+        $idContactList  = $this->getSession('SELECTED_EDIT_CONTACTLIST_ID');
+        if (!$idContactList) {
+            $messageInfoNotSelected = 'Selected one contact list to assign the current contact list';
+            $response->setStatusCode(401);
+            $response->setContent(json_encode(array('message'=>$messageInfoNotSelected)));
+            return $response;
+        }
+        $entityContactList = $this->getBusiness()->findByID($idContactList);
+        if(!$entityContactList){
+            $messageInfo = 'Not has selected entity contact list success';
+            $response->setStatusCode(401);
+            $response->setContent(json_encode(array('message'=>$messageInfo,'code'=>401)));
+            return $response;
+        }
+        $dataArray = $requestArray['data'];
+        $resultArray  = array();
+        foreach ($dataArray as $contact) {
+            $firstName  = $contact['firstName'];
+            $middleName = isset($contact['middleName']) ? $contact['middleName'] : '';
+            $lastName   = $contact['lastName'];
+            $email      = $contact['email'];
+            $entityContact = new Contact();
+            $names = $firstName;
+            if(strlen($middleName)>0) $names.= ' '.$middleName;
+            $entityContact->setFirstName($names);
+            $entityContact->setLastName($lastName);
+            $entityContact->setEmail($email);
+            $this->findBusiness($this->nameService)->saveData($entityContact);
+            $resultArray[] = $this->getBusiness()->addContact($entityContactList,$entityContact);
+        }
+        echo '<pre>';
+        print_r($resultArray);die;
+    }
+
 }

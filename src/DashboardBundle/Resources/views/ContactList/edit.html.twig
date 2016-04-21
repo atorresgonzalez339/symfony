@@ -236,7 +236,7 @@
                         dataName        = value[0];
                         middleName      = value[1];
                         dataLastName    = value[2];
-                        var itemContact = {firstNme:dataName,lastName:dataLastName,email:dataEmail,middleName:middleName};
+                        var itemContact = {firstName:dataName,lastName:dataLastName,email:dataEmail,middleName:middleName};
                         dataArray.push(itemContact);
                       }
                     }
@@ -246,10 +246,25 @@
                     break;
                 }
               }
-              var privider = { provider:providerType };
-              var data     = { data:dataArray };
-              requestArray.push(privider);
-              requestArray.push(data);
+
+              if(dataArray.length == 0){
+                Materialize.toast('Not has contact in the file', 4000);
+              }
+
+              $.ajax({
+                type: "GET",
+                url: '{{ path('bulk_addcontact2contactlist') }}',
+                data: {requestArray:{provider:providerType,data:dataArray}},
+                success: function(data) {
+                  data = JSON.parse(data);
+                  Materialize.toast(data.message, 4000);
+                  if(data.code == 200){
+                  }else{
+                  }
+                },
+                dataType: 'html'
+              });
+
               console.info(requestArray);
             }
           });
