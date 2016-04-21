@@ -225,9 +225,18 @@
                     dataLastName = value[3];
                     break;
                   case 'constantcontact':
-                    dataEmail = value[2];
-                    dataName = value[0];
-                    dataLastName = value[1];
+
+                    if(i!=0){
+                      if(value[2]!=undefined){
+                        dataEmail     = value[2];
+                        dataName      = value[0];
+                        dataLastName  = value[1];
+                        middleName    = '';
+                        var itemContact = {firstName:dataName,lastName:dataLastName,email:dataEmail,middleName:middleName};
+                        dataArray.push(itemContact);
+                      }
+                    }
+
                     break;
                   case 'gmail':
                     if(i!=0){

@@ -154,8 +154,8 @@
                     <i class=" {% if(row.entity.getIsActive()) %}green{% else %} red {% endif %} circle circle-status circle-right">
                     </i>
                     <div class="row" style="margin-top: 0px;">
-                      <div class="col m7" style="padding-bottom: 0px;"> <p style="font-size: 15px;">{{ row.entity.getCompleteName()}}</p> </div>
-                      <div class="col m5" style="padding-bottom: 0px;"> <p>{{ row.entity.email }}</p> </div>
+                      <div class="col m5" style="padding-bottom: 0px;"> <p style="font-size: 15px;">{{ row.entity.getCompleteName() | slice(0, 17)}}</p> </div>
+                      <div class="col m7" style="padding-bottom: 0px;"> <p>{{ row.entity.email | slice(0, 30) }}</p> </div>
                     </div>
                   </li>
                 {% endfor %}
