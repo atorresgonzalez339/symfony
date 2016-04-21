@@ -388,8 +388,10 @@ class ContactListController extends BaseController{
             $this->findBusiness($this->nameService)->saveData($entityContact);
             $resultArray[] = $this->getBusiness()->addContact($entityContactList,$entityContact);
         }
-        echo '<pre>';
-        print_r($resultArray);die;
+        $messageInfo = 'Import contacts successfully';
+        $response->setStatusCode(200);
+        $response->setContent(json_encode(array('message'=>$messageInfo,'code'=>200)));
+        return $response;
     }
 
 }

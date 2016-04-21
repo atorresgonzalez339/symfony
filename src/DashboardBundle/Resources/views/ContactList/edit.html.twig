@@ -249,6 +249,7 @@
 
               if(dataArray.length == 0){
                 Materialize.toast('Not has contact in the file', 4000);
+                return false;
               }
 
               $.ajax({
@@ -259,13 +260,14 @@
                   data = JSON.parse(data);
                   Materialize.toast(data.message, 4000);
                   if(data.code == 200){
+                    grid_SECOND_updateGrid(event);
+                    $('#modalImportContact').closeModal();
+                    $('#importcontact').addClass('disabled')
                   }else{
                   }
                 },
                 dataType: 'html'
               });
-
-              console.info(requestArray);
             }
           });
         }
