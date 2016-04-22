@@ -29,10 +29,16 @@
           <div {{ plan.id == current_plan.plan.id ? 'class="active-plan"' }}>
             <div class="card small">
               <div class="content" style="padding-top: 10px;padding-bottom: 10px;">
-                <center class="" style="font-size: 20px"> <span style="color: #424242;">{{ plan.name | upper }}</span> </center>
+                <center class="" style="font-size: 20px"> <span style="color: #9E9E9E;">{{ plan.name | upper }}</span> </center>
               </div>
-              <div class="content" style="padding-top: 10px;padding-bottom: 10px;background-color: #F0F0EE;">
-                <center class="" style="font-size: 18px;color: #424242;"> <strong>${{ plan.price | number_format(2) }}</strong> <span style="color: #9E9E9E;">/ month </span></center>
+              <div class="content" style="padding-top: 15px;padding-bottom: 15px;">
+                <center class="" >
+                  <div class="circle" style="border: solid 1px #42A5F5;width: 70px;height: 70px;padding-top: 13px;">
+                    <span style="font-size: 16px;color: #42A5F5;font-weight: 600;"> ${{ plan.price | number_format(2) }} </span>
+                    <br>
+                    <span style="font-size: 12px;color: #42A5F5"> a mouth </span>
+                  </div>
+                </center>
               </div>
               <div class="content" style="padding-top: 15px;padding-bottom: 15px;">
                 <p> Up to {{ plan.totalFlyers }} Flyers</p>
