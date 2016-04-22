@@ -7,8 +7,29 @@
 {% block content %}
   <style>
   .active-plan{
-    box-shadow: 0 10px 10px 0 rgba(102,187,106,0.16),0 10px 10px 0 rgba(102,187,106,0.12);
+    /*box-shadow: 0 10px 10px 0 rgba(102,187,106,0.16),0 10px 10px 0 rgba(102,187,106,0.12);*/
   }
+  .active-plan .card.small{
+    height: 375px;
+    margin-top: -20px;
+  }
+
+  i.type-free {
+    color: #616161;
+  }
+
+  i.type-standar {
+    color: #5d4037;
+  }
+
+  i.type-gold {
+    color: #fbc02d;
+  }
+
+  i.type-premiun {
+    color: #d32f2f;
+  }
+
   </style>
   <div class="card">
     <div class="title">
@@ -29,7 +50,7 @@
           <div {{ plan.id == current_plan.plan.id ? 'class="active-plan"' }}>
             <div class="card small">
               <div class="content" style="padding-top: 10px;padding-bottom: 10px;">
-                <center class="" style="font-size: 20px"> <span style="color: #9E9E9E;">{{ plan.name | upper }}</span> </center>
+                <center class="" style="font-size: 20px"> <i class="mdi-device-brightness-low type-{{ plan.name | lower}}"> </i> <span class="type-{{ plan.name | lower}}" style="color: #9E9E9E;">{{ plan.name | upper }}</span> </center>
               </div>
               <div class="content" style="padding-top: 15px;padding-bottom: 15px;">
                 <center class="" >
@@ -41,9 +62,11 @@
                 </center>
               </div>
               <div class="content" style="padding-top: 15px;padding-bottom: 15px;">
-                <p> Up to {{ plan.totalFlyers }} Flyers</p>
-                <p> Up to {{ plan.totalEmails }} Email</p>
-                <p> Up to {{ plan.totalContacts }} Contacts</p>
+                <center class="" >
+                  <p style="color: #9E9E9E;"> Up to <span style="font-weight: 600;">{{ plan.totalFlyers }}</span> Flyers</p>
+                  <p style="color: #9E9E9E;"> Up to <span style="font-weight: 600;">{{ plan.totalEmails }}</span> Email</p>
+                  <p style="color: #9E9E9E;"> Up to <span style="font-weight: 600;">{{ plan.totalContacts }}</span> Contacts</p>
+                </center>
               </div>
               <div class="content" style="padding-top: 15px;padding-bottom: 15px;">
                 {% if current_plan.nextPlan and plan.id == current_plan.nextPlan.id %}
