@@ -3,15 +3,15 @@ var marker = null;
 var map = null;
 var map_autocomplete = null;
 
-function initialize(lat, lng, map_input_id, map_input_lat_id, map_input_lng_id, show_marker) {
+function initialize(lat, lng, zoom, map_input_id, map_input_lat_id, map_input_lng_id, map_input_zoom_id, show_marker) {
+
     var mapOptions = {
         center: new google.maps.LatLng(lat, lng),
         scrollwheel: false,
-        zoom: 13
+        zoom: zoom
     };
 
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-
     var input = /** @type {HTMLInputElement} */(
         document.getElementById(map_input_id));
 
@@ -24,7 +24,7 @@ function initialize(lat, lng, map_input_id, map_input_lat_id, map_input_lng_id, 
     var infowindow = new google.maps.InfoWindow();
 
     if(show_marker){
-        setMarker(new google.maps.LatLng(lat,lng));
+        setMarker(new google.maps.LatLng(lat,lng), map_input_lat_id, map_input_lng_id, map_input_zoom_id);
     }
 
     google.maps.event.addListener(map_autocomplete, 'place_changed', function () {
@@ -49,8 +49,8 @@ function initialize(lat, lng, map_input_id, map_input_lat_id, map_input_lng_id, 
         setMarker(place.geometry.location);
 
         $('#' + map_input_lat_id).val(place.geometry.location.lat());
-
         $('#' + map_input_lng_id).val(place.geometry.location.lng());
+        $('#' + map_input_zoom_id).val(map.getZoom());
 
         var address = '';
         if (place.address_components) {
@@ -64,9 +64,13 @@ function initialize(lat, lng, map_input_id, map_input_lat_id, map_input_lng_id, 
         infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
         infowindow.open(map, marker);
     });
+
+    google.maps.event.addListener(map, 'zoom_changed', function() {
+        $('#' + map_input_zoom_id).val(map.getZoom());
+    });
 }
 
-function setMarker(position){
+function setMarker(position, map_input_lat_id, map_input_lng_id, map_input_zoom_id){
 
     if(!marker){
         marker = new google.maps.Marker({
@@ -78,15 +82,9 @@ function setMarker(position){
         google.maps.event.addListener(marker, "mouseup", function (event) {
             $('#' + map_input_lat_id).val(this.position.lat());
             $('#' + map_input_lng_id).val(this.position.lng());
+            $('#' + map_input_zoom_id).val(map.getZoom());
         });
     }
-
-    //marker.setIcon(/** @type {google.maps.Icon} */({
-    //    size: new google.maps.Size(71, 71),
-    //    origin: new google.maps.Point(0, 0),
-    //    anchor: new google.maps.Point(17, 34),
-    //    scaledSize: new google.maps.Size(35, 35)
-    //}));
 
     marker.setPosition(position);
 

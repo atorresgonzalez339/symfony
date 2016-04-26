@@ -142,6 +142,11 @@ class Property
     protected $lng;
 
     /**
+     * @ORM\Column(type="smallint", nullable=true)
+     */
+    private $map_zoom;
+    
+    /**
      * @ORM\Column(type="integer", nullable=true)
      */
     protected $list_price;
@@ -789,5 +794,28 @@ class Property
 
     public function getFullAddress(){
         return $this->address . ', ' . $this->state . ', ' . $this->country . ', ' . $this->postal_code;
+    }
+
+    /**
+     * Set map_zoom
+     *
+     * @param integer $mapZoom
+     * @return Property
+     */
+    public function setMapZoom($mapZoom)
+    {
+        $this->map_zoom = $mapZoom;
+
+        return $this;
+    }
+
+    /**
+     * Get map_zoom
+     *
+     * @return integer 
+     */
+    public function getMapZoom()
+    {
+        return $this->map_zoom;
     }
 }

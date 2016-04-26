@@ -109,10 +109,6 @@ class PropertyBusiness extends BaseBusiness {
       return $property;
     }
 
-    public function uploadImg($img = null){
-      return $uploader->upload($img, array('folder' => 'eblast'));
-    }
-
     public function removePhoto(Property $property, $photo_id){
       $cloudinaryApi = $this->container->get('speicher210_cloudinary.api');
       foreach($property->getPhotos() as $photo){

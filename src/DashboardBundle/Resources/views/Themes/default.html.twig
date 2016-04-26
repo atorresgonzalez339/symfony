@@ -1,56 +1,56 @@
 <table width="100%" style="border: 0px solid black;">
     <tr>
         <td style="margin: 0; padding: 0; text-align: center;" colspan="2">
-            <h3 data-type="flyer_text" data-element="input" data-align="center" data-padding="5px 0" data-rel="">{{ title }}</h3>
+            <h3 data-id="{{ uniqueId('flyer_') }}" data-type="flyer_text" data-element="input" data-align="center" data-padding="5px 0">{{ title }}</h3>
         </td>
     </tr>
     <tr>
         <td style="margin: 0; padding: 0" colspan="2">
-            <div class="image-editor">
-                <img style="display: none;" src="{{photos.first.photoUrl}}">
+            <div data-element="image_crop">
+                <img data-id="{{ uniqueId('flyer_') }}" style="display: none;" src="{{photos.first.photoUrl | imgToBase64 }}">
                 <div class="cropit-image-preview"></div>
             </div>
         </td>
     </tr>
     <tr>
         <td style="margin: 0; padding: 0; text-align: center;" colspan="2">
-            <h3 data-type="flyer_text" data-element="input" data-align="center" data-padding="5px 0" data-rel="">{{ subtitle }}</h3>
+            <h3 data-id="{{ uniqueId('flyer_') }}" data-type="flyer_text" data-element="input" data-align="center" data-padding="5px 0" data-rel="">{{ subtitle }}</h3>
         </td>
     </tr>
     <tr>
         <td style="margin: 0; padding: 10px; text-align: center; width: 300px">
             <div>
-                <h3 data-type="flyer_text" data-element="input" data-align="center" data-padding="5px 0" data-rel="">Titulo 1</h3>
+                <h3 data-id="{{ uniqueId('flyer_') }}" data-type="flyer_text" data-element="input" data-align="center" data-padding="5px 0" data-rel="">Titulo 1</h3>
             </div>
-            <p data-type="flyer_text" data-element="textarea" data-align="center" data-margin="10px 0" data-rel="">
+            <p data-id="{{ uniqueId('flyer_') }}" data-type="flyer_text" data-element="textarea" data-align="center" data-margin="10px 0" data-rel="">
                 {{ property.features }}
             </p>
         </td>
         <td style="margin: 0; padding: 10px; text-align: center; width: 300px">
             <div>
-                <h3 data-type="flyer_text" data-element="input" data-align="center" data-padding="5px 0" data-rel="">Titulo 2</h3>
+                <h3 data-id="{{ uniqueId('flyer_') }}" data-type="flyer_text" data-element="input" data-align="center" data-padding="5px 0" data-rel="">Titulo 2</h3>
             </div>
-            <p data-type="flyer_text" data-element="textarea" data-align="center" data-margin="10px 0" data-rel="">
+            <p data-id="{{ uniqueId('flyer_') }}" data-type="flyer_text" data-element="textarea" data-align="center" data-margin="10px 0" data-rel="">
                 {{ property.features }}
             </p>
         </td>
     </tr>
     <tr>
         <td style="margin: 0; padding: 0" colspan="2">
-            <div class="image-editor">
-                <img style="display: none;" src="{{photos.1.photoUrl}}">
+            <div data-element="image_crop">
+                <img data-id="{{ uniqueId('flyer_') }}" style="display: none;" src="{{photos.1.photoUrl | imgToBase64 }}">
                 <div class="cropit-image-preview"></div>
             </div>
         </td>
     </tr>
     <tr>
         <td style="margin: 0; padding: 0; text-align: center;" colspan="2">
-            <p data-type="flyer_text" data-element="input" data-align="center" data-padding="5px 0" data-rel="">{{ address }}</p>
+            <p data-id="{{ uniqueId('flyer_') }}" data-type="flyer_text" data-element="input" data-align="center" data-padding="5px 0" data-rel="flyer_address">{{ address }}</p>
         </td>
     </tr>
     <tr>
         <td style="margin: 0; padding: 0; text-align: center;" colspan="2">
-            <div data-map="true" style="height: 100px">
+            <div data-element="map" id="map-canvas" style="height: 200px">
 
             </div>
         </td>
