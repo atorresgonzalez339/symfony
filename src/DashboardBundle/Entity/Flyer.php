@@ -22,6 +22,7 @@ class Flyer
         $this->template = $template;
         $this->total_sent = 0;
 
+        //Binding Flyer with Property
         $this->email = $user->getProfile()->getEmail();
         $this->sender_name = $user->getProfile()->getFullName();
         $this->email_reply = $user->getProfile()->getEmail();
@@ -29,7 +30,9 @@ class Flyer
         $this->map_active = true;
         $this->lat = $property->getLat();
         $this->lng = $property->getLng();
-        $this->map_zoom = 12;
+        $this->map_zoom = $property->getMapZoom();
+        $this->map_center_lat = $property->getMapCenterLat();
+        $this->map_center_lng = $property->getMapCenterLng();
     }
 
 	/**
@@ -145,6 +148,16 @@ class Flyer
      * @ORM\Column(type="float", nullable=true)
      */
     protected $lng;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $map_center_lat;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $map_center_lng;
 
     /**
      * Get id
@@ -614,5 +627,51 @@ class Flyer
     public function getHtmlEdit()
     {
         return $this->html_edit;
+    }
+
+    /**
+     * Set map_center_lat
+     *
+     * @param string $mapCenterLat
+     * @return Flyer
+     */
+    public function setMapCenterLat($mapCenterLat)
+    {
+        $this->map_center_lat = $mapCenterLat;
+
+        return $this;
+    }
+
+    /**
+     * Get map_center_lat
+     *
+     * @return string 
+     */
+    public function getMapCenterLat()
+    {
+        return $this->map_center_lat;
+    }
+
+    /**
+     * Set map_center_lng
+     *
+     * @param string $mapCenterLng
+     * @return Flyer
+     */
+    public function setMapCenterLng($mapCenterLng)
+    {
+        $this->map_center_lng = $mapCenterLng;
+
+        return $this;
+    }
+
+    /**
+     * Get map_center_lng
+     *
+     * @return string 
+     */
+    public function getMapCenterLng()
+    {
+        return $this->map_center_lng;
     }
 }

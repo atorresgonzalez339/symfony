@@ -147,6 +147,8 @@
       {{ form_widget(property_form.lat) }}
       {{ form_widget(property_form.lng) }}
       {{ form_widget(property_form.map_zoom) }}
+      {{ form_widget(property_form.map_center_lat) }}
+      {{ form_widget(property_form.map_center_lng) }}
       <input type="hidden" value="{{ property_id }}" name="property_id" >
     {{ form_end(property_form) }}
   </div>
@@ -156,17 +158,22 @@
   $(document).ready(function(){
 
     if ($('#map-canvas').length != 0) {
-      var lat = {{ property.lat ? property.lat : '25.7823072' }};
-      var lng = {{ property.lng ? property.lng : '-80.3011208' }};
-      var map_input_id = 'property_address';
-      var map_input_lat_id = 'property_lat';
-      var map_input_lng_id = 'property_lng';
-      var map_input_zoom_id = 'property_map_zoom';
-      var show_marker = '{{ property.lat and property.lng ? 'true'}}';
-      google.maps.event.addDomListener(window, 'load', initialize(lat, lng,
-              map_input_id, map_input_lat_id, map_input_lng_id, map_input_zoom_id,
-              show_marker
-      ));
+
+      var mapParams = {
+        lat: {{ property.lat }},
+        lng: {{ property.lng }},
+        center_lat: {{ property.mapCenterLat }},
+        center_lng: {{ property.mapCenterLng }},
+        zoom: {{ property.mapZoom }},
+        map_input_id: 'property_address',
+        map_input_lat_id: 'property_lat',
+        map_input_lng_id: 'property_lng',
+        map_input_zoom_id: 'property_map_zoom',
+        map_input_center_lat_id: 'property_map_center_lat',
+        map_input_center_lng_id: 'property_map_center_lng',
+        show_marker: '{{ property.lat and property.lng ? 'true'}}'
+      };
+      google.maps.event.addDomListener(window, 'load', initialize(mapParams));
     }
 
     var componentForm = {

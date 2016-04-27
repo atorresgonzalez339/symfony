@@ -132,14 +132,24 @@ class Property
     protected $postal_code;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $lat;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $lng;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $map_center_lat;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $map_center_lng;
 
     /**
      * @ORM\Column(type="smallint", nullable=true)
@@ -170,6 +180,11 @@ class Property
     public function __construct(User $user){
         $this->user = $user;
         $this->photos = new ArrayCollection();
+        $this->lat = '25.7823072';
+        $this->lng = '-80.3011208';
+        $this->map_center_lat = '25.7823072';
+        $this->map_center_lng = '-80.3011208';
+        $this->map_zoom = '12';
     }
 
     /**
@@ -620,52 +635,6 @@ class Property
     }
 
     /**
-     * Set lat
-     *
-     * @param float $lat
-     * @return Property
-     */
-    public function setLat($lat)
-    {
-        $this->lat = $lat;
-
-        return $this;
-    }
-
-    /**
-     * Get lat
-     *
-     * @return float 
-     */
-    public function getLat()
-    {
-        return $this->lat;
-    }
-
-    /**
-     * Set lng
-     *
-     * @param float $lng
-     * @return Property
-     */
-    public function setLng($lng)
-    {
-        $this->lng = $lng;
-
-        return $this;
-    }
-
-    /**
-     * Get lng
-     *
-     * @return float 
-     */
-    public function getLng()
-    {
-        return $this->lng;
-    }
-
-    /**
      * Set list_price
      *
      * @param integer $listPrice
@@ -817,5 +786,97 @@ class Property
     public function getMapZoom()
     {
         return $this->map_zoom;
+    }
+
+    /**
+     * Set lat
+     *
+     * @param string $lat
+     * @return Property
+     */
+    public function setLat($lat)
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    /**
+     * Get lat
+     *
+     * @return string 
+     */
+    public function getLat()
+    {
+        return $this->lat;
+    }
+
+    /**
+     * Set lng
+     *
+     * @param string $lng
+     * @return Property
+     */
+    public function setLng($lng)
+    {
+        $this->lng = $lng;
+
+        return $this;
+    }
+
+    /**
+     * Get lng
+     *
+     * @return string 
+     */
+    public function getLng()
+    {
+        return $this->lng;
+    }
+
+    /**
+     * Set map_center_lat
+     *
+     * @param string $mapCenterLat
+     * @return Property
+     */
+    public function setMapCenterLat($mapCenterLat)
+    {
+        $this->map_center_lat = $mapCenterLat;
+
+        return $this;
+    }
+
+    /**
+     * Get map_center_lat
+     *
+     * @return string 
+     */
+    public function getMapCenterLat()
+    {
+        return $this->map_center_lat;
+    }
+
+    /**
+     * Set map_center_lng
+     *
+     * @param string $mapCenterLng
+     * @return Property
+     */
+    public function setMapCenterLng($mapCenterLng)
+    {
+        $this->map_center_lng = $mapCenterLng;
+
+        return $this;
+    }
+
+    /**
+     * Get map_center_lng
+     *
+     * @return string 
+     */
+    public function getMapCenterLng()
+    {
+        return $this->map_center_lng;
     }
 }

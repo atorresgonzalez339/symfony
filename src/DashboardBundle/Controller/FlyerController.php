@@ -149,5 +149,31 @@ class FlyerController extends BaseController
 
     }
 
+    /**
+     * @Route("/flyer/image_base64", name="flyer_image_base64")
+     */
+    public function getImageBase64Action(Request $request){
 
+      $cloudinaryApi = $this->get('speicher210_cloudinary.api');
+
+      $photoId = $request->get('photoId');
+      $width = $request->get('width');
+      $height = $request->get('height');
+      $crop = $request->get('crop');
+      $format = $request->get('format');
+
+      $img = $cloudinaryApi->resource($photoId, array(
+        'width' => $width,
+        'height' => $height,
+        'crop' => $crop,
+        'format' => $format
+      ));
+
+      $thumb = \PhpThumb_Factory::create($img['url']);
+      $data = "data:image/png;base64,";
+      $data .= base64_encode($thumb->getImageAsString());
+
+      return new JsonResponse(array('img' => $data));
+
+    }
 }

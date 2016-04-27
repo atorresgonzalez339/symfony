@@ -154,7 +154,7 @@
                         <tr>
                             <td>
                                 <div data-element="image_crop">
-                                    <img data-id="{{ uniqueId('flyer_') }}" style="display: none;" src="{{photos.first.photoUrl | imgToBase64 }}">
+                                    <img data-id="{{ uniqueId('flyer_') }}" style="display: none;" src="{{ photos.0.photoId | cloudinary_url({'crop':'mfit', 'width':600, 'height':300, 'format':'png'}) | imgToBase64 }}">
                                     <div class="cropit-image-preview" style="width: 100%; height: 300px"></div>
                                 </div>
                             </td>
@@ -211,7 +211,7 @@
                                                 <tr>
                                                     <td style="text-align: center; padding: 0 10px;">
                                                         <div data-element="image_crop" style="display: inline-block;">
-                                                            <img data-id="{{ uniqueId('flyer_') }}" style="display: none;" src="{{photos.1.photoUrl | imgToBase64 }}">
+                                                            <img data-id="{{ uniqueId('flyer_') }}" style="display: none;" src="{{ photos.1.photoId | cloudinary_url({'crop':'mfit', 'width': 200, 'height':200, 'format':'png'}) | imgToBase64 }}">
                                                             <div class="cropit-image-preview" style="width: 200px; height: 200px;"></div>
                                                         </div>
                                                     </td>
@@ -231,7 +231,7 @@
                                                 <tr>
                                                     <td style="text-align: center; padding: 0 10px;">
                                                         <div data-element="image_crop" style="display: inline-block;">
-                                                            <img data-id="{{ uniqueId('flyer_') }}" style="display: none;" src="{{photos.0.photoUrl | imgToBase64 }}">
+                                                            <img data-id="{{ uniqueId('flyer_') }}" style="display: none;" src="{{ photos.0.photoId | cloudinary_url({'crop':'mfit', 'width': 200, 'height':200, 'format':'png'}) | imgToBase64 }}">
                                                             <div class="cropit-image-preview" style="width: 200px; height: 200px;"></div>
                                                         </div>
                                                     </td>

@@ -41,6 +41,12 @@ class FlyerType extends AbstractType {
             ->add('map_zoom', 'hidden', array(
                 'required' => false,
             ))
+            ->add('map_center_lat', 'hidden', array(
+              'required' => false,
+            ))
+            ->add('map_center_lng', 'hidden', array(
+              'required' => false,
+            ))
             ->add('html_edit', 'hidden', array(
                 'required' => false,
             ))
