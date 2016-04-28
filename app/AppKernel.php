@@ -20,7 +20,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Fresh\DoctrineEnumBundle\FreshDoctrineEnumBundle(),
             new JMS\AopBundle\JMSAopBundle(),
-//            new Hip\MandrillBundle\HipMandrillBundle(),
+            new Hip\MandrillBundle\HipMandrillBundle(),
             new APY\DataGridBundle\APYDataGridBundle(),
             new AppBundle\AppBundle(),
             new UserBundle\UserBundle(),
