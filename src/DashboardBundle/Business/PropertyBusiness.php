@@ -94,6 +94,8 @@ class PropertyBusiness extends BaseBusiness {
       $property->setPostalCode($data['address']['postalCode']);
       $property->setLat($data['geo']['lat']);
       $property->setLng($data['geo']['lng']);
+      $property->setMapCenterLat($data['geo']['lat']);
+      $property->setMapCenterLng($data['geo']['lng']);
 
       if(!empty($data['photos'])){
         foreach($data['photos'] as $photo){
@@ -107,10 +109,6 @@ class PropertyBusiness extends BaseBusiness {
 
       $this->saveProperty($property);
       return $property;
-    }
-
-    public function uploadImg($img = null){
-      return $uploader->upload($img, array('folder' => 'eblast'));
     }
 
     public function removePhoto(Property $property, $photo_id){

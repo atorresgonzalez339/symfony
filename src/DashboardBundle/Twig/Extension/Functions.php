@@ -32,6 +32,7 @@ class Functions extends \Twig_Extension {
             'hasSession' => new \Twig_Function_Method($this, 'hasSession'),
             'removeSession' => new \Twig_Function_Method($this, 'removeSession'),
             'setSession' => new \Twig_Function_Method($this, 'setSession'),
+            'uniqueId' => new \Twig_Function_Method($this, 'uniqueId'),
         );
     }
 
@@ -55,9 +56,18 @@ class Functions extends \Twig_Extension {
         return $session->set($key,$value);
     }
 
+    public function uniqueId($prefix){
+        if($prefix){
+           return $prefix . uniqid();
+        }
+
+        return uniqid();
+    }
+
     public function getFilters() {
         return array(
             'parseInt' => new \Twig_Filter_Method($this, 'parseInt'),
+            'imgToBase64' => new \Twig_Filter_Method($this, 'imgToBase64')
         );
     }
 
@@ -68,6 +78,12 @@ class Functions extends \Twig_Extension {
 
     public function parseInt($cadena) {
         return (int) $cadena;
+    }
+
+    public function imgToBase64($src){
+        $thumb = \PhpThumb_Factory::create($src);
+        $data = "data:image/png;base64,";
+        return $data . base64_encode($thumb->getImageAsString());
     }
 }
 

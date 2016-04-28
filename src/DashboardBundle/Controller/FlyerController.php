@@ -14,6 +14,13 @@ use DashboardBundle\Entity\Flyer;
 
 class FlyerController extends BaseController
 {
+    private $serviceName = 'dashboard.flyer.business';
+
+    public function getBusiness()
+    {
+      return parent::findBusiness($this->serviceName);
+    }
+
     /**
      * @Route("/flyer", name="flyer_index")
      */
@@ -57,7 +64,6 @@ class FlyerController extends BaseController
                       ->find($flyer_id);
         $property = $flyer->getProperty();
         $template = $flyer->getTemplate();
-
       }
       else{
         $property_id = $request->get('property_id');
@@ -71,21 +77,26 @@ class FlyerController extends BaseController
           ->getRepository('DashboardBundle:Template')
           ->find($template_id);
 
-        $flyer = new Flyer($user, $property);
+        $flyer = new Flyer($user, $property, $template);
       }
 
       $flyer_form = $this->createForm(FlyerType::class, $flyer);
 
       $photos = $property->getPhotos();
 
-      $flyer_view = $this->renderView('DashboardBundle:Themes:default.html.twig', array(
-        'property' => $property,
-        'photos' => $photos,
-        'flyer' => $flyer,
-        'title' => $property->getName() ? $property->getName() : 'Title Here',
-        'subtitle' => 'Subtitle Here',
-        'address' => $property->getAddress() ? $property->getAddress() : 'Address Here'
-      ));
+      if($flyer->getId()){
+        $flyer_view = $flyer->getHtmlEdit();
+      }
+      else{
+        $flyer_view = $this->renderView('DashboardBundle:Themes:default2.html.twig', array(
+          'property' => $property,
+          'photos' => $photos,
+          'flyer' => $flyer,
+          'title' => $property->getName() ? $property->getName() : 'Title Here',
+          'subtitle' => 'Subtitle Here',
+          'address' => $property->getAddress() ? $property->getAddress() : 'Address Here'
+        ));
+      }
 
       return $this->render('DashboardBundle:Flyer:design.html.twig', array(
         'flyer' => $flyer,
@@ -102,8 +113,67 @@ class FlyerController extends BaseController
      * @Route("/flyer/save", name="flyer_save")
      */
     public function save(Request $request){
-      die('aki');
+
+      $user = $this->getUser();
+
+      $property_id = $request->get('property_id');
+      $template_id = $request->get('template_id');
+      $flyer_id = $request->get('flyer_id');
+
+      $property = $this->getDoctrine()
+        ->getRepository('DashboardBundle:Property')
+        ->find($property_id);
+
+      $template = $this->getDoctrine()
+        ->getRepository('DashboardBundle:Template')
+        ->find($template_id);
+
+      if($flyer_id){
+        $flyer = $this->getDoctrine()
+          ->getRepository('DashboardBundle:Flyer')
+          ->find($flyer_id);
+      }
+      else{
+        $flyer = new Flyer($user, $property, $template);
+      }
+
+      $flyer_form = $this->createForm(FlyerType::class, $flyer);
+      $flyer_form->handleRequest($request);
+
+      if($flyer_form->isValid()){
+        $this->getBusiness()->saveFlyer($flyer);
+        return $this->redirectToRoute('flyer_index');
+      }
+
+      die('invalid');
+
     }
 
+    /**
+     * @Route("/flyer/image_base64", name="flyer_image_base64")
+     */
+    public function getImageBase64Action(Request $request){
 
+      $cloudinaryApi = $this->get('speicher210_cloudinary.api');
+
+      $photoId = $request->get('photoId');
+      $width = $request->get('width');
+      $height = $request->get('height');
+      $crop = $request->get('crop');
+      $format = $request->get('format');
+
+      $img = $cloudinaryApi->resource($photoId, array(
+        'width' => $width,
+        'height' => $height,
+        'crop' => $crop,
+        'format' => $format
+      ));
+
+      $thumb = \PhpThumb_Factory::create($img['url']);
+      $data = "data:image/png;base64,";
+      $data .= base64_encode($thumb->getImageAsString());
+
+      return new JsonResponse(array('img' => $data));
+
+    }
 }

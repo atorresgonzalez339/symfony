@@ -78,6 +78,7 @@ class PropertyController extends BaseController
       $property->setName('New Property');
       $this->getBusiness()->saveProperty($property);
       $property_id = $property->getId();
+      return $this->redirectToRoute('properties_design', array('property_id' => $property_id));
     }
 
     $property_form = $this->createForm(PropertyType::class, $property);

@@ -39,6 +39,9 @@ class PropertyType extends AbstractType
             ->add('postal_code')
             ->add('lat', 'hidden')
             ->add('lng', 'hidden')
+            ->add('map_center_lat', 'hidden')
+            ->add('map_center_lng', 'hidden')
+            ->add('map_zoom', 'hidden')
             ->add('list_price')
         ;
     }

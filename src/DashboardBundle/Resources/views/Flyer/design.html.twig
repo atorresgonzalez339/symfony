@@ -5,11 +5,6 @@
   .cropit-image-preview {
     background-color: #f8f8f8;
     background-size: cover;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    margin-top: 7px;
-    width: 600px;
-    height: 250px;
     cursor: move;
   }
   .cropit-image-background {
@@ -26,12 +21,23 @@
     margin-top: 10px;
   }
 
-  textarea{
+  #flyer-design textarea{
     padding: 0px!important;
     text-indent: 0px!important;
     box-sizing: content-box!important;
     box-shadow: none!important;
   }
+
+  .cropit-image-preview {
+     border: 0px;
+     border-radius: 0px;
+     margin-top: 0px;
+  }
+  .flyer-btn-floating{
+    float: right;
+    margin: 10px;
+  }
+
 </style>
 <div class="row">
   <div class="col s7">
@@ -39,37 +45,75 @@
       <div class="title">
         <h5>Flyer Design</h5>
       </div>
-      <div class="content">
-        <div style="width: 600px">
+      <div class="content" id="flyer-design">
+        {% if(flyer.id) %}
           {{flyer_view | raw}}
-        </div>
+        {% else %}
+          <div style="width: 600px;">
+            {{flyer_view | raw}}
+          </div>
+        {% endif %}
       </div>
-      <button class="export">Export</button>
     </div>
   </div>
   <div class="col s5">
+    {{ form_start(flyer_form, {'action': path('flyer_save', {'property_id':property.id, 'template_id':template.id, 'flyer_id':flyer.id}), 'method': 'POST'}) }}
     <div class="card">
       <div class="title">
-        <h5>Flyer Information</h5>
+        <h5>Flyer</h5>
       </div>
       <div class="content">
          {{ form_row(flyer_form.name) }}
+        <div style="margin-top: 15px">
+          <button id="btn-save" class="btn btn-primary">Save</button>
+          <button id="btn-preview" class="btn btn-primary">Preview</button>
+        </div>
       </div>
     </div>
     <div class="card">
       <div class="title">
-        <h5>Email Information</h5>
+        <h5>Email</h5>
       </div>
       <div class="content">
+        {{ form_row(flyer_form.subject) }}
+        {{ form_row(flyer_form.message) }}
         {{ form_row(flyer_form.sender_name) }}
         {{ form_row(flyer_form.email) }}
         {{ form_row(flyer_form.email_reply) }}
-        {{ form_row(flyer_form.subject) }}
-        {{ form_row(flyer_form.message) }}
       </div>
     </div>
+
+        {# Flyer Hidden Fields #}
+
+        {{ form_row(flyer_form.address) }}
+        {{ form_row(flyer_form.lat) }}
+        {{ form_row(flyer_form.lng) }}
+        {{ form_row(flyer_form.map_zoom) }}
+        {{ form_row(flyer_form.map_center_lat) }}
+        {{ form_row(flyer_form.map_center_lng) }}
+        {{ form_row(flyer_form.html) }}
+        {{ form_row(flyer_form.html_edit) }}
+
+        {# End Hidden Fields #}
+  {{ form_end(flyer_form) }}
   </div>
 </div>
+
+<!-- Modal Flyer Preview Structure -->
+<div id="flyer-photos-modal" class="modal modal-fixed-footer">
+  <div class="modal-content">
+    {% for photo in photos %}
+      <a href="#" class="flyer-img-change" data-photo="{{ photo.photoId }}">
+        <img src="{{ photo.photoId | cloudinary_url({'crop':'fill', 'width':232, 'height':145, 'format':'png'}) }}" alt="">
+      </a>
+    {% endfor %}
+  </div>
+  <div class="modal-footer">
+    <button href="#!" id="stripe-modal-cancel" class="modal-action modal-close waves-effect waves-red btn-flat ">Close</button>
+  </div>
+</div>
+
+
 {% endblock content %}
 
 {% block javascripts %}
@@ -90,8 +134,10 @@
 
   <script>
 
+    var globalCSS = $("<style> html,body {Margin: 0 !important;padding: 0 !important;height: 100% !important;width: 100% !important;}</style>");
+
     function cropImages(){
-      var crop_images = $('.image-editor');
+      var crop_images = $('[data-element="image_crop"]');
       var result = [];
       for(var i = 0; i < crop_images.length; i++){
         var crop_image = $(crop_images[i]);
@@ -101,11 +147,31 @@
       return result;
     }
 
-    $(document).ready(function(){
+    function getStaticMap(){
+      var API_KEY = 'AIzaSyAq79pyvHq180n5gCKCInBPpU3w-fTtFHQ';
+      var host = 'https://maps.googleapis.com/maps/api/staticmap';
 
-      $.cloudinary.config({ cloud_name: 'dnm1l8ric', api_key: '146447182555489'})
+      var flyer_map_center = map.getCenter().lat() + ',' + map.getCenter().lng();
+      var flyer_map_marker = marker.getPosition().lat() + ',' + marker.getPosition().lng();
+      var flyer_map_zoom = map.getZoom();
+      var flyer_map_type = map.getMapTypeId();
 
-      $('.image-editor').each(function(index, value){
+      var params = {
+        center: flyer_map_center,
+        markers:flyer_map_marker,
+        zoom: flyer_map_zoom,
+        size: '600x200',
+        maptype: flyer_map_type,
+        key: API_KEY
+      };
+      params = $.param(params);
+      return host + '?' + params;
+    }
+
+    function setImagesForCrop(){
+      $.cloudinary.config({ cloud_name: 'dnm1l8ric', api_key: '146447182555489'});
+
+      $('[data-element="image_crop"]').each(function(index, value){
         var elm = $(value);
         var img_src = elm.find('img').attr('src');
         elm.cropit({
@@ -114,15 +180,117 @@
           }
         });
       });
+    }
 
-      $('.export').click(function() {
-        var post_data = {};
-        post_data.images = cropImages();
-        console.log(post_data);
+    function setMap(){
+      if ($('[data-element="map"]').length != 0) {
+        var mapParams = {
+          lat: {{ flyer.lat}},
+          lng: {{ flyer.lng}},
+          center_lat: {{ flyer.mapCenterLat }},
+          center_lng: {{ flyer.mapCenterLng }},
+          zoom: {{ flyer.mapZoom }},
+          map_input_id: 'flyer_address',
+          map_input_lat_id: 'flyer_lat',
+          map_input_lng_id: 'flyer_lng',
+          map_input_zoom_id: 'flyer_map_zoom',
+          map_input_center_lat_id: 'flyer_map_center_lat',
+          map_input_center_lng_id: 'flyer_map_center_lng',
+          show_marker: '{{ flyer.lat and flyer.lng ? 'true'}}'
+        };
+        google.maps.event.addDomListener(window, 'load', initialize(mapParams));
+      }
+    }
+
+    function generateFlyerHtml(html_flyer){
+      {# Replace Images in HTLM Flyer #}
+      var crop_images = cropImages();
+      var replace_images = html_flyer.find('img[data-id]');
+      replace_images.each(function(index, value){
+        var img = $(value);
+        img.attr('src', crop_images[index]);
+        img.css('display', '');
+        if(img.parent().data('element') == 'image_crop'){
+          var box = img.parent();
+          box.parent().append(img);
+          box.remove();
+        }
       });
+      {# End #}
 
+      {# Replace Map in HTLM Flyer #}
+      var map_image_src = getStaticMap();
+      var map_container = html_flyer.find('[data-element="map"]');
+
+      if(map_container.length){
+        var flyer_map_image = $('<img data-element="map_image">').attr('src', map_image_src);
+        flyer_map_image.appendTo(map_container.parent());
+        map_container.remove();
+      }
+      else{
+        var currentMapImg = html_flyer.find('[data-element="map_image"]');
+        currentMapImg.attr('src', map_image_src);
+      }
+      {# End #}
+    }
+
+    function generateFlyerHtmlEdit(html_flyer, html_edit){
+      {# Replace HTML EDIT #}
+      html_flyer.find('[data-id]').each(function(index, value){
+        var elm = $(value);
+        var dataId = elm.data('id');
+        var replaceElm = html_edit.find('[data-id="' + dataId + '"]');
+        if(replaceElm.is('img') && elm.is('img')){
+          replaceElm.attr('src', elm.attr('src'))
+        }
+        else{
+          replaceElm.html(elm.html());
+        }
+      });
+      {# End #}
+    }
+
+    function placeEditButtons(){
+      $('[data-element="image_crop"]').each(function(index, value){
+        var element = $(value);
+        var btnEdit = $('<a class="btn-floating flyer-btn-floating btn-small"><i class="large mdi-editor-mode-edit"></i></a>')
+        btnEdit.click(function(){
+          $('.flyer-img-change').unbind('click');
+          $('.flyer-img-change').click(function(e){
+            e.preventDefault();
+
+            var paramsImg = {
+              photoId: $(this).data('photo'),
+              width: element.find('.cropit-image-preview').css('width').replace(/\D/g,''),
+              height: element.find('.cropit-image-preview').css('height').replace(/\D/g,''),
+              crop: 'mfit',
+              format: 'png'
+            };
+
+            getServerImage(paramsImg, function(imgCloud){
+              element.cropit('imageSrc', imgCloud);
+              element.find('.cropit-image-preview').css('background-image', "url(" + imgCloud + ")");
+              element.find('img[data-id]').attr('src', imgCloud);
+              $('#flyer-photos-modal').closeModal();
+            })
+          });
+          $('#flyer-photos-modal').openModal();
+        });
+        element.prepend(btnEdit);
+      })
+    }
+
+    function getServerImage(params, callback){
+      $.get('{{ path('flyer_image_base64') }}', params, function(data){
+        callback(data.img);
+      })
+    }
+
+    function bindChangeFlyerTexts(){
       $('[data-type="flyer_text"]').click(function(){
+
         var flyer_text = $(this);
+        var flyer_text_new = flyer_text.clone();
 
         if(flyer_text.data('element') == 'input') {
           var input = $('<input type="text">');
@@ -132,37 +300,71 @@
         }
 
         input.css('font-size', flyer_text.css('font-size'));
+        input.css('font-family', flyer_text.css('font-family'));
+        input.css('line-height', flyer_text.css('line-height'));
         input.css('height', flyer_text.css('height'));
-        input.css('text-align', flyer_text.data('align'));
-        input.css('margin', flyer_text.data('margin'));
-        input.css('padding', flyer_text.data('padding'));
+        input.css('text-align', flyer_text.css('text-align'));
+        input.css('margin', flyer_text.css('margin'));
+        input.css('padding', flyer_text.css('padding'));
 
         input.blur(function(){
-          flyer_text.removeClass('hide');
-          flyer_text.html(input.val().replace(/\r\n|\n|\r/g, '<br>'));
-          input.remove();
+          flyer_text_new.html(input.val().replace(/\r\n|\n|\r/g, '<br>'));
+          input.change();
+          input.replaceWith(flyer_text_new);
+          bindChangeFlyerTexts();
         });
 
-        input.val($(flyer_text).html().replace(/<br>/g, "\n").trim());
-        input.appendTo(flyer_text.parent());
-        flyer_text.addClass('hide');
+        {# Change Inputs when change flyer element #}
+        var dataRel = flyer_text.data('rel');
+        input.change(function(){
+          $('#' + dataRel).val($(this).val());
+        });
+        {# End #}
+
+        {# Replace new lines characters #}
+        input.val(flyer_text.text().trim().replace(/<br>/g, "\n"));
+        flyer_text.replaceWith(input);
         input.focus();
+        {# En #}
+      });
+    }
+
+    $(document).ready(function(){
+
+      var html_edit = $('#flyer-design').clone();
+      var html_flyer = $('#flyer-design').clone();
+
+      setImagesForCrop();
+      setMap();
+      placeEditButtons();
+
+      $('#btn-save').click(function(e) {
+        e.preventDefault();
+
+        generateFlyerHtml(html_flyer);
+        generateFlyerHtmlEdit(html_flyer, html_edit);
+
+        {# Set Inputs Values #}
+        $('#flyer_html').val(html_flyer.html());
+        $('#flyer_html_edit').val(html_edit.html());
+        {# End #}
+
+        $('form[name="flyer"]').submit();
       });
 
-      {# MAP #}
+      $('#btn-preview').click(function(e) {
+        e.preventDefault();
+        generateFlyerHtml(html_flyer);
+        {# Show a preview in a new tab #}
+        var w = window.open();
+        var html = html_flyer.html();
+        $(w.document.body).html(html);
+        $(w.document.body).find('style').appendTo($(w.document.head));
+        $(w.document.body).find('style').remove();
+        $(w.document.head).prepend(globalCSS);
+      });
 
-      if ($('[data-map="true"]').length != 0) {
-        var lat = {{ property.lat ? property.lat : '25.7823072' }};
-        var lng = {{ property.lng ? property.lng : '-80.3011208' }};
-        var map_input_id = 'property_address';
-        var map_input_lat_id = 'property_lat';
-        var map_input_lng_id = 'property_lng';
-        var show_marker = '{{ property.lat and property.lng ? 'true'}}';
-        google.maps.event.addDomListener(window, 'load', initialize(lat, lng,
-                map_input_id, map_input_lat_id, map_input_lng_id, show_marker));
-      }
-
-      {# END MAP #}
+      bindChangeFlyerTexts();
 
     });
   </script>

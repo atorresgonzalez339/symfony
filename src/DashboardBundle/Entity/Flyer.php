@@ -14,13 +14,27 @@ use UserBundle\Entity\User;
 class Flyer
 {
 
-    public function __construct(User $user, Property $property){
+    public function __construct(User $user, Property $property, Template $template){
         $this->user = $user;
         $this->creation_date = new \DateTime();
         $this->modification_date = $this->creation_date;
+        $this->property = $property;
+        $this->template = $template;
+        $this->total_sent = 0;
+
+        //Binding Flyer with Property
+        $this->email = $user->getProfile()->getEmail();
+        $this->sender_name = $user->getProfile()->getFullName();
+        $this->email_reply = $user->getProfile()->getEmail();
+        $this->address = $property->getAddress();
         $this->map_active = true;
+        $this->lat = $property->getLat();
+        $this->lng = $property->getLng();
+        $this->map_zoom = $property->getMapZoom();
+        $this->map_center_lat = $property->getMapCenterLat();
+        $this->map_center_lng = $property->getMapCenterLng();
     }
-    
+
 	/**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -47,14 +61,8 @@ class Flyer
     private $template;
 
     /**
-     * @ORM\ManyToOne(targetEntity="FlyerStatus")
-     * @ORM\JoinColumn(name="status_id", referencedColumnName="id")
-     */
-    private $status;
-
-    /**
      * @ORM\Column(type="string", nullable=false)
-     * @GRID\Column(field="name", type="text" , filterable=true, title="Name",size=25)
+     * @GRID\Column(field="name", type="text" , filterable=true, title="Name",size=25, operatorsVisible=false)
      */
     private $name;
 
@@ -62,6 +70,11 @@ class Flyer
      * @ORM\Column(type="text", nullable=false)
      */
     private $html;
+
+    /**
+     * @ORM\Column(type="text", nullable=false)
+     */
+    private $html_edit;
 
     /**
      * @ORM\Column(type="datetime", nullable=false)
@@ -89,7 +102,7 @@ class Flyer
     private $address;
 
     /**
-     * @ORM\Column(type="boolean", options={"default":true})
+     * @ORM\Column(type="boolean")
      * @GRID\Column(field="map_active", type="boolean" , filterable=false, title="Map active",size=25, sortable=false)
      */
     private $map_active;
@@ -100,13 +113,8 @@ class Flyer
     private $map_zoom;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
-     */
-    private $map_marker;
-
-    /**
      * @ORM\Column(type="string", nullable=false)
-     * @GRID\Column(field="sender_name", type="textext" , filterable=true, title="Locale", size=25, class="grey-text")
+     * @GRID\Column(field="sender_name", type="textext" , filterable=true, title="Locale", size=25, class="grey-text", operatorsVisible=false)
      */
     private $sender_name;
 
@@ -117,7 +125,7 @@ class Flyer
 
     /**
      * @ORM\Column(type="string", nullable=false)
-     * @GRID\Column(field="email", type="text" , filterable=true, title="Email",size=25)
+     * @GRID\Column(field="email", type="text" , filterable=true, title="Email",size=25, operatorsVisible=false)
      */
     private $email;
 
@@ -130,6 +138,26 @@ class Flyer
      * @ORM\Column(type="smallint", nullable=false)
      */
     private $total_sent;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    protected $lat;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    protected $lng;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $map_center_lat;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $map_center_lng;
 
     /**
      * Get id
@@ -349,29 +377,6 @@ class Flyer
     }
 
     /**
-     * Set map_marker
-     *
-     * @param float $mapMarker
-     * @return Flyer
-     */
-    public function setMapMarker($mapMarker)
-    {
-        $this->map_marker = $mapMarker;
-
-        return $this;
-    }
-
-    /**
-     * Get map_marker
-     *
-     * @return float 
-     */
-    public function getMapMarker()
-    {
-        return $this->map_marker;
-    }
-
-    /**
      * Set sender_name
      *
      * @param string $senderName
@@ -556,25 +561,117 @@ class Flyer
     }
 
     /**
-     * Set status
+     * Set lat
      *
-     * @param \DashboardBundle\Entity\FlyerStatus $status
+     * @param float $lat
      * @return Flyer
      */
-    public function setStatus(\DashboardBundle\Entity\FlyerStatus $status = null)
+    public function setLat($lat)
     {
-        $this->status = $status;
+        $this->lat = $lat;
 
         return $this;
     }
 
     /**
-     * Get status
+     * Get lat
      *
-     * @return \DashboardBundle\Entity\FlyerStatus 
+     * @return float 
      */
-    public function getStatus()
+    public function getLat()
     {
-        return $this->status;
+        return $this->lat;
+    }
+
+    /**
+     * Set lng
+     *
+     * @param float $lng
+     * @return Flyer
+     */
+    public function setLng($lng)
+    {
+        $this->lng = $lng;
+
+        return $this;
+    }
+
+    /**
+     * Get lng
+     *
+     * @return float 
+     */
+    public function getLng()
+    {
+        return $this->lng;
+    }
+
+    /**
+     * Set html_edit
+     *
+     * @param string $htmlEdit
+     * @return Flyer
+     */
+    public function setHtmlEdit($htmlEdit)
+    {
+        $this->html_edit = $htmlEdit;
+
+        return $this;
+    }
+
+    /**
+     * Get html_edit
+     *
+     * @return string 
+     */
+    public function getHtmlEdit()
+    {
+        return $this->html_edit;
+    }
+
+    /**
+     * Set map_center_lat
+     *
+     * @param string $mapCenterLat
+     * @return Flyer
+     */
+    public function setMapCenterLat($mapCenterLat)
+    {
+        $this->map_center_lat = $mapCenterLat;
+
+        return $this;
+    }
+
+    /**
+     * Get map_center_lat
+     *
+     * @return string 
+     */
+    public function getMapCenterLat()
+    {
+        return $this->map_center_lat;
+    }
+
+    /**
+     * Set map_center_lng
+     *
+     * @param string $mapCenterLng
+     * @return Flyer
+     */
+    public function setMapCenterLng($mapCenterLng)
+    {
+        $this->map_center_lng = $mapCenterLng;
+
+        return $this;
+    }
+
+    /**
+     * Get map_center_lng
+     *
+     * @return string 
+     */
+    public function getMapCenterLng()
+    {
+        return $this->map_center_lng;
     }
 }
