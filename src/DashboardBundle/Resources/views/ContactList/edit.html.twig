@@ -206,26 +206,47 @@
               var providerType = $('li.collection-item.active').data('email');
               var dataArray = Array();
               var requestArray = Array();
+              console.info(contacts)
               for(var i = 0;i < contacts.length;i++){
                 value = contacts[i];
                 switch(providerType){
                   case 'topproducer':
-                    dataEmail = value[17];
-                    dataName = value[4];
-                    dataLastName = value[5];
+                    if(i!=0){
+                      if(value[17]!=undefined){
+                        dataEmail = value[17];
+                        dataName = value[4];
+                        dataLastName = value[5];
+                        middleName    = '';
+                        var itemContact = {firstName:dataName,lastName:dataLastName,email:dataEmail,middleName:middleName};
+                        dataArray.push(itemContact);
+                      }
+                    }
                     break;
                   case 'mailchimp':
-                    dataEmail = value[0];
-                    dataName = value[1];
-                    dataLastName = value[2];
+                    if(i!=0){
+                      if(value[0]!=undefined){
+                        dataEmail = value[0];
+                        dataName = value[1];
+                        dataLastName = value[2];
+                        middleName    = '';
+                        var itemContact = {firstName:dataName,lastName:dataLastName,email:dataEmail,middleName:middleName};
+                        dataArray.push(itemContact);
+                      }
+                    }
                     break;
                   case 'outlook':
-                    dataEmail = value[46];
-                    dataName = value[1];
-                    dataLastName = value[3];
+                    if(i!=0){
+                      if(value[46]!=undefined){
+                        dataEmail = value[46];
+                        dataName = value[1];
+                        dataLastName = value[3];
+                        middleName    = '';
+                        var itemContact = {firstName:dataName,lastName:dataLastName,email:dataEmail,middleName:middleName};
+                        dataArray.push(itemContact);
+                      }
+                    }
                     break;
                   case 'constantcontact':
-
                     if(i!=0){
                       if(value[2]!=undefined){
                         dataEmail     = value[2];
@@ -236,7 +257,6 @@
                         dataArray.push(itemContact);
                       }
                     }
-
                     break;
                   case 'gmail':
                     if(i!=0){
