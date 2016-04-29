@@ -159,11 +159,15 @@ class ContactListController extends BaseController{
         $grid->setLimits(array(10));
         $idContacts = $this->findBusiness('dashboard.contact.business')->getIdContactByIdContactList($idSelected);
 
+        $idUser = $this->getUserAuthenticated()->getId();
+
         if($idContacts){
             $tableAlias = $source->getTableAlias();
             $source->manipulateQuery(
-              function ($query) use ($tableAlias,$idContacts) {
-                  $query->andWhere($tableAlias.'.id NOT IN(:ids)' )
+              function ($query) use ($tableAlias,$idContacts,$idUser) {
+                  $query->leftJoin($tableAlias.'.user', 'u')
+                        ->andWhere($tableAlias.'.id NOT IN(:ids)')
+                        ->andWhere('u.id = '.$idUser)
                         ->addOrderBy($tableAlias.'.id', 'DESC')
                         ->setParameter(':ids', $idContacts);
               }
@@ -178,9 +182,11 @@ class ContactListController extends BaseController{
         $grid2->setLimits(array(10));
         $tableAlias2 = $source2->getTableAlias();
         $source2->manipulateQuery(
-            function ($query) use ($tableAlias2,$idSelected) {
+            function ($query) use ($tableAlias2,$idSelected,$idUser) {
                 $query->leftJoin($tableAlias2.'.contactList', 'cl')
+                      ->leftJoin($tableAlias2.'.user', 'u')
                       ->andWhere('cl.id = '.$idSelected )
+                      ->andWhere('u.id = '.$idUser)
                       ->addOrderBy($tableAlias2.'.id', 'DESC');
             }
         );
@@ -335,6 +341,7 @@ class ContactListController extends BaseController{
         $formContact->bind($request);
 
         if ($formContact->isValid()) {
+            $entityContact->setUser($this->getUserAuthenticated());
             $this->findBusiness($this->nameService)->saveData($entityContact);
             $result = $this->getBusiness()->addContact($entityContactList,$entityContact);
             $messageInfo = 'New contact added to this list';
@@ -384,6 +391,7 @@ class ContactListController extends BaseController{
             if(strlen($middleName)>0) $names.= ' '.$middleName;
             $entityContact->setFirstName($names);
             $entityContact->setLastName($lastName);
+            $entityContact->setUser($this->getUserAuthenticated());
             $entityContact->setEmail($email);
             $this->findBusiness($this->nameService)->saveData($entityContact);
             $resultArray[] = $this->getBusiness()->addContact($entityContactList,$entityContact);

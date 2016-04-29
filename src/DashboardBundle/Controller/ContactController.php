@@ -33,7 +33,10 @@ class ContactController extends BaseController{
       $tableAlias = $source->getTableAlias();
       $source->manipulateQuery(
         function ($query) use ($tableAlias) {
-            $query->addOrderBy($tableAlias.'.id', 'DESC');
+            $idUser = $this->getUserAuthenticated()->getId();
+            $query->leftJoin($tableAlias.'.user', 'u')
+                  ->andWhere('u.id = '.$idUser)
+                  ->addOrderBy($tableAlias.'.id', 'DESC');
         }
       );
       $grid->setSource($source);
