@@ -7,7 +7,8 @@ parameters:
 
 services:
   dashboard.utils.business:
-    class: DashboardBundle\Business\UtilBusiness
+    class: DashboardBundle\Business\UtilsBusiness
+    parent: common.base.business
     arguments: ["@service_container"]
 
   dashboard.property.business:
@@ -18,6 +19,7 @@ services:
   dashboard.flyer.business:
     class: DashboardBundle\Business\FlyerBusiness
     parent: common.base.business
+    arguments: ["@service_container"]
 
   dashboard.template.business:
     class: DashboardBundle\Business\TemplateBusiness
@@ -35,6 +37,16 @@ services:
   dashboard.contactlist.business:
       class: DashboardBundle\Business\ContactListBusiness
       parent: common.base.business
+
+  dashboard.mandrill.business:
+        class: DashboardBundle\Business\MandrillBusiness
+        parent: common.base.business
+        arguments: ["@service_container"]
+
+  dashboard.sendflyer.business:
+          class: DashboardBundle\Business\SendFlyerBusiness
+          parent: common.base.business
+          arguments: ["@service_container"]
 
   ralf.common.twig.extension.functions:
     class: DashboardBundle\Twig\Extension\Functions

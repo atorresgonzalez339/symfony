@@ -1,0 +1,103 @@
+{% extends 'DashboardBundle:Common:backend2.html.twig' %}
+
+{% block content %}
+<div class="row">
+    <div class="col md12 s12">
+        <div class="card">
+            <div class="title">
+                <h5>Activity</h5>
+            </div>
+            <div class="content">
+                <div class="col s4">
+                    <div class="card-panel orders-card">
+                        {%  set sent_percent = (subaccount.sent_total / subaccount.custom_quota * 100) | number_format(0) %}
+                        <h4>{{ subaccount.sent_total }} / {{ subaccount.custom_quota }}</h4>
+                        <div class="row">
+                            <div class="col s6">
+                                <small>Total Sent</small>
+                            </div>
+                            <div class="col s6 right-align">
+                                {{ sent_percent }}%
+                            </div>
+                        </div>
+                        <div class="progress small">
+                            <div class="determinate" style="width: {{ sent_percent }}%"></div>
+                        </div>
+                        {%  set delivery_percent = (subaccount.last_30_days.sent / subaccount.sent_total * 100) | number_format(0) %}
+                        <h4>{{ subaccount.last_30_days.sent }}</h4>
+                        <div class="row">
+                            <div class="col s6">
+                                <small>Delivered (Last 30 days)</small>
+                            </div>
+                            <div class="col s6 right-align">
+                                {{ delivery_percent }}%
+                            </div>
+                        </div>
+                        <div class="progress small">
+                            <div class="determinate" style="width: {{ delivery_percent }}%"></div>
+                        </div>
+                        {%  set open_percent = (subaccount.last_30_days.unique_opens / subaccount.sent_total * 100) | number_format(0) %}
+                        <h4>{{ subaccount.last_30_days.unique_opens }}</h4>
+                        <div class="row">
+                            <div class="col s6">
+                                <small>Unique Opens (Last 30 days)</small>
+                            </div>
+                            <div class="col s6 right-align">
+                                {{ open_percent }}%
+                            </div>
+                        </div>
+                        <div class="progress small">
+                            <div class="determinate" style="width: {{ open_percent }}%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Flyer</th>
+                            <th>Property</th>
+                            <th>Subject</th>
+                            <th style="text-align: center">Total Sent</th>
+                            <th style="text-align: center">Unique Opens</th>
+                            <th style="text-align: center">Created</th>
+                            <th style="text-align: center">Last sent</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for activity in activities %}
+                            <tr>
+                                <td>{{ activity.flyer.name }}</td>
+                                <td>
+                                    <a href="{{ path('properties_design', {'property_id':activity.flyer.property.id}) }}">
+                                        {{ activity.flyer.property.name }}
+                                    </a>
+                                </td>
+                                <td>{{ activity.flyer.subject }}</td>
+                                <td style="text-align: center">
+                                    0
+                                </td>
+                                <td style="text-align: center">
+                                    0
+                                </td>
+                                <td style="text-align: center">{{ activity.flyer.creationDate | date('M d') }}</td>
+                                <td style="text-align: center">{{ activity.flyer.lastSentDate | date('M d h:i') }}</td>
+                                <td style="text-align: center">
+                                    <a href="{{ path('activity_detail', {'id':activity.flyer.id}) }}">
+                                        Details
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block javascripts %}
+
+{% endblock javascripts%}

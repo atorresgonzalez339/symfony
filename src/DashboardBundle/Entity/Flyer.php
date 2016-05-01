@@ -481,6 +481,13 @@ class Flyer
         return $this;
     }
 
+    public function addTotalSent()
+    {
+        $this->total_sent = $this->total_sent++;
+
+        return $this;
+    }
+
     /**
      * Get total_sent
      *

@@ -115,6 +115,11 @@ class UserProfile
      */
     private $customer_id;
 
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $mandrill_subaccount;
+
 
     /**
      * Get id
@@ -515,4 +520,27 @@ class UserProfile
     }
 
 
+
+    /**
+     * Set mandrill_subaccount
+     *
+     * @param string $mandrillSubaccount
+     * @return UserProfile
+     */
+    public function setMandrillSubaccount($mandrillSubaccount)
+    {
+        $this->mandrill_subaccount = $mandrillSubaccount;
+
+        return $this;
+    }
+
+    /**
+     * Get mandrill_subaccount
+     *
+     * @return string 
+     */
+    public function getMandrillSubaccount()
+    {
+        return $this->mandrill_subaccount;
+    }
 }
