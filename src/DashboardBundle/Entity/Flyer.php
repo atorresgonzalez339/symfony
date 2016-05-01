@@ -125,12 +125,6 @@ class Flyer
 
     /**
      * @ORM\Column(type="string", nullable=false)
-     * @GRID\Column(field="email", type="text" , filterable=true, title="Email",size=25, operatorsVisible=false)
-     */
-    private $email;
-
-    /**
-     * @ORM\Column(type="string", nullable=false)
      */
     private $email_reply;
 
@@ -420,29 +414,6 @@ class Flyer
     public function getSubject()
     {
         return $this->subject;
-    }
-
-    /**
-     * Set email
-     *
-     * @param string $email
-     * @return Flyer
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string 
-     */
-    public function getEmail()
-    {
-        return $this->email;
     }
 
     /**

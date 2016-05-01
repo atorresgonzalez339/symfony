@@ -24,23 +24,27 @@ class ActivityController extends BaseController
    */
   public function indexAction(Request $request)
   {
-
     $mandrillBusiness = $this->get('dashboard.mandrill.business');
+    $activityBusiness = $this->get('dashboard.activity.business');
 
     $user = $this->getUser();
+
     $mandrillSubaccount =  $user->getProfile()->getMandrillSubaccount();
+
     if($mandrillSubaccount){
+
       $subaccount = $mandrillBusiness->getSubAccount($mandrillSubaccount);
-//      echo "<pre>";
-//      print_r($subaccount);
-//      die();
+
       $activities = $this->getDoctrine()
                          ->getRepository('DashboardBundle:Activity')
                          ->findBy(array('user' => $user->getId()));
 
+      $activityChartData = $activityBusiness->getActivityChartData($user, $subaccount);
+
       return $this->render('DashboardBundle:Activity:index.html.twig', array(
         'subaccount' => $subaccount,
-        'activities' => $activities
+        'activities' => $activities,
+        'activity_chart_data' => $activityChartData
       ));
 
     }

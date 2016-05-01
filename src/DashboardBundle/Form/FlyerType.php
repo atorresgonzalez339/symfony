@@ -15,10 +15,6 @@ class FlyerType extends AbstractType {
                 'required' => true,
                 'label' => 'Sender Name',
             ))
-            ->add('email', null, array(
-              'required' => true,
-              'label' => 'Sender email',
-            ))
             ->add('email_reply', null, array(
                 'required' => true,
             ))
