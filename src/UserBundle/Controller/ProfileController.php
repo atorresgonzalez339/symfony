@@ -28,30 +28,43 @@ class ProfileController extends BaseController
 
       $upgradeBusiness = $this->findBusiness('dashboard.upgrade.business');
 
-      $profile = $this->getBusiness()
-                      ->getRepository('User', 'UserProfile')
-                      ->findByUserId($user->getId());
+      $profile = $user->getProfile();
 
-      $cardInfo = $upgradeBusiness->getCardInformation($user);
+      $isNew = false;
 
-      $invoices = $upgradeBusiness->getInvoices($user);
-
-      if(!$profile){
-      	$profile = new UserProfile($user);
+      if(!$profile) {
+        $profile = new UserProfile($user);
+        $isNew = true;
+      }
+      else if(!$profile->getIsCompleted()){
+        $isNew = true;
       }
 
       $profile_form = $this->createForm(ProfileType::class, $profile);
-      $account_form = $this->createForm(AccountType::class, $user);
       $picture_form = $this->createForm(PictureType::class, $profile);
 
-      return $this->render('UserBundle:Profile:index.html.twig', array(
-        'profile' => $profile,
-        'profile_form' => $profile_form->createView(),
-        'account_form' => $account_form->createView(),
-        'picture_form' => $picture_form->createView(),
-        'card_info' => $cardInfo,
-        'invoices' => $invoices
-      ));
+      if($isNew){
+        return $this->render("UserBundle:Profile:required_form.html.twig", array(
+          'profile' => $profile,
+          'profile_form' => $profile_form->createView(),
+          'picture_form' => $picture_form->createView(),
+        ));
+      }
+      else{
+
+        $cardInfo = $upgradeBusiness->getCardInformation($user);
+        $invoices = $upgradeBusiness->getInvoices($user);
+        $account_form = $this->createForm(AccountType::class, $user);
+
+        return $this->render("UserBundle:Profile:index.html.twig", array(
+          'profile' => $profile,
+          'profile_form' => $profile_form->createView(),
+          'account_form' => $account_form->createView(),
+          'picture_form' => $picture_form->createView(),
+          'card_info' => $cardInfo,
+          'invoices' => $invoices
+        ));
+      }
     }
 
     /**

@@ -136,3 +136,57 @@
     </button>
   </div>
 </div>
+
+<script>
+  $(document).ready(function(){
+    // Add & Update Credit Card
+
+    var $form_update_card = $('form#stripe-card-form');
+
+    MyStripe.init({
+      form_selector: '#stripe-card-form'
+    });
+
+    MyStripe.process(function(token){
+      var data = {
+        token: token
+      };
+
+      $.post('{{ path('upgrade_update_card') }}', data, function(result){
+        $('#stripe-modal-accept').prop('disabled', false);
+        $('#stripe-modal-cancel').prop('disabled', false);
+        $('#stripe-modal-spiner').addClass('hide');
+        if(result.status == 'ok'){
+          $('#card_holder').text(result.data.name);
+          $('#card_ended').text('XXXX-XXXX-XXXX-' + result.data.last4);
+          $('#card_brand').text(result.data.brand);
+          App.toast('Credit card updated successfully');
+          $('#stripe-card-modal').closeModal();
+          $form_update_card.trigger("reset");
+        }
+      });
+    }, function(){
+      $('#stripe-modal-accept').prop('disabled', false);
+      $('#stripe-modal-cancel').prop('disabled', false);
+      $('#stripe-modal-spiner').addClass('hide');
+    });
+
+    $('#stripe-show-card-modal').click(function(){
+      var $errors = $form.find('#stripe-payment-errors');
+      $errors.parent().addClass('hide');
+    });
+
+    $('#stripe-modal-cancel').click(function(){
+      $form_update_card.trigger("reset");
+    });
+
+    $('#stripe-modal-accept').click(function(){
+      if($form_update_card[0].checkValidity()){
+        $('#stripe-modal-spiner').removeClass('hide');
+        $('#stripe-modal-accept').prop('disabled', true);
+        $('#stripe-modal-cancel').prop('disabled', true);
+      }
+      $form_update_card.find('#stripe-btn-submit').click();
+    });
+  })
+</script>

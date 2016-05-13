@@ -146,63 +146,21 @@
 			max-width: 100% !important;
 			min-width: 100% !important;
 		}
-    .input-field .prefix~label.active{
-      transform: translateY(-170%) !important;
-      margin-left: 0px;
-    }
-    .input-field > i.prefix{
-      text-indent: 5px;
-      color: #7C7E89;
-    }
-    .input-field > i.prefix + input {
-      text-indent: 40px;
-    }
+		.input-field .prefix~label.active{
+		  transform: translateY(-170%) !important;
+		  margin-left: 0px;
+		}
+		.input-field > i.prefix{
+		  text-indent: 5px;
+		  color: #7C7E89;
+		}
+		.input-field > i.prefix + input {
+		  text-indent: 40px;
+		}
 	</style>
 		<div class="row">
 			<div class="col m3" style="padding-right: 20px;">
-				<div class="card small" id="profile-left-box" style="background-color: #F8F8F8;color: #5E5E5E;">
-					<div class="card-image card-image-profile">
-						{% if profile.photoId %}
-							<img src="{{ profile.photoId | cloudinary_url({'crop':'crop', 'gravity':'face', 'width':400, 'height':400}) }}">
-						{% else %}
-							<img src="{{ asset('bundles/dashboard/images/profile-icon.png') }}">
-						{% endif %}
-					</div>
-					<div class="progress hide" style="height: 3px;margin-top: 0px;margin-bottom: 0px;">
-						<div class="indeterminate"></div>
-					</div>
-					<div class="file-field input-field pmop-edit" style=" margin-top: 0px !important;padding: 0px;">
-						<div class="btn" style="background-color: transparent;">
-							<span><i class="mdi mdi-image-photo-camera left"></i> Update Picture</span>
-							<input name="file" class="cloudinary-fileupload" type="file">
-						</div>
-					</div>
-
-					{# Upload Form #}
-					{{ form_start(picture_form, {'action': path('profile_upload_picture'), 'method': 'POST', 'id':'profile_picture_form'}) }}
-					{{ form_end(picture_form) }}
-					{# End Upload Form #}
-					{#<div class="card-action">#}
-						{#<div class="pmo-block pmo-contact hidden-xs">#}
-							{#<h2>Contact</h2>#}
-
-							{#<ul>#}
-								{#<li><i class="mdi mdi-communication-phone"></i> 00971 12345678 9</li>#}
-								{#<li><i class="mdi mdi-communication-email"></i> malinda-h@gmail.com</li>#}
-								{#<li><i class="fa fa-facebook-official"></i> malinda.hollaway</li>#}
-								{#<li><i class="fa fa-twitter"></i> @malinda (twitter.com/malinda)</li>#}
-								{#<li>#}
-									{#<i class="mdi mdi-communication-location-on"></i>#}
-									{#<address class="m-b-0 ng-binding">#}
-										{#44-46 Morningside Road,<br>#}
-										{#Edinburgh,<br>#}
-										{#Scotland#}
-									{#</address>#}
-								{#</li>#}
-							{#</ul>#}
-						{#</div>#}
-					{#</div>#}
-				</div>
+				{% include 'UserBundle:Profile:Partials/_profile-picture.html.twig' %}
 			</div>
 			<div class="col m9" style="border-left: 1px solid #eee;background-color: #FFFFFF;min-height: 570px;border-bottom: 1px solid #eee;">
 				<div class="row" style="margin-top: 0px">
@@ -214,14 +172,13 @@
 						</ul>
 					</div>
 
-          {#Tab Profile#}
-          {% include 'UserBundle:Profile:Partials/_index-tab-profile-info.html.twig' %}
+					{#Tab Profile#}
+					{% include 'UserBundle:Profile:Partials/_index-tab-profile-info.html.twig' %}
 
-          {#Tab Account Info#}
-          {% include 'UserBundle:Profile:Partials/_index-tab-account-info.html.twig' %}
+					{#Tab Account Info#}
+					{% include 'UserBundle:Profile:Partials/_index-tab-account-info.html.twig' %}
 
-		  {% include 'UserBundle:Profile:Partials/_index-tab-payment-option.html.twig' %}
-
+					{% include 'UserBundle:Profile:Partials/_index-tab-payment-option.html.twig' %}
 				</div>
 			</div>
 		</div>
@@ -251,7 +208,6 @@
 
 	<script>
 		$(document).ready(function(){
-
 			//Initialize
 			var picker = new Pikaday({
 				field: document.getElementById('profile_birth_date'),
@@ -268,113 +224,9 @@
 			});
 
 			$('#edit-profile').click(function(){
-					$('#edit-profile-container').attr('style','display:block');
-					$('#edit-profile-information').attr('style','display:none');
+				$('#edit-profile-container').attr('style','display:block');
+				$('#edit-profile-information').attr('style','display:none');
 			});
-
-			//Upload Profile Picture
-			Cloudinary.init({
-				'preset': 'profile'
-			});
-
-			Cloudinary.uploadDone(function(data){
-				var profile_picture = $.cloudinary.image(data.result.public_id,{
-					format: 'png',
-					width: 400,
-					height: 400,
-					crop: "crop",
-					gravity:"face"
-				});
-				var profile_picture_thumb = $.cloudinary.image(data.result.public_id,{
-					format: 'png',
-					width: 250,
-					height:250,
-					crop: "crop",
-					gravity:"face",
-					radius: 'max'
-				});
-				var profile_img = $('.card-image-profile img');
-				var profile_img_thumb = $('.profile-photo-thumb');
-				var progress = $('#profile-left-box .progress');
-				profile_img.attr('src', profile_picture.first().attr('src')).load(function() {
-					progress.addClass('hide');
-				});
-				profile_img_thumb.attr('src', profile_picture_thumb.first().attr('src'));
-
-				{# Change form data #}
-				var photo_id = $('#picture_photo_id');
-				var photo_url = $('#picture_photo_url');
-
-				photo_id.val(data.result.public_id);
-				photo_url.val(data.result.url);
-
-				{# Upload form by ajax #}
-				var form = photo_url.closest('form');
-				var form_action = form.attr('action');
-
-				var data = form.serialize();
-
-				$.post(form_action, data, function( result ) {
-					console.log(result);
-				});
-			});
-
-			Cloudinary.uploadProgress(function(data){
-				var progress_val = (data.loaded * 100.0) / data.total;
-				var progress = $('#profile-left-box .progress');
-				progress.removeClass('hide');
-			});
-
-			// Add & Update Credit Card
-
-			var $form_update_card = $('form#stripe-card-form');
-
-			MyStripe.init({
-				form_selector: '#stripe-card-form'
-			});
-
-			MyStripe.process(function(token){
-				var data = {
-					token: token
-				};
-
-				$.post('{{ path('upgrade_update_card') }}', data, function(result){
-					$('#stripe-modal-accept').prop('disabled', false);
-					$('#stripe-modal-cancel').prop('disabled', false);
-					$('#stripe-modal-spiner').addClass('hide');
-					if(result.status == 'ok'){
-						$('#card_holder').text(result.data.name);
-						$('#card_ended').text('XXXX-XXXX-XXXX-' + result.data.last4);
-						$('#card_brand').text(result.data.brand);
-						App.toast('Credit card updated successfully');
-						$('#stripe-card-modal').closeModal();
-						$form_update_card.trigger("reset");
-					}
-				});
-			}, function(){
-				$('#stripe-modal-accept').prop('disabled', false);
-				$('#stripe-modal-cancel').prop('disabled', false);
-				$('#stripe-modal-spiner').addClass('hide');
-			});
-
-			$('#stripe-show-card-modal').click(function(){
-				var $errors = $form.find('#stripe-payment-errors');
-				$errors.parent().addClass('hide');
-			});
-
-			$('#stripe-modal-cancel').click(function(){
-				$form_update_card.trigger("reset");
-			});
-
-			$('#stripe-modal-accept').click(function(){
-				if($form_update_card[0].checkValidity()){
-					$('#stripe-modal-spiner').removeClass('hide');
-					$('#stripe-modal-accept').prop('disabled', true);
-					$('#stripe-modal-cancel').prop('disabled', true);
-				}
-				$form_update_card.find('#stripe-btn-submit').click();
-			});
-
 		});
 	</script>
 {% endblock javascripts%}
