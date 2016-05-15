@@ -119,6 +119,7 @@ class FlyerController extends BaseController
       $property_id = $request->get('property_id');
       $template_id = $request->get('template_id');
       $flyer_id = $request->get('flyer_id');
+      $go_to_send = $request->get('go_to_send');
 
       $property = $this->getDoctrine()
         ->getRepository('DashboardBundle:Property')
@@ -142,7 +143,19 @@ class FlyerController extends BaseController
 
       if($flyer_form->isValid()){
         $this->getBusiness()->saveFlyer($flyer);
-        return $this->redirectToRoute('flyer_index');
+
+        if(!$go_to_send){
+          $this->addFlash('success', 'Flyer was saved');
+          return $this->redirectToRoute('flyer_design', array(
+            'flyer_id' => $flyer_id
+          ));
+        }
+        else{
+          return $this->redirectToRoute('send_flyer_preview', array(
+            'flyer_id' => $flyer_id
+          ));
+        }
+
       }
 
       die('invalid');

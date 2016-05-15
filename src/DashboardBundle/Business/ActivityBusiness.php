@@ -17,7 +17,6 @@ class ActivityBusiness extends BaseBusiness {
 
     $dateStart = $userPlan->getDateStart();
     $dateEnd = new \DateTime();
-    $dateEnd->add(new \DateInterval('P1D'));
 
     $dateRanges = new \DatePeriod($dateStart, new \DateInterval('P1D'), $dateEnd);
 

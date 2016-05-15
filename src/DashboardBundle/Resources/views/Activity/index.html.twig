@@ -8,7 +8,7 @@
                 <h5>Activity</h5>
             </div>
             <div class="content">
-                {% if subacount is defined %}
+                {% if subaccount is defined %}
                 {# Include Widgets #}
                 <div class="col s3">
                     {{ include('DashboardBundle:Activity/Partials:_widgets.html.twig') }}
@@ -21,7 +21,7 @@
                 {# Include Activity List #}
                 {{ include('DashboardBundle:Activity/Partials:_activity_list.html.twig') }}
                 {% else %}
-                    <div style="text-align: center">
+                    <div style="te">
                         <h4> Activity not found </h4>
                     </div>
                 {% endif %}
