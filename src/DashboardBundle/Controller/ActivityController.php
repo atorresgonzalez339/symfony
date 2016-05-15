@@ -31,7 +31,7 @@ class ActivityController extends BaseController
 
     $mandrillSubaccount =  $user->getProfile()->getMandrillSubaccount();
 
-    if(!$mandrillSubaccount){
+    if($mandrillSubaccount){
 
       $subaccount = $mandrillBusiness->getSubAccount($mandrillSubaccount);
 
