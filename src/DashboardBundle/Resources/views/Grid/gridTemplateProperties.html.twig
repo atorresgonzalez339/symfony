@@ -120,45 +120,70 @@
               <div class="col m3">
                 <div class="hoverable">
                 <div class="card of-h">
-                  <div class="card-image waves-effect waves-block waves-light card-image-templeate">
+                  <div class="card-image waves-effect waves-block waves-light card-image-templeate" {% if row.entity.photos | length == 0 %}style="box-shadow: 0 1px 0 0 rgba(0,0,0,.1);{% endif %}">
+                    {% if row.entity.photos | length > 0 %}
                     <div class="slider" >
                       <ul class="slides">
-                        {% if row.entity.photos | length > 0 %}
                           {% for photo in row.entity.photos %}
                             <li>
                               <img class="activator" src="{{ photo.photoUrl }}">
                             </li>
                           {% endfor %}
-                        {% else %}
-                          <li>
-                            <img class="activator" src="{{ asset('bundles/dashboard/images/properties/no-image.png') }}">
-                          </li>
-                        {% endif %}
                       </ul>
                     </div>
-                    {#<img class="activator" src="{{ asset('bundles/dashboard/properties/1.jpg') }}">#}
+
+                    {% else %}
+                      {#<li>#}
+                      <img class="activator" src="{{ asset('bundles/dashboard/images/properties/no-image.png') }}" style="min-height: 201px;">
+                      {#</li>#}
+                    {% endif %}
+                    {#<img class="activator" src="{{ asset('bundles/dashboard/images/properties/no-image.png') }}">#}
                   </div>
-                  <div class="content" style=" padding-top: 10px; padding-bottom: 10px;">
+                  <div class="content" style="padding-top: 5px;padding-bottom: 5px;padding-left: 5px;padding-right: 0px;height: 38px;">
                     <span class="card-title activator grey-text text-darken-4" style="font-size: 20px;">
-                      <p style="position: absolute;top: 207px; margin-top: 5px; margin-bottom: 5px;left: 10px;">
+                      <p style="margin-top: 0px;margin-bottom: 0px;">
                         <input type="checkbox" class="filled-in" id="checkbox-{{ row.entity.id }}" name="{{ grid.hash }}[__action][{{ row.primaryFieldValue }}]" value="{{ row.primaryFieldValue }}"/>
-                        <label for="checkbox-{{ row.entity.id }}" style="font-size: 18px;color: #424242">{{ row.entity.name | slice(0, 15) }}</label>
+                        <label for="checkbox-{{ row.entity.id }}" style="font-size: 14px;color: #424242;padding-left: 30px;">{{ row.entity.name | slice(0, 20) }}</label>
                       </p>
                       <i class="mdi-navigation-more-vert right"></i></span>
                   </div>
-                  <div class="card-action card-action-templeate" style="font-size: 12px;background-color: #F0F0EE;padding-bottom: 0px;">
-                    <a href="#!" class="" style="color: #9E9E9E;font-size: 11px;font-weight: 600;">BATHS</a>
-                    <a href="#!" class="" style="color: #9E9E9E;font-size: 11px;font-weight: 600;">BEDS</a>
-                    <a href="#!" class="" style="color: #9E9E9E;font-size: 11px;font-weight: 600;">GARAGES</a>
+                  <div class="card-action card-action-templeate" style="font-size: 12px;background-color: #F0F0EE;padding-left: 0px;padding-right: 10px;">
+                    <div class="row" style="margin: 0;">
+                      <div class="col m4" style="padding: 0px;">
+                        <div class="row" style="margin: 0;">
+                          <div class="col m12" style="padding: 0px;padding-bottom: 5px;">
+                            <a href="#!" class="" style="color: #9E9E9E;font-size: 11px;font-weight: 600;text-align: center;margin: 0px;">BATHS</a>
+                          </div>
+                        </div>
+                        <div class="row" style="margin: 0;">
+                          <div class="col m12" style="padding: 0px;">
+                            <a href="#!" class="" style="color: #424242;font-size: 18px;font-weight: normal; opacity: .85;text-align: center;margin: 0px;">{{ row.entity.bathrooms ? row.entity.bathrooms : '-' }}</a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col m4" style="padding: 0px;">
+                        <div class="row" style="margin: 0;">
+                          <div class="col m12" style="padding: 0px;padding-bottom: 5px;">
+                            <a href="#!" class="" style="color: #9E9E9E;font-size: 11px;font-weight: 600;text-align: center;margin: 0px;">BEDS</a>
+                          </div>
+                        </div>
+                        <div class="row" style="margin: 0;">
+                          <div class="col m12" style="padding: 0px;"> <a href="#!" class="" style="color: #424242;font-size: 18px;font-weight: normal; opacity: .85;text-align: center;margin: 0px;">{{ row.entity.bedrooms ? row.entity.bedrooms : '-' }}</a> </div>
+                        </div>
+                      </div>
+                      <div class="col m4" style="padding: 0px;">
+                        <div class="row" style="margin: 0;">
+                          <div class="col m12" style="padding: 0px;padding-bottom: 5px;"> <a href="#!" class="" style="color: #9E9E9E;font-size: 11px;font-weight: 600;text-align: center;margin: 0px;">GARAGES</a> </div>
+                        </div>
+                        <div class="row" style="margin: 0;">
+                          <div class="col m12" style="padding: 0px;"> <a href="#!" class="" style="color: #424242;font-size: 18px;font-weight: normal; opacity: .85;text-align: center;margin: 0px;">{{ row.entity.parkingSpaces ? row.entity.parkingSpaces : '-' }}</a> </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div class="card-action card-action-templeate" style="border-top: 0px;background-color: #F0F0EE;font-size: 25px;padding: 0px 0px 0px 10px;">
-                    <a href="#!" class="" style="margin-right: 4rem;margin-left: 8px;color: #424242;font-size: 18px;font-weight: normal; opacity: .85;">{{ row.entity.bathrooms ? row.entity.bathrooms : '-' }}</a>
-                    <a href="#!" class="" style="margin-right: 4rem;color: #424242;font-size: 18px;font-weight: normal; opacity: .85;">{{ row.entity.bedrooms ? row.entity.bedrooms : '-' }}</a>
-                    <a href="#!" class="" style="margin-right: 4rem;color: #424242;font-size: 18px;font-weight: normal; opacity: .85;">{{ row.entity.parkingSpaces ? row.entity.parkingSpaces : '-' }}</a>
-                  </div>
-                  <div class="card-action card-action-templeate" style="font-size: 12px; text-align: left">
+                  <div class="card-action card-action-templeate" style="font-size: 9px;text-align: left;padding-right: 10px;min-height: 55px;max-height: 55px;">
                     <a href="#!" class="blue-text" style="margin-right: 0.1rem;color: #9E9E9E!important"><i class="mdi-communication-location-on"></i></a>
-                    <a href="#!" class="blue-text" style="margin-right: 0rem;color: #9E9E9E!important;">{{ row.entity.address ? row.entity.fullAddress : 'No address defined' }}</a>
+                    <a href="#!" class="blue-text" style="margin-right: 0rem;color: #9E9E9E!important;">{{ row.entity.address ? row.entity.fullAddress | slice(0, 73) : 'No address defined' }}</a>
                   </div>
                   <div class="card-action card-action-templeate">
                     <a href="#!" class="blue-text" style="margin-right: 3rem;font-size: 15px">
@@ -321,40 +346,20 @@
 {% endblock grid_titles %}#}
 {# -------------------------------------------------- grid_filters --------------------------------------------------- #}
 {% block grid_filters %}
-  <ul class="collapsible" data-collapsible="accordion">
-    <li {% if grid.isFiltered %} class="active" {% endif %}>
-      <div class="align-left collapsible-header {% if grid.isFiltered %} active {% endif %}"><i
-            class="mdi-content-filter-list"></i>{{ 'Filters'|trans }}</div>
-      <div class="collapsible-body" style="background-color: #FFFFFF">
 
-        {% for column in grid.columns %}
-          <div class="row">
-            {% for i in 0..3 %}
-              <div class="col s3">
-                dsds- {{ loop.index0 }}
-              </div>
-            {% endfor %}
-          </div>
-        {% endfor %}
-
-        {#<table>#}
-        {#<tr class="grid-row-filters row">#}
-        {#{% for column in grid.columns %}#}
-        {#{% if loop.index0!=0 %}#}
-        {#{% if column.visible(grid.isReadyForExport) and column.filterable%}#}
-        {#<th {% if loop.last %} class="last-column"{%else%}class="col l3 column-{{ column.title }}"{% endif %}{% if(column.size > -1) %} style="width:" {% endif %}>#}
-        {#{% if column.filterable%}#}
-        {#{{ grid_filter(column, grid)|raw }}#}
-        {#{% endif %}#}
-        {#</th>#}
-        {#{% endif %}#}
-        {#{% endif %}#}
-        {#{% endfor %}#}
-        {#</tr>#}
-        {#</table>#}
-      </div>
-    </li>
-  </ul>
+  <div class="row" style="margin-top: -10px;">
+    <div class="col m12" style="padding-bottom: 10px;">
+      {% for column in grid.columns %}
+        {% if loop.index0!=0 %}
+          {% if column.visible(grid.isReadyForExport) and column.filterable %}
+            {% if column.filterable %}
+              {{ grid_filter(column, grid)|raw }}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
 
 {% endblock grid_filters %}
 
@@ -399,13 +404,13 @@
                     </div>
                   </tr>
                   <tr>
-                    <div class="form-search" style="margin-left: 20px;">
+                    <div class="form-search">
                       <div id="filter-bar" class="btn-toolbar">
                         <div class="filter-search btn-group pull-left input-append">
                           <div class="span6">
                             <div class="input-group input-group-sm">
                               <div class="input-group input-group-sm">
-                                <input style="margin-top: 5px !important;width: 175px" type="{{ column.inputType }}"
+                                <input style="width: 245px" type="{{ column.inputType }}"
                                        value="{{ from }}"
                                        class="input-small  search-query input-small grid-filter-input-query-from "
                                        placeholder="{{ column.title|trans }}"
