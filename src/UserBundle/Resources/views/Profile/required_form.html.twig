@@ -2,78 +2,76 @@
 
 
 {% block stylesheets_priority %}
-  {{ parent() }}
-	<link href="{{ asset('bundles/dashboard/material/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
-	<link href="{{ asset('bundles/dashboard/material/css/pikaday.css') }}" rel="stylesheet" type="text/css"/>
+    {{ parent() }}
+    <link href="{{ asset('bundles/dashboard/material/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('bundles/dashboard/material/css/pikaday.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('bundles/user/css/profile.css') }}" rel="stylesheet" type="text/css"/>
 {% endblock stylesheets_priority %}
 
 {% block breadcrumb %}
-	<li><a href="#">Profile</a></li>
-{% endblock breadcrumb%}
+    <li><a href="#">Profile</a></li>
+{% endblock breadcrumb %}
 
 {% block viewport %}
 
-	{% block north %}
-		{{ parent() }}
-	{% endblock north%}
+    {% block north %}
+        {{ parent() }}
+    {% endblock north %}
 
-	{% block center %}
-	<section>
-	{% block breadcrumb_body %}{% endblock breadcrumb_body%}
+    {% block center %}
+        <section>
+            {% block breadcrumb_body %}{% endblock breadcrumb_body %}
 
-	{% block flash_message %}
-		{{ parent() }}
-	{% endblock flash_message %}
+            {% block flash_message %}
+                {{ parent() }}
+            {% endblock flash_message %}
 
-	{% block content %}
+            {% block content %}
+                <div class="row" style="margin-top: 7em">
+                    <div class="col m1">
 
-		<style>
-			.card.small .card-image.card-image-profile {
-				height: 100%;
-			}
-		</style>
+                    </div>
+                    <div class="col m2" style="padding-right: 20px;">
+                        {% include 'UserBundle:Profile:Partials/_profile-picture.html.twig' %}
+                    </div>
+                    <div class="col m7"
+                         style="border-left: 1px solid #eee;background-color: #FFFFFF;min-height: 570px;border-bottom: 1px solid #eee;">
+                        <div class="row" style="margin-top: 0px;">
+                            <div class="col s12" style="padding-bottom: 5px;">
+                                {% include 'UserBundle:Profile:Partials/_profile-form.html.twig' %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endblock content %}
+        </section>
+    {% endblock center %}
 
-		<div class="row" style="margin-top: 7em">
-			<div class="col m1">
-
-			</div>
-			<div class="col m2" style="padding-right: 20px;">
-				{% include 'UserBundle:Profile:Partials/_profile-picture.html.twig' %}
-			</div>
-			<div class="col m7" style="border-left: 1px solid #eee;background-color: #FFFFFF;min-height: 570px;border-bottom: 1px solid #eee;">
-				<div class="row" style="margin-top: 0px;">
-					<div class="col s12" style="padding-bottom: 5px;">
-						{% include 'UserBundle:Profile:Partials/_profile-form.html.twig' %}
-					</div>
-				</div>
-			</div>
-		</div>
-		<br>
-	{% endblock content%}
-	</section>
-	{% endblock center%}
-
-	{% block south %}
-		{% include 'DashboardBundle:Common:Partials/_backend-footer.html.twig' %}
-	{% endblock south%}
+    {% block south %}
+        {% include 'DashboardBundle:Common:Partials/_backend-footer.html.twig' %}
+    {% endblock south %}
 
 {% endblock viewport %}
 
 {% block javascripts %}
-	{{parent()}}
-	<script src="{{ asset('bundles/dashboard/material/js/select2.full.min.js') }}"></script>
-	<script src="{{ asset('bundles/dashboard/material/js/jquery.inputmask.bundle.min.js') }}"></script>
-	<script src="{{ asset('bundles/dashboard/material/js/moment.js') }}"></script>
-	<script src="{{ asset('bundles/dashboard/material/js/pikaday.js') }}"></script>
-	<script src="{{ asset('bundles/dashboard/material/js/pikaday.jquery.js') }}"></script>
-	<script src="{{ asset('bundles/common/js/application.js') }}"></script>
+    {{ parent() }}
+    <script src="{{ asset('bundles/dashboard/material/js/select2.full.min.js') }}"></script>
+    <script src="{{ asset('bundles/dashboard/material/js/jquery.inputmask.bundle.min.js') }}"></script>
+    <script src="{{ asset('bundles/dashboard/material/js/moment.js') }}"></script>
+    <script src="{{ asset('bundles/dashboard/material/js/pikaday.js') }}"></script>
+    <script src="{{ asset('bundles/dashboard/material/js/pikaday.jquery.js') }}"></script>
+    <script src="{{ asset('bundles/common/js/application.js') }}"></script>
 
-	{# Upload scripts #}
-	<script src="{{ asset('bundles/common/bower_components/jquery-ui/ui/widget.js') }}" type="text/javascript"></script>
-	<script src="{{ asset('bundles/common/bower_components/blueimp-file-upload/js/jquery.iframe-transport.js') }}" type="text/javascript"></script>
-	<script src="{{ asset('bundles/common/bower_components/blueimp-file-upload/js/jquery.fileupload.js') }}" type="text/javascript"></script>
-	<script src="{{ asset('bundles/common/bower_components/blueimp-file-upload/js/jquery.fileupload-image.js') }}" type="text/javascript"></script>
-	<script src="{{ asset('bundles/common/bower_components/cloudinary-jquery-file-upload/cloudinary-jquery-file-upload.js') }}" type="text/javascript"></script>
-	<script src="{{ asset('bundles/common/js/cloudinary.js') }}" type="text/javascript"></script>
-{% endblock javascripts%}
+    {# Upload scripts #}
+    <script src="{{ asset('bundles/common/bower_components/jquery-ui/ui/widget.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/common/bower_components/blueimp-file-upload/js/jquery.iframe-transport.js') }}"
+            type="text/javascript"></script>
+    <script src="{{ asset('bundles/common/bower_components/blueimp-file-upload/js/jquery.fileupload.js') }}"
+            type="text/javascript"></script>
+    <script src="{{ asset('bundles/common/bower_components/blueimp-file-upload/js/jquery.fileupload-image.js') }}"
+            type="text/javascript"></script>
+    <script src="{{ asset('bundles/common/bower_components/cloudinary-jquery-file-upload/cloudinary-jquery-file-upload.js') }}"
+            type="text/javascript"></script>
+    <script src="{{ asset('bundles/common/js/cloudinary.js') }}" type="text/javascript"></script>
+{% endblock javascripts %}
 

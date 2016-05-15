@@ -17,7 +17,6 @@
   </div>
 
   <div class="row" id="edit-profile-information">
-
     <div class="row" style="margin-top: 0px;">
       <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>First Name:</b> </strong></span></div>
       <div class="col s9" style="padding-bottom: 10px;"> <span>{{ profile.firstName ? profile.firstName : 'Empty' }}</span></div>
@@ -73,23 +72,12 @@
     </div>
   </div>
 
-  {% include 'UserBundle:Profile:Partials/_profile-form.html.twig' %}
+  {% include 'UserBundle:Profile:Partials/_profile-form.html.twig' with {'hidden': true} %}
 
 </div>
 
 <script>
   $(document).ready(function(){
-
-    //Initialize
-    var picker = new Pikaday({
-      field: document.getElementById('profile_birth_date'),
-      format: 'L'
-    });
-    picker.setDate({{ "now" | date("m/d/Y") }});
-
-    $('#profile_birth_date').attr('type','text');
-    $('#profile_website').attr('type','url');
-
     $('#btn-profile-cancel').click(function(){
       $('#edit-profile-container').attr('style','display:none');
       $('#edit-profile-information').attr('style','display:block');
