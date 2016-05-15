@@ -131,13 +131,9 @@
                           {% endfor %}
                       </ul>
                     </div>
-
                     {% else %}
-                      {#<li>#}
                       <img class="activator" src="{{ asset('bundles/dashboard/images/properties/no-image.png') }}" style="min-height: 201px;">
-                      {#</li>#}
                     {% endif %}
-                    {#<img class="activator" src="{{ asset('bundles/dashboard/images/properties/no-image.png') }}">#}
                   </div>
                   <div class="content" style="padding-top: 5px;padding-bottom: 5px;padding-left: 5px;padding-right: 0px;height: 38px;">
                     <span class="card-title activator grey-text text-darken-4" style="font-size: 20px;">
@@ -410,9 +406,34 @@
                           <div class="span6">
                             <div class="input-group input-group-sm">
                               <div class="input-group input-group-sm">
-                                <input style="width: 245px" type="{{ column.inputType }}"
+                                <style>
+                                  span.search-clean-close {
+                                    cursor: pointer;color: #9E9E9E;position: absolute;left: 222px;top: 6px;font-size: 20px;
+                                  }
+                                </style>
+                                <script>
+                                  $(document).ready(function () {
+                                    var valueSearchObjs = $('.input-search-filter');
+                                    for(var i = 0; i < valueSearchObjs.length;i++){
+                                      var valueSearchObj = valueSearchObjs[i]
+                                      var inputValue = $('#'+valueSearchObj.id).val()
+                                      if(inputValue!==""){
+                                        var spanId = "input-search-close-" + $('#'+valueSearchObj.id).data("item-id")
+                                        $('#'+spanId).attr("style","display:block")
+                                        console.info($('#'+spanId))
+                                        $( "#"+spanId ).on( "click", function() {
+                                          $('#'+valueSearchObj.id).val("")
+                                          return {{ grid.hash }}_submitForm(event, this.form);
+                                        });
+                                      }
+                                    }
+//
+                                  });
+                                </script>
+                                <span style="display:none" id="input-search-close-{{ column.id }}" class="mdi-navigation-close search-clean-close"> </span>
+                                <input id="input-search-{{ column.id }}" data-item-id="{{ column.id }}" style="width: 245px" type="{{ column.inputType }}"
                                        value="{{ from }}"
-                                       class="input-small  search-query input-small grid-filter-input-query-from "
+                                       class="input-search-filter input-small  search-query input-small grid-filter-input-query-from "
                                        placeholder="{{ column.title|trans }}"
                                        name="{{ grid.hash }}[{{ column.id }}][from]"
                                        id="{{ grid.hash }}__{{ column.id }}__query__from"

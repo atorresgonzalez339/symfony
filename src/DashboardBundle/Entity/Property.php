@@ -33,7 +33,7 @@ class Property
 
     /**
      * @ORM\Column(type="string", nullable=false)
-     * @GRID\Column(field="name", type="text" , filterable=true, title="Name", size=50)
+     * @GRID\Column(field="name", type="text" , filterable=true, title="Name", size=50, operatorsVisible=false)
      */
     protected $name;
 

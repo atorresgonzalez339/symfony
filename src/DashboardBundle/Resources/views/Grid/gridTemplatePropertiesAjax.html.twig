@@ -24,6 +24,8 @@ function {{ grid.hash }}_goto(url, data, type)
     
         $('#{{ grid.hash }}').parent().replaceWith(msg);
         $('.grid-loading').css('display','none');
+
+    $('.slider').slider();
         $(".collapsible").collapsible();
         $(".select2").select2();
     });

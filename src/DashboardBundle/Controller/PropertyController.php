@@ -37,7 +37,7 @@ class PropertyController extends BaseController
     $grid->setLimits($this->container->getParameter('admin.paginator.limits.config'));
 
     if ($request->isXmlHttpRequest()) {
-      return $grid->getGridResponse('DashboardBundle:Propery:indexAjax.html.twig');
+      return $grid->getGridResponse('DashboardBundle:Properties:indexAjax.html.twig');
     }
     if ($grid->isReadyForRedirect()) {
       return new RedirectResponse($grid->getRouteUrl());

@@ -1,5 +1,10 @@
 {% extends 'DashboardBundle:Common:backend2.html.twig' %}
 
+{% block stylesheets_priority %}
+	{{ parent() }}
+	<link href="{{ asset('bundles/dashboard/material/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
+{% endblock stylesheets_priority %}
+
 {% block breadcrumb %}
 	<li><a href="#">My Properties</a></li>
 {% endblock breadcrumb%}
@@ -55,5 +60,10 @@
 	</script>
 
 {% endblock content%}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script src="{{ asset('bundles/dashboard/material/js/select2.full.min.js') }}"></script>
+{% endblock javascripts %}
 
 
