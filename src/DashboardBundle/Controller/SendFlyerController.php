@@ -26,17 +26,20 @@ class SendFlyerController extends BaseController
   public function sendPreviewAction(Request $request, $flyer_id)
   {
     $mandrillBusiness = $this->findBusiness('dashboard.mandrill.business');
+
     $user = $this->getUser();
     $flyer = $this->getDoctrine()
                   ->getRepository('DashboardBundle:Flyer')
                   ->find($flyer_id);
 
     if(!$user->getProfile()->getMandrillSubaccount()){
-      $mandrillBusiness->createSubAccount($user);
+      $profile = $user->getProfile();
+      $subaccount = $mandrillBusiness->createSubAccount($user);
+      $profile->setMandrillSubaccount($subaccount);
+      $mandrillBusiness->saveData($profile);
     }
-    else{
-      $subAccountInfo = $mandrillBusiness->getSubaccount($user->getProfile()->getMandrillSubaccount());
-    }
+
+    $subAccountInfo = $mandrillBusiness->getSubaccount($user->getProfile()->getMandrillSubaccount());
 
     return $this->render('DashboardBundle:SendFlyer:preview.html.twig', array(
       'flyer' => $flyer,

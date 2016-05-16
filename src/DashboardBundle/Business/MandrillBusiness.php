@@ -32,6 +32,8 @@ class MandrillBusiness extends BaseBusiness {
 
       $this->mandrillApi->subaccounts->add($subaccount_id, $subaccount_name, $notes, $custom_quota);
 
+      return $subaccount_id;
+
     }
 
     public function updateSubAccount(User $user){

@@ -67,6 +67,7 @@
         <div style="margin-top: 15px">
           <button id="btn-save" class="btn btn-primary">Save</button>
           <button id="btn-preview" class="btn btn-primary">Preview</button>
+          <button id="btn-go-to-send" class="btn btn-primary">Go to Send</button>
         </div>
       </div>
     </div>
@@ -92,6 +93,8 @@
         {{ form_row(flyer_form.map_center_lng) }}
         {{ form_row(flyer_form.html) }}
         {{ form_row(flyer_form.html_edit) }}
+
+        <input id="goToSend" type="hidden" value="0" name="go_to_send">
 
         {# End Hidden Fields #}
   {{ form_end(flyer_form) }}
@@ -337,8 +340,15 @@
       setMap();
       placeEditButtons();
 
-      $('#btn-save').click(function(e) {
+      $('#btn-save, #btn-go-to-send').click(function(e) {
         e.preventDefault();
+
+        if($(this).attr('id') == 'btn-go-to-send'){
+          $('input#goToSend').val(1)
+        }
+        else{
+          $('input#goToSend').val(0)
+        }
 
         generateFlyerHtml(html_flyer);
         generateFlyerHtmlEdit(html_flyer, html_edit);
