@@ -140,7 +140,7 @@
 
           </style>
           <div class="row">
-            <div class="col m12" style="padding: 0px;padding-bottom: 15px">
+            <div class="col m12" style="padding-bottom: 15px">
               <ul class="collection">
               {% for row in grid.rows %}
                 <li class="collection-item avatar avatar-left">
@@ -148,7 +148,7 @@
                   </i>
                   <div class="row" style="margin-top: 0px;">
                     <div class="col m5" style="padding-bottom: 0px;"> <p style="font-size: 15px;">{{ row.entity.getCompleteName() | slice(0, 18)}}</p> </div>
-                    <div class="col m7" style="padding-bottom: 0px;"> <p>{{ row.entity.email | slice(0, 30) }}</p> </div>
+                    <div class="col m6" style="padding-bottom: 0px;"> <p>{{ row.entity.email | slice(0, 30) }}</p> </div>
                   </div>
                   <a href="#!" class="secondary-content secundary-content-center">
                     <i class="mdi mdi-hardware-keyboard-arrow-right arrow-switch action-arrow-switch" data-id="{{ row.entity.id }}"></i>
@@ -188,7 +188,7 @@
           </script>
 
           {# Aqui se genera el paginado #}
-          <div class="grid_footer" style="height: 60px;">
+          <div class="grid_footer" style="height: auto;">
             {% if grid.isPagerSectionVisible %}
               {{ grid_pager(grid) }}
             {% endif %}
@@ -550,7 +550,7 @@
   {% else %}
 
     <div class="row" style="margin-top: 0px">
-      <div class="col m12" style="padding-bottom: 0px;">
+      <div class="col m12" style="padding-bottom: 10px;">
         {{ grid_pager_selectpage(grid) }}
       </div>
     </div>

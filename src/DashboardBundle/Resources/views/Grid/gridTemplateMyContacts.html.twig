@@ -17,7 +17,7 @@
     });
   </script>
 
-  <div class="grid" style="padding-top: 0px;">
+  <div class="grid" style="padding-top: 0px;padding-bottom: 0px;">
 
     {% if grid.totalCount > 0 or grid.isFiltered or grid.noDataMessage is sameas(false) %}
     <form id="{{ grid.hash }}" action="{{ grid.routeUrl }}" method="post">
@@ -90,9 +90,6 @@
           </div>
         </div>
         <div id="genericContainerTable2">
-          <script>
-            //            $('.slider').slider({full_width: true,height:200px});
-          </script>
           <style>
             .collection .collection-item.avatar i.circle-avatar-status {
               font-size: 18px;
@@ -143,7 +140,7 @@
 
           </style>
           <div class="row">
-            <div class="col m12">
+            <div class="col m12" style="padding-bottom: 15px">
               <ul class="collection">
                 {% for row in grid.rows %}
 
@@ -155,7 +152,7 @@
                     </i>
                     <div class="row" style="margin-top: 0px;">
                       <div class="col m5" style="padding-bottom: 0px;"> <p style="font-size: 15px;">{{ row.entity.getCompleteName() | slice(0, 17)}}</p> </div>
-                      <div class="col m7" style="padding-bottom: 0px;"> <p>{{ row.entity.email | slice(0, 30) }}</p> </div>
+                      <div class="col m6" style="padding-bottom: 0px;"> <p>{{ row.entity.email | slice(0, 30) }}</p> </div>
                     </div>
                   </li>
                 {% endfor %}
@@ -192,7 +189,7 @@
           </script>
 
           {# Aqui se genera el paginado #}
-          <div class="grid_footer" style="height: 60px;">
+          <div class="grid_footer" style="height: auto">
             {% if grid.isPagerSectionVisible %}
               {{ grid_pager(grid) }}
             {% endif %}
@@ -551,10 +548,7 @@
   {% else %}
 
     <div class="row" style="margin-top: 0px">
-      <div class="col m2" style="padding-bottom: 0px;">
-        {{ grid_pager_totalcount(grid) }}
-      </div>
-      <div class="col m10" style="padding-bottom: 0px;">
+      <div class="col m12" style="padding-bottom: 10px;">
         {{ grid_pager_selectpage(grid) }}
       </div>
     </div>
@@ -580,37 +574,17 @@
 {# ---------------------------------------------------- grid_pager_selectpage -------------------------------------------------- #}
 {% block grid_pager_selectpage %}
   {% spaceless %}
-    <div class="row" style="margin-top: 10px;">
-      <div class="col l2">
-        <b style="font-size: 12px;position: relative;top: -8px;left: 8px;">{{ 'Page'|trans }}</b>
-      </div>
-      <div class="col l6">
-        <a style="margin-top: -35px;width: 25px;padding-left: 10px;"
-           class="btn btn-primary {% if grid.page <= 0 %}disabled{% endif %}"
-           {% if grid.page <= 0 %}disabled="disabled" {% else %} onclick="return {{ grid.hash }}_previousPage();" {% endif %}><i
+    <a style="margin-top: -35px;width: 25px;padding-left: 10px;"
+       class="btn btn-primary {% if grid.page <= 0 %}disabled{% endif %}"
+       {% if grid.page <= 0 %}disabled="disabled" {% else %} onclick="return {{ grid.hash }}_previousPage();" {% endif %}><i
               class="mdi-hardware-keyboard-arrow-left"></i></a>
-        <input type='text' class="" value="{{ grid.page + 1 }}"
-               style="  width: 34px;margin-right: 10px !important;margin-left: 10px !important;text-align: center;position: relative;top: -17px; max-height: 34px;text-indent: -1px;"
-               onkeypress="return {{ grid.hash }}_enterPage(event, parseInt(this.value)-1);"/><a style="margin-top: -35px;width: 25px;padding-left: 10px;"
-                                                                                                 class="btn btn-primary {% if grid.page >= grid.pageCount-1 %}disabled {% endif %}"
-                                                                                                 {% if grid.page >= grid.pageCount-1 %}disabled="disabled" {% else %}  onclick="return {{ grid.hash }}_nextPage();" {% endif %}><i
-              class="mdi-hardware-keyboard-arrow-right"></i></a>
-      </div>
-      <div class="col l2">
-        <b style="font-size: 12px;position: relative;top: -7px;left: -22px;">of &nbsp;<label class="" style="font-size: 12px;
-                    font-weight: 400;
-                    font-size: .9rem;
-                    color: #fff;
-                    background-color: #42A5F5;
-                    height: auto;
-                    line-height: 1;
-                    border-radius: 2px;
-                    min-width: 10px;
-                    padding: 3px 7px;">{{ grid.pageCount }}</label>
-        </b>
-      </div>
+    <input type='text' class="" value="{{ grid.page + 1 }}"
+           style="  width: 34px;margin-right: 10px !important;margin-left: 10px !important;text-align: center;position: relative;top: -17px; max-height: 34px;text-indent: -1px;"
+           onkeypress="return {{ grid.hash }}_enterPage(event, parseInt(this.value)-1);"/><a style="margin-top: -35px;width: 25px;padding-left: 10px;"
+                                                                                             class="btn btn-primary {% if grid.page >= grid.pageCount-1 %}disabled {% endif %}"
+                                                                                             {% if grid.page >= grid.pageCount-1 %}disabled="disabled" {% else %}  onclick="return {{ grid.hash }}_nextPage();" {% endif %}><i
+            class="mdi-hardware-keyboard-arrow-right"></i></a>
     </div>
-
   {% endspaceless %}
 {% endblock grid_pager_selectpage %}
 {# ---------------------------------------------------- grid_pager_results_perpage -------------------------------------------------- #}
