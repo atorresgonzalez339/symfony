@@ -34,7 +34,7 @@ class PropertyController extends BaseController
     $grid->setSource($source);
     $grid->hideColumns(array('id'));
     $grid->addMassAction(new DeleteMassAction());
-    $grid->setLimits($this->container->getParameter('admin.paginator.limits.config'));
+    $grid->setLimits(array(8,16,24,32,40));
 
     if ($request->isXmlHttpRequest()) {
       return $grid->getGridResponse('DashboardBundle:Properties:indexAjax.html.twig');

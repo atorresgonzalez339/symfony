@@ -45,6 +45,22 @@
 		</div>
 	</div>
 
+	<div class="fixed-action-btn" style="bottom: 45px; right: 24px">
+		<a class="btn-floating btn-large red"><i class="large mdi mdi-content-add left"></i></a>
+		<ul>
+			<li>
+				<a href="{{ path('properties_mls') }}" data-position="left" data-delay="50" data-tooltip="From MLS" class="btn-floating blue tooltipped" style="transform: scaleY(0.4) scaleX(0.4) translateY(40px) translateX(0px); opacity: 0;">
+					<i class="large fa fa-home"></i>
+				</a>
+			</li>
+			<li>
+				<a href="{{ path('properties_design') }}" data-position="left" data-delay="50" data-tooltip="Empty" class="btn-floating green tooltipped" style="transform: scaleY(0.4) scaleX(0.4) translateY(40px) translateX(0px); opacity: 0;">
+					<i class="large fa fa-home"></i>
+				</a>
+			</li>
+		</ul>
+	</div>
+
 	<script>
 		$(document).ready(function(){
 			$('#edit_action').click(function(){

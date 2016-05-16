@@ -197,12 +197,13 @@
             {% endfor %}
           </div>
 
-          {#<table style="position: relative;text-align: left" id="itemList" class="table table-hover">#}
-          {#{% if grid.isTitleSectionVisible %}#}
-          {#{{ grid_titles(grid) }}#}
-          {#{% endif %}#}
-          {#{{ grid_rows(grid) }}#}
-          {#</table>#}
+          <script>
+            $(document).ready(function () {
+              $('.slider').slider({
+                autoplay:false
+              });
+            });
+          </script>
 
           {# Aqui se genera el paginado #}
           <div class="grid_footer">
@@ -300,51 +301,13 @@
 <thead>
 {% endblock grid_titles %}
 {#{% block grid_titles %}
-            <tr>
-                {% set isOrderable = (grid.isOrderable is defined ? grid.isOrderable : false) %}
-                {% if isOrderable %}
-                    <th class="" style="width: 1%;">
-                        <i class="fa fa-hand-o-up"></i>
-                    </th>
-                {% endif %}
-                {%set firtColumnH = false%}
-                {% for column in grid.columns %}
-                    {% if column.visible(grid.isReadyForExport) %}
-                        {% if firtColumnH==false %}
-                           {%set firtColumnH = true%}
-                           <th class="{% if column.align != 'left'%}align-{{ column.align }}{% endif %}{% if loop.last %} last-column{% endif %}"{% if(column.size > -1) %} style="width:{{ column.size }}px;"{% endif %}>
-                        {% else %}
-                           <th class="{% if column.align != 'left'%}align-{{ column.align }}{% endif %}{% if loop.last %} last-column{% endif %}"{% if(column.size > -1) %} style="width:{{ column.size }}px;"{% endif %}>
-                        {% endif %}
-                        {% if column.type == 'massaction' %}
-                                <i style="font-size: 12px;color: #428bca" class="icon-ok"></i> 
-                        {% else %}
-                            {% set columnTitle = grid.prefixTitle ~ column.title ~ '__abbr' %}
-                            {% if columnTitle|trans == columnTitle %}
-                                {% set columnTitle = grid.prefixTitle ~ column.title %}
-                            {% endif %}
-                            {% if (column.sortable) %}
-                                <a style="font-size: 13px" data-toggle="tooltip" data-placement="top" class="order" href="{{ grid_url('order', grid, column) }}" title="{{ 'Order by'|trans }} {{ columnTitle|trans }}">{{ columnTitle|trans }}</a>
-                                {% if column.order == 'asc' %}
-                                <i class="icon-chevron-up"></i>
-                                {% elseif column.order == 'desc' %}
-                                <i class="icon-chevron-down"></i>
-                                {% else %}
-                                {% endif %}
-                            {% else %}
-                                {{ columnTitle|trans }}
-                            {% endif %}
-                        {% endif %}
-                            </th>
-                    {% endif %}
-                {% endfor %}
-            </tr>
+
 {% endblock grid_titles %}#}
 {# -------------------------------------------------- grid_filters --------------------------------------------------- #}
 {% block grid_filters %}
 
   <div class="row" style="margin-top: -10px;">
-    <div class="col m12" style="padding-bottom: 10px;">
+    <div class="col m12" style="padding-bottom: 55px;">
       {% for column in grid.columns %}
         {% if loop.index0!=0 %}
           {% if column.visible(grid.isReadyForExport) and column.filterable %}
@@ -390,7 +353,7 @@
   {% set from = column.data.from is defined ? column.data.from : null %}
   {% set to = column.data.to is defined ? column.data.to : null %}
 
-  <span class="grid-filter-input">
+  <span class="grid-filter-input" style="position: absolute;right: 0">
 
             <span class="grid-filter-input-query">
                 <table class="">
@@ -408,7 +371,7 @@
                               <div class="input-group input-group-sm">
                                 <style>
                                   span.search-clean-close {
-                                    cursor: pointer;color: #9E9E9E;position: absolute;left: 222px;top: 6px;font-size: 20px;
+                                    cursor: pointer;color: #9E9E9E;position: absolute;right: 42px;top: 3px;font-size: 20px;
                                   }
                                 </style>
                                 <script>
@@ -431,7 +394,7 @@
                                   });
                                 </script>
                                 <span style="display:none" id="input-search-close-{{ column.id }}" class="mdi-navigation-close search-clean-close"> </span>
-                                <input id="input-search-{{ column.id }}" data-item-id="{{ column.id }}" style="width: 245px" type="{{ column.inputType }}"
+                                <input id="input-search-{{ column.id }}" data-item-id="{{ column.id }}" style="width: 320px" type="{{ column.inputType }}"
                                        value="{{ from }}"
                                        class="input-search-filter input-small  search-query input-small grid-filter-input-query-from "
                                        placeholder="{{ column.title|trans }}"
