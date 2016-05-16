@@ -134,48 +134,22 @@
 
   {% include 'DashboardBundle:ContactList:Partials/_modal-add-contact.html.twig' %}
   {% include 'DashboardBundle:ContactList:Partials/_modal-import-contact.html.twig' %}
+  <div class="row">
+    <div class="col m2" style="padding-right: 0px">
+      <i class="green circle circle-status-bootom"> <span></span></i> <b style="margin-left: 30px;"> Enabled contact</b>
+    </div>
+    <div class="col m2">
+      <i class="red circle circle-status-bootom"> <span></span></i> <b style="margin-left: 30px;"> Disabled contact</b>
+    </div>
+    <div class="col m4">
+      <div style="margin-top: -6px;">
+        <i class="mdi mdi-hardware-keyboard-arrow-right arrow-switch-legent"></i>
+        <i class="mdi mdi-hardware-keyboard-arrow-left arrow-switch-legent"></i>
+        <b> Switch contact </b>
+      </div>
+    </div>
+  </div>
 
-{#<div class="card">#}
-  {#<div class="title">#}
-    {#<h5> Manage contacts </h5>#}
-    {#<div class="btn-group right">#}
-      {#<a class="btn btn-small waves-dark waves-effect modal-trigger"  href="#modalAddContat"> <i class="mdi mdi-social-group-add left"></i>Add contact</a>#}
-      {#<a class="btn btn-small waves-dark waves-effect modal-trigger"  href="#modalImportContact"> <i class="mdi mdi-communication-import-export left"></i>Import contact</a>#}
-    {#</div>#}
-  {#</div>#}
-
-  {#{% include 'DashboardBundle:ContactList:Partials/_modal-add-contact.html.twig' %}#}
-  {#{% include 'DashboardBundle:ContactList:Partials/_modal-import-contact.html.twig' %}#}
-
-  {#<div class="content" style="padding-top: 5px">#}
-    {#<div class="row" style="margin-top: 5px;">#}
-      {#<div class="col m6" style="padding-bottom: 0px;">#}
-        {#<span style="font-size: 18px">All contacts:</span>#}
-        {#{{ grid(grid, 'DashboardBundle:Grid:gridTemplateContactsAjax.html.twig') }}#}
-      {#</div>#}
-      {#<div class="col m6" style="padding-bottom: 0px;">#}
-        {#<span style="font-size: 18px">Contacts in this list:</span>#}
-        {#{{ grid(grid2, 'DashboardBundle:Grid:gridTemplateMyContactsAjax.html.twig') }}#}
-      {#</div>#}
-    {#</div>#}
-
-    {#<div class="row">#}
-      {#<div class="col m2" style="padding-right: 0px">#}
-        {#<i class="green circle circle-status-bootom"> <span></span></i> <b style="margin-left: 30px;"> Enabled contact</b>#}
-      {#</div>#}
-      {#<div class="col m2">#}
-        {#<i class="red circle circle-status-bootom"> <span></span></i> <b style="margin-left: 30px;"> Disabled contact</b>#}
-      {#</div>#}
-      {#<div class="col m4">#}
-        {#<div style="margin-top: -6px;">#}
-          {#<i class="mdi mdi-hardware-keyboard-arrow-right arrow-switch-legent"></i>#}
-          {#<i class="mdi mdi-hardware-keyboard-arrow-left arrow-switch-legent"></i>#}
-          {#<b> Switch contact </b>#}
-        {#</div>#}
-      {#</div>#}
-    {#</div>#}
-  {#</div>#}
-{#</div>#}
   <script src="{{ asset('bundles/dashboard/material/js/parsley.min.js') }}" type="text/javascript"></script>
   <script src="{{ asset('bundles/common/js/jquery/plugin/jquery.form.js') }}" type="text/javascript"></script>
   <script src="{{ asset('bundles/common/js/papaparse.js') }}" type="text/javascript"></script>
