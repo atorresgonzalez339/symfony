@@ -383,7 +383,6 @@
                                       if(inputValue!==""){
                                         var spanId = "input-search-close-" + $('#'+valueSearchObj.id).data("item-id")
                                         $('#'+spanId).attr("style","display:block")
-                                        console.info($('#'+spanId))
                                         $( "#"+spanId ).on( "click", function() {
                                           $('#'+valueSearchObj.id).val("")
                                           return {{ grid.hash }}_submitForm(event, this.form);
