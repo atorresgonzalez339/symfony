@@ -382,8 +382,8 @@
                                       var inputValue = $('#'+valueSearchObj.id).val()
                                       if(inputValue!==""){
                                         var spanId = "input-search-close-" + $('#'+valueSearchObj.id).data("item-id")
-                                        $('#'+spanId).attr("style","display:block")
-                                        $( "#"+spanId ).on( "click", function() {
+                                          $('#'+spanId).attr("style","display:block")
+                                          $( "#"+spanId ).on( "click", function() {
                                           $('#'+valueSearchObj.id).val("")
                                           return {{ grid.hash }}_submitForm(event, this.form);
                                         });

@@ -26,7 +26,7 @@
             padding: 5px;
         }
     </style>
-<div class="grid">
+<div class="grid" style="padding-bottom: 0px;">
     
 {% if grid.totalCount > 0 or grid.isFiltered or grid.noDataMessage is sameas(false) %}
     <form id="{{ grid.hash }}" action="{{ grid.routeUrl }}" method="post">
@@ -201,7 +201,7 @@
 {# -------------------------------------------------- grid_filters --------------------------------------------------- #}
 {% block grid_filters %}
     <div class="row" style="margin-top: 0px;">
-        <div class="col m12" style="padding-bottom: 5px;">
+        <div class="col m12" style="padding-bottom: 55px;">
             {% for column in grid.columns %}
                 {% if loop.index0!=0 %}
                     {% if column.visible(grid.isReadyForExport) and column.filterable %}
@@ -245,7 +245,7 @@
 {% set from = column.data.from is defined ? column.data.from : null %}
 {% set to = column.data.to is defined ? column.data.to : null %}
     
-    <span class="grid-filter-input">
+    <span class="grid-filter-input" style="position: absolute;right: 0">
 
             <span class="grid-filter-input-query">
                 <table class="">   
@@ -261,7 +261,31 @@
                                     <div class="span6">
                                         <div class="input-group input-group-sm">
                                             <div class="input-group input-group-sm">
-                                                <input style="margin-top: 5px !important;width: 300px" type="{{ column.inputType }}" value="{{ from }}" class="input-small  search-query input-small grid-filter-input-query-from " placeholder="{{ column.title|trans }}" name="{{ grid.hash }}[{{ column.id }}][from]" id="{{ grid.hash }}__{{ column.id }}__query__from" {% if submitOnChange is sameas(true) %}onkeypress="return {{ grid.hash }}_submitForm(event, this.form);"{% endif%} {{ ( op == isNullOperator or op == isNotNullOperator ) ? 'style="display: none;" disabled="disabled"' : '' }} />
+                                                <style>
+                                                    span.search-clean-close {
+                                                        cursor: pointer;color: #9E9E9E;position: absolute;right: 42px;top: 8px;font-size: 20px;
+                                                    }
+                                                </style>
+                                                <script>
+                                                    $(document).ready(function () {
+                                                        var valueSearchObjs = $('.input-search-filter');
+                                                        for(var i = 0; i < valueSearchObjs.length;i++){
+                                                            var valueSearchObj = valueSearchObjs[i]
+                                                            var inputValue = $('#'+valueSearchObj.id).val()
+                                                            if(inputValue!==""){
+                                                                var spanId = "input-search-close-" + $('#'+valueSearchObj.id).data("item-id")
+                                                                $('#'+spanId).attr("style","display:block")
+                                                                $( "#"+spanId ).on( "click", function() {
+                                                                    $('#'+valueSearchObj.id).val("")
+                                                                    return {{ grid.hash }}_submitForm(event, this.form);
+                                                                });
+                                                            }
+                                                        }
+//
+                                                    });
+                                                </script>
+                                                <span style="display:none" id="input-search-close-{{ column.id }}" class="mdi-navigation-close search-clean-close"> </span>
+                                                <input id="input-search-{{ column.id }}" data-item-id="{{ column.id }}" style="margin-top: 5px !important;width: 300px" type="{{ column.inputType }}" value="{{ from }}" class="input-search-filter input-small  search-query input-small grid-filter-input-query-from " placeholder="{{ column.title|trans }}" name="{{ grid.hash }}[{{ column.id }}][from]" id="{{ grid.hash }}__{{ column.id }}__query__from" {% if submitOnChange is sameas(true) %}onkeypress="return {{ grid.hash }}_submitForm(event, this.form);"{% endif%} {{ ( op == isNullOperator or op == isNotNullOperator ) ? 'style="display: none;" disabled="disabled"' : '' }} />
                                                 <span class="input-group-btn">
                                                     <button style="padding-left: 11px;padding-right: 10px;margin-left: -4px;margin-top: -3px;border-top-left-radius: 0px;border-bottom-left-radius: 0px;min-height: 37px;" type="submit" onclick="return {{ grid.hash }}_submitForm(event, this.form);" class="btn btn-primary tooltipped" data-position="bottom" data-delay="50" data-tooltip="{{ 'Search'|trans }}" ><i class="mdi-action-search"></i> {#{{'SEARCH'|trans}}#} </button>
                                                 </span>
@@ -320,17 +344,33 @@
             {% endif %}
         {% endfor %}
     {% endspaceless %}
-           <script>
+       <script>
+
+       //Clear Selected
+       var trs = $( "#tbodyRows" ).find('.avsys-grid-tr');
+       for(var i=0; i<trs.length; i++){
+           var trSelected = $('#'+trs[i].id);
+           var id = "checkbox-" + trSelected.attr('trInputId');
+           $("#"+id).data('selected', false);
+       }
         $("#avsys-grid-tr-{{row.getPrimaryKeyValue.id}}").click(function(evt) {
         var self = $(this)[0];
-        
+        var trSelected = $('#'+self.id);
+        var id = "checkbox-" + trSelected.attr('trInputId');
         if (evt.ctrlKey){
             if(arrayIdSelected.indexOf(self.id) ==-1){
                 arrayIdSelected.push(self.id);
+            }else {
+                var index = arrayIdSelected.indexOf(self.id)
+                arrayIdSelected.splice(index, 1);
             }
         }else{
           arrayIdSelected = [];
-          arrayIdSelected.push(self.id);
+            if($("#"+id).data('selected') == false){
+                arrayIdSelected.push(self.id);
+            }else {
+                $("#"+id).data('selected',false)
+            }
         }
        
         onSelectedRow(self);
@@ -343,41 +383,42 @@
     </tbody>
     
     <script>
-    
     arrayIdSelected = Array();
-
     function onSelectedRow(self){
+        //Clear Selected
+        var trs = $( "#tbodyRows" ).find('.avsys-grid-tr');
+        var arraySelectedOld = Array()
+        for(var i=0; i<trs.length; i++){
+            $('#'+trs[i].id).attr('style','background-color:#FAFAFA;cursor: pointer;color:#333644');
+            var trSelected = $('#'+trs[i].id);
+            var id = "checkbox-" + trSelected.attr('trInputId');
+            var check = document.getElementById(id);
+            if (check.type == 'checkbox') {
+                if(check.checked === true){
+                    arraySelectedOld.push(id)
+                }
+                check.checked = false;
+                $('label[for="'+id+'"]').removeClass('myclase1');
 
-            //Clear Selected
-            var trs = $( "#tbodyRows" ).find('.avsys-grid-tr');
-            
-            for(var i=0; i<trs.length; i++){
-                $('#'+trs[i].id).attr('style','background-color:#FAFAFA;cursor: pointer;color:#333644');
-                
-                var trSelected = $('#'+trs[i].id);
-                
-                //$("#checkbox-" + trSelected.attr('trInputId')).checked = false;
-                var id = "checkbox-" + trSelected.attr('trInputId');
-                var check = document.getElementById(id);
-                if (check.type == 'checkbox') {
-                    check.checked = false;
-                    $('label[for="'+id+'"]').removeClass('myclase1');
-                }
+                var check0 = document.getElementById("checkbox00");
+                check0.checked = false
             }
-            
-            //Selected Items
-            for(var i=0; i<arrayIdSelected.length; i++){
-                var trSelected = $('#'+arrayIdSelected[i]);
-                trSelected.attr('style','background-color:#dee8f2;cursor: pointer;color:#424242');
-                
-                var id = "checkbox-" + trSelected.attr('trInputId');
-                var check = document.getElementById(id);
-                if (check.type == 'checkbox') {
+        }
+        //Selected Items
+        console.info(arrayIdSelected)
+        for(var i=0; i<arrayIdSelected.length; i++){
+            var trSelected = $('#'+arrayIdSelected[i]);
+            var id = "checkbox-" + trSelected.attr('trInputId');
+            var check = document.getElementById(id);
+            var isSelected = $("#"+id).data("selected")
+            if (check.type == 'checkbox') {
+
+                    $("#"+id).data('selected', true);
                     check.checked = true;
-                    $('label[for="'+id+'"]').addClass('myclase1');
-                }
-                //$("#checked-" + trSelected.attr('trInputId')).checked = true;
+                    trSelected.attr('style','background-color:#dee8f2;cursor: pointer;color:#424242');
+                $('label[for="'+id+'"]').addClass('myclase1');
             }
+        }
         }
     
 </script>
@@ -388,29 +429,38 @@
     {% if pagerfanta %}
         {{ grid_pagerfanta(grid) }}
     {% else %}
-        
+
+        <script>
+            $("#checkbox00").click(function(evt) {
+                var check0 = document.getElementById("checkbox00");
+                var trs = $( "#tbodyRows" ).find('.avsys-grid-tr');
+                if(check0.checked == true){
+                    for(var i=0; i<trs.length; i++){
+                      $('#'+trs[i].id).attr('style','background-color:#dee8f2;cursor: pointer;color:#424242');
+                    }
+                }else {
+                    for(var i=0; i<trs.length; i++){
+                      $('#'+trs[i].id).attr('style','background-color:#FAFAFA;cursor: pointer;color:#333644');
+                    }
+                }
+            })
+        </script>
+        <style>
+            .select2-container--default .select2-selection--single .select2-selection__arrow {
+                margin-top: 5px;
+            }
+            .select2-container--default .select2-selection--single .select2-selection__rendered {
+                padding-top: 3px;
+            }
+        </style>
         <div class="row">
-            <div class="col l3">
-                <div class="progress">
-                    {%if grid.pageCount == 1%}
-                    <div class="active striped" style="width: 100%">100%</div>
-                    {%elseif grid.pageCount > 1%}
-                    {%set pocent = (grid.limit * (grid.page + 1) * 100) / grid.totalCount %}
-                    {%if pocent > 100%}
-                    {%set pocent = 100 %}
-                    {%endif%}
-                    
-                    <div class="active striped" style="width: {{pocent|parseInt}}%">{{pocent|parseInt}}%</div>
-                    {%endif%}
-                </div>
-            </div>
-            <div class="col l1">
+            <div class="col m4" style="padding-bottom: 0px;">
                  {{ grid_pager_totalcount(grid) }}
             </div>
-            <div class="col l4">
+            <div class="col m4" style="padding-right: 0px;padding-bottom: 0px;">
                 {{ grid_pager_selectpage(grid) }}
             </div>
-            <div class="col l3">
+            <div class="col m4" style="padding-bottom: 0px;">
                     {{ grid_pager_results_perpage(grid) }}
             </div>
         </div>
@@ -437,15 +487,15 @@
 {% block grid_pager_selectpage %}
 {% spaceless %}
             <div class="row" style="margin-top: 10px;">   
-                <div class="col l2"> 
+                <div class="col m2">
                     <b style="font-size: 12px;position: relative;top: -8px;left: 8px;">{{ 'Page'|trans }}</b> 
                 </div>  
-                <div class="col l6">
+                <div class="col m6">
                     <a  style="margin-top: -35px;width: 25px;padding-left: 10px;" class="btn btn-primary {% if grid.page <= 0 %}disabled{% endif %}" {% if grid.page <= 0 %}disabled="disabled" {% else %} onclick="return {{ grid.hash }}_previousPage();" {% endif %}><i class="mdi-hardware-keyboard-arrow-left"></i></a>
                     <input type='text' class="" value="{{ grid.page + 1 }}" style="width: 34px;margin-right: 10px !important;margin-left: 10px !important;text-align: center;position: relative;top: -17px; max-height: 34px;text-indent: -1px;" onkeypress="return {{ grid.hash }}_enterPage(event, parseInt(this.value)-1);"/>
                     <a style="margin-top: -35px;width: 25px;padding-left: 10px;" class="btn btn-primary {% if grid.page >= grid.pageCount-1 %}disabled {% endif %}" {% if grid.page >= grid.pageCount-1 %}disabled="disabled" {% else %}  onclick="return {{ grid.hash }}_nextPage();" {% endif %}><i class="mdi-hardware-keyboard-arrow-right"></i></a>
                 </div> 
-                <div class="col l2"> 
+                <div class="col m3">
                     <b style="font-size: 12px;position: relative;top: -7px;left: -22px;">of &nbsp;<label class="" style="font-size: 12px;
                     font-weight: 400;
                     font-size: .9rem;
