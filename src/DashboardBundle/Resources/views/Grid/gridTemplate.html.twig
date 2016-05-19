@@ -405,14 +405,12 @@
             }
         }
         //Selected Items
-        console.info(arrayIdSelected)
         for(var i=0; i<arrayIdSelected.length; i++){
             var trSelected = $('#'+arrayIdSelected[i]);
             var id = "checkbox-" + trSelected.attr('trInputId');
             var check = document.getElementById(id);
             var isSelected = $("#"+id).data("selected")
             if (check.type == 'checkbox') {
-
                     $("#"+id).data('selected', true);
                     check.checked = true;
                     trSelected.attr('style','background-color:#dee8f2;cursor: pointer;color:#424242');
@@ -431,19 +429,24 @@
     {% else %}
 
         <script>
-            $("#checkbox00").click(function(evt) {
-                var check0 = document.getElementById("checkbox00");
-                var trs = $( "#tbodyRows" ).find('.avsys-grid-tr');
-                if(check0.checked == true){
-                    for(var i=0; i<trs.length; i++){
-                      $('#'+trs[i].id).attr('style','background-color:#dee8f2;cursor: pointer;color:#424242');
-                    }
-                }else {
-                    for(var i=0; i<trs.length; i++){
-                      $('#'+trs[i].id).attr('style','background-color:#FAFAFA;cursor: pointer;color:#333644');
-                    }
-                }
-            })
+//            $(document).ready(function () {
+//
+//            $("#checkbox00").click(function(evt) {
+//                alert('asssssssssssss')
+////                var check0 = document.getElementById("checkbox00");
+////                var trs = $( "#tbodyRows" ).find('.avsys-grid-tr');
+////                if(check0.checked == true){
+////                    for(var i=0; i<trs.length; i++){
+////                      $('#'+trs[i].id).attr('style','background-color:#dee8f2;cursor: pointer;color:#424242');
+////                    }
+////                }else {
+////                    for(var i=0; i<trs.length; i++){
+////                      $('#'+trs[i].id).attr('style','background-color:#FAFAFA;cursor: pointer;color:#333644');
+////                    }
+////                }
+//            })
+//
+//            })
         </script>
         <style>
             .select2-container--default .select2-selection--single .select2-selection__arrow {
@@ -775,6 +778,18 @@
 {% block grid_scripts_mark_visible %}
                                                                                         function {{ grid.hash }}_markVisible(select)
                                                                                         {
+                                                                                            var check0 = document.getElementById("checkbox00");
+                                                                                            var trs = $( "#tbodyRows" ).find('.avsys-grid-tr');
+                                                                                            if(check0.checked == true){
+                                                                                                for(var i=0; i<trs.length; i++){
+                                                                                                $('#'+trs[i].id).attr('style','background-color:#dee8f2;cursor: pointer;color:#424242');
+                                                                                            }
+                                                                                            }else {
+                                                                                                for(var i=0; i<trs.length; i++){
+                                                                                                $('#'+trs[i].id).attr('style','background-color:#FAFAFA;cursor: pointer;color:#333644');
+                                                                                            }
+                                                                                            }
+
                                                                                             var form = document.getElementById('{{ grid.hash }}');
 
                                                                                             var counter = 0;
