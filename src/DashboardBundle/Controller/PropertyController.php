@@ -9,6 +9,7 @@ use DashboardBundle\Entity\Property;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use APY\DataGridBundle\Grid\Source\Entity;
 use APY\DataGridBundle\Grid\Action\DeleteMassAction;
@@ -47,6 +48,26 @@ class PropertyController extends BaseController
   }
 
   /**
+   * @Route("/properties/show", name="properties_show")
+   */
+  public function showAction(Request $request) {
+    $messageInfoNotSelected = "Select one Property in the list";
+    $indexRouting = "properties_index";
+    $idSelected = $this->getFiertSelectetGridItem();
+    if (!$idSelected) {
+      $this->addFlash('info', $messageInfoNotSelected);
+      return $this->redirect($this->generateUrl($indexRouting));
+    }
+    $entity = $this->getDoctrine()->getRepository('DashboardBundle:Property')->find($idSelected);
+    if (!$entity) {
+      return $this->addFlash('info', $messageInfoNotSelected, $indexRouting);
+    }
+    return $this->render('DashboardBundle:Properties:show.html.twig', array(
+        'property' => $entity,
+    ));
+  }
+
+    /**
    * @Route("/properties/design", name="properties_design")
    */
   public function designAction(Request $request)

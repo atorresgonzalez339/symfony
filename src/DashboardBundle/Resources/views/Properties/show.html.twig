@@ -1,0 +1,33 @@
+{% extends 'DashboardBundle:Common:backend2.html.twig' %}
+
+{% block stylesheets_priority %}
+	{{ parent() }}
+	<link href="{{ asset('bundles/dashboard/material/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
+{% endblock stylesheets_priority %}
+
+{% block breadcrumb %}
+	<li>
+		<a href="{{ path('properties_index') }}">My Properties</a>
+		<i class="mdi-navigation-chevron-right"></i>
+	</li>
+	<li><a>Show</a></li>
+{% endblock breadcrumb%}
+
+{% block content %}
+	<div class="card">
+		<div class="title">
+			<h5> Properties - {{ property.name }}</h5>
+		</div>
+		<div class="content">
+			aaaaaaaaaa
+		</div>
+	</div>
+
+{% endblock content%}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script src="{{ asset('bundles/dashboard/material/js/select2.full.min.js') }}"></script>
+{% endblock javascripts %}
+
+

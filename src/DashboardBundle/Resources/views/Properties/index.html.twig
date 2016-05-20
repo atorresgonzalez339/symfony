@@ -34,6 +34,10 @@
 					<i class="mdi mdi-content-create left"></i>
 					Edit
 				</a>
+				<a id="show_action" class="btn btn-small waves-dark waves-effect">
+					<i class="mdi mdi-action-view-day left"></i>
+					Show
+				</a>
 				<a id="delete_action" class="btn btn-small waves-dark waves-effect red">
 					<i class="mdi mdi-content-clear left"></i>
 					Delete
@@ -70,6 +74,11 @@
 
 			$('#delete_action').click(function(){
 				$('#{{idFormGrid}}').attr('action', '{{path("properties_remove")}}');
+				$('#{{idFormGrid}}').submit();
+			});
+
+			$('#show_action').click(function(){
+				$('#{{idFormGrid}}').attr('action', '{{path("properties_show")}}');
 				$('#{{idFormGrid}}').submit();
 			});
 		});
