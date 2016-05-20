@@ -20,7 +20,7 @@
 
   </script>
 
-  <div class="grid">
+  <div class="grid" style="padding-bottom: 0px;">
 
     {% if grid.totalCount > 0 or grid.isFiltered or grid.noDataMessage is sameas(false) %}
     <form id="{{ grid.hash }}" action="{{ grid.routeUrl }}" method="post">
@@ -540,28 +540,22 @@
     {{ grid_pagerfanta(grid) }}
   {% else %}
 
+    <style>
+      .select2-container--default .select2-selection--single .select2-selection__arrow {
+        margin-top: 0px;
+      }
+      .select2-container--default .select2-selection--single .select2-selection__rendered {
+        padding-top: 0px;
+      }
+    </style>
     <div class="row">
-      <div class="col l3">
-        <div class="progress">
-          {% if grid.pageCount == 1 %}
-            <div class="active striped" style="width: 100%">100%</div>
-          {% elseif grid.pageCount > 1 %}
-            {% set pocent = (grid.limit * (grid.page + 1) * 100) / grid.totalCount %}
-            {% if pocent > 100 %}
-              {% set pocent = 100 %}
-            {% endif %}
-
-            <div class="active striped" style="width: {{ pocent|parseInt }}%">{{ pocent|parseInt }}%</div>
-          {% endif %}
-        </div>
-      </div>
-      <div class="col l1">
+      <div class="col m4" style="padding-bottom: 0px;">
         {{ grid_pager_totalcount(grid) }}
       </div>
-      <div class="col l4">
+      <div class="col m4" style="padding-right: 0px;padding-bottom: 0px;">
         {{ grid_pager_selectpage(grid) }}
       </div>
-      <div class="col l3">
+      <div class="col m4" style="padding-bottom: 0px;">
         {{ grid_pager_results_perpage(grid) }}
       </div>
     </div>
