@@ -47,7 +47,22 @@ class Activity
     /**
      * @ORM\Column(type="integer", nullable=false)
      */
-    private $bounced;
+    private $soft_bounced;
+
+    /**
+     * @ORM\Column(type="integer", nullable=false)
+     */
+    private $hard_bounced;
+
+    /**
+     * @ORM\Column(type="integer", nullable=false)
+     */
+    private $spam;
+
+    /**
+     * @ORM\Column(type="integer", nullable=false)
+     */
+    private $unsubscribed;
 
     /**
      * @ORM\Column(type="integer", nullable=false)

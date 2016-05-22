@@ -17,14 +17,19 @@
         <div class="col m3" style="padding-right: 20px;">
             {% include 'UserBundle:Profile:Partials/_profile-picture.html.twig' %}
         </div>
-        <div class="col m9"
-             style="border-left: 1px solid #eee;background-color: #FFFFFF;min-height: 570px;border-bottom: 1px solid #eee;">
+        <div class="col m9" style="border-left: 1px solid #eee;background-color: #FFFFFF;min-height: 570px;border-bottom: 1px solid #eee;">
             <div class="row" style="margin-top: 0px">
                 <div class="col s12" style="padding-bottom: 5px;">
                     <ul class="tabs tab-nav">
-                        <li class="tab col s1 waves-effect"><a href="#test1" class="active">Profile</a></li>
-                        <li class="tab col s1 waves-effect"><a href="#test2">Account</a></li>
-                        <li class="tab col s1 waves-effect"><a href="#test3">Billing</a></li>
+                        <li class="tab col s1 waves-effect">
+                            <a href="#tab-profile-info" class="active">Profile</a>
+                        </li>
+                        <li class="tab col s1 waves-effect">
+                            <a href="#tab-account-info">Account</a>
+                        </li>
+                        <li class="tab col s1 waves-effect">
+                            <a href="#tab-billing-info">Billing</a>
+                        </li>
                     </ul>
                 </div>
 

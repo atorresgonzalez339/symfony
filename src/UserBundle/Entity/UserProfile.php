@@ -120,6 +120,11 @@ class UserProfile
      */
     private $mandrill_subaccount;
 
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $licence_number;
+
 
     /**
      * Get id
