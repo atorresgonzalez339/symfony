@@ -20,7 +20,7 @@
 
 </script>
 
-<div class="grid">
+<div class="grid" style="padding-bottom: 0px;">
     
 {% if grid.totalCount > 0 or grid.isFiltered or grid.noDataMessage is sameas(false) %}
     <form id="{{ grid.hash }}" action="{{ grid.routeUrl }}" method="post">
@@ -287,52 +287,19 @@
 {% endblock grid_titles %}#}
 {# -------------------------------------------------- grid_filters --------------------------------------------------- #}
 {% block grid_filters %}
-  {% for column in grid.columns %}
-    {% if loop.index0!=0 %}
-      {% if column.visible(grid.isReadyForExport) and column.filterable%}
-        <th {% if loop.last %} class="last-column"{%else%}class="col l3 column-{{ column.title }}"{% endif %}{% if(column.size > -1) %} style="width:" {% endif %}>
-          {% if column.filterable%}
-            {{ grid_filter(column, grid)|raw }}
-          {% endif %}
-        </th>
-      {% endif %}
-    {% endif %}
-  {% endfor %}
-
-    {#<ul class="collapsible" data-collapsible="accordion">#}
-        {#<li {% if grid.isFiltered %} class="active" {% endif %}>#}
-            {#<div class="align-left collapsible-header {% if grid.isFiltered %} active {% endif %}"><i class="mdi-content-filter-list"></i>{{'Filters'|trans}}</div>#}
-            {#<div class="collapsible-body" style="background-color: #FFFFFF">#}
-
-                {#{% for column in grid.columns %}#}
-                {#<div class="row">#}
-                    {#{% for i in 0..3 %}#}
-                    {#<div class="col s3">#}
-                        {#dsds- {{ loop.index0 }}#}
-                    {#</div>#}
-                    {#{% endfor %}#}
-                {#</div>#}
-                {#{% endfor %}#}
-
-                {#<table>#}
-                    {#<tr class="grid-row-filters row">#}
-                        {#{% for column in grid.columns %}#}
-                           {#{% if loop.index0!=0 %}#}
-                             {#{% if column.visible(grid.isReadyForExport) and column.filterable%}#}
-                                {#<th {% if loop.last %} class="last-column"{%else%}class="col l3 column-{{ column.title }}"{% endif %}{% if(column.size > -1) %} style="width:" {% endif %}>#}
-                                    {#{% if column.filterable%}#}
-                                        {#{{ grid_filter(column, grid)|raw }}#}
-                                    {#{% endif %}#}
-                                {#</th>#}
-                             {#{% endif %}#}
-                           {#{% endif %}#}
-                        {#{% endfor %}#}
-                    {#</tr>#}
-                {#</table>#}
-            {#</div>#}
-        {#</li>#}
-    {#</ul>#}
-            
+    <div class="row" style="margin-top: 0px;">
+        <div class="col m12" style="padding-bottom: 75px;">
+            {% for column in grid.columns %}
+                {% if loop.index0!=0 %}
+                    {% if column.visible(grid.isReadyForExport) and column.filterable %}
+                        {% if column.filterable %}
+                            {{ grid_filter(column, grid)|raw }}
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
 {% endblock grid_filters %}
 
 {# -------------------------------------------------- grid_search ---------------------------------------------------- #}
@@ -364,15 +331,10 @@
 {% set from = column.data.from is defined ? column.data.from : null %}
 {% set to = column.data.to is defined ? column.data.to : null %}
     
-    <span class="grid-filter-input">
+    <span class="grid-filter-input" style="position: absolute;right: 0">
 
             <span class="grid-filter-input-query">
                 <table class="">   
-                    {#<tr >#}
-                        {#<div style="margin-left: 20px;">#}
-                            {#{{ block('grid_column_operator')}}#}
-                        {#</div> #}
-                    {#</tr>#}
                     <tr>
                         <div class="form-search" style="margin-left: 20px;">
                             <div id="filter-bar" class="btn-toolbar">
@@ -380,7 +342,31 @@
                                     <div class="span6">
                                         <div class="input-group input-group-sm">
                                             <div class="input-group input-group-sm">
-                                                <input style="margin-top: 5px !important;width: 280px" type="{{ column.inputType }}" value="{{ from }}" class="input-small  search-query input-small grid-filter-input-query-from " placeholder="{{ column.title|trans }}" name="{{ grid.hash }}[{{ column.id }}][from]" id="{{ grid.hash }}__{{ column.id }}__query__from" {% if submitOnChange is sameas(true) %}onkeypress="return {{ grid.hash }}_submitForm(event, this.form);"{% endif%} {{ ( op == isNullOperator or op == isNotNullOperator ) ? 'style="display: none;" disabled="disabled"' : '' }} />
+                                                <style>
+                                                    span.search-clean-close {
+                                                        cursor: pointer;color: #9E9E9E;position: absolute;right: 42px;top: 8px;font-size: 20px;
+                                                    }
+                                                </style>
+                                                <script>
+                                                    $(document).ready(function () {
+                                                        var valueSearchObjs = $('.input-search-filter');
+                                                        for(var i = 0; i < valueSearchObjs.length;i++){
+                                                            var valueSearchObj = valueSearchObjs[i]
+                                                            var inputValue = $('#'+valueSearchObj.id).val()
+                                                            if(inputValue!==""){
+                                                                var spanId = "input-search-close-" + $('#'+valueSearchObj.id).data("item-id")
+                                                                $('#'+spanId).attr("style","display:block")
+                                                                $( "#"+spanId ).on( "click", function() {
+                                                                    $('#'+valueSearchObj.id).val("")
+                                                                    return {{ grid.hash }}_submitForm(event, this.form);
+                                                                });
+                                                            }
+                                                        }
+//
+                                                    });
+                                                </script>
+                                                <span style="display:none" id="input-search-close-{{ column.id }}" class="mdi-navigation-close search-clean-close"> </span>
+                                                <input id="input-search-{{ column.id }}" data-item-id="{{ column.id }}" style="margin-top: 5px !important;width: 280px" type="{{ column.inputType }}" value="{{ from }}" class="input-search-filter     input-small  search-query input-small grid-filter-input-query-from " placeholder="{{ column.title|trans }}" name="{{ grid.hash }}[{{ column.id }}][from]" id="{{ grid.hash }}__{{ column.id }}__query__from" {% if submitOnChange is sameas(true) %}onkeypress="return {{ grid.hash }}_submitForm(event, this.form);"{% endif%} {{ ( op == isNullOperator or op == isNotNullOperator ) ? 'style="display: none;" disabled="disabled"' : '' }} />
                                                 <span class="input-group-btn">
                                                     <button style="padding-left: 11px;padding-right: 10px;margin-left: -4px;margin-top: -3px;border-top-left-radius: 0px;border-bottom-left-radius: 0px;min-height: 37px;" type="submit" onclick="return {{ grid.hash }}_submitForm(event, this.form);" class="btn btn-primary tooltipped" data-position="bottom" data-delay="50" data-tooltip="{{ 'Search'|trans }}" ><i class="mdi-action-search"></i> {#{{'SEARCH'|trans}}#} </button>
                                                 </span>
@@ -512,30 +498,24 @@
     {% if pagerfanta %}
         {{ grid_pagerfanta(grid) }}
     {% else %}
-        
+
+        <style>
+            .select2-container--default .select2-selection--single .select2-selection__arrow {
+                margin-top: 0px;
+            }
+            .select2-container--default .select2-selection--single .select2-selection__rendered {
+                padding-top: 0px;
+            }
+        </style>
         <div class="row">
-            <div class="col l3">
-                <div class="progress">
-                    {%if grid.pageCount == 1%}
-                    <div class="active striped" style="width: 100%">100%</div>
-                    {%elseif grid.pageCount > 1%}
-                    {%set pocent = (grid.limit * (grid.page + 1) * 100) / grid.totalCount %}
-                    {%if pocent > 100%}
-                    {%set pocent = 100 %}
-                    {%endif%}
-                    
-                    <div class="active striped" style="width: {{pocent|parseInt}}%">{{pocent|parseInt}}%</div>
-                    {%endif%}
-                </div>
+            <div class="col m4" style="padding-bottom: 0px;">
+                {{ grid_pager_totalcount(grid) }}
             </div>
-            <div class="col l1">
-                 {{ grid_pager_totalcount(grid) }}
-            </div>
-            <div class="col l4">
+            <div class="col m4" style="padding-right: 0px;padding-bottom: 0px;">
                 {{ grid_pager_selectpage(grid) }}
             </div>
-            <div class="col l3">
-                    {{ grid_pager_results_perpage(grid) }}
+            <div class="col m4" style="padding-bottom: 0px;">
+                {{ grid_pager_results_perpage(grid) }}
             </div>
         </div>
                     
