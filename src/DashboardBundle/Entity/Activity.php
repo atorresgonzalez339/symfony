@@ -198,6 +198,13 @@ class Activity
         return $this;
     }
 
+    public function addDelivered()
+    {
+        $this->delivered++;
+
+        return $this;
+    }
+
     /**
      * Get delivered
      *
@@ -244,6 +251,13 @@ class Activity
         return $this;
     }
 
+    public function addOpens()
+    {
+        $this->opens++;
+
+        return $this;
+    }
+
     /**
      * Get opens
      *
@@ -267,6 +281,13 @@ class Activity
         return $this;
     }
 
+    public function addUniqueOpens()
+    {
+        $this->unique_opens++;
+
+        return $this;
+    }
+
     /**
      * Get unique_opens
      *
@@ -275,5 +296,125 @@ class Activity
     public function getUniqueOpens()
     {
         return $this->unique_opens;
+    }
+
+    /**
+     * Set soft_bounced
+     *
+     * @param integer $softBounced
+     * @return Activity
+     */
+    public function setSoftBounced($softBounced)
+    {
+        $this->soft_bounced = $softBounced;
+
+        return $this;
+    }
+
+    public function addSoftBounced()
+    {
+        $this->soft_bounced++;
+
+        return $this;
+    }
+
+    /**
+     * Get soft_bounced
+     *
+     * @return integer 
+     */
+    public function getSoftBounced()
+    {
+        return $this->soft_bounced;
+    }
+
+    /**
+     * Set hard_bounced
+     *
+     * @param integer $hardBounced
+     * @return Activity
+     */
+    public function setHardBounced($hardBounced)
+    {
+        $this->hard_bounced = $hardBounced;
+
+        return $this;
+    }
+
+    public function addHardBounced()
+    {
+        $this->hard_bounced++;
+
+        return $this;
+    }
+
+    /**
+     * Get hard_bounced
+     *
+     * @return integer 
+     */
+    public function getHardBounced()
+    {
+        return $this->hard_bounced;
+    }
+
+    /**
+     * Set spam
+     *
+     * @param integer $spam
+     * @return Activity
+     */
+    public function setSpam($spam)
+    {
+        $this->spam = $spam;
+
+        return $this;
+    }
+
+    public function addSpam()
+    {
+        $this->spam++;
+
+        return $this;
+    }
+
+    /**
+     * Get spam
+     *
+     * @return integer 
+     */
+    public function getSpam()
+    {
+        return $this->spam;
+    }
+
+    /**
+     * Set unsubscribed
+     *
+     * @param integer $unsubscribed
+     * @return Activity
+     */
+    public function setUnsubscribed($unsubscribed)
+    {
+        $this->unsubscribed = $unsubscribed;
+
+        return $this;
+    }
+
+    public function addUnsubscribed()
+    {
+        $this->unsubscribed++;
+
+        return $this;
+    }
+
+    /**
+     * Get unsubscribed
+     *
+     * @return integer 
+     */
+    public function getUnsubscribed()
+    {
+        return $this->unsubscribed;
     }
 }

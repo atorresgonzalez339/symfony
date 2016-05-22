@@ -47,6 +47,43 @@ class ActivityBusiness extends BaseBusiness {
     print_r($result);
     die('aki');
 
+  }
+
+  public function processFlyerEvent($email, $activity_id, $event){
+
+    $activity = $this->getRepository('Dashboard', 'Activity')
+                     ->findOneBy(array('activity_id' => $activity_id));
+
+    switch($event){
+      case 'send':{
+          $activity->addDelivered();
+        break;
+      }
+      case 'hard_bounce':
+      case 'reject':{
+          $activity->addHardBounced();
+        break;
+      }
+      case 'soft_bounce':
+      case 'deferral': {
+        $activity->addSoftBounced();
+        break;
+      }
+      case 'open':{
+        $activity->addOpens();
+        break;
+      }
+      case 'spam':{
+        $activity->addSpam();
+        break;
+      }
+      case 'unsub':{
+        $activity->getUnsubscribed();
+        break;
+      }
+    }
+
+    $this->saveData($activity);
 
   }
 

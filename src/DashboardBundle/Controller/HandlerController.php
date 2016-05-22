@@ -51,44 +51,19 @@ class HandlerController extends BaseController
     foreach ($events as $event) {
       if (filter_var($event['msg']['email'], FILTER_VALIDATE_EMAIL)) {
         switch ($event["event"]) {
-          case "send": {
-            $this->event_send($event);
+          case "send":
+          case "hard_bounce":
+          case "soft_bounce":
+          case "open":
+          case "spam":
+          case "spamreport":
+          case "deferral":
+          case "reject":
+          case "unsub":
+            $this->standardEventsHandler($event);
             break;
-          }
-          case "deferral": {
-            $this->webhooks_soft_bounce($event);
-            break;
-          }
-          case "hard_bounce": {
-            $this->webhooks_hard_bounce($event);
-            break;
-          }
-          case "soft_bounce": {
-            $this->webhooks_soft_bounce($event);
-            break;
-          }
-          case "open": {
-            $this->event_open($event);
-            break;
-          }
           case "click": {
             $this->event_click($event);
-            break;
-          }
-          case "spam": {
-            $this->webhooks_spam_report($event);
-            break;
-          }
-          case "spamreport": {
-            $this->webhooks_spam_report($event);
-            break;
-          }
-          case "unsub": {
-            $this->event_unsubscribe($event);
-            break;
-          }
-          case "reject": {
-            $this->webhooks_hard_bounce($event['msg']['email'], "reject: " . $event['msg']['bounce_description']);
             break;
           }
           default: {
@@ -102,39 +77,42 @@ class HandlerController extends BaseController
 
   }
 
-  function event_send($event)
+  function standardEventsHandler($event)
   {
+    $activityBusiness = $this->findBusiness('dashboard.activity.business');
+
     $email = $event['msg']['email'];
     $metadata = $event['msg']['metadata'];
     $tags = $event['msg']['tags'];
+
+    $state = $event['msg']['state'];
+    $date_sent = $event['msg']['ts'];
+    $message_id = $event['msg']['_id'];
+
+    $bounced_reason = null;
+    $bounced_description = null;
+
+    switch($event["event"]){
+      case 'soft_bounce':
+      case 'hard_bounce':
+      case 'deferral':
+      case 'reject': {
+        $bounced_description = $event['msg']['diag'];
+        $bounced_reason = $event['msg']['bounce_description'];
+      break;
+      }
+    }
+
+    if(in_array('flyer', $tags) && in_array('activity_id', $metadata)){
+      $activity_id = $metadata['activity_id'];
+      $activityBusiness->processFlyerEvent($email, $activity_id, $event);
+    }
   }
-
-  function webhooks_soft_bounce($event){
-
-  }
-
-  function webhooks_hard_bounce($event){
-
-  }
-
-  function webhooks_spam_report($event){
-
-  }
-
-  function event_open($event)
-  {
-
-  } // function event_open($event)
 
   function event_click($event)
   {
 
   } // function event_click($event)
-
-  function event_unsubscribe($event)
-  {
-
-  } // function event_unsubscribe($event)
 
   function webhooks_debug($event)
   {
