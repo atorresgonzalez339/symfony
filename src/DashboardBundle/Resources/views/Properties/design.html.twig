@@ -8,7 +8,11 @@
 {% endblock stylesheets_priority %}
 
 {% block breadcrumb %}
-  <li><a href="{{ path('properties_index') }}">Properties</a></li>
+  <li>
+    <a href="{{ path('properties_index') }}">My Properties</a>
+    <i class="mdi-navigation-chevron-right"></i>
+  </li>
+  <li><a>Edit</a></li>
 {% endblock breadcrumb %}
 
 {% block content %}
