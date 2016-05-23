@@ -14,6 +14,7 @@ class UserProfile
     public function __construct(User $user){
         $this->user = $user;
         $this->is_completed = false;
+        $this->email = $user->getEmail();
     }
 
     /**

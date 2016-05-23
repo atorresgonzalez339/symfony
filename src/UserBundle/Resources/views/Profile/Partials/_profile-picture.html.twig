@@ -1,7 +1,7 @@
 <div class="card small" id="profile-left-box" style="background-color: #F8F8F8;color: #5E5E5E;">
     <div class="card-image card-image-profile">
         {% if profile.photoId %}
-            <img src="{{ profile.photoId | cloudinary_url({'crop':'crop', 'gravity':'face', 'width':400, 'height':400}) }}">
+            <img src="{{ profile.photoId | cloudinary_url({'crop':'scale', 'width':400, 'height':400}) }}">
         {% else %}
             <img src="{{ asset('bundles/dashboard/images/profile-icon.png') }}">
         {% endif %}
@@ -32,15 +32,13 @@
                 format: 'png',
                 width: 400,
                 height: 400,
-                crop: "crop",
-                gravity:"face"
+                crop: "scale",
             });
             var profile_picture_thumb = $.cloudinary.image(data.result.public_id,{
                 format: 'png',
                 width: 250,
                 height:250,
-                crop: "crop",
-                gravity:"face",
+                crop: "scale",
                 radius: 'max'
             });
             var profile_img = $('.card-image-profile img');
