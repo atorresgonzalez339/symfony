@@ -88,6 +88,7 @@ class ProfileController extends BaseController
       if ($profile_form->isValid()) {
 
         $this->getBusiness()->saveProfile($profile);
+        $user->setProfile($profile);
 
         //Add free Plan to the user after complete profile
         if(!$user->getCurrentPlan()){
