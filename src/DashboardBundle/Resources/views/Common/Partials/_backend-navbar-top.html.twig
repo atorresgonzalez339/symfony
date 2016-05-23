@@ -54,7 +54,7 @@
       <li class="user">
         <a class="dropdown-button" data-activates="user-dropdown" href="http://html.nkdev.info/_con/ui-buttons.html#!">
           {% if app.user.profile.photoId is defined and app.user.profile.photoId %}
-            <img class="profile-photo-thumb" src="{{ app.user.profile.photoId | cloudinary_url({'format':'png', 'crop':'crop', 'gravity':'face', 'radius':'max', 'width':250, 'height':250}) }}">
+            <img class="profile-photo-thumb" src="{{ app.user.profile.photoId | cloudinary_url({'format':'png', 'crop':'scale', 'radius':'max', 'width':250, 'height':250}) }}">
           {% else %}
             <img class="profile-photo-thumb circle" src="{{ asset('bundles/dashboard/images/profile-icon.png') }}">
           {% endif %}
