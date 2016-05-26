@@ -14,7 +14,9 @@ class PropertyType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('description')
+            ->add('description',null,array(
+                'attr' => array('style' => 'width: 99%;'),
+            ))
             ->add('bedrooms')
             ->add('bathrooms')
             ->add('amenities')

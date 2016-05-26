@@ -159,10 +159,11 @@ textarea.min-h-80{
     min-width: 100% !important;
 }
 .input-field label {
-    /*left: 0px;*/
+    left: 8px;
+    top: 9px;
 }
 .input-field label.active {
-    transform: translateY(-170%) !important;
+    transform: translateY(-142%) !important;
     left: 0px;
     font-size: 12px !important;
 }
