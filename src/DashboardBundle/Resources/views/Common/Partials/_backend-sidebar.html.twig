@@ -13,18 +13,18 @@
   <div class="nano has-scrollbar">
     <div class="nano-content" tabindex="0" style="right: -17px;">
       <ul>
-        <li class="yay-user-info">
-          <a href="{{path('profile_index')}}">
-            {% if app.user.profile.photoId is defined and app.user.profile.photoId %}
-              <img class="profile-photo-thumb" src="{{ app.user.profile.photoId | cloudinary_url({'format':'png', 'crop':'scale', 'radius':'max', 'width':250, 'height':250}) }}">
-            {% else %}
-              <img class="profile-photo-thumb circle" src="{{ asset('bundles/dashboard/images/profile-icon.png') }}">
-            {% endif %}
-            <h3 class="yay-user-info-name">{{ app.user.profile.fullName is defined ? app.user.profile.fullName : app.user.username }}</h3>
-            <div class="yay-user-location"><i class="fa fa-map-marker"></i> Las Vegas, NV</div>
-          </a>
-        </li>
-        <li>
+        {#<li class="yay-user-info">#}
+          {#<a href="{{path('profile_index')}}">#}
+            {#{% if app.user.profile.photoId is defined and app.user.profile.photoId %}#}
+              {#<img class="profile-photo-thumb" src="{{ app.user.profile.photoId | cloudinary_url({'format':'png', 'crop':'fill', 'radius':'max', 'width':250, 'height':250}) }}">#}
+            {#{% else %}#}
+              {#<img class="profile-photo-thumb circle" src="{{ asset('bundles/dashboard/images/profile-icon.png') }}">#}
+            {#{% endif %}#}
+            {#<h3 class="yay-user-info-name">{{ app.user.profile.fullName is defined ? app.user.profile.fullName : app.user.username }}</h3>#}
+            {#<div class="yay-user-location"><i class="fa fa-map-marker"></i> Las Vegas, NV</div>#}
+          {#</a>#}
+        {#</li>#}
+        <li style="margin-top: 20px;">
           <a href="{{path('dashboard_index')}}" class="waves-effect waves-blue">
             <i class="fa fa-home"></i> Dashboard
           </a>
