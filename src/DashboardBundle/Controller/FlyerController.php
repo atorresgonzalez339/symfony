@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use APY\DataGridBundle\Grid\Source\Entity;
 use APY\DataGridBundle\Grid\Action\DeleteMassAction;
 use DashboardBundle\Entity\Flyer;
+use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
 class FlyerController extends BaseController
 {
@@ -187,6 +188,27 @@ class FlyerController extends BaseController
       $data .= base64_encode($thumb->getImageAsString());
 
       return new JsonResponse(array('img' => $data));
+
+    }
+
+    /**
+     * @Route("/flyer/view_online", name="flyer_view_online")
+     */
+    public function viewOnlineAction(Request $request){
+
+      $flyer_id = $request->get('flyer_id');
+
+      $flyer = $this->getDoctrine()
+                    ->getRepository('DashboardBundle:Flyer')
+                    ->find($flyer_id);
+
+      if(!$flyer){
+        throw new ResourceNotFoundException();
+      }
+
+      return $this->render('DashboardBundle:Flyer:view_online.html.twig', array(
+        'flyer' => $flyer,
+      ));
 
     }
 }
