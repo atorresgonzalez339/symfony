@@ -1,87 +1,95 @@
-<style>
-  .tag-key-description {
-    text-align: right;
-    padding-bottom: 10px !important;
-    padding-right: 10px !important;
-  }
-  .tag-value-description {
-    padding-bottom: 10px !important;
-    padding-right: 10px !important;
-  }
-</style>
 
-<div class="row" id="main-info" style="margin-top: 0px;">
-  <div class="col m12">
-      <div class="card">
-        <div class="title">
-          <h5> Basic Information </h5>
-        </div>
-        <div class="content" style="padding-top: 5px;padding-bottom: 5px;">
-          <div class="row" style="margin-top: 0px">
-            <div class="col m2 tag-key-description"><b>Property Name:</b></div>
-            <div class="col m10 tag-value-description">{{ property.name }}</div>
-          </div>
-          <div class="row" style="margin-top: 0px">
-            <div class="col m2 tag-key-description"><b>Property Description:</b></div>
-            <div class="col m10">{{ property.description }}</div>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="title">
-          <h5> Attributes </h5>
-        </div>
-        <div class="content" style="padding-top: 5px;padding-bottom: 15px;">
-          <div class="row" style="margin-top: 5px;">
-            <div class="col m6">
-              <div class="row" style="margin-top: 0px">
-                <div class="col m2 tag-key-description"><b>Rooms:</b></div>
-                <div class="col m10 tag-value-description">{{ property.bedrooms }}</div>
-              </div>
-              <div class="row" style="margin-top: 0px">
-                <div class="col m2 tag-key-description"><b>Baths:</b></div>
-                <div class="col m10 tag-value-description">{{ property.bathrooms }}</div>
-              </div>
-              <div class="row" style="margin-top: 0px">
-                <div class="col m2 tag-key-description"><b>Parking:</b></div>
-                <div class="col m10 tag-value-description">{{ property.getParkingSpaces() }}</div>
-              </div>
-              <div class="row" style="margin-top: 0px">
-                <div class="col m2 tag-key-description"><b>Unit Size:</b></div>
-                <div class="col m10 tag-value-description">{{ property.getUnitSize() }}</div>
-              </div>
-              <div class="row" style="margin-top: 0px">
-                <div class="col m2 tag-key-description"><b>Year Built:</b></div>
-                <div class="col m10 tag-value-description">{{ property.getYearBuilt() }}</div>
-              </div>
-              <div class="input-field">
-                <div class="row" style="margin-top: 0px;">
-                  <div class="col m6">
-                    <div class="row" style="margin-top: 0px">
-                      <div class="col m2 tag-key-description"><b>Price:</b></div>
-                      <div class="col m10 tag-value-description">{{ property.getListPrice() }}</div>
-                    </div>
-                  </div>
-                  <div class="col m6">
-                    <p style="margin-top: 5px;">
+
+
+
+
+
+
+
+{#<style>#}
+  {#.tag-key-description {#}
+    {#text-align: right;#}
+    {#padding-bottom: 10px !important;#}
+    {#padding-right: 10px !important;#}
+  {#}#}
+  {#.tag-value-description {#}
+    {#padding-bottom: 10px !important;#}
+    {#padding-right: 10px !important;#}
+  {#}#}
+{#</style>#}
+
+{#<div class="row" id="main-info" style="margin-top: 0px;">#}
+  {#<div class="col m12">#}
+      {#<div class="card">#}
+        {#<div class="title">#}
+          {#<h5> Basic Information </h5>#}
+        {#</div>#}
+        {#<div class="content" style="padding-top: 5px;padding-bottom: 5px;">#}
+          {#<div class="row" style="margin-top: 0px">#}
+            {#<div class="col m2 tag-key-description"><b>Property Name:</b></div>#}
+            {#<div class="col m10 tag-value-description">{{ property.name }}</div>#}
+          {#</div>#}
+          {#<div class="row" style="margin-top: 0px">#}
+            {#<div class="col m2 tag-key-description"><b>Property Description:</b></div>#}
+            {#<div class="col m10">{{ property.description }}</div>#}
+          {#</div>#}
+        {#</div>#}
+      {#</div>#}
+      {#<div class="card">#}
+        {#<div class="title">#}
+          {#<h5> Attributes </h5>#}
+        {#</div>#}
+        {#<div class="content" style="padding-top: 5px;padding-bottom: 15px;">#}
+          {#<div class="row" style="margin-top: 5px;">#}
+            {#<div class="col m6">#}
+              {#<div class="row" style="margin-top: 0px">#}
+                {#<div class="col m2 tag-key-description"><b>Rooms:</b></div>#}
+                {#<div class="col m10 tag-value-description">{{ property.bedrooms }}</div>#}
+              {#</div>#}
+              {#<div class="row" style="margin-top: 0px">#}
+                {#<div class="col m2 tag-key-description"><b>Baths:</b></div>#}
+                {#<div class="col m10 tag-value-description">{{ property.bathrooms }}</div>#}
+              {#</div>#}
+              {#<div class="row" style="margin-top: 0px">#}
+                {#<div class="col m2 tag-key-description"><b>Parking:</b></div>#}
+                {#<div class="col m10 tag-value-description">{{ property.getParkingSpaces() }}</div>#}
+              {#</div>#}
+              {#<div class="row" style="margin-top: 0px">#}
+                {#<div class="col m2 tag-key-description"><b>Unit Size:</b></div>#}
+                {#<div class="col m10 tag-value-description">{{ property.getUnitSize() }}</div>#}
+              {#</div>#}
+              {#<div class="row" style="margin-top: 0px">#}
+                {#<div class="col m2 tag-key-description"><b>Year Built:</b></div>#}
+                {#<div class="col m10 tag-value-description">{{ property.getYearBuilt() }}</div>#}
+              {#</div>#}
+              {#<div class="input-field">#}
+                {#<div class="row" style="margin-top: 0px;">#}
+                  {#<div class="col m6">#}
+                    {#<div class="row" style="margin-top: 0px">#}
+                      {#<div class="col m2 tag-key-description"><b>Price:</b></div>#}
+                      {#<div class="col m10 tag-value-description">{{ property.getListPrice() }}</div>#}
+                    {#</div>#}
+                  {#</div>#}
+                  {#<div class="col m6">#}
+                    {#<p style="margin-top: 5px;">#}
                       {#{{ form_widget(property_form.for_rent, {'attr': {'class':'filled-in'}}) }}#}
-                      <input type="checkbox" class="filled-in" id="property_for_rent" checked="checked" />
+                      {#<input type="checkbox" class="filled-in" id="property_for_rent" checked="checked" />#}
 
-                      <label for="property_for_rent">Is it for rent?</label>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="row" style="margin-top: 0px">
-                <div class="col m2 tag-key-description"><b>Lease Term:</b></div>
-                <div class="col m10">{{ property.getLeaseTerm() }}</div>
-              </div>
-            </div>
-            <div class="col m6">
-              <div class="row" style="margin-top: 0px">
-                <div class="col m2 tag-key-description"><b>Year Built:</b></div>
-                <div class="col m10 tag-value-description">{{ property.getYearBuilt() }}</div>
-              </div>
+                      {#<label for="property_for_rent">Is it for rent?</label>#}
+                    {#</p>#}
+                  {#</div>#}
+                {#</div>#}
+              {#</div>#}
+              {#<div class="row" style="margin-top: 0px">#}
+                {#<div class="col m2 tag-key-description"><b>Lease Term:</b></div>#}
+                {#<div class="col m10">{{ property.getLeaseTerm() }}</div>#}
+              {#</div>#}
+            {#</div>#}
+            {#<div class="col m6">#}
+              {#<div class="row" style="margin-top: 0px">#}
+                {#<div class="col m2 tag-key-description"><b>Year Built:</b></div>#}
+                {#<div class="col m10 tag-value-description">{{ property.getYearBuilt() }}</div>#}
+              {#</div>#}
               {#<div class="input-field">#}
                 {#{{ form_widget(property_form.type)}}#}
               {#</div>#}
@@ -110,14 +118,14 @@
                 {#<label for="property_postal_code" class="">Postal Code</label>#}
               {#</div>#}
 
-              <div class="row" style="margin-top: 0px">
-                <div class="col m2 tag-key-description"><b>Postal Code:</b></div>
-                <div class="col m10">{{ property.getPostalCode() }}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+              {#<div class="row" style="margin-top: 0px">#}
+                {#<div class="col m2 tag-key-description"><b>Postal Code:</b></div>#}
+                {#<div class="col m10">{{ property.getPostalCode() }}</div>#}
+              {#</div>#}
+            {#</div>#}
+          {#</div>#}
+        {#</div>#}
+      {#</div>#}
 
       {#<div class="card">#}
         {#<div class="title">#}
