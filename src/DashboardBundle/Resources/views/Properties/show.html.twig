@@ -14,22 +14,227 @@
 {% endblock breadcrumb%}
 
 {% block content %}
-	<div class="row">
+
+		<div class="row">
+			<div class="col m8">
+
+				<div class="row" style="margin-top: 0px">
+					<div class="col m12">
+						<div class="carousel carousel-slider" style="height: 375px;">
+							<a class="carousel-item" href="#one!"><img src="{{ asset('bundles/dashboard/properties/1.jpg') }}"></a>
+							<a class="carousel-item" href="#one!"><img src="{{ asset('bundles/dashboard/properties/2.jpg') }}"></a>
+							<a class="carousel-item" href="#one!"><img src="{{ asset('bundles/dashboard/properties/3.jpg') }}"></a>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col m4">
+						<a id="p" class="btn"><i class="mdi-hardware-keyboard-arrow-left" style="font-size: 24px"></i></a>
+						<a id="f" class="btn"><i class="mdi-hardware-keyboard-arrow-right" style="font-size: 24px"></i></a>
+					</div>
+					<div class="col m8">
+					</div>
+				</div>
+			</div>
+
+			<div class="col m4">
+
+				<div class="card">
+					<div class="title">
+						<h5> Attributes </h5>
+					</div>
+					<div class="content" style="padding: 15px;">
+						<section id="technicalData" class="row m-t list-data" style="margin-top: 0px">
+							<div class="col l4 m6 s6" style="padding-bottom: 0px">
+								<p class="m-none"><small class="latam-secondary-text text-lighten-2 truncate">Price</small>
+									<span class="truncate">2,344,666</span>
+								</p>
+							</div>
+							<div class="col l4 m6 s6" style="padding-bottom: 0px">
+								<p class="m-none"><small class="latam-secondary-text text-lighten-2 truncate">Rooms</small>
+									<span class="truncate">2</span>
+								</p>
+							</div>
+							<div class="col l4 m6 s6" style="padding-bottom: 0px">
+								<p class="m-none"><small class="latam-secondary-text text-lighten-2 truncate">Baths</small>
+									<span class="truncate">1</span>
+								</p>
+							</div>
+							<div class="col l4 m6 s6" style="padding-bottom: 0px">
+								<p class="m-none"><small class="latam-secondary-text text-lighten-2 truncate">Parking</small>
+									<span class="truncate">Yes</span>
+								</p>
+							</div>
+							<div class="col l4 m6 s6" style="padding-bottom: 0px">
+								<p class="m-none"><small class="latam-secondary-text text-lighten-2 truncate">Unit Size</small>
+									<span class="truncate">28x90</span>
+								</p>
+							</div>
+							<div class="col l4 m6 s6" style="padding-bottom: 0px">
+								<p class="m-none"><small class="latam-secondary-text text-lighten-2 truncate">Year Built</small>
+									<span class="truncate">2010</span>
+								</p>
+							</div>
+							<div class="col l4 m6 s6">
+								<p class="m-none"><small class="latam-secondary-text text-lighten-2 truncate">Lease Term</small>
+									<span class="truncate">3344</span>
+								</p>
+							</div>
+							<div class="col l4 m6 s6">
+								<p class="m-none"><small class="latam-secondary-text text-lighten-2 truncate">Is for rent?</small>
+									<span class="truncate">Yes</span>
+								</p>
+							</div>
+							<div class="col l4 m6 s6">
+								<p class="m-none"><small class="latam-secondary-text text-lighten-2 truncate">IUnit type</small>
+									<span class="truncate">House</span>
+								</p>
+							</div>
+						</section>
+					</div>
+				</div>
+
+				<div class="card">
+					<div class="title">
+						<h5> Location </h5>
+					</div>
+					<div class="content" style="padding: 15px;">
+						<section id="technicalData" class="row m-t list-data" style="margin-top: 0px">
+							<div class="col l4 m6 s6" style="padding-bottom: 0px">
+								<p class="m-none"><small class="latam-secondary-text text-lighten-2 truncate">Country</small>
+									<span class="truncate">United States</span>
+								</p>
+							</div>
+							<div class="col l4 m6 s6" style="padding-bottom: 0px">
+								<p class="m-none"><small class="latam-secondary-text text-lighten-2 truncate">State</small>
+									<span class="truncate">Texas</span>
+								</p>
+							</div>
+							<div class="col l4 m6 s6" style="padding-bottom: 0px">
+								<p class="m-none"><small class="latam-secondary-text text-lighten-2 truncate">City</small>
+									<span class="truncate">Houston</span>
+								</p>
+							</div>
+							<div class="col l8 m8 s6" style="padding-bottom: 0px">
+								<p class="m-none"><small class="latam-secondary-text text-lighten-2 truncate">Address</small>
+									<span class="truncate tooltipped"  data-position="top" data-delay="50" data-tooltip="74434 East Sweet Bottom Br #18393" style="cursor: pointer">74434 East Sweet Bottom Br #18393</span>
+								</p>
+							</div>
+							<div class="col l4 m4 s6" style="padding-bottom: 0px">
+								<p class="m-none"><small class="latam-secondary-text text-lighten-2 truncate">Postal Code</small>
+									<span class="truncate">32767</span>
+								</p>
+							</div>
+							<div class="col l12 m12 s6">
+								<div id="map-canvas"></div>
+							</div>
+
+						</section>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+
+
 		{#<div class="col s12">#}
 			{#{% include 'DashboardBundle:Properties:Partials/_show-tabbar.html.twig' %}#}
 		{#</div>#}
-		<div id="test1" class="col s12">
-			{% include 'DashboardBundle:Properties:Partials/_show-tab-information.html.twig' %}
-		</div>
+		{#<div id="test1" class="col s12">#}
+			{#{% include 'DashboardBundle:Properties:Partials/_show-tab-information.html.twig' %}#}
+		{#</div>#}
 		{#<div id="tab-gallery" class="col s12">#}
 			{#{% include 'DashboardBundle:Properties:Partials/_show-tab-gallery.html.twig' %}#}
 		{#</div>#}
-	</div>
 {% endblock content%}
 
 {% block javascripts %}
 	{{ parent() }}
 	<script src="{{ asset('bundles/dashboard/material/js/select2.full.min.js') }}"></script>
+	<script src="http://maps.googleapis.com/maps/api/js?libraries=weather,geometry,visualization,places,drawing&amp;sensor=false" type="text/javascript"></script>
+	<script src="{{ asset('bundles/dashboard/assets/libraries/jquery-google-map/infobox.js') }}"></script>
+	<script src="{{ asset('bundles/dashboard/assets/libraries/jquery-google-map/markerclusterer.js') }}"></script>
+	<script src="{{ asset('bundles/dashboard/assets/libraries/jquery-google-map/jquery-google-map.js') }}"></script>
+	<script src="{{ asset('bundles/dashboard/assets/js/map.js') }}"></script>
+
+	<script>
+		$(document).ready(function(){
+
+			$('.carousel.carousel-slider').carousel({full_width: true});
+
+			$('#p').click(function(){
+				$('.carousel').carousel('prev');
+			});
+
+			$('#f').click(function(){
+				$('.carousel').carousel('next');
+			});
+
+
+			if ($('#map-canvas').length != 0) {
+
+				var mapParams = {
+					lat: {{ property.lat }},
+					lng: {{ property.lng }},
+					center_lat: {{ property.mapCenterLat }},
+					center_lng: {{ property.mapCenterLng }},
+					zoom: {{ property.mapZoom }},
+					map_input_id: 'property_address',
+					map_input_lat_id: 'property_lat',
+					map_input_lng_id: 'property_lng',
+					map_input_zoom_id: 'property_map_zoom',
+					map_input_center_lat_id: 'property_map_center_lat',
+					map_input_center_lng_id: 'property_map_center_lng',
+					show_marker: '{{ property.lat and property.lng ? 'true'}}'
+				};
+				google.maps.event.addDomListener(window, 'load', initialize(mapParams));
+			}
+
+			var componentForm = {
+				street_number: 'short_name',
+				route: 'long_name',
+				locality: 'long_name',
+				administrative_area_level_1: 'short_name',
+				country: 'short_name',
+				postal_code: 'short_name'
+			};
+
+			var componentFormId = {
+				street_number: 'property_unit',
+				route: 'form_route',
+				locality: 'property_city',
+				administrative_area_level_1: 'property_state',
+				country: 'property_country',
+				postal_code: 'property_postal_code'
+			};
+
+			google.maps.event.addListener(map_autocomplete, 'place_changed', function () {
+				var place = map_autocomplete.getPlace();
+				if (!place.geometry) {
+					return;
+				}
+
+				for (var i = 0; i < place.address_components.length; i++) {
+					var addressType = place.address_components[i].types[0];
+					if (addressType == "sublocality_level_1") {
+						addressType = "locality";
+					}
+					if (componentForm[addressType]) {
+
+						var val = place.address_components[i][componentForm[addressType]];
+
+						if ($('#' + componentFormId[addressType]).length) {
+							$('#' + componentFormId[addressType]).val(val).change();
+						}
+					}
+				}
+			});
+
+		});
+	</script>
+
+
 {% endblock javascripts %}
 
 
