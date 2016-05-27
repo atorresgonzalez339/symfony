@@ -26,7 +26,7 @@ class PropertyType extends AbstractType
                 'attr' => array('class' => 'select2'),
                 'empty_data' => null,
                 'required'    => false,
-                'placeholder' => 'Select unit type',
+                'placeholder' => 'Select Unit Type',
             ))
             ->add('for_rent')
             ->add('lease_term')
