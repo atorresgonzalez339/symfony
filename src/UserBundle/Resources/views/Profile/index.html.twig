@@ -5,8 +5,12 @@
     {{ parent() }}
     <link href="{{ asset('bundles/dashboard/material/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('bundles/dashboard/material/css/pikaday.css') }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ asset('bundles/user/css/profile.css') }}" rel="stylesheet" type="text/css"/>
 {% endblock stylesheets_priority %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/user/css/profile.css') }}" rel="stylesheet" type="text/css"/>
+{% endblock stylesheets %}
 
 {% block breadcrumb %}
     <li><a href="#">Profile</a></li>
