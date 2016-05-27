@@ -19,8 +19,12 @@ class PropertyType extends AbstractType
             ))
             ->add('bedrooms')
             ->add('bathrooms')
-            ->add('amenities')
-            ->add('features')
+            ->add('amenities',null,array(
+                'attr' => array('class' => 'custom-ta'),
+            ))
+            ->add('features',null,array(
+                'attr' => array('class' => 'custom-ta'),
+            ))
             ->add('type', ChoiceType::class, array(
                 'choices' => PropertyEnumType::getChoices(),
                 'attr' => array('class' => 'select2'),
