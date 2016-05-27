@@ -103,7 +103,7 @@ class Flyer
 
     /**
      * @ORM\Column(type="boolean")
-     * @GRID\Column(field="map_active", type="boolean" , filterable=false, title="Map active",size=25, sortable=false)
+     * @GRID\Column(field="map_active", type="boolean" , filterable=false, title="Map active",size=25, sortable=false, operatorsVisible=false)
      */
     private $map_active;
 
