@@ -38,7 +38,10 @@
       <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Birthday:</b> </strong></span></div>
       <div class="col s9" style="padding-bottom: 10px;"> <span>{{ profile.birthDate ? profile.birthDate | date('M, d Y') : 'Empty' }}</span></div>
     </div>
-
+    <div class="row">
+      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Email Address:</b> </strong></span></div>
+      <div class="col s9" style="padding-bottom: 10px;"> <span>{{ profile.email ? profile.email : '-' }}</span></div>
+    </div>
     <div class="row" style="margin-top: 0px;">
       <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Mobile Phone:</b> </strong></span></div>
       <div class="col s9" style="padding-bottom: 10px;"> <span>{{ profile.cellPhone ? profile.cellPhone : '-' }}</span></div>
@@ -46,10 +49,6 @@
     <div class="row" style="margin-top: 0px;">
       <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Office Phone:</b> </strong></span></div>
       <div class="col s9" style="padding-bottom: 10px;"><span>{{ profile.officePhone ? profile.officePhone : '-' }}</span></div>
-    </div>
-    <div class="row">
-      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Email Address:</b> </strong></span></div>
-      <div class="col s9" style="padding-bottom: 10px;"> <span>{{ profile.email ? profile.email : '-' }}</span></div>
     </div>
     <div class="row">
       <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Company:</b> </strong></span></div>
