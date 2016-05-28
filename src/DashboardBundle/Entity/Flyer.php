@@ -9,8 +9,9 @@ use UserBundle\Entity\User;
 /**
  * @ORM\Entity
  * @ORM\Table(name="flyers")
- * @GRID\Source(columns="id,name,email,map_active,sender_name")
+ * @GRID\Source(columns="id,name,email_reply,sender_name,map_active")
  */
+
 class Flyer
 {
 
@@ -23,7 +24,7 @@ class Flyer
         $this->total_sent = 0;
 
         //Binding Flyer with Property
-        $this->email = $user->getProfile()->getEmail();
+        $this->email       = $user->getProfile()->getEmail();
         $this->sender_name = $user->getProfile()->getFullName();
         $this->email_reply = $user->getProfile()->getEmail();
         $this->address = $property->getAddress();
@@ -114,7 +115,7 @@ class Flyer
 
     /**
      * @ORM\Column(type="string", nullable=false)
-     * @GRID\Column(field="sender_name", type="textext" , filterable=true, title="Locale", size=25, class="grey-text", operatorsVisible=false)
+     * @GRID\Column(field="sender_name", type="textext" , filterable=false, title="Locale", size=25, class="grey-text", operatorsVisible=false)
      */
     private $sender_name;
 
@@ -125,6 +126,7 @@ class Flyer
 
     /**
      * @ORM\Column(type="string", nullable=false)
+     * @GRID\Column(field="email_reply", type="textext" , filterable=false, title="Locale", size=25, class="grey-text", operatorsVisible=false)
      */
     private $email_reply;
 
