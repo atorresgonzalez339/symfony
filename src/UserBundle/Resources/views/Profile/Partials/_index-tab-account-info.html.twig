@@ -5,7 +5,7 @@
       <div class="row" style="margin-top: 0rem;">
         <div class="col m12" style="padding-bottom: 0px;">
           <div class="input-field align-left">
-            <i class="mdi mdi-social-person prefix"></i>
+            <i class="mdi mdi-action-account-circle prefix"></i>
             {{ form_widget(account_form.username, {'attr': {'readonly':true}}) }}
             <label for="account_username" class="">Username</label>
           </div>
@@ -15,7 +15,7 @@
       <div class="row" style="margin-top: 0rem;">
         <div class="col m12" style="padding-bottom: 0px;">
           <div class="input-field align-left">
-            <i class="mdi mdi-communication-email prefix"></i>
+            <i class="ion-email prefix"></i>
             {{ form_widget(account_form.email, {'attr': {'class':'validate', 'readonly':true}}) }}
             <label for="account_email" class="">Email</label>
           </div>
@@ -25,7 +25,7 @@
       <div class="row" style="margin-top: 0rem;">
         <div class="col m12" style="padding-bottom: 0px;">
           <div class="input-field align-left">
-            <i class="mdi mdi-action-lock prefix"></i>
+            <i class="ion-ios-locked prefix"></i>
             {{ form_widget(account_form.plainPassword, {'attr': {'class':'validate'}}) }}
             <label for="account_password" class="">New password</label>
           </div>
@@ -35,7 +35,7 @@
       <div class="row" style="margin-top: 0rem;">
         <div class="col m12" style="padding-bottom: 0px;">
           <div class="input-field">
-            <i class="mdi mdi-action-lock prefix"></i>
+            <i class="ion-ios-locked prefix"></i>
             <input type="password" id="rpassword" name="rpassword" required="required" class="validate">
             <label for="rpassword" class="">Repeat password</label>
           </div>

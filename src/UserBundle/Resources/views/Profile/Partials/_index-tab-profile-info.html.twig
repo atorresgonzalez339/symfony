@@ -1,84 +1,109 @@
 <div id="tab-profile-info" class="col s12" style="color: #5e5e5e;">
-  <div class="row" style="margin-top: 0px;" id="edit-profile-button-box">
-    <nav style="padding-right: 25px;color: #424242;background-color: #fff;box-shadow: 0 0px 0px rgba(0,0,0,.26)!important;padding-left: 30px;">
-      <div class="nav-wrapper">
-        <a href="#!" class="brand-logo"></a>
-        <ul class="right hide-on-med-and-down">
-          <li>
-            <a id="edit-profile" style="color: #9E9E9E;padding: 0px;width: 55px;" class="dropdown-button" href="#!">
-              <div class="row" style="margin-top: 0px">
-                <div class="col m4" style="padding-right: 0px;padding-bottom: 0px">
-                  <i class="mdi mdi-editor-mode-edit" style="font-size: 18px;width: 20px;"></i>
-                </div>
-                <div class="col m8" style="padding-bottom: 0px">
-                  <span>  Edit</span>
-                </div>
-              </div>
-            </a>
-          </li>
-        </ul>
+
+      <div class="row" style="margin-top: 0px;height: 15px;" id="edit-profile-button-box">
+        <nav style="padding-right: 25px;color: #424242;background-color: #fff;box-shadow: 0 0px 0px rgba(0,0,0,.26)!important;padding-left: 30px;">
+          <div class="nav-wrapper">
+            <a href="#!" class="brand-logo"></a>
+            <ul class="right hide-on-med-and-down">
+              <li>
+                <a id="edit-profile" style="color: #9E9E9E;padding: 0px;width: 107px;" class="dropdown-button" href="#!">
+                  <div class="row" style="margin-top: 0px">
+                    <div class="col m2" style="padding-right: 0px;padding-bottom: 0px">
+                      <i class="mdi mdi-editor-mode-edit" style="font-size: 18px;width: 20px;"></i>
+                    </div>
+                    <div class="col m10" style="padding-bottom: 0px">
+                      <span>Edit profile</span>
+                    </div>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
       </div>
-    </nav>
+
+      <div class="row" id="edit-profile-information">
+       <div class="row" style="padding-left: 20px;margin-top: 0px">
+         <div class="col m2" style="padding-right: 5px">
+           {% include 'UserBundle:Profile:Partials/_profile-picture.html.twig' %}
+         </div>
+         <div class="col m10">
+           <div class="row" style="margin-top: 0px;">
+             <div class="col s2" style="padding-bottom: 10px;"> <span class="right"><strong><b>First Name:</b> </strong></span></div>
+             <div class="col s10" style="padding-bottom: 10px;"> <span>{{ profile.firstName ? profile.firstName : 'Empty' }}</span></div>
+           </div>
+           <div class="row" style="margin-top: 0px;">
+             <div class="col s2" style="padding-bottom: 10px;"> <span class="right"><strong><b>Last Name:</b> </strong></span></div>
+             <div class="col s10" style="padding-bottom: 10px;"> <span>{{ profile.lastName ? profile.lastName : 'Empty' }}</span></div>
+           </div>
+           <div class="row">
+             <div class="col s2" style="padding-bottom: 10px;"> <span class="right"><strong><b>Gender:</b> </strong></span></div>
+             <div class="col s10" style="padding-bottom: 10px;"> <span>{{ profile.gender ? profile.gender : 'Empty' }}</span></div>
+           </div>
+           <div class="row">
+             <div class="col s2" style="padding-bottom: 10px;"> <span class="right"><strong><b>Birthday:</b> </strong></span></div>
+             <div class="col s10" style="padding-bottom: 10px;"> <span>{{ profile.birthDate ? profile.birthDate | date('M, d Y') : 'Empty' }}</span></div>
+           </div>
+           <div class="row">
+             <div class="col s2" style="padding-bottom: 10px;"> <span class="right"><strong><b>Email Address:</b> </strong></span></div>
+             <div class="col s10" style="padding-bottom: 10px;"> <span>{{ profile.email ? profile.email : '-' }}</span></div>
+           </div>
+         </div>
+       </div>
+
+
+        <div class="row" style="margin-top: 0px;">
+          <div class="col m12" style="padding-bottom: 10px;padding-left: 20px;padding-right: 45px"><div class="divider"></div></div>
+        </div>
+
+          <div class="row" style="margin-top: 0px;">
+              <div class="col m6">
+                  <div class="row" style="margin-top: 0px;">
+                      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Mobile Phone:</b> </strong></span></div>
+                      <div class="col s9" style="padding-bottom: 10px;"> <span>{{ profile.cellPhone ? profile.cellPhone : '-' }}</span></div>
+                  </div>
+                  <div class="row" style="margin-top: 0px;">
+                      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Office Phone:</b> </strong></span></div>
+                      <div class="col s9" style="padding-bottom: 10px;"><span>{{ profile.officePhone ? profile.officePhone : '-' }}</span></div>
+                  </div>
+                  <div class="row">
+                      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Company:</b> </strong></span></div>
+                      <div class="col s9" style="padding-bottom: 10px;"><span> {{ profile.company ? profile.company : '-' }}</span></div>
+                  </div>
+                  <div class="row">
+                      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Website:</b> </strong></span></div>
+                      <div class="col s9" style="padding-bottom: 10px;"> <span>{{ profile.website ? profile.website : '-' }}</span></div>
+                  </div>
+              </div>
+              <div class="col m6">
+                  <div class="row" style="margin-top: 0px">
+                      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Address:</b> </strong></span></div>
+                      <div class="col s9" style="padding-bottom: 10px;"> <span>{{ profile.address ? profile.address : '-' }}</span></div>
+                  </div>
+                  <div class="row">
+                      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>City:</b> </strong></span></div>
+                      <div class="col s9" style="padding-bottom: 10px;"><span>{{ profile.city ? profile.city : '-' }}</span></div>
+                  </div>
+                  <div class="row">
+                      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>State:</b> </strong></span></div>
+                      <div class="col s9" style="padding-bottom: 10px;"><span>{{ profile.state ? profile.state : '-' }}</span></div>
+                  </div>
+                  <div class="row">
+                      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Country:</b> </strong></span></div>
+                      <div class="col s9" style="padding-bottom: 10px;"><span>{{ profile.country ? profile.country : '-' }}</span></div>
+                  </div>
+              </div>
+          </div>
+
+
+      </div>
+
+      {% include 'UserBundle:Profile:Partials/_profile-form.html.twig' with {'hidden': true} %}
+
+
   </div>
 
-  <div class="row" id="edit-profile-information">
-    <div class="row" style="margin-top: 0px;">
-      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>First Name:</b> </strong></span></div>
-      <div class="col s9" style="padding-bottom: 10px;"> <span>{{ profile.firstName ? profile.firstName : 'Empty' }}</span></div>
-    </div>
-    <div class="row" style="margin-top: 0px;">
-      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Last Name:</b> </strong></span></div>
-      <div class="col s9" style="padding-bottom: 10px;"> <span>{{ profile.lastName ? profile.lastName : 'Empty' }}</span></div>
-    </div>
-    <div class="row">
-      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Gender:</b> </strong></span></div>
-      <div class="col s9" style="padding-bottom: 10px;"> <span>{{ profile.gender ? profile.gender : 'Empty' }}</span></div>
-    </div>
-    <div class="row">
-      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Birthday:</b> </strong></span></div>
-      <div class="col s9" style="padding-bottom: 10px;"> <span>{{ profile.birthDate ? profile.birthDate | date('M, d Y') : 'Empty' }}</span></div>
-    </div>
-    <div class="row">
-      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Email Address:</b> </strong></span></div>
-      <div class="col s9" style="padding-bottom: 10px;"> <span>{{ profile.email ? profile.email : '-' }}</span></div>
-    </div>
-    <div class="row" style="margin-top: 0px;">
-      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Mobile Phone:</b> </strong></span></div>
-      <div class="col s9" style="padding-bottom: 10px;"> <span>{{ profile.cellPhone ? profile.cellPhone : '-' }}</span></div>
-    </div>
-    <div class="row" style="margin-top: 0px;">
-      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Office Phone:</b> </strong></span></div>
-      <div class="col s9" style="padding-bottom: 10px;"><span>{{ profile.officePhone ? profile.officePhone : '-' }}</span></div>
-    </div>
-    <div class="row">
-      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Company:</b> </strong></span></div>
-      <div class="col s9" style="padding-bottom: 10px;"><span> {{ profile.company ? profile.company : '-' }}</span></div>
-    </div>
-    <div class="row">
-      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Address:</b> </strong></span></div>
-      <div class="col s9" style="padding-bottom: 10px;"> <span>{{ profile.address ? profile.address : '-' }}</span></div>
-    </div>
-    <div class="row">
-      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>City:</b> </strong></span></div>
-      <div class="col s9" style="padding-bottom: 10px;"><span>{{ profile.city ? profile.city : '-' }}</span></div>
-    </div>
-    <div class="row">
-      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>State:</b> </strong></span></div>
-      <div class="col s9" style="padding-bottom: 10px;"><span>{{ profile.state ? profile.state : '-' }}</span></div>
-    </div>
-    <div class="row">
-      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Country:</b> </strong></span></div>
-      <div class="col s9" style="padding-bottom: 10px;"><span>{{ profile.country ? profile.country : '-' }}</span></div>
-    </div>
-    <div class="row">
-      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Website:</b> </strong></span></div>
-      <div class="col s9" style="padding-bottom: 10px;"> <span>{{ profile.website ? profile.website : '-' }}</span></div>
-    </div>
-  </div>
 
-  {% include 'UserBundle:Profile:Partials/_profile-form.html.twig' with {'hidden': true} %}
-
-</div>
 
 <script>
   $(document).ready(function(){
@@ -91,5 +116,14 @@
       $('#edit-profile-container').attr('style','display:block');
       $('#edit-profile-information').attr('style','display:none');
     });
+
+    $("img#profile-image").mouseover(function(){
+        $("#btn-update").trigger("mouseover");
+    });
+
+    $("img#profile-image").mouseleave(function(){
+//        $(".mdi-image-photo-camera").css("color", "red");
+    });
+      //transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
   });
 </script>

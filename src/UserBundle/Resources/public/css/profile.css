@@ -3,16 +3,16 @@
 }
 
 .pmop-edit:hover {
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.6);
     opacity: 1;
 }
 
 .pmop-edit {
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
     color: #fff;
-    background: rgba(0, 0, 0, 0.38);
+    background: rgba(0, 0, 0, 0);
     text-align: center;
     padding: 10px 10px 11px;
     -webkit-transition: opacity;
