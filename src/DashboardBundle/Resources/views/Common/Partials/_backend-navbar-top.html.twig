@@ -51,6 +51,13 @@
           {#</div>#}
         {#</div>#}
       {#</li>#}
+
+      {#<li>#}
+        {#<a class="dropdown-button" data-activates="test-dropdown" href="#">#}
+          {#<i class="mdi mdi-device-brightness-low"></i> <span class="badge new grey" style="font-size: 10px;right: -10px;">PREMIUN</span>#}
+        {#</a>#}
+      {#</li>#}
+
       <li class="user">
         <a class="dropdown-button" data-activates="user-dropdown" href="http://html.nkdev.info/_con/ui-buttons.html#!">
           {% if app.user.profile.photoId is defined and app.user.profile.photoId %}
@@ -61,11 +68,23 @@
           {{ app.user.profile.fullName is defined ? app.user.profile.fullName : app.user.username }}
           <i class="mdi-navigation-expand-more right"></i>
         </a>
+
+        <style>
+          #user-dropdown{top: 66px !important;}
+        </style>
         <ul id="user-dropdown" class="dropdown-content">
           <li>
             <a href="{{path('profile_index')}}">
-              <i class="fa fa-user"></i>
+              <i class="mdi mdi-action-account-circle"></i>
               Profile
+            </a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <a href="{{ path('upgrade_index') }}">
+              <i class="fa fa-credit-card"></i>
+              Upgrade Plan <br>
+              <div style="font-size: 9px;padding-left: 22px;"><i class="mdi mdi-device-brightness-low type-free" style="font-size: 12px;position: relative;top: -4px;left: 3px;"></i> FREE</div>
             </a>
           </li>
           {#<li>#}
@@ -82,7 +101,7 @@
             {#</a>#}
           {#</li>#}
           <li class="divider"></li>
-          <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out"></i>
+          <li><a href="{{ path('fos_user_security_logout') }}"><i class="mdi mdi-action-exit-to-app"></i>
               Logout</a></li>
         </ul>
       </li>
