@@ -1,30 +1,22 @@
-<div id="tab-billing-info" class="col s12" style="color: #5e5e5e;">
-  <div class="row">
-    <div class="col md6 s6">
-      <div class="row" style="margin-top: 0px;">
-        <div class="col md3 s3" style="padding-bottom: 10px;">
-        <span class="right">
-          <strong><b>Card Holder:</b> </strong>
-        </span>
-        </div>
-        <div class="col md9 s9" style="padding-bottom: 10px;">
-        <span id="card_holder">
+<div id="tab-billing-info" style="color: #5e5e5e;padding: 15px 15px 15px 15px">
+  <div class="row" style="margin-top: 3rem;">
+    <div class="col m6">
+      <div class="row">
+        <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><b>Card Holder:</b></span></div>
+        <div class="col s9" style="padding-bottom: 10px;">
+          <span id="card_holder">
           {% if card_info %}
             {{ card_info.name }}
+            {% else %}
+            -
           {% endif %}
         </span>
         </div>
       </div>
-      <div class="row" style="margin-top: 0px;">
-        <div class="col md3 s3" style="padding-bottom: 10px;">
-        <span class="right">
-          <strong>
-            <b>Stored Card:</b>
-          </strong>
-        </span>
-        </div>
-        <div class="col md9 s9" style="padding-bottom: 10px;">
-        <span id="card_ended">
+      <div class="row">
+        <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><b>Stored Card:</b></span></div>
+        <div class="col s9" style="padding-bottom: 10px;">
+          <span id="card_ended">
           {% if card_info %}
             XXXX-XXXX-XXXX-{{ card_info.last4 }}
           {% else %}
@@ -33,54 +25,50 @@
         </span>
         </div>
       </div>
-      <div class="row" style="margin-top: 0px;">
-        <div class="col md3 s3" style="padding-bottom: 10px;">
-        <span class="right">
-          <strong><b>Card Type:</b> </strong>
-        </span>
-        </div>
-        <div class="col md9 s9" style="padding-bottom: 10px;">
-        <span>
+      <div class="row">
+        <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><b>Card Type:</b></span></div>
+        <div class="col s9" style="padding-bottom: 10px;">
+          <span>
           {% if card_info %}
             {{ card_info.brand }}
+          {% else %}
+            -
           {% endif %}
         </span>
         </div>
       </div>
     </div>
-    <div class="col md6 s6">
-      <div class="row" style="margin-top: 0px;">
-        <div class="col md12 s12" style="padding-bottom: 10px;">
-          <a class="btn modal-trigger" id="stripe-show-card-modal"  href="#stripe-card-modal">
-            {% if card_info %}
-              Update Credit Card
-            {% else %}
-              Add Credit Card
-            {% endif %}
-          </a>
-        </div>
-      </div>
+    <div class="col m6">
+      <a class="btn modal-trigger btn-small right" id="stripe-show-card-modal"  href="#stripe-card-modal">
+        <i class="fa fa-credit-card left"></i>
+        {% if card_info %}
+          Update Credit Card
+        {% else %}
+          Add Credit Card
+        {% endif %}
+      </a>
     </div>
   </div>
 
-  <div class="row">
-      <h3>Payments History:</h3>
-      <table class="row">
+  <div class="row" style="margin-top: 3rem;">
+    <div class="col m12">
+      <h5>Payments History:</h5>
+      <table class="table table-hover">
         <thead>
-          <tr>
-            <th>
-              Plan
-            </th>
-            <th>
-              Date
-            </th>
-            <th>
-              Amount
-            </th>
-            <th>
-              Status
-            </th>
-          </tr>
+        <tr>
+          <th>
+            Plan
+          </th>
+          <th>
+            Date
+          </th>
+          <th>
+            Amount
+          </th>
+          <th>
+            Status
+          </th>
+        </tr>
         </thead>
         <tbody>
         {% if invoices %}
@@ -111,12 +99,13 @@
         {% endif %}
         </tbody>
       </table>
+    </div>
   </div>
 </div>
 
 <!-- Modal Structure -->
-<div id="stripe-card-modal" class="modal modal-fixed-footer" style="width: 35%; height: 420px">
-  <div class="modal-content">
+<div id="stripe-card-modal" class="modal modal-fixed-footer" style="width: 35%; height: 425px;">
+  <div class="modal-content" style="overflow-x: hidden;padding-bottom: 0px;">
     <h4>
       {% if card_info %}
         Update Credit Card
