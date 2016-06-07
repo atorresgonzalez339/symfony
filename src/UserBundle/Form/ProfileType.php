@@ -40,6 +40,7 @@ class ProfileType extends AbstractType
             ->add('state')
             ->add('country')
             ->add('website')
+            ->add('licence_number')
         ;
     }
 

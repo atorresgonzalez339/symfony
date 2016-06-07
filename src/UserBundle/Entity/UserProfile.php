@@ -549,4 +549,23 @@ class UserProfile
     {
         return $this->mandrill_subaccount;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getLicenceNumber()
+    {
+        return $this->licence_number;
+    }
+
+    /**
+     * @param mixed $licence_number
+     */
+    public function setLicenceNumber($licence_number)
+    {
+        $this->licence_number = $licence_number;
+    }
+
+
+
 }

@@ -1,5 +1,5 @@
 <div id="edit-profile-container" style="{{ hidden is defined and hidden ? 'display: none' : '' }}">
-    <div class="row" style="padding-left: 20px;padding-right: 20px">
+    <div class="row" style="padding-left: 20px;padding-right: 20px; margin-top: 1em;">
         {{ form_start(profile_form, {'action': path('profile_save'), 'method': 'POST', 'id':'profile_form'}) }}
         <div class="row" style="margin-top: 0rem;">
             <div class="col m6" style="padding-bottom: 0px;">
@@ -7,54 +7,67 @@
                     {{ form_widget(profile_form.first_name, {'attr': {'class':'validate'}}) }}
                     <label for="profile_first_name" class="">First Name</label>
                 </div>
-            </div>
-            <div class="col m6" style="padding-bottom: 0px;">
-                <div class="input-field align-left">
-                    {{ form_widget(profile_form.address, {'attr': {'class':'validate'}}) }}
-                    <label for="profile_address" class="">Address</label>
-                </div>
-            </div>
-        </div>
 
-        <div class="row" style="margin-top: 0rem;">
-            <div class="col m6" style="padding-bottom: 0px;">
                 <div class="input-field align-left">
                     {{ form_widget(profile_form.last_name, {'attr': {'class':'validate'}}) }}
                     <label for="profile_last_name" class="">Last Name</label>
                 </div>
-            </div>
-            <div class="col m6" style="padding-bottom: 0px;">
-                <div class="input-field align-left">
-                    {{ form_widget(profile_form.city, {'attr': {'class':'validate'}}) }}
-                    <label for="profile_city" class="">City</label>
-                </div>
-            </div>
-        </div>
 
-        <div class="row" style="margin-top: 0rem;">
-            <div class="col m6" style="padding-bottom: 0px;">
                 <div class="input-field">
                     {{ form_widget(profile_form.email, {'attr': {'type':'email','class':'validate'}}) }}
                     <label for="profile_email" class="">Email</label>
                 </div>
+
+                <div class="input-field">
+                    {{ form_widget(profile_form.gender) }}
+                    <label for="profile_gender" style="transform: translateY(-170%);left: 0px;font-size: 12px;">Gender</label>
+                </div>
+
+                <div class="input-field align-left">
+                    {{ form_widget(profile_form.birth_date) }}
+                    <label for="profile_birth_date">Birth date</label>
+                </div>
+
+                <div class="input-field">
+                    {{ form_widget(profile_form.cell_phone, {'attr': {'class':'validate','data-inputmask':"'mask': '(999) 999-9999'"}}) }}
+                    <label for="profile_cell_phone" style="transform: translateY(-170%);left: 0px;">Cell Phone</label>
+                </div>
+
+                <div class="input-field">
+                    {{ form_widget(profile_form.office_phone, {'attr': {'class':'validate','data-inputmask':"'mask': '(999) 999-9999'"}}) }}
+                    <label for="profile_office_phone" style="transform: translateY(-170%);left: 0px;">Office
+                        Phone</label>
+                </div>
+
             </div>
             <div class="col m6" style="padding-bottom: 0px;">
+                <div class="input-field align-left">
+                    {{ form_widget(profile_form.licence_number, {'attr': {'class':'validate'}}) }}
+                    <label for="profile_licence_number">Licence Number</label>
+                </div>
+
+                <div class="input-field align-left">
+                    {{ form_widget(profile_form.company, {'attr': {'class':'validate'}}) }}
+                    <label for="profile_company">Company</label>
+                </div>
+
+                <div class="input-field align-left">
+                    {{ form_widget(profile_form.website, {'attr': {'class':'validate'}}) }}
+                    <label for="profile_website">Website</label>
+                </div>
+
+                <div class="input-field align-left">
+                    {{ form_widget(profile_form.address, {'attr': {'class':'validate'}}) }}
+                    <label for="profile_address" class="">Address</label>
+                </div>
+                <div class="input-field align-left">
+                    {{ form_widget(profile_form.city, {'attr': {'class':'validate'}}) }}
+                    <label for="profile_city" class="">City</label>
+                </div>
                 <div class="input-field align-left">
                     {{ form_widget(profile_form.state, {'attr': {'class':'validate'}}) }}
                     <label for="profile_state" class="">State</label>
                 </div>
-            </div>
-        </div>
-
-        <div class="row" style="margin-top: 0rem;">
-            <div class="col m6" style="padding-bottom: 0px;">
-                <div class="input-field">
-                    {{ form_widget(profile_form.gender) }}
-                    <label for="profile_gender"
-                           style="transform: translateY(-170%);left: 0px;font-size: .8rem;">Gender</label>
-                </div>
-            </div>
-            <div class="col m6" style="padding-bottom: 0px;">
                 <div class="input-field align-left">
                     {{ form_widget(profile_form.country, {'attr': {'class':'validate'}}) }}
                     <label for="profile_country" class="">Country</label>
@@ -62,49 +75,7 @@
             </div>
         </div>
 
-        <div class="row" style="margin-top: 0rem;">
-            <div class="col m6" style="padding-bottom: 0px;">
-                <div class="input-field">
-                    {{ form_widget(profile_form.cell_phone, {'attr': {'class':'validate','data-inputmask':"'mask': '(999) 999-9999'"}}) }}
-                    <label for="profile_cell_phone" style="transform: translateY(-170%);left: 0px;">Cell Phone</label>
-                </div>
-            </div>
-            <div class="col m6" style="padding-bottom: 0px;">
-                <div class="input-field">
-                    {{ form_widget(profile_form.office_phone, {'attr': {'class':'validate','data-inputmask':"'mask': '(999) 999-9999'"}}) }}
-                    <label for="profile_office_phone" style="transform: translateY(-170%);left: 0px;">Office
-                        Phone</label>
-                </div>
-            </div>
-        </div>
-
-        <div class="row" style="margin-top: 0rem;">
-            <div class="col m6" style="padding-bottom: 0px;">
-                <div class="input-field align-left">
-                    {{ form_widget(profile_form.company, {'attr': {'class':'validate'}}) }}
-                    <label for="profile_company">Company</label>
-                </div>
-            </div>
-            <div class="col m6" style="padding-bottom: 0px;">
-                <div class="input-field align-left">
-                    {{ form_widget(profile_form.website, {'attr': {'class':'validate'}}) }}
-                    <label for="profile_website">Website</label>
-                </div>
-            </div>
-        </div>
-
-        <div class="row" style="margin-top: 0rem;">
-            <div class="col m6" style="padding-bottom: 0px;">
-                <div class="input-field align-left">
-                    {{ form_widget(profile_form.birth_date) }}
-                    <label for="profile_birth_date">Birth date</label>
-                </div>
-            </div>
-            <div class="col m6" style="padding-bottom: 0px;">
-            </div>
-        </div>
-
-        <div class="row" style="padding-right: 25px;padding-top: 20px">
+        <div class="row" style="padding-right: 25px;">
             <div class="col s12">
                 <button type="submit" class="waves-effect waves-light btn btn-small">SAVE</button>
                 <a id="btn-profile-cancel" class="waves-effect waves-light btn btn-small red">CANCEL</a>
@@ -113,6 +84,12 @@
         {{ form_end(profile_form) }}
     </div>
 </div>
+
+<style>
+    #edit-profile-container div.input-field{
+       margin-bottom: 27px;
+    }
+</style>
 
 <script>
     $(document).ready(function () {

@@ -1,6 +1,5 @@
-<div id="tab-profile-info" class="col s12" style="color: #5e5e5e;">
-
-      <div class="row" style="margin-top: 0px;height: 15px;" id="edit-profile-button-box">
+<div id="tab-profile-info" class="col s12" style="color: #5e5e5e; margin-top: 1em">
+      <div class="row" style="margin-top: 0px; height: 15px; ma" id="edit-profile-button-box">
         <nav style="padding-right: 25px;color: #424242;background-color: #fff;box-shadow: 0 0px 0px rgba(0,0,0,.26)!important;padding-left: 30px;">
           <div class="nav-wrapper">
             <a href="#!" class="brand-logo"></a>
@@ -94,16 +93,18 @@
                   </div>
               </div>
           </div>
-
-
       </div>
 
-      {% include 'UserBundle:Profile:Partials/_profile-form.html.twig' with {'hidden': true} %}
-
+        {% include 'UserBundle:Profile:Partials/_profile-form.html.twig' with {'hidden': true} %}
 
   </div>
 
 
+<style>
+    #edit-profile-container {
+        margin-top: 2em;
+    }
+</style>
 
 <script>
   $(document).ready(function(){
