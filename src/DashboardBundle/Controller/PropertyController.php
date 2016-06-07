@@ -51,17 +51,8 @@ class PropertyController extends BaseController
    * @Route("/properties/show", name="properties_show")
    */
   public function showAction(Request $request) {
-    $messageInfoNotSelected = "Select one Property in the list";
-    $indexRouting = "properties_index";
-    $idSelected = $this->getFiertSelectetGridItem();
-    if (!$idSelected) {
-      $this->addFlash('info', $messageInfoNotSelected);
-      return $this->redirect($this->generateUrl($indexRouting));
-    }
-    $entity = $this->getDoctrine()->getRepository('DashboardBundle:Property')->find($idSelected);
-    if (!$entity) {
-      return $this->addFlash('info', $messageInfoNotSelected, $indexRouting);
-    }
+    $property_id = $request->get('property_id');
+    $entity = $this->getDoctrine()->getRepository('DashboardBundle:Property')->find($property_id);
     return $this->render('DashboardBundle:Properties:show.html.twig', array(
         'property' => $entity,
     ));
@@ -75,11 +66,6 @@ class PropertyController extends BaseController
     $mls_id = $request->get('mls_id');
     $property_id = $request->get('property_id');
     $user = $this->getUser();
-
-    if($request->isMethod('POST')){
-      $property_id = $this->getFirstSelectedGridItem();
-      return $this->redirectToRoute('properties_design', array('property_id' => $property_id));
-    }
 
     //Design a property from MLS
     if ($mls_id) {
@@ -112,6 +98,37 @@ class PropertyController extends BaseController
       'property_form' => $property_form->createView(),
       'property_photo_form' => $property_photo_form->createView()
     ));
+  }
+
+  /**
+   * @Route("/properties/options", name="properties_option")
+   */
+  public function optionsAction(Request $request){
+    $action = $request->get('action');
+    $messageInfoNotSelected = "You should select a property in order to continue.";
+    $indexRouting = "properties_index";
+    $property_id = $this->getFirstSelectedGridItem();
+    if (!$property_id) {
+      $this->addFlash('info', $messageInfoNotSelected);
+      return $this->redirect($this->generateUrl($indexRouting));
+    }
+
+    switch($action){
+      case 'show':
+          $route = 'properties_show';
+        break;
+      case 'edit':
+          $route = 'properties_design';
+        break;
+      case 'delete':
+          $route = 'properties_remove';
+        break;
+      default:
+        $route = 'properties_show';
+      break;
+    }
+
+    return $this->redirectToRoute($route, array('property_id' => $property_id));
   }
 
   /**
@@ -151,7 +168,7 @@ class PropertyController extends BaseController
    */
   public function removeAction(Request $request)
   {
-    $property_id = $this->getFirstSelectedGridItem();
+    $property_id = $request->get('property_id');
 
     $property = $this->getDoctrine()
       ->getRepository('DashboardBundle:Property')

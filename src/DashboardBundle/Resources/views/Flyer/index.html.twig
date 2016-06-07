@@ -32,7 +32,7 @@
 	<script>
 		$(document).ready(function(){
 			$('#edit_action').click(function(){
-				$('#{{idFormGrid}}').attr('action', '{{path("flyer_edit")}}');
+				$('#{{idFormGrid}}').attr('action', '{{path("flyer_options", {'action':'edit'})}}');
     		$('#{{idFormGrid}}').submit();
 			});
 		});

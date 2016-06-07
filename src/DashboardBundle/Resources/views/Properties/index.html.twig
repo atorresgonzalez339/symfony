@@ -68,17 +68,17 @@
 	<script>
 		$(document).ready(function(){
 			$('#edit_action').click(function(){
-				$('#{{idFormGrid}}').attr('action', '{{path("properties_design")}}');
+				$('#{{idFormGrid}}').attr('action', '{{path("properties_option", {'action':'edit'})}}');
 				$('#{{idFormGrid}}').submit();
 			});
 
 			$('#delete_action').click(function(){
-				$('#{{idFormGrid}}').attr('action', '{{path("properties_remove")}}');
+				$('#{{idFormGrid}}').attr('action', '{{path("properties_option", {'action':'delete'})}}');
 				$('#{{idFormGrid}}').submit();
 			});
 
 			$('#show_action').click(function(){
-				$('#{{idFormGrid}}').attr('action', '{{path("properties_show")}}');
+				$('#{{idFormGrid}}').attr('action', '{{path("properties_option", {'action':'show'})}}');
 				$('#{{idFormGrid}}').submit();
 			});
 		});
