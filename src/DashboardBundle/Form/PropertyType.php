@@ -14,17 +14,23 @@ class PropertyType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('description')
+            ->add('description',null,array(
+                'attr' => array('style' => 'width: 99%;'),
+            ))
             ->add('bedrooms')
             ->add('bathrooms')
-            ->add('amenities')
-            ->add('features')
+            ->add('amenities',null,array(
+                'attr' => array('class' => 'custom-ta'),
+            ))
+            ->add('features',null,array(
+                'attr' => array('class' => 'custom-ta'),
+            ))
             ->add('type', ChoiceType::class, array(
                 'choices' => PropertyEnumType::getChoices(),
                 'attr' => array('class' => 'select2'),
                 'empty_data' => null,
                 'required'    => false,
-                'placeholder' => 'Select unit type',
+                'placeholder' => 'Select Unit Type',
             ))
             ->add('for_rent')
             ->add('lease_term')
@@ -39,6 +45,9 @@ class PropertyType extends AbstractType
             ->add('postal_code')
             ->add('lat', 'hidden')
             ->add('lng', 'hidden')
+            ->add('map_center_lat', 'hidden')
+            ->add('map_center_lng', 'hidden')
+            ->add('map_zoom', 'hidden')
             ->add('list_price')
         ;
     }

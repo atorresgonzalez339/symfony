@@ -1,8 +1,514 @@
 {% extends 'DashboardBundle:Common:backend2.html.twig' %}
 
-{% block content %}
-    Dashboard
-    <a href="{{path('properties_index')}}">Properties</a>
-    <a href="{{path('fos_user_security_logout')}}">Log out</a>
+{% block breadcrumb %}
+    <li><a href="#">Dashboard</a></li>
+{% endblock breadcrumb %}
 
-{% endblock content%}
+{% block content %}
+    {#Dashboard#}
+    {#<a href="{{path('properties_index')}}">Properties</a>#}
+    {#<a href="{{path('fos_user_security_logout')}}">Log out</a>#}
+    <div class="row">
+        <div class="col m12">
+            <div class="card-panel" id="chartMain" style="height: 315px">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col m6">
+            <div class="card-panel" id="chartLeft" style="height: 315px">
+            </div>
+        </div>
+        <div class="col m6">
+            <div class="card-panel" id="chartRight" style="height: 315px"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col m4">
+            <div class="card">
+                <div class="title"><h5>Orders</h5><a class="close" href="#"><i class="mdi-content-clear"></i></a> <a
+                            class="minimize" href="#"><i class="mdi-navigation-expand-less"></i></a></div>
+                <div class="content orders-card"><h4>3,729</h4>
+                    <div class="row">
+                        <div class="col s6">
+                            <small>Total Orders</small>
+                        </div>
+                        <div class="col s6 right-align">77% <i class="fa fa-level-down red-text"></i></div>
+                    </div>
+                    <div class="progress small">
+                        <div class="determinate" style="width: 77%"></div>
+                    </div>
+                    <h4>$7,180</h4>
+                    <div class="row">
+                        <div class="col s6">
+                            <small>Total Income</small>
+                        </div>
+                        <div class="col s6 right-align">43% <i class="fa fa-level-up green-text"></i></div>
+                    </div>
+                    <div class="progress small">
+                        <div class="determinate" style="width: 43%"></div>
+                    </div>
+                    <h4>27</h4>
+                    <div class="row">
+                        <div class="col s6">
+                            <small>Total Refunds</small>
+                        </div>
+                        <div class="col s6 right-align">7%</div>
+                    </div>
+                    <div class="progress small">
+                        <div class="determinate" style="width: 7%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col m8">
+            <div class="card-panel" id="chartLine" style="height: 289px"></div>
+        </div>
+    </div>
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.highcharts.com/modules/drilldown.js"></script>
+    <script>
+        $(function () {
+            $(function () {
+                $('#chartLine').highcharts({
+                    xAxis: {
+                        min: -0.5,
+                        max: 5.5
+                    },
+                    yAxis: {
+                        min: 0
+                    },
+                    title: {
+                        text: 'Scatter plot with regression line'
+                    },
+                    series: [{
+                        type: 'line',
+                        name: 'Regression Line',
+                        data: [[0, 1.11], [5, 4.51]],
+                        marker: {
+                            enabled: false
+                        },
+                        states: {
+                            hover: {
+                                lineWidth: 0
+                            }
+                        },
+                        enableMouseTracking: false
+                    }, {
+                        type: 'scatter',
+                        name: 'Observations',
+                        data: [1, 1.5, 2.8, 3.5, 3.9, 4.2],
+                        marker: {
+                            radius: 4
+                        }
+                    }]
+                });
+            });
+
+            // Create the chart
+            $('#chartRight').highcharts({
+                chart: {
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Browser market shares'
+                },
+                plotOptions: {
+                    series: {
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.name}: {point.y:.1f}%'
+                        }
+                    }
+                },
+
+                tooltip: {
+                    headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                    pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+                },
+                series: [{
+                    name: 'Brands',
+                    colorByPoint: true,
+                    data: [{
+                        name: 'Microsoft Internet Explorer',
+                        y: 56.33,
+                        drilldown: 'Microsoft Internet Explorer'
+                    }, {
+                        name: 'Chrome',
+                        y: 24.03,
+                        drilldown: 'Chrome'
+                    }, {
+                        name: 'Firefox',
+                        y: 10.38,
+                        drilldown: 'Firefox'
+                    }, {
+                        name: 'Safari',
+                        y: 4.77,
+                        drilldown: 'Safari'
+                    }, {
+                        name: 'Opera',
+                        y: 0.91,
+                        drilldown: 'Opera'
+                    }, {
+                        name: 'Proprietary or Undetectable',
+                        y: 0.2,
+                        drilldown: null
+                    }]
+                }],
+                drilldown: {
+                    series: [{
+                        name: 'Microsoft Internet Explorer',
+                        id: 'Microsoft Internet Explorer',
+                        data: [
+                            ['v11.0', 24.13],
+                            ['v8.0', 17.2],
+                            ['v9.0', 8.11],
+                            ['v10.0', 5.33],
+                            ['v6.0', 1.06],
+                            ['v7.0', 0.5]
+                        ]
+                    }, {
+                        name: 'Chrome',
+                        id: 'Chrome',
+                        data: [
+                            ['v40.0', 5],
+                            ['v41.0', 4.32],
+                            ['v42.0', 3.68],
+                            ['v39.0', 2.96],
+                            ['v36.0', 2.53],
+                            ['v43.0', 1.45],
+                            ['v31.0', 1.24],
+                            ['v35.0', 0.85],
+                            ['v38.0', 0.6],
+                            ['v32.0', 0.55],
+                            ['v37.0', 0.38],
+                            ['v33.0', 0.19],
+                            ['v34.0', 0.14],
+                            ['v30.0', 0.14]
+                        ]
+                    }, {
+                        name: 'Firefox',
+                        id: 'Firefox',
+                        data: [
+                            ['v35', 2.76],
+                            ['v36', 2.32],
+                            ['v37', 2.31],
+                            ['v34', 1.27],
+                            ['v38', 1.02],
+                            ['v31', 0.33],
+                            ['v33', 0.22],
+                            ['v32', 0.15]
+                        ]
+                    }, {
+                        name: 'Safari',
+                        id: 'Safari',
+                        data: [
+                            ['v8.0', 2.56],
+                            ['v7.1', 0.77],
+                            ['v5.1', 0.42],
+                            ['v5.0', 0.3],
+                            ['v6.1', 0.29],
+                            ['v7.0', 0.26],
+                            ['v6.2', 0.17]
+                        ]
+                    }, {
+                        name: 'Opera',
+                        id: 'Opera',
+                        data: [
+                            ['v12.x', 0.34],
+                            ['v28', 0.24],
+                            ['v27', 0.17],
+                            ['v29', 0.16]
+                        ]
+                    }]
+                }
+            });
+        });
+
+        $(function () {
+            // Create the chart
+            $('#chartLeft').highcharts({
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Name tested'
+                },
+                xAxis: {
+                    type: 'category'
+                },
+                yAxis: {
+                    title: {
+                        text: 'Total percent market share'
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+
+                series: [{
+                    name: 'Brands',
+                    colorByPoint: true,
+                    data: [{
+                        name: 'Microsoft Internet Explorer',
+                        y: 56.33,
+                        drilldown: 'Microsoft Internet Explorer'
+                    }, {
+                        name: 'Chrome',
+                        y: 24.03,
+                        drilldown: 'Chrome'
+                    }, {
+                        name: 'Firefox',
+                        y: 10.38,
+                        drilldown: 'Firefox'
+                    }, {
+                        name: 'Safari',
+                        y: 4.77,
+                        drilldown: 'Safari'
+                    }, {
+                        name: 'Opera',
+                        y: 0.91,
+                        drilldown: 'Opera'
+                    }, {
+                        name: 'Proprietary or Undetectable',
+                        y: 0.2,
+                        drilldown: null
+                    }]
+                }],
+                drilldown: {
+                    series: [{
+                        name: 'Microsoft Internet Explorer',
+                        id: 'Microsoft Internet Explorer',
+                        data: [
+                            [
+                                'v11.0',
+                                24.13
+                            ],
+                            [
+                                'v8.0',
+                                17.2
+                            ],
+                            [
+                                'v9.0',
+                                8.11
+                            ],
+                            [
+                                'v10.0',
+                                5.33
+                            ],
+                            [
+                                'v6.0',
+                                1.06
+                            ],
+                            [
+                                'v7.0',
+                                0.5
+                            ]
+                        ]
+                    }, {
+                        name: 'Chrome',
+                        id: 'Chrome',
+                        data: [
+                            [
+                                'v40.0',
+                                5
+                            ],
+                            [
+                                'v41.0',
+                                4.32
+                            ],
+                            [
+                                'v42.0',
+                                3.68
+                            ],
+                            [
+                                'v39.0',
+                                2.96
+                            ],
+                            [
+                                'v36.0',
+                                2.53
+                            ],
+                            [
+                                'v43.0',
+                                1.45
+                            ],
+                            [
+                                'v31.0',
+                                1.24
+                            ],
+                            [
+                                'v35.0',
+                                0.85
+                            ],
+                            [
+                                'v38.0',
+                                0.6
+                            ],
+                            [
+                                'v32.0',
+                                0.55
+                            ],
+                            [
+                                'v37.0',
+                                0.38
+                            ],
+                            [
+                                'v33.0',
+                                0.19
+                            ],
+                            [
+                                'v34.0',
+                                0.14
+                            ],
+                            [
+                                'v30.0',
+                                0.14
+                            ]
+                        ]
+                    }, {
+                        name: 'Firefox',
+                        id: 'Firefox',
+                        data: [
+                            [
+                                'v35',
+                                2.76
+                            ],
+                            [
+                                'v36',
+                                2.32
+                            ],
+                            [
+                                'v37',
+                                2.31
+                            ],
+                            [
+                                'v34',
+                                1.27
+                            ],
+                            [
+                                'v38',
+                                1.02
+                            ],
+                            [
+                                'v31',
+                                0.33
+                            ],
+                            [
+                                'v33',
+                                0.22
+                            ],
+                            [
+                                'v32',
+                                0.15
+                            ]
+                        ]
+                    }, {
+                        name: 'Safari',
+                        id: 'Safari',
+                        data: [
+                            [
+                                'v8.0',
+                                2.56
+                            ],
+                            [
+                                'v7.1',
+                                0.77
+                            ],
+                            [
+                                'v5.1',
+                                0.42
+                            ],
+                            [
+                                'v5.0',
+                                0.3
+                            ],
+                            [
+                                'v6.1',
+                                0.29
+                            ],
+                            [
+                                'v7.0',
+                                0.26
+                            ],
+                            [
+                                'v6.2',
+                                0.17
+                            ]
+                        ]
+                    }, {
+                        name: 'Opera',
+                        id: 'Opera',
+                        data: [
+                            [
+                                'v12.x',
+                                0.34
+                            ],
+                            [
+                                'v28',
+                                0.24
+                            ],
+                            [
+                                'v27',
+                                0.17
+                            ],
+                            [
+                                'v29',
+                                0.16
+                            ]
+                        ]
+                    }]
+                }
+            });
+        });
+
+        $(function () {
+            $('#chartMain').highcharts({
+                title: {
+                    text: 'Monthly Average Temperature',
+                    x: -20 //center
+                },
+                xAxis: {
+                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                },
+                yAxis: {
+                    title: {
+                        text: 'Temperature (°C)'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
+                },
+                tooltip: {
+                    valueSuffix: '°C'
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                series: [{
+                    name: 'Tokyo',
+                    data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+                }, {
+                    name: 'New York',
+                    data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
+                }, {
+                    name: 'Berlin',
+                    data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
+                }, {
+                    name: 'London',
+                    data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+                }]
+            });
+        });
+    </script>
+{% endblock content %}

@@ -11,6 +11,7 @@ $loader = require __DIR__.'/../vendor/autoload.php';
 $loader->add('PhpThumb_', __DIR__.'/../libraries/phpthumb/lib');
 $loader->add('JMS', __DIR__.'/../vendor/bundles');
 $loader->add('JMS', __DIR__.'/../vendor/cg-library/src');
+$loader->add('Stripe', __DIR__.'/../libraries/stripe/lib');
 
 AnnotationRegistry::registerLoader(array($loader, 'loadClass'));
 

@@ -1,0 +1,62 @@
+<form id="stripe-card-form">
+    <div class="row">
+        <div class="col md12 s12 hide">
+            <span id="stripe-payment-errors" class="alert alert-danger alert-dismissible fade in" role="alert"></span>
+        </div>
+
+        <div class="col s12 md12 " style="padding-bottom: 10px">
+            <label>
+                <h5>Full Name</h5>
+                <span>Enter your name exactly as it appear on the card</span>
+                <input type="text" maxlength="40" data-stripe="name" required/>
+            </label>
+        </div>
+
+        <div class="col s12 md12" style="padding-bottom: 10px">
+            <label>
+                <h5>Card Number</h5>
+                <span>Enter the 16 digits appear on the front of your card</span>
+                <input type="text" maxlength="16" data-stripe="number" required/>
+            </label>
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col s4 md4">
+            <label>
+                <h5>Expiration Date</h5>
+                <select data-stripe="exp-month" required class="browser-default">
+                    {% for month in ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"] %}
+                        <option {{ loop.index == 1 ? 'selected' }} value="{{ month }}">{{ month }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+        </div>
+        <div class="col s4 md4">
+            <label>
+                <h5>&nbsp;</h5>
+                <select data-stripe="exp-year" required class="browser-default">
+                    <option disabled selected>YYYY</option>
+                    {% for year in [0, 1, 2, 3, 4, 5] %}
+                        {% set year_show = "now"|date("Y") + year %}
+                        <option {{ loop.index == 1 ? 'selected' }} value="{{ year_show }}">{{ year_show }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+        </div>
+        <div class="col s4 md4">
+            <label>
+                <h5>CVC</h5>
+                <input type="text" maxlength="4" data-stripe="cvc" required/>
+            </label>
+        </div>
+    </div>
+
+    <div style="margin: 20px">
+        <center>
+            <button id="stripe-btn-submit" class="btn {{ hide_btn is defined and hide_btn ? 'hide' : '' }}" type="submit">{{ btn_title is defined and btn_title ? btn_title : 'Save' }}</button>
+        </center>
+    </div>
+</form>

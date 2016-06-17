@@ -6,8 +6,9 @@ use CommonBundle\Business\BaseBusiness;
 
 class UtilsBusiness extends BaseBusiness{
 
-		public function __construct(EntityManager $em) {
+		public function __construct($em, $container) {
 			parent::__construct($em);
+			$this->container = $container;
 		}
 
 		public function upladImage($img, $folder = null){

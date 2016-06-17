@@ -29,7 +29,110 @@ class BaseController extends Controller {
     /**
      * @author  Livan L. Frometa Osorio <llfrometa@gmail.com>
      */
-    public function getFirstSelectetGridItem() {
+    protected function getUserAuthenticated() {
+        return $this->get('security.context')->getToken()->getUser();
+    }
+
+    /**
+     * @author  Livan L. Frometa Osorio <llfrometa@gmail.com>
+     */
+    protected function genericNew($nameEntity, $nameFormEntity, $renderDir, $nameFormView = 'form') {
+        $entity = new $nameEntity();
+        $form = $this->createForm(new $nameFormEntity(), $entity);
+        return $this->render($renderDir, array(
+            $nameFormView => $form->createView(),
+        ));
+    }
+
+    /**
+     * @author  Livan L. Frometa Osorio <llfrometa@gmail.com>
+     */
+    public function genericCreate($nameEntity, $nameFormEntity, $renderDir, $nameService, $routing, $messageSucccess = '', $messageError = '', $nameFormView = 'form') {
+        $request = $this->getRequest();
+        $entity = new $nameEntity();
+        $form = $this->createForm(new $nameFormEntity(), $entity);
+        $form->bind($request);
+        if ($form->isValid()) {
+            $this->findBusiness($nameService)->saveData($entity);
+            $this->addFlash('success', $messageSucccess, $routing);
+            return $this->redirect($this->generateUrl($routing));
+        } else {
+            $this->addFlash('info', $messageError);
+            return $this->render($renderDir, array('entity' => $entity,$nameFormView => $form->createView()));
+        }
+    }
+
+    /**
+     * @author  Livan L. Frometa Osorio <llfrometa@gmail.com>
+     */
+    public function genericDelete($nameService, $indexRouting,$messageInfo = '', $messageSucccess = '',$messageError = '') {
+        $ids = $this->getSelectetGridItems();
+        if (!$ids) {
+            $this->addFlash('info', $messageInfo);
+            return $this->redirect($this->generateUrl($indexRouting));
+        }
+        $business   = $this->findBusiness($nameService);
+        $result     = $business->removeAll($ids);
+        if ($result) {
+            return $this->addFlash('success', $messageSucccess, $indexRouting);
+        } else {
+            return $this->addFlash('info', $messageError, $indexRouting);
+        }
+    }
+
+    /**
+     * @author  Livan L. Frometa Osorio <llfrometa@gmail.com>
+     */
+    public function genericEdit($nameFormEntity, $renderDir, $nameService, $indexRouting,$messageInfoNotSelected ='',$messageInfo ='', $nameFormView = 'form') {
+        $idSelected = $this->getFiertSelectetGridItem();
+        if (!$idSelected) {
+            $this->addFlash('info', $messageInfoNotSelected);
+            return $this->redirect($this->generateUrl($indexRouting));
+        }
+        $entity = $this->findBusiness($nameService)->findByID($idSelected);
+        if (!$entity) {
+            return $this->addFlash('info', $messageInfo, $indexRouting);
+        }
+        $editForm = $this->createForm(new $nameFormEntity(), $entity);
+        return $this->render($renderDir, array(
+            'entity' => $entity,
+            $nameFormView => $editForm->createView(),
+        ));
+    }
+
+    /**
+     * @author  Livan L. Frometa Osorio <llfrometa@gmail.com>
+     */
+    public function genericUpdate($idEntity, $nameFormEntity, $renderDir, $nameService, $indexRouting,$messageInfoNotSelected = '',$messageSucccess ='',$messageError = '', $nameFormView = 'form') {
+        $request = $this->getRequest();
+        $business = $this->findBusiness($nameService);
+        $entity = $business->findByID($idEntity);
+        if (!$entity) return $this->addFlash('info', $messageInfoNotSelected, $indexRouting);
+        $form = $this->createForm(new $nameFormEntity(), $entity);
+        $form->bind($request);
+        if ($form->isValid()) {
+            $business->saveData($entity);
+            return $this->addFlash('success', $messageSucccess, $indexRouting);
+        } else {
+            $this->addFlash('info', $messageError);
+            return $this->render($renderDir, array( 'entity' => $entity, $nameFormView => $form->createView()
+            ));
+        }
+        return $this->redirect($this->generateUrl($indexRouting));
+    }
+
+    /**
+     * @author  Livan L. Frometa Osorio <llfrometa@gmail.com>
+     */
+    public function getFiertSelectetGridItem() {
+        $ids = $this->getSelectetGridItems();
+        return $ids[0];
+    }
+
+    /**
+     * @author  Livan L. Frometa Osorio <llfrometa@gmail.com>
+     */
+    public function getFirstSelectedGridItem() {
         $ids = $this->getSelectetGridItems();
         return $ids[0];
     }
@@ -116,28 +219,27 @@ class BaseController extends Controller {
      * @example $this->getSession('security');
      */
     protected function getSession($key) {
-
-        $salt = $this->getUserAuthenticated()->getSalt();
-        $ralfSession = $this->findBusiness('ralf.core.business.ralfsession')->getRepository('Core', 'RalfSession')->findByKey($key,$salt);
-
-        if($ralfSession){
-            return $ralfSession->getValue();
-        }else{
-            return null;
-        }
+        $request = $this->getRequest();
+        $session = $request->getSession();
+        return $session->get($key);
     }
 
-    /**
-     * @author  Livan L. Frometa Osorio <llfrometa@gmail.com>
-     * @name    getSession($key)
-     * @see     this method remove a object in the session by key.
-     * @param   $key
-     * @example $this->removeSession('security');
-     */
+    protected function hasSession($key) {
+        $request = $this->getRequest();
+        $session = $request->getSession();
+        return $session->has($key);
+    }
+
     protected function removeSession($key) {
-        $peticion = $this->getRequest();
-        $session = $peticion->getSession();
+        $request = $this->getRequest();
+        $session = $request->getSession();
         return $session->remove($key);
+    }
+
+    protected function setSession($key,$value) {
+        $request = $this->getRequest();
+        $session = $request->getSession();
+        return $session->set($key,$value);
     }
 
     /**

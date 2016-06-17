@@ -1,13 +1,14 @@
 parameters:
-    admin.paginator.limits.config: [10, 15, 20, 30, 50,100,200,300,500]
-    admin.paginator.limits.template.config: [8, 12, 16, 20]
-    grid.column.textext.class: DashboardBundle\Grid\RalfTextColumn
-    grid.column.icon.class: DashboardBundle\Grid\RalfIconColumn
-    grid.column.photo.class: DashboardBundle\Grid\RalfPhotoColumn
+  admin.paginator.limits.config: [10, 15, 20, 30, 50,100,200,300,500]
+  admin.paginator.limits.template.config: [8, 12, 16, 20]
+  grid.column.textext.class: DashboardBundle\Grid\RalfTextColumn
+  grid.column.icon.class: DashboardBundle\Grid\RalfIconColumn
+  grid.column.photo.class: DashboardBundle\Grid\RalfPhotoColumn
 
 services:
   dashboard.utils.business:
-    class: DashboardBundle\Business\UtilBusiness
+    class: DashboardBundle\Business\UtilsBusiness
+    parent: common.base.business
     arguments: ["@service_container"]
 
   dashboard.property.business:
@@ -18,10 +19,39 @@ services:
   dashboard.flyer.business:
     class: DashboardBundle\Business\FlyerBusiness
     parent: common.base.business
+    arguments: ["@service_container"]
 
   dashboard.template.business:
     class: DashboardBundle\Business\TemplateBusiness
     parent: common.base.business
+
+  dashboard.upgrade.business:
+    class: DashboardBundle\Business\UpgradeBusiness
+    parent: common.base.business
+    arguments: ["@service_container"]
+
+  dashboard.contact.business:
+    class: DashboardBundle\Business\ContactBusiness
+    parent: common.base.business
+
+  dashboard.contactlist.business:
+    class: DashboardBundle\Business\ContactListBusiness
+    parent: common.base.business
+
+  dashboard.mandrill.business:
+    class: DashboardBundle\Business\MandrillBusiness
+    parent: common.base.business
+    arguments: ["@service_container"]
+
+  dashboard.sendflyer.business:
+    class: DashboardBundle\Business\SendFlyerBusiness
+    parent: common.base.business
+    arguments: ["@service_container"]
+
+  dashboard.activity.business:
+    class: DashboardBundle\Business\ActivityBusiness
+    parent: common.base.business
+    arguments: ["@service_container"]
 
   ralf.common.twig.extension.functions:
     class: DashboardBundle\Twig\Extension\Functions
@@ -43,4 +73,3 @@ services:
     class: %grid.column.photo.class%
     tags:
       - { name: grid.column.extension }
-

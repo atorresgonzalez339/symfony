@@ -26,24 +26,45 @@ class ProfileController extends BaseController
 
       $user = $this->getUser();
 
-      $profile = $this->getBusiness()
-                      ->getRepository('User', 'UserProfile')
-                      ->findByUserId($user->getId());
+      $upgradeBusiness = $this->findBusiness('dashboard.upgrade.business');
 
-      if(!$profile){
-      	$profile = new UserProfile($user);
+      $profile = $user->getProfile();
+
+      $isNew = false;
+
+      if(!$profile) {
+        $profile = new UserProfile($user);
+        $isNew = true;
+      }
+      else if(!$profile->getIsCompleted()){
+        $isNew = true;
       }
 
       $profile_form = $this->createForm(ProfileType::class, $profile);
-      $account_form = $this->createForm(AccountType::class, $user);
       $picture_form = $this->createForm(PictureType::class, $profile);
 
-      return $this->render('UserBundle:Profile:index.html.twig', array(
-        'profile' => $profile,
-        'profile_form' => $profile_form->createView(),
-        'account_form' => $account_form->createView(),
-        'picture_form' => $picture_form->createView()
-      ));
+      if($isNew){
+        return $this->render("UserBundle:Profile:required_form.html.twig", array(
+          'profile' => $profile,
+          'profile_form' => $profile_form->createView(),
+          'picture_form' => $picture_form->createView(),
+        ));
+      }
+      else{
+
+        $cardInfo = $upgradeBusiness->getCardInformation($user);
+        $invoices = $upgradeBusiness->getInvoices($user);
+        $account_form = $this->createForm(AccountType::class, $user);
+
+        return $this->render("UserBundle:Profile:index.html.twig", array(
+          'profile' => $profile,
+          'profile_form' => $profile_form->createView(),
+          'account_form' => $account_form->createView(),
+          'picture_form' => $picture_form->createView(),
+          'card_info' => $cardInfo,
+          'invoices' => $invoices
+        ));
+      }
     }
 
     /**
@@ -65,7 +86,19 @@ class ProfileController extends BaseController
       $profile_form->handleRequest($request);
 
       if ($profile_form->isValid()) {
+
         $this->getBusiness()->saveProfile($profile);
+        $user->setProfile($profile);
+
+        //Add free Plan to the user after complete profile
+        if(!$user->getCurrentPlan()){
+          $freePlan =  $this->getBusiness()
+                            ->getRepository('Dashboard', 'Plan')
+                            ->find(1);
+          $upgradeBusiness = $this->findBusiness('dashboard.upgrade.business');
+          $upgradeBusiness->updatePlan($user, $freePlan);
+        }
+
         $this->addFlash('success', 'Profile saved');
         return $this->redirect($this->generateUrl('profile_index'));
       }

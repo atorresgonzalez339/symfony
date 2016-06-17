@@ -1,5 +1,10 @@
 {% extends 'DashboardBundle:Common:backend2.html.twig' %}
 
+{% block stylesheets_priority %}
+	{{ parent() }}
+	<link href="{{ asset('bundles/dashboard/material/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
+{% endblock stylesheets_priority %}
+
 {% block breadcrumb %}
 	<li><a href="#">My Properties</a></li>
 {% endblock breadcrumb%}
@@ -29,6 +34,10 @@
 					<i class="mdi mdi-content-create left"></i>
 					Edit
 				</a>
+				<a id="show_action" class="btn btn-small waves-dark waves-effect">
+					<i class="mdi mdi-action-view-day left"></i>
+					Show
+				</a>
 				<a id="delete_action" class="btn btn-small waves-dark waves-effect red">
 					<i class="mdi mdi-content-clear left"></i>
 					Delete
@@ -40,20 +49,46 @@
 		</div>
 	</div>
 
+	<div class="fixed-action-btn" style="bottom: 45px; right: 24px">
+		<a class="btn-floating btn-large red"><i class="large mdi mdi-content-add left"></i></a>
+		<ul>
+			<li>
+				<a href="{{ path('properties_mls') }}" data-position="left" data-delay="50" data-tooltip="From MLS" class="btn-floating blue tooltipped" style="transform: scaleY(0.4) scaleX(0.4) translateY(40px) translateX(0px); opacity: 0;">
+					<i class="large fa fa-home"></i>
+				</a>
+			</li>
+			<li>
+				<a href="{{ path('properties_design') }}" data-position="left" data-delay="50" data-tooltip="Empty" class="btn-floating green tooltipped" style="transform: scaleY(0.4) scaleX(0.4) translateY(40px) translateX(0px); opacity: 0;">
+					<i class="large fa fa-home"></i>
+				</a>
+			</li>
+		</ul>
+	</div>
+
 	<script>
 		$(document).ready(function(){
 			$('#edit_action').click(function(){
-				$('#{{idFormGrid}}').attr('action', '{{path("properties_design")}}');
+				$('#{{idFormGrid}}').attr('action', '{{path("properties_option", {'action':'edit'})}}');
 				$('#{{idFormGrid}}').submit();
 			});
 
 			$('#delete_action').click(function(){
-				$('#{{idFormGrid}}').attr('action', '{{path("properties_remove")}}');
+				$('#{{idFormGrid}}').attr('action', '{{path("properties_option", {'action':'delete'})}}');
+				$('#{{idFormGrid}}').submit();
+			});
+
+			$('#show_action').click(function(){
+				$('#{{idFormGrid}}').attr('action', '{{path("properties_option", {'action':'show'})}}');
 				$('#{{idFormGrid}}').submit();
 			});
 		});
 	</script>
 
 {% endblock content%}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script src="{{ asset('bundles/dashboard/material/js/select2.full.min.js') }}"></script>
+{% endblock javascripts %}
 
 

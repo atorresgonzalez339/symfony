@@ -1,0 +1,56 @@
+<table class="table">
+    <thead>
+    <tr>
+        <th>Flyer</th>
+        <th>Property</th>
+        <th>Subject</th>
+        <th style="text-align: center">Total Sent</th>
+        <th style="text-align: center">Delivered </th>
+        <th style="text-align: center">Bounced </th>
+        <th style="text-align: center">Unique Opens</th>
+        <th style="text-align: center">Total Opens</th>
+        <th style="text-align: center">Created</th>
+        <th style="text-align: center">Last sent</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for activity in activities %}
+        <tr>
+            <td>{{ activity.flyer.name }}</td>
+            <td>
+                <a href="{{ path('properties_design', {'property_id':activity.flyer.property.id}) }}">
+                    {{ activity.flyer.property.name }}
+                </a>
+            </td>
+            <td>{{ activity.flyer.subject }}</td>
+            <td style="text-align: center">
+                0
+            </td>
+            <td style="text-align: center">
+                0
+            </td>
+            <td style="text-align: center">
+                0
+            </td>
+            <td style="text-align: center">
+                0
+            </td>
+            <td style="text-align: center">
+                0
+            </td>
+            <td style="text-align: center">{{ activity.flyer.creationDate | date('M d') }}</td>
+            <td style="text-align: center">{{ activity.flyer.lastSentDate | date('M d h:i') }}</td>
+            <td style="text-align: center">
+                <a href="{{ path('activity_detail', {'id':activity.flyer.id}) }}">
+                    Details
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<script>
+
+</script>

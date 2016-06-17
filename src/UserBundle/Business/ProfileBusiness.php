@@ -17,6 +17,7 @@ class ProfileBusiness extends BaseBusiness {
   }
 
   public function saveProfile(UserProfile $profile){
+    $profile->setIsCompleted(true);
     $this->saveData($profile);
   }
 

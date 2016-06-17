@@ -1,0 +1,185 @@
+<div id="tab-billing-info" style="color: #5e5e5e;padding: 20px">
+  <div class="row" style="margin-top: 3rem;">
+    <div class="col m4">
+      <h5>Card Information</h5>
+      <div class="row" style="margin-top: 1em">
+        <div class="col s4" style="padding-bottom: 10px;"> <span class="left"><b>Card Holder:</b></span></div>
+        <div class="col s8" style="padding-bottom: 10px;">
+          <span id="card_holder">
+          {% if card_info %}
+            {{ card_info.name }}
+            {% else %}
+            -
+          {% endif %}
+        </span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s4" style="padding-bottom: 10px;"> <span class="left"><b>Stored Card:</b></span></div>
+        <div class="col s8" style="padding-bottom: 10px;">
+          <span id="card_ended">
+          {% if card_info %}
+            XXXX-XXXX-XXXX-{{ card_info.last4 }}
+          {% else %}
+            No card
+          {% endif %}
+        </span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s4" style="padding-bottom: 10px;"> <span class="left"><b>Card Type:</b></span></div>
+        <div class="col s8" style="padding-bottom: 10px;">
+          <span>
+          {% if card_info %}
+            {{ card_info.brand }}
+          {% else %}
+            -
+          {% endif %}
+        </span>
+        </div>
+      </div>
+      <div class="row">
+        <a class="btn modal-trigger btn-small" id="stripe-show-card-modal"  href="#stripe-card-modal" style="margin-top: 1em">
+          <i class="fa fa-credit-card left"></i>
+          {% if card_info %}
+            Update Credit Card
+          {% else %}
+            Add Credit Card
+          {% endif %}
+        </a>
+      </div>
+    </div>
+    <div class="col m8">
+      <div class="col m12">
+        <h5>Payment History</h5>
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th>
+              Plan
+            </th>
+            <th>
+              Date
+            </th>
+            <th>
+              Amount
+            </th>
+            <th>
+              Status
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          {% if invoices %}
+            {% for invoice in invoices %}
+              <tr>
+                <td>
+                  {% set line_first = invoice.lines.data | first %}
+                  {% set line_last = invoice.lines.data | last %}
+                  {{ line_last.plan.name }}
+                </td>
+                <td>
+                  {{ invoice.date | date('M Y') }}
+                </td>
+                <td>
+                  $ {{ (invoice.amount_due / 100) | number_format(2) }}
+                </td>
+                <td>
+                  {{ invoice.closed ? 'PAYD' : 'UNPAYD' }}
+                </td>
+              </tr>
+            {% endfor %}
+          {% else %}
+            <tr>
+              <td>
+                No invoices found
+              </td>
+            </tr>
+          {% endif %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="margin-top: 3rem;">
+
+  </div>
+</div>
+
+<!-- Modal Structure -->
+<div id="stripe-card-modal" class="modal modal-fixed-footer" style="width: 35%; height: 425px;">
+  <div class="modal-content" style="overflow-x: hidden;padding-bottom: 0px;">
+    <h4>
+      {% if card_info %}
+        Update Credit Card
+      {% else %}
+        Add Credit Card
+      {% endif %}
+    </h4>
+    <div>
+      {% include 'DashboardBundle:Upgrade:Partials/_stripe_card_form.html.twig' with {'hide_btn': true} %}
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button href="#!" id="stripe-modal-cancel" class="modal-action modal-close waves-effect waves-red btn-flat ">Cancel</button>
+    <button href="#!" id="stripe-modal-accept" class="modal-action waves-effect waves-green btn-flat ">
+      <i id="stripe-modal-spiner" class="fa fa-spinner fa-spin right hide" style="margin-left: 5px;"></i>
+      Accept
+    </button>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function(){
+    // Add & Update Credit Card
+
+    var $form_update_card = $('form#stripe-card-form');
+
+    MyStripe.init({
+      form_selector: '#stripe-card-form'
+    });
+
+    MyStripe.process(function(token){
+      var data = {
+        token: token
+      };
+
+      $.post('{{ path('upgrade_update_card') }}', data, function(result){
+        $('#stripe-modal-accept').prop('disabled', false);
+        $('#stripe-modal-cancel').prop('disabled', false);
+        $('#stripe-modal-spiner').addClass('hide');
+        if(result.status == 'ok'){
+          $('#card_holder').text(result.data.name);
+          $('#card_ended').text('XXXX-XXXX-XXXX-' + result.data.last4);
+          $('#card_brand').text(result.data.brand);
+          App.toast('Credit card updated successfully');
+          $('#stripe-card-modal').closeModal();
+          $form_update_card.trigger("reset");
+        }
+      });
+    }, function(){
+      $('#stripe-modal-accept').prop('disabled', false);
+      $('#stripe-modal-cancel').prop('disabled', false);
+      $('#stripe-modal-spiner').addClass('hide');
+    });
+
+    $('#stripe-show-card-modal').click(function(){
+      var $errors = $form.find('#stripe-payment-errors');
+      $errors.parent().addClass('hide');
+    });
+
+    $('#stripe-modal-cancel').click(function(){
+      $form_update_card.trigger("reset");
+    });
+
+    $('#stripe-modal-accept').click(function(){
+      if($form_update_card[0].checkValidity()){
+        $('#stripe-modal-spiner').removeClass('hide');
+        $('#stripe-modal-accept').prop('disabled', true);
+        $('#stripe-modal-cancel').prop('disabled', true);
+      }
+      $form_update_card.find('#stripe-btn-submit').click();
+    });
+  })
+</script>

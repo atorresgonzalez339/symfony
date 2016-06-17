@@ -1,3 +1,10 @@
+<style>
+  textarea#property_amenities,textarea#property_features {
+    height: 150px !important;
+    overflow-y: auto !important;
+  }
+</style>
+
 <div class="row" id="main-info" style="margin-top: 0px;">
   <div class="col m12">
     {{ form_start(property_form, {'action': path('properties_save'), 'method': 'POST', 'id':'property_form'}) }}
@@ -5,7 +12,7 @@
         <div class="title">
           <h5> Basic Information </h5>
           <div class="btn-group right">
-            <a href="#!" class="waves-effect waves-dark btn btn-small">
+            <a href="{{ path('properties_index') }}" class="waves-effect waves-dark btn btn-small">
               <i class="mdi mdi-navigation-chevron-left left"></i> Back
             </a>
             <button type="submit" id="btn-save" class="waves-effect waves-dark btn btn-small">
@@ -40,68 +47,38 @@
                 <label for="property_bathrooms" class="">Baths</label>
               </div>
               <div class="input-field">
-                {{ form_widget(property_form.parking_spaces) }}
-                <label for="property_parking_spaces" class="">Parking</label>
+                {{ form_widget(property_form.list_price) }}
+                <label for="property_year_built" class="">Price</label>
               </div>
               <div class="input-field">
                 {{ form_widget(property_form.unit_size) }}
                 <label for="property_unit_size" class="">Unit Size</label>
               </div>
-              <div class="input-field">
-                {{ form_widget(property_form.year_built) }}
-                <label for="property_year_built" class="">Year Built</label>
-              </div>
-              <div class="input-field" style="margin-top: 3px;">
-                {{ form_widget(property_form.list_price) }}
-                <label for="property_list_price" class="">Price</label>
-              </div>
-              <div class="input-field">
-                {{ form_widget(property_form.lease_term) }}
-                <label for="property_lease_term" class="">Lease Term</label>
-              </div>
             </div>
             <div class="col m6">
               <div class="input-field">
                 {{ form_widget(property_form.type)}}
-                {#<select class="select2">#}
-                  {#<option value="AK">Apartament</option>#}
-                  {#<option value="HI">Condo</option>#}
-                  {#<option value="HI">House</option>#}
-                  {#<option value="HI">Villa</option>#}
-                {#</select>#}
               </div>
               <div class="input-field">
-                {{ form_widget(property_form.address, {'attr':{'placeholder':''}}) }}
-                <label for="property_address" class="">Address</label>
+                {{ form_widget(property_form.year_built) }}
+                <label for="property_year_built" class="">Year Built</label>
               </div>
               <div class="input-field">
-                {{ form_widget(property_form.unit) }}
-                <label for="property_unit" class="">Unit</label>
+                {{ form_widget(property_form.parking_spaces) }}
+                <label for="property_parking_spaces" class="">Parking</label>
               </div>
-              <div class="input-field">
-                {{ form_widget(property_form.city) }}
-                <label for="property_city" class="">City</label>
-              </div>
-              <div class="input-field">
-                {{ form_widget(property_form.state) }}
-                <label for="property_state" class="">State</label>
-              </div>
-              <div class="input-field">
-                {{ form_widget(property_form.country) }}
-                <label for="property_country" class="">Country</label>
-              </div>
-              <div class="input-field">
-                <div class="row" style="margin-top: 0px;">
-                  <div class="col m6">
-                    <div class="input-field" style="margin-top: 0px !important;">
-                      {{ form_widget(property_form.postal_code) }}
-                      <label for="property_postal_code" class="">Postal Code</label>
-                    </div>
+              <div class="row" style="margin-top: 0px;">
+                <div class="col m8">
+                  <div class="input-field">
+                    {{ form_widget(property_form.lease_term) }}
+                    <label for="property_lease_term" class="">Lease Term</label>
                   </div>
-                  <div class="col m6">
+                </div>
+                <div class="col m4">
+                  <div class="input-field">
                     <p style="margin-top: 5px;">
                       {{ form_widget(property_form.for_rent, {'attr': {'class':'filled-in'}}) }}
-                      <label for="property_for_rent">Is it for rent?</label>
+                      <label for="property_for_rent" style="left: 0px !important;">Is it for rent?</label>
                     </p>
                   </div>
                 </div>
@@ -119,13 +96,13 @@
           <div class="row" style="margin-top: 0px">
             <div class="col m6">
               <div class="input-field">
-                {{ form_widget(property_form.amenities, {'attr': {'class':'materialize-textarea'}}) }}
+                {{ form_widget(property_form.amenities, {'attr': {'class':'materialize-textarea min-h-80'}}) }}
                 <label for="property_amenities">Amenities</label>
               </div>
             </div>
             <div class="col m6">
               <div class="input-field">
-                {{ form_widget(property_form.features, {'attr': {'class':'materialize-textarea'}}) }}
+                {{ form_widget(property_form.features, {'attr': {'class':'materialize-textarea min-h-80'}}) }}
                 <label for="property_features">Features</label>
               </div>
             </div>
@@ -133,21 +110,64 @@
         </div>
       </div>
 
-      <div class="card">
-        <div class="title">
-          <h5> Location </h5>
-        </div>
-        <div class="content" style="padding-top: 5px;padding-bottom: 15px;">
-          <div class="row" style="margin-top: 5px">
-            <div class="col m12" style="padding-bottom: 5px;">
-              <div id="map-canvas"></div>
+      <div class="row">
+        <div class="col m5">
+          <div class="card">
+            <div class="title">
+              <h5> Location </h5>
+            </div>
+            <div class="content" style="padding-top: 5px;padding-bottom: 15px;">
+              <div class="row" style="margin-top: 0px">
+                <div class="col m12" style="padding-bottom: 5px;">
+                  <div class="input-field">
+                    {{ form_widget(property_form.address, {'attr':{'placeholder':''}}) }}
+                    <label for="property_address" class="">Address</label>
+                  </div>
+                  <div class="input-field">
+                    {{ form_widget(property_form.unit) }}
+                    <label for="property_unit" class="">Unit</label>
+                  </div>
+                  <div class="input-field">
+                    {{ form_widget(property_form.city) }}
+                    <label for="property_city" class="">City</label>
+                  </div>
+                  <div class="input-field">
+                    {{ form_widget(property_form.state) }}
+                    <label for="property_state" class="">State</label>
+                  </div>
+                  <div class="input-field">
+                    {{ form_widget(property_form.country) }}
+                    <label for="property_country" class="">Country</label>
+                  </div>
+                  <div class="input-field">
+                    {{ form_widget(property_form.postal_code) }}
+                    <label for="property_postal_code" class="">Postal Code</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row" style="margin-top: 5px"></div>
             </div>
           </div>
-          <div class="row" style="margin-top: 5px"></div>
+        </div>
+        <div class="col m7">
+          <div class="card">
+            <div class="content" style="padding-top: 5px !important;padding-bottom: 8px !important;padding-left: 10px;padding-right: 10px;min-height: 396px;">
+              <div class="row" style="margin-top: 5px">
+                <div class="col m12" style="padding-bottom: 5px;">
+                  <div id="map-canvas" style="min-height: 392px;"></div>
+                </div>
+              </div>
+              <div class="row" style="margin-top: 5px"></div>
+            </div>
+          </div>
         </div>
       </div>
+
       {{ form_widget(property_form.lat) }}
       {{ form_widget(property_form.lng) }}
+      {{ form_widget(property_form.map_zoom) }}
+      {{ form_widget(property_form.map_center_lat) }}
+      {{ form_widget(property_form.map_center_lng) }}
       <input type="hidden" value="{{ property_id }}" name="property_id" >
     {{ form_end(property_form) }}
   </div>
@@ -157,14 +177,22 @@
   $(document).ready(function(){
 
     if ($('#map-canvas').length != 0) {
-      var lat = {{ property.lat ? property.lat : '25.7823072' }};
-      var lng = {{ property.lng ? property.lng : '-80.3011208' }};
-      var map_input_id = 'property_address';
-      var map_input_lat_id = 'property_lat';
-      var map_input_lng_id = 'property_lng';
-      var show_marker = '{{ property.lat and property.lng ? 'true'}}';
-      google.maps.event.addDomListener(window, 'load', initialize(lat, lng,
-              map_input_id, map_input_lat_id, map_input_lng_id, show_marker));
+
+      var mapParams = {
+        lat: {{ property.lat }},
+        lng: {{ property.lng }},
+        center_lat: {{ property.mapCenterLat }},
+        center_lng: {{ property.mapCenterLng }},
+        zoom: {{ property.mapZoom }},
+        map_input_id: 'property_address',
+        map_input_lat_id: 'property_lat',
+        map_input_lng_id: 'property_lng',
+        map_input_zoom_id: 'property_map_zoom',
+        map_input_center_lat_id: 'property_map_center_lat',
+        map_input_center_lng_id: 'property_map_center_lng',
+        show_marker: '{{ property.lat and property.lng ? 'true'}}'
+      };
+      google.maps.event.addDomListener(window, 'load', initialize(mapParams));
     }
 
     var componentForm = {

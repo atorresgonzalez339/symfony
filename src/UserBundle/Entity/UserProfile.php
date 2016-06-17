@@ -13,6 +13,8 @@ class UserProfile
 {
     public function __construct(User $user){
         $this->user = $user;
+        $this->is_completed = false;
+        $this->email = $user->getEmail();
     }
 
     /**
@@ -23,7 +25,7 @@ class UserProfile
     protected $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="User", inversedBy="cart")
+     * @ORM\OneToOne(targetEntity="User", inversedBy="profile")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
@@ -103,6 +105,26 @@ class UserProfile
      * @ORM\Column(type="string", nullable=true)
      */
     private $photo_url;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    private $is_completed;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $customer_id;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $mandrill_subaccount;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $licence_number;
 
 
     /**
@@ -472,6 +494,78 @@ class UserProfile
     public function getFullName(){
         return $this->first_name . ' ' . $this->last_name;
     }
+    /**
+     * @return mixed
+     */
+    public function getIsCompleted()
+    {
+        return $this->is_completed;
+    }
+    /**
+     * @param mixed $is_completed
+     */
+    public function setIsCompleted($is_completed)
+    {
+        $this->is_completed = $is_completed;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCustomerId()
+    {
+        return $this->customer_id;
+    }
+
+    /**
+     * @param mixed $customer_id
+     */
+    public function setCustomerId($customer_id)
+    {
+        $this->customer_id = $customer_id;
+    }
+
+
+
+    /**
+     * Set mandrill_subaccount
+     *
+     * @param string $mandrillSubaccount
+     * @return UserProfile
+     */
+    public function setMandrillSubaccount($mandrillSubaccount)
+    {
+        $this->mandrill_subaccount = $mandrillSubaccount;
+
+        return $this;
+    }
+
+    /**
+     * Get mandrill_subaccount
+     *
+     * @return string 
+     */
+    public function getMandrillSubaccount()
+    {
+        return $this->mandrill_subaccount;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLicenceNumber()
+    {
+        return $this->licence_number;
+    }
+
+    /**
+     * @param mixed $licence_number
+     */
+    public function setLicenceNumber($licence_number)
+    {
+        $this->licence_number = $licence_number;
+    }
+
 
 
 }

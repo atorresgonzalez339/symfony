@@ -1,0 +1,35 @@
+{% extends 'DashboardBundle:Common:backend2.html.twig' %}
+
+{% block breadcrumb %}
+	<li><a href="#">Contacts List</a></li>
+{% endblock breadcrumb%}
+
+{% block content %}
+	<div class="card card-data-grid">
+		<div class="title">
+			<h5> Contacts List</h5>
+			<div class="btn-group right">
+				<a href="{{ path('contactlist_new') }}" class="btn btn-small waves-dark waves-effect"><i class="mdi mdi-content-add left"></i>Add</a>
+				<a id="edit_action" class="btn btn-small waves-dark waves-effect">
+					<i class="mdi mdi-content-create left"></i>
+					Edit
+				</a>
+				<a id="delete_action" class="btn btn-small waves-dark waves-effect red"><i class="mdi mdi-content-clear left"></i>Delete</a>
+			</div>
+		</div>
+		<div class="content">
+			{{ grid(grid, 'DashboardBundle:Grid:gridTemplateAjax.html.twig') }}
+		</div>
+	</div>
+	<script src="{{ asset('bundles/common/js/application.js') }}" type="text/javascript"></script>
+	<script>
+		$(document).ready(function(){
+			$('#delete_action').click(function(){
+				App.submit('{{ grid.hash }}','{{ path('contactlist_delete') }}')
+			});
+			$('#edit_action').click(function(){
+				App.submit('{{ grid.hash }}','{{ path('contactlist_edit') }}')
+			});
+		});
+	</script>
+{% endblock content %}

@@ -9,6 +9,7 @@ use DashboardBundle\Entity\Property;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use APY\DataGridBundle\Grid\Source\Entity;
 use APY\DataGridBundle\Grid\Action\DeleteMassAction;
@@ -34,10 +35,10 @@ class PropertyController extends BaseController
     $grid->setSource($source);
     $grid->hideColumns(array('id'));
     $grid->addMassAction(new DeleteMassAction());
-    $grid->setLimits($this->container->getParameter('admin.paginator.limits.config'));
+    $grid->setLimits(array(8,16,24,32,40));
 
     if ($request->isXmlHttpRequest()) {
-      return $grid->getGridResponse('DashboardBundle:Propery:indexAjax.html.twig');
+      return $grid->getGridResponse('DashboardBundle:Properties:indexAjax.html.twig');
     }
     if ($grid->isReadyForRedirect()) {
       return new RedirectResponse($grid->getRouteUrl());
@@ -47,6 +48,17 @@ class PropertyController extends BaseController
   }
 
   /**
+   * @Route("/properties/show", name="properties_show")
+   */
+  public function showAction(Request $request) {
+    $property_id = $request->get('property_id');
+    $entity = $this->getDoctrine()->getRepository('DashboardBundle:Property')->find($property_id);
+    return $this->render('DashboardBundle:Properties:show.html.twig', array(
+        'property' => $entity,
+    ));
+  }
+
+    /**
    * @Route("/properties/design", name="properties_design")
    */
   public function designAction(Request $request)
@@ -54,11 +66,6 @@ class PropertyController extends BaseController
     $mls_id = $request->get('mls_id');
     $property_id = $request->get('property_id');
     $user = $this->getUser();
-
-    if($request->isMethod('POST')){
-      $property_id = $this->getFirstSelectetGridItem();
-      return $this->redirectToRoute('properties_design', array('property_id' => $property_id));
-    }
 
     //Design a property from MLS
     if ($mls_id) {
@@ -78,6 +85,7 @@ class PropertyController extends BaseController
       $property->setName('New Property');
       $this->getBusiness()->saveProperty($property);
       $property_id = $property->getId();
+      return $this->redirectToRoute('properties_design', array('property_id' => $property_id));
     }
 
     $property_form = $this->createForm(PropertyType::class, $property);
@@ -90,6 +98,37 @@ class PropertyController extends BaseController
       'property_form' => $property_form->createView(),
       'property_photo_form' => $property_photo_form->createView()
     ));
+  }
+
+  /**
+   * @Route("/properties/options", name="properties_option")
+   */
+  public function optionsAction(Request $request){
+    $action = $request->get('action');
+    $messageInfoNotSelected = "You should select a property in order to continue.";
+    $indexRouting = "properties_index";
+    $property_id = $this->getFirstSelectedGridItem();
+    if (!$property_id) {
+      $this->addFlash('info', $messageInfoNotSelected);
+      return $this->redirect($this->generateUrl($indexRouting));
+    }
+
+    switch($action){
+      case 'show':
+          $route = 'properties_show';
+        break;
+      case 'edit':
+          $route = 'properties_design';
+        break;
+      case 'delete':
+          $route = 'properties_remove';
+        break;
+      default:
+        $route = 'properties_show';
+      break;
+    }
+
+    return $this->redirectToRoute($route, array('property_id' => $property_id));
   }
 
   /**
@@ -129,7 +168,7 @@ class PropertyController extends BaseController
    */
   public function removeAction(Request $request)
   {
-    $property_id = $this->getFirstSelectetGridItem();
+    $property_id = $request->get('property_id');
 
     $property = $this->getDoctrine()
       ->getRepository('DashboardBundle:Property')

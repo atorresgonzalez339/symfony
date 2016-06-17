@@ -1,0 +1,50 @@
+{% extends 'DashboardBundle:Common:backend2.html.twig' %}
+
+{% block breadcrumb %}
+  <li><a href="#">Upgrade</a></li>
+  <li><a href="#">Checkout</a></li>
+{% endblock breadcrumb %}
+
+{% block content %}
+  <div class="card">
+    <div class="title">
+      <h5> Checkout </h5>
+    </div>
+    <div class="content">
+      <div class="row" style="margin-top: 0px">
+        <div class="col s5">
+          {{ include ('DashboardBundle:Upgrade/Partials:_checkout_details.html.twig') }}
+        </div>
+        <div class="col s6 offset-s1">
+          {{ include ('DashboardBundle:Upgrade/Partials:_payment_method.html.twig') }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+  <script src="{{ asset('bundles/dashboard/assets/js/stripe.js') }}"></script>
+
+  <script>
+
+    MyStripe.init({
+      form_selector: '#stripe-card-form'
+    });
+
+    MyStripe.process(function(token){
+      var data = {
+        token: token
+      };
+      $.post('{{ path('upgrade_update_card') }}', data, function(result){
+        if(result.status == 'ok'){
+          window.location.href = "{{ path('upgrade_change_plan', {'plan_id':plan.id}) }}";
+        }
+      });
+    });
+  </script>
+
+{% endblock %}

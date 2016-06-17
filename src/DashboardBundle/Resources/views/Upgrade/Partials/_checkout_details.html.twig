@@ -1,0 +1,47 @@
+<h4>
+    Checkout Details:
+</h4>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Plan</th>
+            <th colspan="3">
+                Features
+            </th>
+            <th colspan="2">
+                <span class="right">
+                    Total
+                </span>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ plan.name | upper }}</td>
+            <td colspan="3">
+                <p> Up to {{ plan.totalFlyers }} Flyers</p>
+                <p> Up to {{ plan.totalEmails }} Email</p>
+                <p> Up to {{ plan.totalContacts }} Contacts</p>
+            </td>
+            <td colspan="2">
+                <span class="right">
+                    ${{ plan.price | number_format(2) }}
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" rowspan="2"></td>
+            <td class="right-align"><strong>Tax and Fees:</strong></td>
+            <td class="right-align" colspan="4">${{ (total_amount - plan.price) | number_format(2) }}</td>
+        </tr>
+        <tr>
+            <td class="right-align"><strong>Total</strong></td>
+            <td class="right-align" colspan="4"><strong class="h2">${{ total_amount | number_format(2) }}</strong></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="alert orange lighten-2 white-text">
+    <strong><i class="fa fa-lg fa-exclamation-triangle"></i> IMPORTANT!</strong> It is a subscription plan. We will charge ${{ total_amount | number_format(2)}} every month in your stored card until you change or cancel this plan.
+</div>

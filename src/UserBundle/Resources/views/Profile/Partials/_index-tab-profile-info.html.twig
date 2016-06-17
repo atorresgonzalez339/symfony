@@ -1,189 +1,130 @@
-<div id="test1" class="col s12" style="color: #5e5e5e;">
-
-  <div class="row" style="margin-top: 0px;">
-    <nav style="padding-right: 25px;color: #424242;background-color: #fff;box-shadow: 0 0px 0px rgba(0,0,0,.26)!important;padding-left: 30px;">
-      <div class="nav-wrapper">
-        <a href="#!" class="brand-logo"></a>
-        <ul class="right hide-on-med-and-down">
-          <li>
-            <a id="edit-profile" style="color: #9E9E9E" class="dropdown-button" href="#!">
-              <i class="mdi mdi-editor-mode-edit" style="font-size: 18px;"></i>
-            </a>
-          </li>
-        </ul>
+<div id="tab-profile-info" class="col s12" style="color: #5e5e5e; margin-top: 1em">
+      <div class="row" style="margin-top: 0px; height: 15px; ma" id="edit-profile-button-box">
+        <nav style="padding-right: 25px;color: #424242;background-color: #fff;box-shadow: 0 0px 0px rgba(0,0,0,.26)!important;padding-left: 30px;">
+          <div class="nav-wrapper">
+            <a href="#!" class="brand-logo"></a>
+            <ul class="right hide-on-med-and-down">
+              <li>
+                <a id="edit-profile" style="color: #9E9E9E;padding: 0px;width: 107px;" class="dropdown-button" href="#!">
+                  <div class="row" style="margin-top: 0px">
+                    <div class="col m2" style="padding-right: 0px;padding-bottom: 0px">
+                      <i class="mdi mdi-editor-mode-edit" style="font-size: 18px;width: 20px;"></i>
+                    </div>
+                    <div class="col m10" style="padding-bottom: 0px">
+                      <span>Edit profile</span>
+                    </div>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
       </div>
-    </nav>
+
+      <div class="row" id="edit-profile-information">
+       <div class="row" style="padding-left: 20px;margin-top: 0px">
+         <div class="col m2" style="padding-right: 5px">
+           {% include 'UserBundle:Profile:Partials/_profile-picture.html.twig' %}
+         </div>
+         <div class="col m10">
+           <div class="row" style="margin-top: 0px;">
+             <div class="col s2" style="padding-bottom: 10px;"> <span class="right"><strong><b>First Name:</b> </strong></span></div>
+             <div class="col s10" style="padding-bottom: 10px;"> <span>{{ profile.firstName ? profile.firstName : 'Empty' }}</span></div>
+           </div>
+           <div class="row" style="margin-top: 0px;">
+             <div class="col s2" style="padding-bottom: 10px;"> <span class="right"><strong><b>Last Name:</b> </strong></span></div>
+             <div class="col s10" style="padding-bottom: 10px;"> <span>{{ profile.lastName ? profile.lastName : 'Empty' }}</span></div>
+           </div>
+           <div class="row">
+             <div class="col s2" style="padding-bottom: 10px;"> <span class="right"><strong><b>Gender:</b> </strong></span></div>
+             <div class="col s10" style="padding-bottom: 10px;"> <span>{{ profile.gender ? profile.gender : 'Empty' }}</span></div>
+           </div>
+           <div class="row">
+             <div class="col s2" style="padding-bottom: 10px;"> <span class="right"><strong><b>Birthday:</b> </strong></span></div>
+             <div class="col s10" style="padding-bottom: 10px;"> <span>{{ profile.birthDate ? profile.birthDate | date('M, d Y') : 'Empty' }}</span></div>
+           </div>
+           <div class="row">
+             <div class="col s2" style="padding-bottom: 10px;"> <span class="right"><strong><b>Email Address:</b> </strong></span></div>
+             <div class="col s10" style="padding-bottom: 10px;"> <span>{{ profile.email ? profile.email : '-' }}</span></div>
+           </div>
+         </div>
+       </div>
+
+
+        <div class="row" style="margin-top: 0px;">
+          <div class="col m12" style="padding-bottom: 10px;padding-left: 20px;padding-right: 45px"><div class="divider"></div></div>
+        </div>
+
+          <div class="row" style="margin-top: 0px;">
+              <div class="col m6">
+                  <div class="row" style="margin-top: 0px;">
+                      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Mobile Phone:</b> </strong></span></div>
+                      <div class="col s9" style="padding-bottom: 10px;"> <span>{{ profile.cellPhone ? profile.cellPhone : '-' }}</span></div>
+                  </div>
+                  <div class="row" style="margin-top: 0px;">
+                      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Office Phone:</b> </strong></span></div>
+                      <div class="col s9" style="padding-bottom: 10px;"><span>{{ profile.officePhone ? profile.officePhone : '-' }}</span></div>
+                  </div>
+                  <div class="row">
+                      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Company:</b> </strong></span></div>
+                      <div class="col s9" style="padding-bottom: 10px;"><span> {{ profile.company ? profile.company : '-' }}</span></div>
+                  </div>
+                  <div class="row">
+                      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Website:</b> </strong></span></div>
+                      <div class="col s9" style="padding-bottom: 10px;"> <span>{{ profile.website ? profile.website : '-' }}</span></div>
+                  </div>
+              </div>
+              <div class="col m6">
+                  <div class="row" style="margin-top: 0px">
+                      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Address:</b> </strong></span></div>
+                      <div class="col s9" style="padding-bottom: 10px;"> <span>{{ profile.address ? profile.address : '-' }}</span></div>
+                  </div>
+                  <div class="row">
+                      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>City:</b> </strong></span></div>
+                      <div class="col s9" style="padding-bottom: 10px;"><span>{{ profile.city ? profile.city : '-' }}</span></div>
+                  </div>
+                  <div class="row">
+                      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>State:</b> </strong></span></div>
+                      <div class="col s9" style="padding-bottom: 10px;"><span>{{ profile.state ? profile.state : '-' }}</span></div>
+                  </div>
+                  <div class="row">
+                      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Country:</b> </strong></span></div>
+                      <div class="col s9" style="padding-bottom: 10px;"><span>{{ profile.country ? profile.country : '-' }}</span></div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+        {% include 'UserBundle:Profile:Partials/_profile-form.html.twig' with {'hidden': true} %}
 
   </div>
 
-  <div class="row" id="edit-profile-information">
 
-    <div class="row" style="margin-top: 0px;">
-      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>First Name:</b> </strong></span></div>
-      <div class="col s9" style="padding-bottom: 10px;"> <span>{{ profile.firstName ? profile.firstName : 'Empty' }}</span></div>
-    </div>
-    <div class="row" style="margin-top: 0px;">
-      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Last Name:</b> </strong></span></div>
-      <div class="col s9" style="padding-bottom: 10px;"> <span>{{ profile.lastName ? profile.lastName : 'Empty' }}</span></div>
-    </div>
-    <div class="row">
-      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Gender:</b> </strong></span></div>
-      <div class="col s9" style="padding-bottom: 10px;"> <span>{{ profile.gender ? profile.gender : 'Empty' }}</span></div>
-    </div>
-    <div class="row">
-      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Birthday:</b> </strong></span></div>
-      <div class="col s9" style="padding-bottom: 10px;"> <span>{{ profile.birthDate ? profile.birthDate | date('M, d Y') : 'Empty' }}</span></div>
-    </div>
+<style>
+    #edit-profile-container {
+        margin-top: 2em;
+    }
+</style>
 
-    <div class="row" style="margin-top: 0px;">
-      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Mobile Phone:</b> </strong></span></div>
-      <div class="col s9" style="padding-bottom: 10px;"> <span>{{ profile.cellPhone ? profile.cellPhone : '-' }}</span></div>
-    </div>
-    <div class="row" style="margin-top: 0px;">
-      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Office Phone:</b> </strong></span></div>
-      <div class="col s9" style="padding-bottom: 10px;"><span>{{ profile.officePhone ? profile.officePhone : '-' }}</span></div>
-    </div>
-    <div class="row">
-      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Email Address:</b> </strong></span></div>
-      <div class="col s9" style="padding-bottom: 10px;"> <span>{{ profile.email ? profile.email : '-' }}</span></div>
-    </div>
-    <div class="row">
-      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Company:</b> </strong></span></div>
-      <div class="col s9" style="padding-bottom: 10px;"><span> {{ profile.company ? profile.company : '-' }}</span></div>
-    </div>
-    <div class="row">
-      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Address:</b> </strong></span></div>
-      <div class="col s9" style="padding-bottom: 10px;"> <span>{{ profile.address ? profile.address : '-' }}</span></div>
-    </div>
-    <div class="row">
-      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>City:</b> </strong></span></div>
-      <div class="col s9" style="padding-bottom: 10px;"><span>{{ profile.city ? profile.city : '-' }}</span></div>
-    </div>
-    <div class="row">
-      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>State:</b> </strong></span></div>
-      <div class="col s9" style="padding-bottom: 10px;"><span>{{ profile.state ? profile.state : '-' }}</span></div>
-    </div>
-    <div class="row">
-      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Country:</b> </strong></span></div>
-      <div class="col s9" style="padding-bottom: 10px;"><span>{{ profile.country ? profile.country : '-' }}</span></div>
-    </div>
-    <div class="row">
-      <div class="col s3" style="padding-bottom: 10px;"> <span class="right"><strong><b>Website:</b> </strong></span></div>
-      <div class="col s9" style="padding-bottom: 10px;"> <span>{{ profile.website ? profile.website : '-' }}</span></div>
-    </div>
-  </div>
+<script>
+  $(document).ready(function(){
+    $('#btn-profile-cancel').click(function(){
+      $('#edit-profile-container').attr('style','display:none');
+      $('#edit-profile-information').attr('style','display:block');
+    });
 
-  <div id="edit-profile-container" style="display: none;">
-    <div class="row" style="padding-left: 20px;padding-right: 20px">
-      {{ form_start(profile_form, {'action': path('profile_save'), 'method': 'POST', 'id':'profile_form'}) }}
-      <div class="row" style="margin-top: 0rem;">
-        <div class="col m6" style="padding-bottom: 0px;">
-          <div class="input-field align-left">
-            {{ form_widget(profile_form.first_name, {'attr': {'class':'validate'}}) }}
-            <label for="profile_first_name" class="">First Name</label>
-          </div>
-        </div>
-        <div class="col m6" style="padding-bottom: 0px;">
-          <div class="input-field align-left">
-            {{ form_widget(profile_form.address, {'attr': {'class':'validate'}}) }}
-            <label for="profile_address" class="">Address</label>
-          </div>
-        </div>
-      </div>
+    $('#edit-profile').click(function(){
+      $('#edit-profile-container').attr('style','display:block');
+      $('#edit-profile-information').attr('style','display:none');
+    });
 
-      <div class="row" style="margin-top: 0rem;">
-        <div class="col m6" style="padding-bottom: 0px;">
-          <div class="input-field align-left">
-            {{ form_widget(profile_form.last_name, {'attr': {'class':'validate'}}) }}
-            <label for="profile_last_name" class="">Last Name</label>
-          </div>
-        </div>
-        <div class="col m6" style="padding-bottom: 0px;">
-          <div class="input-field align-left">
-            {{ form_widget(profile_form.city, {'attr': {'class':'validate'}}) }}
-            <label for="profile_city" class="">City</label>
-          </div>
-        </div>
-      </div>
+    $("img#profile-image").mouseover(function(){
+        $("#btn-update").trigger("mouseover");
+    });
 
-      <div class="row" style="margin-top: 0rem;">
-        <div class="col m6" style="padding-bottom: 0px;">
-          <div class="input-field">
-            {{ form_widget(profile_form.email, {'attr': {'type':'email','class':'validate'}}) }}
-            <label for="profile_email" class="">Email</label>
-          </div>
-        </div>
-        <div class="col m6" style="padding-bottom: 0px;">
-          <div class="input-field align-left">
-            {{ form_widget(profile_form.state, {'attr': {'class':'validate'}}) }}
-            <label for="profile_state" class="">State</label>
-          </div>
-        </div>
-      </div>
-
-      <div class="row" style="margin-top: 0rem;">
-        <div class="col m6" style="padding-bottom: 0px;">
-          <div class="input-field">
-            {{ form_widget(profile_form.gender) }}
-            <label for="profile_gender" style="transform: translateY(-170%);left: 0px;font-size: .8rem;">Gender</label>
-          </div>
-        </div>
-        <div class="col m6" style="padding-bottom: 0px;">
-          <div class="input-field align-left">
-            {{ form_widget(profile_form.country, {'attr': {'class':'validate'}}) }}
-            <label for="profile_country" class="">Country</label>
-          </div>
-        </div>
-      </div>
-
-      <div class="row" style="margin-top: 0rem;">
-        <div class="col m6" style="padding-bottom: 0px;">
-          <div class="input-field">
-            {{ form_widget(profile_form.cell_phone, {'attr': {'class':'validate','data-inputmask':"'mask': '(999) 999-9999'"}}) }}
-            <label for="profile_cell_phone" style="transform: translateY(-170%);left: 0px;">Cell Phone</label>
-          </div>
-        </div>
-        <div class="col m6" style="padding-bottom: 0px;">
-          <div class="input-field">
-            {{ form_widget(profile_form.office_phone, {'attr': {'class':'validate','data-inputmask':"'mask': '(999) 999-9999'"}}) }}
-            <label for="profile_office_phone" style="transform: translateY(-170%);left: 0px;">Office Phone</label>
-          </div>
-        </div>
-      </div>
-
-      <div class="row" style="margin-top: 0rem;">
-        <div class="col m6" style="padding-bottom: 0px;">
-          <div class="input-field align-left">
-            {{ form_widget(profile_form.company, {'attr': {'class':'validate'}}) }}
-            <label for="profile_company">Company</label>
-          </div>
-        </div>
-        <div class="col m6" style="padding-bottom: 0px;">
-          <div class="input-field align-left">
-            {{ form_widget(profile_form.website, {'attr': {'class':'validate'}}) }}
-            <label for="profile_website">Website</label>
-          </div>
-        </div>
-      </div>
-
-      <div class="row" style="margin-top: 0rem;">
-        <div class="col m6" style="padding-bottom: 0px;">
-          <div class="input-field align-left">
-            {{ form_widget(profile_form.birth_date) }}
-            <label for="profile_birth_date">Birth date</label>
-          </div>
-        </div>
-        <div class="col m6" style="padding-bottom: 0px;">
-        </div>
-      </div>
-
-      <div class="row" style="padding-right: 25px;padding-top: 20px">
-        <div class="col s12">
-          <button type="submit" class="waves-effect waves-light btn btn-small">SAVE</button>
-          <a id="btn-profile-cancel" class="waves-effect waves-light btn btn-small red">CANCEL</a>
-        </div>
-      </div>
-      {{ form_end(profile_form) }}
-    </div>
-  </div>
-</div>
+    $("img#profile-image").mouseleave(function(){
+//        $(".mdi-image-photo-camera").css("color", "red");
+    });
+      //transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+  });
+</script>

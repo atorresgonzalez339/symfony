@@ -1,0 +1,41 @@
+<div class="card-panel orders-card">
+    {%  set sent_percent = (subaccount.sent_total / subaccount.custom_quota * 100) | number_format(0) %}
+    <h4>{{ subaccount.sent_total }} / {{ subaccount.custom_quota }}</h4>
+    <div class="row">
+        <div class="col s6">
+            <small>Total Sent</small>
+        </div>
+        <div class="col s6 right-align">
+            {{ sent_percent }}%
+        </div>
+    </div>
+    <div class="progress small">
+        <div class="determinate" style="width: {{ sent_percent }}%"></div>
+    </div>
+    {%  set delivery_percent = (subaccount.last_30_days.sent / subaccount.sent_total * 100) | number_format(0) %}
+    <h4>{{ subaccount.last_30_days.sent }}</h4>
+    <div class="row">
+        <div class="col s6">
+            <small>Delivered (Last 30 days)</small>
+        </div>
+        <div class="col s6 right-align">
+            {{ delivery_percent }}%
+        </div>
+    </div>
+    <div class="progress small">
+        <div class="determinate" style="width: {{ delivery_percent }}%"></div>
+    </div>
+    {%  set open_percent = (subaccount.last_30_days.unique_opens / subaccount.sent_total * 100) | number_format(0) %}
+    <h4>{{ subaccount.last_30_days.unique_opens }}</h4>
+    <div class="row">
+        <div class="col s6">
+            <small>Unique Opens (Last 30 days)</small>
+        </div>
+        <div class="col s6 right-align">
+            {{ open_percent }}%
+        </div>
+    </div>
+    <div class="progress small">
+        <div class="determinate" style="width: {{ open_percent }}%"></div>
+    </div>
+</div>

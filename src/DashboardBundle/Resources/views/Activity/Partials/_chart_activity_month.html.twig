@@ -1,0 +1,39 @@
+<div class="card-panel" id="chartActivityMonth" style="height: 277px">
+</div>
+
+<script>
+$(function () {
+    $('#chartActivityMonth').highcharts({
+        title: {
+            text: 'Monthly Activity',
+            x: -20 //center
+        },
+        xAxis: {
+            categories: {{ activity_chart_data.date_ranges | raw }}
+        },
+        yAxis: {
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: 'Delivered',
+            data: {{ activity_chart_data.date_values.delivered | raw }}
+        }, {
+            name: 'Bounced',
+            data: {{ activity_chart_data.date_values.bounced | raw }}
+        }, {
+            name: 'Opened',
+            data: {{ activity_chart_data.date_values.opened | raw }}
+        }]
+    });
+});
+</script>

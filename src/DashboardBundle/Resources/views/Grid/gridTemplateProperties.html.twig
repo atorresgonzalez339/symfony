@@ -20,7 +20,7 @@
 
   </script>
 
-  <div class="grid">
+  <div class="grid" style="padding-bottom: 0px;">
 
     {% if grid.totalCount > 0 or grid.isFiltered or grid.noDataMessage is sameas(false) %}
     <form id="{{ grid.hash }}" action="{{ grid.routeUrl }}" method="post">
@@ -120,49 +120,70 @@
               <div class="col m3">
                 <div class="hoverable">
                 <div class="card of-h">
-                  <div class="card-image waves-effect waves-block waves-light card-image-templeate">
+                  <div class="card-image waves-effect waves-block waves-light card-image-templeate" {% if row.entity.photos | length == 0 %}style="box-shadow: 0 1px 0 0 rgba(0,0,0,.1);{% endif %}">
+                    {% if row.entity.photos | length > 0 %}
                     <div class="slider" >
                       <ul class="slides">
-                        {% if row.entity.photos | length > 0 %}
                           {% for photo in row.entity.photos %}
                             <li>
                               <img class="activator" src="{{ photo.photoUrl }}">
                             </li>
                           {% endfor %}
-                        {% else %}
-                          <li>
-                            <img class="activator" src="{{ asset('bundles/dashboard/images/properties/no-image.png') }}">
-                          </li>
-                        {% endif %}
                       </ul>
                     </div>
-                    {#<img class="activator" src="{{ asset('bundles/dashboard/properties/1.jpg') }}">#}
+                    {% else %}
+                      <img class="activator" src="{{ asset('bundles/dashboard/images/properties/no-image.png') }}" style="min-height: 201px;">
+                    {% endif %}
                   </div>
-                  <div class="content" style=" padding-top: 10px; padding-bottom: 10px;">
+                  <div class="content" style="padding-top: 5px;padding-bottom: 5px;padding-left: 5px;padding-right: 0px;height: 38px;">
                     <span class="card-title activator grey-text text-darken-4" style="font-size: 20px;">
-                      <p style="position: absolute;top: 207px; margin-top: 5px; margin-bottom: 5px;left: 10px;">
+                      <p style="margin-top: 0px;margin-bottom: 0px;">
                         <input type="checkbox" class="filled-in" id="checkbox-{{ row.entity.id }}" name="{{ grid.hash }}[__action][{{ row.primaryFieldValue }}]" value="{{ row.primaryFieldValue }}"/>
-                        <label for="checkbox-{{ row.entity.id }}" style="font-size: 18px;color: #424242">{{ row.entity.name | slice(0, 15) }}</label>
+                        <label for="checkbox-{{ row.entity.id }}" style="font-size: 14px;color: #424242;padding-left: 30px;">{{ row.entity.name | slice(0, 20) }}</label>
                       </p>
                       <i class="mdi-navigation-more-vert right"></i></span>
                   </div>
-                  <div class="card-action card-action-templeate" style="font-size: 12px;background-color: #F0F0EE;padding-bottom: 0px;">
-                    <a href="#!" class="" style="color: #9E9E9E;font-size: 11px;font-weight: 600;">BATHS</a>
-                    <a href="#!" class="" style="color: #9E9E9E;font-size: 11px;font-weight: 600;">BEDS</a>
-                    <a href="#!" class="" style="color: #9E9E9E;font-size: 11px;font-weight: 600;">GARAGES</a>
+                  <div class="card-action card-action-templeate" style="font-size: 12px;background-color: #F0F0EE;padding-left: 0px;padding-right: 10px;">
+                    <div class="row" style="margin: 0;">
+                      <div class="col m4" style="padding: 0px;">
+                        <div class="row" style="margin: 0;">
+                          <div class="col m12" style="padding: 0px;padding-bottom: 5px;">
+                            <a href="#!" class="" style="color: #9E9E9E;font-size: 11px;font-weight: 600;text-align: center;margin: 0px;">BATHS</a>
+                          </div>
+                        </div>
+                        <div class="row" style="margin: 0;">
+                          <div class="col m12" style="padding: 0px;">
+                            <a href="#!" class="" style="color: #424242;font-size: 18px;font-weight: normal; opacity: .85;text-align: center;margin: 0px;">{{ row.entity.bathrooms ? row.entity.bathrooms : '-' }}</a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col m4" style="padding: 0px;">
+                        <div class="row" style="margin: 0;">
+                          <div class="col m12" style="padding: 0px;padding-bottom: 5px;">
+                            <a href="#!" class="" style="color: #9E9E9E;font-size: 11px;font-weight: 600;text-align: center;margin: 0px;">BEDS</a>
+                          </div>
+                        </div>
+                        <div class="row" style="margin: 0;">
+                          <div class="col m12" style="padding: 0px;"> <a href="#!" class="" style="color: #424242;font-size: 18px;font-weight: normal; opacity: .85;text-align: center;margin: 0px;">{{ row.entity.bedrooms ? row.entity.bedrooms : '-' }}</a> </div>
+                        </div>
+                      </div>
+                      <div class="col m4" style="padding: 0px;">
+                        <div class="row" style="margin: 0;">
+                          <div class="col m12" style="padding: 0px;padding-bottom: 5px;"> <a href="#!" class="" style="color: #9E9E9E;font-size: 11px;font-weight: 600;text-align: center;margin: 0px;">GARAGES</a> </div>
+                        </div>
+                        <div class="row" style="margin: 0;">
+                          <div class="col m12" style="padding: 0px;"> <a href="#!" class="" style="color: #424242;font-size: 18px;font-weight: normal; opacity: .85;text-align: center;margin: 0px;">{{ row.entity.parkingSpaces ? row.entity.parkingSpaces : '-' }}</a> </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div class="card-action card-action-templeate" style="border-top: 0px;background-color: #F0F0EE;font-size: 25px;padding: 0px 0px 0px 10px;">
-                    <a href="#!" class="" style="margin-right: 4rem;margin-left: 8px;color: #424242;font-size: 18px;font-weight: normal; opacity: .85;">{{ row.entity.bathrooms ? row.entity.bathrooms : '-' }}</a>
-                    <a href="#!" class="" style="margin-right: 4rem;color: #424242;font-size: 18px;font-weight: normal; opacity: .85;">{{ row.entity.bedrooms ? row.entity.bedrooms : '-' }}</a>
-                    <a href="#!" class="" style="margin-right: 4rem;color: #424242;font-size: 18px;font-weight: normal; opacity: .85;">{{ row.entity.parkingSpaces ? row.entity.parkingSpaces : '-' }}</a>
-                  </div>
-                  <div class="card-action card-action-templeate" style="font-size: 12px; text-align: left">
+                  <div class="card-action card-action-templeate" style="font-size: 9px;text-align: left;padding-right: 10px;min-height: 55px;max-height: 55px;">
                     <a href="#!" class="blue-text" style="margin-right: 0.1rem;color: #9E9E9E!important"><i class="mdi-communication-location-on"></i></a>
-                    <a href="#!" class="blue-text" style="margin-right: 0rem;color: #9E9E9E!important;">{{ row.entity.address ? row.entity.fullAddress : 'No address defined' }}</a>
+                    <a href="#!" class="blue-text" style="margin-right: 0rem;color: #9E9E9E!important;">{{ row.entity.address ? row.entity.fullAddress | slice(0, 73) : 'No address defined' }}</a>
                   </div>
                   <div class="card-action card-action-templeate">
                     <a href="#!" class="blue-text" style="margin-right: 3rem;font-size: 15px">
-                      <i class="mdi-editor-attach-money" style="font-size: 20px;margin-top: 2px;position: absolute;left: 6px;top: 378px;"></i>12.000</a>
+                      <i class="mdi-editor-attach-money" style="font-size: 15px;"></i>12.000</a>
                     <a href="#!" class="blue-text right">VIEW DETAIL</a>
                   </div>
                   <div class="card-reveal">
@@ -176,12 +197,13 @@
             {% endfor %}
           </div>
 
-          {#<table style="position: relative;text-align: left" id="itemList" class="table table-hover">#}
-          {#{% if grid.isTitleSectionVisible %}#}
-          {#{{ grid_titles(grid) }}#}
-          {#{% endif %}#}
-          {#{{ grid_rows(grid) }}#}
-          {#</table>#}
+          <script>
+            $(document).ready(function () {
+//              $('.slider').slider({
+//                autoplay:false
+//              });
+            });
+          </script>
 
           {# Aqui se genera el paginado #}
           <div class="grid_footer">
@@ -279,82 +301,24 @@
 <thead>
 {% endblock grid_titles %}
 {#{% block grid_titles %}
-            <tr>
-                {% set isOrderable = (grid.isOrderable is defined ? grid.isOrderable : false) %}
-                {% if isOrderable %}
-                    <th class="" style="width: 1%;">
-                        <i class="fa fa-hand-o-up"></i>
-                    </th>
-                {% endif %}
-                {%set firtColumnH = false%}
-                {% for column in grid.columns %}
-                    {% if column.visible(grid.isReadyForExport) %}
-                        {% if firtColumnH==false %}
-                           {%set firtColumnH = true%}
-                           <th class="{% if column.align != 'left'%}align-{{ column.align }}{% endif %}{% if loop.last %} last-column{% endif %}"{% if(column.size > -1) %} style="width:{{ column.size }}px;"{% endif %}>
-                        {% else %}
-                           <th class="{% if column.align != 'left'%}align-{{ column.align }}{% endif %}{% if loop.last %} last-column{% endif %}"{% if(column.size > -1) %} style="width:{{ column.size }}px;"{% endif %}>
-                        {% endif %}
-                        {% if column.type == 'massaction' %}
-                                <i style="font-size: 12px;color: #428bca" class="icon-ok"></i> 
-                        {% else %}
-                            {% set columnTitle = grid.prefixTitle ~ column.title ~ '__abbr' %}
-                            {% if columnTitle|trans == columnTitle %}
-                                {% set columnTitle = grid.prefixTitle ~ column.title %}
-                            {% endif %}
-                            {% if (column.sortable) %}
-                                <a style="font-size: 13px" data-toggle="tooltip" data-placement="top" class="order" href="{{ grid_url('order', grid, column) }}" title="{{ 'Order by'|trans }} {{ columnTitle|trans }}">{{ columnTitle|trans }}</a>
-                                {% if column.order == 'asc' %}
-                                <i class="icon-chevron-up"></i>
-                                {% elseif column.order == 'desc' %}
-                                <i class="icon-chevron-down"></i>
-                                {% else %}
-                                {% endif %}
-                            {% else %}
-                                {{ columnTitle|trans }}
-                            {% endif %}
-                        {% endif %}
-                            </th>
-                    {% endif %}
-                {% endfor %}
-            </tr>
+
 {% endblock grid_titles %}#}
 {# -------------------------------------------------- grid_filters --------------------------------------------------- #}
 {% block grid_filters %}
-  <ul class="collapsible" data-collapsible="accordion">
-    <li {% if grid.isFiltered %} class="active" {% endif %}>
-      <div class="align-left collapsible-header {% if grid.isFiltered %} active {% endif %}"><i
-            class="mdi-content-filter-list"></i>{{ 'Filters'|trans }}</div>
-      <div class="collapsible-body" style="background-color: #FFFFFF">
 
-        {% for column in grid.columns %}
-          <div class="row">
-            {% for i in 0..3 %}
-              <div class="col s3">
-                dsds- {{ loop.index0 }}
-              </div>
-            {% endfor %}
-          </div>
-        {% endfor %}
-
-        {#<table>#}
-        {#<tr class="grid-row-filters row">#}
-        {#{% for column in grid.columns %}#}
-        {#{% if loop.index0!=0 %}#}
-        {#{% if column.visible(grid.isReadyForExport) and column.filterable%}#}
-        {#<th {% if loop.last %} class="last-column"{%else%}class="col l3 column-{{ column.title }}"{% endif %}{% if(column.size > -1) %} style="width:" {% endif %}>#}
-        {#{% if column.filterable%}#}
-        {#{{ grid_filter(column, grid)|raw }}#}
-        {#{% endif %}#}
-        {#</th>#}
-        {#{% endif %}#}
-        {#{% endif %}#}
-        {#{% endfor %}#}
-        {#</tr>#}
-        {#</table>#}
-      </div>
-    </li>
-  </ul>
+  <div class="row" style="margin-top: -10px;">
+    <div class="col m12" style="padding-bottom: 55px;">
+      {% for column in grid.columns %}
+        {% if loop.index0!=0 %}
+          {% if column.visible(grid.isReadyForExport) and column.filterable %}
+            {% if column.filterable %}
+              {{ grid_filter(column, grid)|raw }}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
 
 {% endblock grid_filters %}
 
@@ -389,7 +353,7 @@
   {% set from = column.data.from is defined ? column.data.from : null %}
   {% set to = column.data.to is defined ? column.data.to : null %}
 
-  <span class="grid-filter-input">
+  <span class="grid-filter-input" style="position: absolute;left: 0">
 
             <span class="grid-filter-input-query">
                 <table class="">
@@ -399,15 +363,39 @@
                     </div>
                   </tr>
                   <tr>
-                    <div class="form-search" style="margin-left: 20px;">
+                    <div class="form-search">
                       <div id="filter-bar" class="btn-toolbar">
                         <div class="filter-search btn-group pull-left input-append">
                           <div class="span6">
                             <div class="input-group input-group-sm">
                               <div class="input-group input-group-sm">
-                                <input style="margin-top: 5px !important;width: 175px" type="{{ column.inputType }}"
+                                <style>
+                                  span.search-clean-close {
+                                    cursor: pointer;color: #9E9E9E;position: absolute;right: 42px;top: 3px;font-size: 20px;
+                                  }
+                                </style>
+                                <script>
+                                  $(document).ready(function () {
+                                    var valueSearchObjs = $('.input-search-filter');
+                                    for(var i = 0; i < valueSearchObjs.length;i++){
+                                      var valueSearchObj = valueSearchObjs[i]
+                                      var inputValue = $('#'+valueSearchObj.id).val()
+                                      if(inputValue!==""){
+                                        var spanId = "input-search-close-" + $('#'+valueSearchObj.id).data("item-id")
+                                          $('#'+spanId).attr("style","display:block")
+                                          $( "#"+spanId ).on( "click", function() {
+                                          $('#'+valueSearchObj.id).val("")
+                                          return {{ grid.hash }}_submitForm(event, this.form);
+                                        });
+                                      }
+                                    }
+//
+                                  });
+                                </script>
+                                <span style="display:none" id="input-search-close-{{ column.id }}" class="mdi-navigation-close search-clean-close"> </span>
+                                <input id="input-search-{{ column.id }}" data-item-id="{{ column.id }}" style="width: 320px" type="{{ column.inputType }}"
                                        value="{{ from }}"
-                                       class="input-small  search-query input-small grid-filter-input-query-from "
+                                       class="input-search-filter input-small  search-query input-small grid-filter-input-query-from "
                                        placeholder="{{ column.title|trans }}"
                                        name="{{ grid.hash }}[{{ column.id }}][from]"
                                        id="{{ grid.hash }}__{{ column.id }}__query__from"
@@ -552,28 +540,22 @@
     {{ grid_pagerfanta(grid) }}
   {% else %}
 
+    <style>
+      .select2-container--default .select2-selection--single .select2-selection__arrow {
+        margin-top: 0px;
+      }
+      .select2-container--default .select2-selection--single .select2-selection__rendered {
+        padding-top: 0px;
+      }
+    </style>
     <div class="row">
-      <div class="col l3">
-        <div class="progress">
-          {% if grid.pageCount == 1 %}
-            <div class="active striped" style="width: 100%">100%</div>
-          {% elseif grid.pageCount > 1 %}
-            {% set pocent = (grid.limit * (grid.page + 1) * 100) / grid.totalCount %}
-            {% if pocent > 100 %}
-              {% set pocent = 100 %}
-            {% endif %}
-
-            <div class="active striped" style="width: {{ pocent|parseInt }}%">{{ pocent|parseInt }}%</div>
-          {% endif %}
-        </div>
-      </div>
-      <div class="col l1">
+      <div class="col m4" style="padding-bottom: 0px;">
         {{ grid_pager_totalcount(grid) }}
       </div>
-      <div class="col l4">
+      <div class="col m4" style="padding-right: 0px;padding-bottom: 0px;">
         {{ grid_pager_selectpage(grid) }}
       </div>
-      <div class="col l3">
+      <div class="col m4" style="padding-bottom: 0px;">
         {{ grid_pager_results_perpage(grid) }}
       </div>
     </div>

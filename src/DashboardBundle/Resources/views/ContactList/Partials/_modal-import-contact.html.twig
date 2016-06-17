@@ -1,0 +1,60 @@
+
+<style>
+  li.collection-item.active{
+    background-color: #DEE8F2 !important;
+    color: rgba(0,0,0,.87) !important;
+  }
+</style>
+<div id="modalImportContact" class="modal" style="overflow-x: hidden;width: 35%;">
+  <div class="modal-content">
+    <h4>Import contacts by CVS</h4>
+    <div class="row" style="margin-top: 0px;">
+      <div class="col m12">
+        <ul class="collection" style="margin-bottom: 0px;">
+          <li class="collection-item avatar active" data-email="gmail" style="max-height: 53px;padding-bottom: 27px;padding-top: 5px;cursor: pointer;">
+            <img src="{{ asset('bundles/dashboard/images/contactcompany/gmail.png') }}" alt="" class="circle" style="border-radius: 1%;">
+            <p style="font-size: 16px;padding-top: 13px;">Gmail</p>
+            <a href="#!" class="secondary-content"></a>
+          </li>
+          <li class="collection-item avatar" data-email="outlook" style="max-height: 53px;padding-bottom: 27px;padding-top: 5px;cursor: pointer;">
+            <img src="{{ asset('bundles/dashboard/images/contactcompany/outlook.png') }}" alt="" class="circle" style="border-radius: 1%;">
+            <p style="font-size: 16px;padding-top: 13px;">Outlook</p>
+            <a href="#!" class="secondary-content"></a>
+          </li>
+          <li class="collection-item avatar" data-email="constantcontact" style="max-height: 53px;padding-bottom: 27px;padding-top: 5px;cursor: pointer;">
+            <img src="{{ asset('bundles/dashboard/images/contactcompany/contactcontact.png') }}" alt="" class="circle" style="border-radius: 1%;">
+            <p style="font-size: 16px;padding-top: 13px;">ContactContact</p>
+            <a href="#!" class="secondary-content"></a>
+          </li>
+          <li class="collection-item avatar" data-email="mailchimp" style="max-height: 53px;padding-bottom: 27px;padding-top: 5px;cursor: pointer;">
+            <img src="{{ asset('bundles/dashboard/images/contactcompany/mailchimp.png') }}" alt="" class="circle" style="border-radius: 1%;">
+            <p style="font-size: 16px;padding-top: 13px;">MailChimp</p>
+            <a href="#!" class="secondary-content"></a>
+          </li>
+          <li class="collection-item avatar" data-email="toppoducer" style="max-height: 53px;padding-bottom: 27px;padding-top: 5px;cursor: pointer;">
+            <img src="{{ asset('bundles/dashboard/images/contactcompany/topproducer.jpg') }}" alt="" class="circle" style="border-radius: 1%;">
+            <p style="font-size: 16px;padding-top: 13px;">TopPoducer</p>
+            <a href="#!" class="secondary-content"></a>
+          </li>
+        </ul>
+        <div class="row" style="margin-top: 0px;">
+          <div class="col m12" style="padding-bottom: 5px;">
+            <div class="btn-group right" style="width: 252px;">
+              <div class="file-field input-field">
+                <div class="btn  btn-small" style="height: 25.2px;line-height: 25px;font-size: .8rem;" onclick="$('#importcontact').removeClass('disabled')">
+                  <span>Select CVS</span>
+                  <input id="fileinput" multiple name="file" class="" data-cloudinary-field="image_upload" type="file">
+                </div>
+              </div>
+              {#<a class="btn btn-small waves-dark waves-effect"> <i class="mdi mdi-editor-insert-drive-file left"></i>Select CVS</a>#}
+              <a id="importcontact" class="btn btn-small waves-dark waves-effect disabled" onclick="handleFileSelect();"> <i class="mdi mdi-communication-import-export left"></i>Import</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Cerrar</a>
+  </div>
+</div>

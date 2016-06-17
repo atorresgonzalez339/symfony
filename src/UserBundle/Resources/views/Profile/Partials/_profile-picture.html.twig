@@ -1,0 +1,80 @@
+<style>
+    img
+</style>
+
+<div class="card small" id="profile-left-box" style="background-color: #F8F8F8;color: #5E5E5E;">
+    <div class="card-image card-image-profile" style="padding: 3px;border: 1px solid #B3ACA1;">
+        {% if profile.photoId %}
+            <img id="profile-image" src="{{ profile.photoId | cloudinary_url({'crop':'fill', 'width':400, 'height':400}) }}">
+        {% else %}
+            <img id="profile-image" src="{{ asset('bundles/dashboard/images/profile-icon.png') }}">
+        {% endif %}
+    </div>
+    <div class="progress hide" style="height: 3px;margin-top: 0px;margin-bottom: 0px;">
+        <div class="indeterminate"></div>
+    </div>
+    <div class="file-field input-field pmop-edit" style=" margin-top: 0px !important;">
+        <a id="btn-update" class="btn btn-small " style="background-color: transparent;width: 100%;height: 25.2px;line-height: 25px;font-size:10px;padding-left: 15px;padding-right: 15px;box-shadow: 0 0px 0px rgba(0,0,0,.26)!important;">
+            <span><i class="mdi mdi-image-photo-camera left" style="margin-right: 0px"></i> Update picture</span>
+            <input name="file" class="cloudinary-fileupload" type="file">
+        </a>
+    </div>
+
+    {{ form_start(picture_form, {'action': path('profile_upload_picture'), 'method': 'POST', 'id':'profile_picture_form'}) }}
+    {{ form_end(picture_form) }}
+</div>
+
+<script>
+    $(document).ready(function(){
+        //Upload Profile Picture
+        Cloudinary.init({
+            'preset': 'profile'
+        });
+
+        Cloudinary.uploadDone(function(data){
+            var profile_picture = $.cloudinary.image(data.result.public_id,{
+                format: 'png',
+                width: 400,
+                height: 400,
+                crop: "fill",
+            });
+            var profile_picture_thumb = $.cloudinary.image(data.result.public_id,{
+                format: 'png',
+                width: 250,
+                height:250,
+                crop: "fill",
+                radius: 'max'
+            });
+            var profile_img = $('.card-image-profile img');
+            var profile_img_thumb = $('.profile-photo-thumb');
+            var progress = $('#profile-left-box .progress');
+            profile_img.attr('src', profile_picture.first().attr('src')).load(function() {
+                progress.addClass('hide');
+            });
+            profile_img_thumb.attr('src', profile_picture_thumb.first().attr('src'));
+
+            {# Change form data #}
+            var photo_id = $('#picture_photo_id');
+            var photo_url = $('#picture_photo_url');
+
+            photo_id.val(data.result.public_id);
+            photo_url.val(data.result.url);
+
+            {# Upload form by ajax #}
+            var form = photo_url.closest('form');
+            var form_action = form.attr('action');
+
+            var data = form.serialize();
+
+            $.post(form_action, data, function( result ) {
+                console.log(result);
+            });
+        });
+
+        Cloudinary.uploadProgress(function(data){
+            var progress_val = (data.loaded * 100.0) / data.total;
+            var progress = $('#profile-left-box .progress');
+            progress.removeClass('hide');
+        });
+    });
+</script>
