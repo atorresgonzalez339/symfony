@@ -1,0 +1,30 @@
+{% block subject %}Confirm your Registration{% endblock %}
+
+{% block body_text %}
+    {% autoescape false %}
+        Hello {{ user.username }} !
+
+        Confirm your registration in order to complete your activation in AgentsBud.
+        To confirm your registration use the fallowing link:
+        {{ confirmationUrl }}
+
+        Greetings,
+        the AgentsBud team
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_html %}
+    <h1>
+        Hello {{ user.username }} !
+    </h1>
+    <p>
+        Confirm your registration in order to complete your activation in AgentsBud.
+        To confirm your registration use the fallowing link: <br />
+        <a href="{{ confirmationUrl }}">{{ confirmationUrl }}</a>
+    </p>
+    <p>
+        Greetings,
+        <br/>
+        the AgentsBud team
+    </p>
+{% endblock %}
