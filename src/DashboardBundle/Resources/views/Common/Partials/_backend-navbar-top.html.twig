@@ -5,7 +5,7 @@
 </style>
 <nav class="navbar-top">
   <div class="nav-wrapper">
-    {% if hide_toggle is not defined or hide_toggle == false %}
+    {% if hide_elements is not defined or hide_elements == false %}
     <a href="#" class="yay-toggle" style="width: 58px">
       <div class="burg1"></div>
       <div class="burg2"></div>
@@ -77,6 +77,7 @@
           #user-dropdown{top: 66px !important;}
         </style>
         <ul id="user-dropdown" class="dropdown-content">
+          {% if hide_elements is not defined or hide_elements == false %}
           <li>
             <a href="{{path('profile_index')}}">
               <i class="mdi mdi-action-account-circle"></i>
@@ -84,6 +85,8 @@
             </a>
           </li>
           <li class="divider"></li>
+          {% endif %}
+          {% if hide_elements is not defined or hide_elements == false %}
           <li>
             <a href="{{ path('upgrade_index') }}">
               <i class="fa fa-credit-card"></i>
@@ -91,6 +94,8 @@
               <div style="font-size: 9px;padding-left: 22px;"><i class="mdi mdi-device-brightness-low type-free" style="font-size: 12px;position: relative;top: -4px;left: 3px;"></i> FREE</div>
             </a>
           </li>
+          <li class="divider"></li>
+          {% endif %}
           {#<li>#}
             {#<a href="http://html.nkdev.info/_con/mail-inbox.html">#}
               {#<i class="fa fa-envelope"></i> #}
@@ -104,7 +109,6 @@
               {#Settings#}
             {#</a>#}
           {#</li>#}
-          <li class="divider"></li>
           <li><a href="{{ path('fos_user_security_logout') }}"><i class="mdi mdi-action-exit-to-app"></i>
               Logout</a></li>
         </ul>
