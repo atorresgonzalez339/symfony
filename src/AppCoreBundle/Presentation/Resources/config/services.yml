@@ -1,0 +1,11 @@
+services:
+#    app_core.example:
+#        class: AppCoreBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]
+    presentation.controllers.contactcontroller:
+            class: AppCoreBundle\Presentation\Controllers\ContactController
+            autowire: true
+
+    application.impl.contactservice:
+            class: AppCoreBundle\Application\Impl\ContactService
+            autowire: true

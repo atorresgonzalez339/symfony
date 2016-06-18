@@ -6,7 +6,7 @@ common:
 dashboard:
     resource: "@DashboardBundle/Controller/"
     type:     annotation
-    prefix:   /dashboard
+    prefix:   /dashboard1
 
 listener:
     resource: "@DashboardBundle/Controller/HandlerController.php"
@@ -21,6 +21,11 @@ user:
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+
+app_core:
+    resource: "@AppCoreBundle/Presentation/Controllers/"
+    type:     annotation
+    prefix:   /dashboard
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
