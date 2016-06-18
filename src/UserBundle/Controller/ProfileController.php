@@ -45,6 +45,7 @@ class ProfileController extends BaseController
 
       if($isNew){
         return $this->render("UserBundle:Profile:required_form.html.twig", array(
+          'hide_toggle' => true,
           'profile' => $profile,
           'profile_form' => $profile_form->createView(),
           'picture_form' => $picture_form->createView(),

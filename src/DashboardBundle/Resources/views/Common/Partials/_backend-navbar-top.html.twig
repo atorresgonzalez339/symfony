@@ -5,11 +5,15 @@
 </style>
 <nav class="navbar-top">
   <div class="nav-wrapper">
-    <a href="http://html.nkdev.info/_con/ui-buttons.html#" class="yay-toggle" style="width: 58px">
+    {% if hide_toggle is not defined or hide_toggle == false %}
+    <a href="#" class="yay-toggle" style="width: 58px">
       <div class="burg1"></div>
       <div class="burg2"></div>
       <div class="burg3"></div>
     </a>
+    {% else %}
+    <a href="#" class="yay-toggle" style="width: 20px"></a>
+    {% endif %}
     <a href="{{ path('dashboard_index') }}" class="brand-logo" style="padding-left: 0px;">
       <img src="{{ asset('bundles/common/images/logo-left.png') }}" alt="LOGO">
     </a>
