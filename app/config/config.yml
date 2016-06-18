@@ -86,14 +86,20 @@ fos_user:
     firewall_name: main
     user_class: UserBundle\Entity\User
     service:
-            mailer: fos_user.mailer.twig_swift
+        mailer: fos_user.mailer.twig_swift
     from_email:
-            address:        info@agentsbud.com
-            sender_name:    AgentsBud
+        address:        info@agentsbud.com
+        sender_name:    AgentsBud
     registration:
-            confirmation:
-                enabled: true
-                template:       emails/confirm.registration.email.html.twig
+        confirmation:
+            enabled: true
+            template:       FOSUserBundle:Registration:confirm_registration_email.html.twig
+    resetting:
+        email:
+            from_email: # Use this node only if you don't want the global email address for the resetting email
+                address:        info@agentsbud.com
+                sender_name:    AgentsBud
+            template:   FOSUserBundle:Resetting:forgot_password_email.html.twig
 
 doctrine_migrations:
     dir_name: "%kernel.root_dir%/DoctrineMigrations"
