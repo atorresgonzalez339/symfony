@@ -72,7 +72,9 @@ class ProfileController extends BaseController
      * @Route("/profile/save", name="profile_save")
      */
     public function saveAction(Request $request){
+
       $user = $this->getUser();
+      $redirect_to = 'profile_index';
 
       $profile = $this->getBusiness()
                       ->getRepository('User', 'UserProfile')
@@ -80,6 +82,10 @@ class ProfileController extends BaseController
 
       if(!$profile){
         $profile = new UserProfile($user);
+        $redirect_to = 'dashboard_index';
+      }
+      else if(!$profile->getIsCompleted()){
+        $redirect_to = 'dashboard_index';
       }
 
       $profile_form = $this->createForm(ProfileType::class, $profile);
@@ -101,7 +107,7 @@ class ProfileController extends BaseController
         }
 
         $this->addFlash('success', 'Profile saved');
-        return $this->redirect($this->generateUrl('profile_index'));
+        return $this->redirect($this->generateUrl($redirect_to));
       }
 
 
