@@ -1,8 +1,8 @@
 <?php
-
 namespace AppCoreBundle\Presentation\Controllers;
 
 use AppCoreBundle\Application\Contract\IContactService;
+use AppCoreBundle\Application\Impl\ContactService;
 use CommonBundle\Controller\BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -19,8 +19,8 @@ class ContactController extends BaseController {
     private $newRouting     = 'contact_new';
     private $contactService;
 
-    public function __construct(IContactService $contactService) {
-        $this->contactService = $contactService;
+    public function __construct() {
+        $this->contactService = $this->get("application.contactservice");
     }
 
     public function getBusiness() {

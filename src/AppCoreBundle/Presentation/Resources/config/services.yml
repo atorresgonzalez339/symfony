@@ -2,10 +2,43 @@ services:
 #    app_core.example:
 #        class: AppCoreBundle\Example
 #        arguments: ["@service_id", "plain_value", %parameter%]
-    presentation.controllers.contactcontroller:
-            class: AppCoreBundle\Presentation\Controllers\ContactController
-            autowire: true
 
-    application.impl.contactservice:
-            class: AppCoreBundle\Application\Impl\ContactService
-            autowire: true
+#    domain.contactrepository:
+#        class: AppCoreBundle\Infraestructure\Impl\ContactRepository
+#        types: [ AppCoreBundle\Domain\Contract\IContactRepository ]
+
+    application.contactservice:
+        class: AppCoreBundle\Application\Impl\ContactService
+        autowire: true
+
+
+#
+#interface A{}
+#
+#class A1 implements A{}
+#
+#class A2 implements A{}
+#
+#class B
+#{
+#    public function __construct(A $a){}
+#}
+#
+#        services:
+#            a1:
+#                class: A1
+#                types: [ A ]
+#
+#            a2:
+#                class: A2
+#
+#            # Will be autowired with A1
+#            class b:
+#                class: B
+#                autowire: true
+#
+#            # Not autowired
+#            class another_b:
+#                class: B
+#                arguments: [ @a2 ]
+#                autowire: true

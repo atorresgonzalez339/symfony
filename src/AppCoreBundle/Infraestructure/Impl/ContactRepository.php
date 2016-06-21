@@ -1,12 +1,10 @@
 <?php
+namespace AppCoreBundle\Infraestructure\Impl;
 
-/**
- * Created by PhpStorm.
- * User: livan
- * Date: 18/06/16
- * Time: 09:07 PM
- */
-class ContactRepository
-{
+use AppCoreBundle\Domain\Contract\IContactRepository;
 
+class ContactRepository {
+    public function save() {
+        die("IContactRepository");
+    }
 }

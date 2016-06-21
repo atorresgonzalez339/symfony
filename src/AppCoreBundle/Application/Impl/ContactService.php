@@ -1,17 +1,19 @@
 <?php
-
 namespace AppCoreBundle\Application\Impl;
+
 use AppCoreBundle\Application\Contract\IContactService;
-/**
- * Created by PhpStorm.
- * User: livan
- * Date: 18/06/16
- * Time: 05:20 PM
- */
+use AppCoreBundle\Domain\Contract\IContactRepository;
+use AppCoreBundle\Infraestructure\Impl\ContactRepository;
+
 class ContactService implements IContactService {
 
-    public function create()
-    {
-        die("sss");
+    private $contactRepository;
+
+    public function __construct(ContactRepository $contactRepository) {
+        $this->contactRepository = $contactRepository;
+    }
+
+    public function create() {
+        die("ContactService");
     }
 }

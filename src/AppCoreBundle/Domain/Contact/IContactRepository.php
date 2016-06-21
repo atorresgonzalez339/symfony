@@ -1,12 +1,6 @@
 <?php
+namespace AppCoreBundle\Domain\Contract;
 
-/**
- * Created by PhpStorm.
- * User: livan
- * Date: 18/06/16
- * Time: 09:07 PM
- */
-interface ContactRepository
-{
-
+interface IContactRepository {
+    public function save();
 }
